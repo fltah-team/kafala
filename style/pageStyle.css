@@ -1,0 +1,113 @@
+*{
+	font-family:Droid Arabic Kufi;
+	}
+.main{
+	width:80%;
+	margin:0 auto ; 
+	border:#399 solid 3px ;
+	border-radius:5px;
+	margin-top:10px;
+	padding:20px 0 20px 0 ;
+	background:#8BEBDF;
+	}
+.teacherMain{
+	width:80%;
+	margin:0 auto ; 
+	border:#666666 solid 3px ;
+	border-radius:5px;
+	margin-top:10px;
+	padding:20px 0 20px 0 ;
+	background:#CCCCCC;
+	}
+.studentMain{
+	width:80%;
+	margin:0 auto ; 
+	border:#E88B00 solid 3px ;
+	border-radius:5px;
+	margin-top:10px;
+	padding:20px 0 20px 0 ;
+	background:#FFEAB7;
+	}
+#title{
+	padding:10px 0 10px 0 ;
+	width:80%;
+	margin:0 auto ; 
+	border:#399 solid 3px ;
+	border-radius:5px;
+	margin-top:30px;
+	background:#8BEBDF;
+	text-align:center;
+	}
+.menu{
+	width:80%;
+	margin:0 auto ; 
+	border:#399 solid 3px ;
+	border-radius:5px;
+	margin-top:10px;
+	background:#8BEBDF;
+	text-align:center;
+}
+.menu ul {
+	list-style-type:none;
+}
+
+.menu ul li {
+	display:inline;
+	padding: 0 20px 0 20px;
+}
+
+.menu a {
+	color:#C00;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+
+.menu a:hover {
+		color:#000;
+}
+.adress{
+	text-decoration:underline;
+	}
+
+#title h1{
+	color: #000;
+	}
+.login{
+	margin-top:50px;
+	margin-bottom:50px;
+	}
+.textFiels{
+	padding-left:10px;
+	padding-right:10px;
+	text-align:right;
+	}
+.bt{
+	padding-right:5px;
+	padding-left:5px;
+	}
+#footer{
+	margin-top:70px;
+	text-align:center;
+	border-top:dashed 1px #fff ;
+	}
+.bg{
+	
+	}
+.table{
+	color:#000;
+	border:solid #Fff 1px;
+	border-radius:5px;
+	}
+.linkBT{
+	width:200px;
+	padding:5px 5px 5px 5px ;
+	background:#FFC;
+	border:solid 2px #FFCC99;
+	}
+.linkBT a{
+	width:20px;
+	color:#C00;
+	font-weight:bold;
+	text-decoration:none;
+	}
