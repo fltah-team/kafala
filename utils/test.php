@@ -1,4 +1,6 @@
 <?php
+	// TEST
+
 	include("db.php");
 	include("usersAPI.php");
 	$result = fp_users_delete(6);
