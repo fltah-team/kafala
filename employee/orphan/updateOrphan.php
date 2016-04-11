@@ -39,20 +39,20 @@
 <br />
 <table width="85%" border="0" align="center">
   <tr align="center">
-  	<td width="16%" align="right">&nbsp;</td>
-  	<td width="18%" align="center">&nbsp;</td>
-    <td width="17%" align="right"><select class="textFiels" name="sponsor" id="sponsor">
-      <option value="1">قطر الخيرية</option>
-      <option value="2">جهة 2</option>
-      <option value="3">جهة 3</option>
-    </select></td>
-    <td width="18%">جهة الكفالة</td>
-    <td width="14%" align="right"><select class="textFiels" name="status" id="status">
-      <option value="1">مكفول</option>
-      <option value="2">قيد التسويق</option>
-      <option value="3">متوقف</option>
-    </select></td>
-    <td width="20%" align="center">الحالة</td>
+  	<td width="16%" align="right"><select class="textFiels" name="sponsor2" id="sponsor">
+  	  <option value="1">قطر الخيرية</option>
+  	  <option value="2">جهة 2</option>
+  	  <option value="3">جهة 3</option>
+	  </select></td>
+  	<td width="18%">جهة الكفالة</td>
+  	<td width="17%" align="right"><select class="textFiels" name="status" id="status">
+  	  <option value="1">مكفول</option>
+  	  <option value="2">قيد التسويق</option>
+  	  <option value="3">متوقف</option>
+	  </select></td>
+    <td width="18%">الحالة</td>
+    <td width="14%" align="right"><input name="id" type="text" disabled="disabled" class="textFiels" id="id" size="10" maxlength="30" /></td>
+    <td width="20%" align="center">رقم اليتيم</td>
   </tr>
   
   <tr>
@@ -229,12 +229,10 @@
   <tr>
     <td align="center"><input class="textFielsS" name="fbstate" type="text" id="un2" size="10" maxlength="30" /></td>
     <td align="center"><input class="textFielsS" name="fmbd" type="text" id="un2" size="10" maxlength="30" /></td>
-    <td align="center"><label>
-  	    <input type="radio" name="gender" value="1" id="gender_0" />
-  	    ذكر</label>
-        <label>
-  	    <input type="radio" name="gender" value="2" id="gender_1" />
-  	    انثى</label></td>
+    <td align="center"><select class="textFiels" name="fmgender" id="fmgender">
+      <option value="1">ذكر</option>
+      <option value="0">انثى</option>
+    </select></td>
     <td align="center"><input class="textFielsS" name="fbname" type="text" id="un2" size="30" maxlength="30" /></td>
     <td align="center">1</td>
   </tr>
@@ -435,8 +433,8 @@
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td align="right"><input class="bt" name="add" onclick="IsEmpty()" type="button"  value="اضافة يتيم" /></td>
-    <td>&nbsp;</td>
+    <td align="center"><input class="bt" name="add" onclick="IsEmpty()" type="button"  value="حذف" /></td>
+    <td align="center"><input class="bt" name="add" onclick="IsEmpty()" type="button"  value="تعديل بيانات" /></td>
   </tr>
 </table>
 </div>

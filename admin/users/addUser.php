@@ -36,7 +36,7 @@
 <div class="login">
 <h2 align="center">بيانات مستخدم </h2>
 <br />
-<form  >
+<form >
 	<table width="60%" border="0" align="center">
     <tr>
     <td id="noti">&nbsp;</td>
@@ -68,7 +68,7 @@
     <td align="center">نوع المستخدم</td>
     </tr>
       <tr>
-    <td>&nbsp;</td>
+    <td id="passnoti" align="right">&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
@@ -88,7 +88,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="right"><input name="add" onclick="IsEmpty()" type="button"  value="اضافة مستخدم" /></td>
+    <td align="right"><input name="add"  type="button" onclick="IsEmpty()"   value="اضافة مستخدم" /></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
@@ -117,11 +117,28 @@
 		} else res++;
 		check(res);
 	}
+	<?php 
+	
+	include('../../utils/db.php');
+	include('../../utils/usersAPI.php');
+	$user = fp_users_get(" WHERE `username`='".$_POST['un']."'");
+	if($user != NULL) echo 'exist';
+	
+	?>
 	 
 }
 
 function check(res){
-	if(res == 4) ajax();
+	if(res == 4){
+		if(data[2].value == data[3].value) ajax(); 
+		else 
+			document.getElementById("passnoti").innerHTML = "كلمات المرور غير متطابقة";
+			document.getElementById("passnoti").style.color = "#F00";
+			data[2].value = "";
+			data[3].value = "";
+			//setAttribute("placeholder","err");
+		}
+	
 	}
 
 function ajax()
@@ -154,7 +171,7 @@ function ajax()
         if (ajax.readyState==4&&ajax.status==200)
         {
             alert(ajax.responseText);
-			window.location.href = "showUsers.php";
+			//window.location.href = "showUsers.php";
 			//document.getElementById(elementID).innerHTML=ajax.responseText;
         }
     }

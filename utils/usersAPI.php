@@ -1,16 +1,18 @@
 <?php
-	include('db.php');
+	
+	
+	/*include('db.php');
 	$users = fp_users_get();
 	fp_db_close();
 	if(!$users) die ("prolem");
 	$ucount = @count($users);
 	if($ucount == 0 ) die("NO users");
+	*/
 	
 	// SELSECT ALL
 function fp_users_get($extra = ''){
 	global $fp_handle ;
 	$query = sprintf("SELECT * FROM `employee` %s",$extra);
-
 	$qresult = @mysql_query($query);
 	
 	if(!$qresult) return NULL ; 
@@ -42,7 +44,7 @@ function fp_users_get_by_id($id){
 	// INSERT	
 function fp_users_add($name , $username , $password , $type){
 	global $fp_handle;
-	if( (empty($name)) || (empty($username)) || (empty($password))) 
+	if(is_int($name) && is_int((int)$username)) 
 	return false;
 	$n_name    = @mysql_real_escape_string(strip_tags($name),$fp_handle);
 	$n_username    = @mysql_real_escape_string(strip_tags($username),$fp_handle);
@@ -118,5 +120,5 @@ function fp_users_delete($id){
 	}
 
 	 	
-		
+
 ?>
