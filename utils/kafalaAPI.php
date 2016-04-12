@@ -1,12 +1,12 @@
 <?php
-	
+/*	
 include("db.php");
 
 $kafala = fp_kafala_get();
 if(!$kafala) die("err");
 else echo serialize($kafala);
 
-
+*/
 	// SELSECT ALL
 function fp_kafala_get($extra = ''){
 	global $fp_handle ;
@@ -32,7 +32,7 @@ function fp_kafala_get($extra = ''){
 
 
 	// INSERT	
-function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$month_no){
+function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$month_no,$sponsored){
 	global $fp_handle;
 	if( (empty($amount)) || (empty($saving)) || (empty($date)) || (empty($sponsor)) || (empty($month_no)) ) 
 	return false;
@@ -40,9 +40,9 @@ function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$month_no){
 	$n_saving    = (int)$saving;
 	$n_date    = @mysql_real_escape_string(strip_tags($date),$fp_handle);
 	$n_sponsor = (int)$sponsor;
-	$month_no = (int)$month_no;
-	
-	$query = ("INSERT INTO `sponsorship` (`id`,`amount` , `saving` , `date` ,`sponsor`, `month_no`) VALUE(NULL, $n_amount, $n_saving, '$n_date' ,$n_sponsor , $month_no)");
+	$n_month_no = (int)$month_no;
+	$n_sponsored = (int)$sponsored;
+	$query = ("INSERT INTO `sponsorship` (`id`,`amount` , `saving` , `date` ,`sponsor`, `month_no` ,`sponsored`) VALUE(NULL, $n_amount, $n_saving, '$n_date' ,$n_sponsor , $month_no , $n_sponsored)");
 	$qresult = mysql_query($query);
 	if(!$qresult) return false ;
 	

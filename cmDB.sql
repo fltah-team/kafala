@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 29, 2016 at 05:13 PM
+-- Generation Time: Apr 12, 2016 at 02:40 PM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -33,15 +33,17 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `type` int(10) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;
 
 --
 -- Dumping data for table `employee`
 --
 
 INSERT INTO `employee` (`id`, `name`, `username`, `password`, `type`) VALUES
-(21, 'nn2', 'un2', 's', 1),
-(24, 'rrrrrr', 'rrrrr', 'rrrrrrr', 3);
+(24, 'rrrrrr', 'rrrrr', 'rrrrrrr', 3),
+(25, 'lkjsdhf', 'mdshj', 'jhg', 3),
+(26, 'sljdf', 'kjksvnk', 'c4ca4238a0b923820dcc509a6f75849b', 4),
+(38, 'undefined', 'fffff', 'c4ca4238a0b923820dcc509a6f75849b', 3);
 
 -- --------------------------------------------------------
 
@@ -83,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `family` (
   `sex` varchar(6) NOT NULL,
   `social_state` int(50) NOT NULL,
   `father_dead_date` date NOT NULL,
-  `fatjer_dead_cause` varchar(50) NOT NULL,
+  `father_dead_cause` varchar(50) NOT NULL,
   `father_work` varchar(50) NOT NULL,
   `supporter_first_name` varchar(50) NOT NULL,
   `supporter_meddle_name` varchar(50) NOT NULL,
@@ -170,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `f_member` (
 --
 
 CREATE TABLE IF NOT EXISTS `orphan` (
-  `id` varchar(100) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `state` varchar(50) NOT NULL,
   `warranty_organization` int(11) NOT NULL,
   `first_name` varchar(50) NOT NULL,
@@ -184,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `orphan` (
   `mother_last_name` varchar(50) NOT NULL,
   `mother_4th_name` varchar(50) NOT NULL,
   `mother_Birth_date` date NOT NULL,
-  `mother_state` varchar(5) NOT NULL,
+  `mother_state` varchar(100) NOT NULL,
   `father_dead_date` date NOT NULL,
   `father_dead_cause` varchar(100) NOT NULL,
   `father_work` varchar(100) NOT NULL,
@@ -197,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `orphan` (
   `phone2` int(20) NOT NULL,
   `sisters_no` int(20) NOT NULL,
   `brothers_no` int(20) NOT NULL,
-  `sibiling` varchar(50) NOT NULL,
+  `sibiling` int(11) NOT NULL,
   `studing_state` varchar(50) NOT NULL,
   `nonstuding_cause` varchar(50) NOT NULL,
   `school_name` varchar(50) NOT NULL,
@@ -209,11 +211,12 @@ CREATE TABLE IF NOT EXISTS `orphan` (
   `data_entery_name` varchar(50) NOT NULL,
   `data_entery_date` date NOT NULL,
   `head_dep_name` varchar(50) NOT NULL,
-  `head_dep_date` int(11) NOT NULL,
+  `head_dep_date` date NOT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `warranty_organization` (`warranty_organization`),
-  KEY `residence_state` (`residence_state`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `residence_state` (`residence_state`),
+  KEY `sibiling` (`sibiling`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `orphan`
@@ -276,13 +279,13 @@ CREATE TABLE IF NOT EXISTS `preacher` (
 --
 
 CREATE TABLE IF NOT EXISTS `sibiling` (
-  `id` varchar(100) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `sex` varchar(50) NOT NULL,
   `birth_date` date NOT NULL,
   `state` varchar(50) NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `sibiling`
@@ -296,16 +299,19 @@ CREATE TABLE IF NOT EXISTS `sibiling` (
 --
 
 CREATE TABLE IF NOT EXISTS `sponsor` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `numberOFSponsored` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `sponsor`
 --
 
+INSERT INTO `sponsor` (`id`, `name`, `numberOFSponsored`) VALUES
+(1, 'jjj', 5);
 
 -- --------------------------------------------------------
 
@@ -314,19 +320,25 @@ CREATE TABLE IF NOT EXISTS `sponsor` (
 --
 
 CREATE TABLE IF NOT EXISTS `sponsorship` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `amount` int(11) NOT NULL,
-  `saving` int(11) NOT NULL,
   `date` date NOT NULL,
+  `saving` int(11) NOT NULL,
   `sponsor` int(11) NOT NULL,
   `month_no` int(11) NOT NULL,
+  `sponsored` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `sponsor` (`sponsor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf32 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `sponsorship`
 --
 
+INSERT INTO `sponsorship` (`id`, `amount`, `date`, `saving`, `sponsor`, `month_no`, `sponsored`) VALUES
+(3, 1000, '2016-04-07', 0, 1, 2, 0),
+(4, 450, '2016-04-12', 0, 1, 5, 0),
+(5, 450, '2016-04-12', 50, 1, 5, 4);
 
 -- --------------------------------------------------------
 
@@ -344,6 +356,8 @@ CREATE TABLE IF NOT EXISTS `state` (
 -- Dumping data for table `state`
 --
 
+INSERT INTO `state` (`id`, `name`) VALUES
+(1, 'khartoum');
 
 -- --------------------------------------------------------
 
@@ -413,7 +427,6 @@ ALTER TABLE `experience`
 -- Constraints for table `family`
 --
 ALTER TABLE `family`
-  ADD CONSTRAINT `family_id` FOREIGN KEY (`memebr_id`) REFERENCES `family_member` (`family_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `family_state_id` FOREIGN KEY (`residence_state`) REFERENCES `state` (`id`),
   ADD CONSTRAINT `sponsorship_id` FOREIGN KEY (`warranty_organization`) REFERENCES `sponsor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -428,6 +441,7 @@ ALTER TABLE `f_member`
 -- Constraints for table `orphan`
 --
 ALTER TABLE `orphan`
+  ADD CONSTRAINT `sibiling_id` FOREIGN KEY (`sibiling`) REFERENCES `sibiling` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `sponsorship_organization` FOREIGN KEY (`warranty_organization`) REFERENCES `sponsor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `state_id` FOREIGN KEY (`residence_state`) REFERENCES `state` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 

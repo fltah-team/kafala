@@ -1,7 +1,8 @@
+<?php
 	// SELSECT ALL sponsor
-function fp_users_get($extra = ''){
+function fp_sponsor_get($extra = ''){
 	global $fp_handle ;
-	$query = sprintf("SELECT * FROM `employee` %s",$extra);
+	$query = sprintf("SELECT * FROM `sponsor` %s",$extra);
 	$qresult = @mysql_query($query);
 	
 	if(!$qresult) return NULL ; 
@@ -9,13 +10,14 @@ function fp_users_get($extra = ''){
 	$rcount = mysql_num_rows($qresult);
 	if($rcount == 0 )  return NULL ;
 	
-	$users = array();
+	$sponsors = array();
 	
 	for($i = 0 ; $i < $rcount ; $i++)
-		$users[@count($users)] = @mysql_fetch_object($qresult);
+		$sponsors[@count($sponsors)] = @mysql_fetch_object($qresult);
 		
 	@mysql_free_result($qresult);
 	
-	return $users ; 
+	return $sponsors ; 
 	}
-		
+
+?>	

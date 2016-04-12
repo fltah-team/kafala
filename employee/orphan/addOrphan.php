@@ -41,10 +41,20 @@
   <tr align="center">
   	<td width="16%" align="right">&nbsp;</td>
   	<td width="18%" align="center">&nbsp;</td>
-    <td width="17%" align="right"><select class="textFiels" name="sponsor" id="sponsor">
-      <option value="1">قطر الخيرية</option>
-      <option value="2">جهة 2</option>
-      <option value="3">جهة 3</option>
+    <?php
+    
+	include('../../utils/db.php');
+	include('../../utils/sponsorAPI.php');
+	$sponsors = fp_sponsor_get();
+	$scount = count($sponsors);
+	
+	?>
+    <td width="17%" align="right">
+    <select class="textFiels" name="sponsor" id="sponsor">
+    <?php for($i = 0 ; $i < $scount ; $i++){
+		$sponsor = $sponsors[$i] ; ?>
+      <option value="<?php echo $sponsor->id?>"><?php echo $sponsor->name?></option>
+	<?php } ?>
     </select></td>
     <td width="18%">جهة الكفالة</td>
     <td width="14%" align="right"><select class="textFiels" name="status" id="status">
@@ -74,13 +84,11 @@
 	<td>
         </td>
         <td align="right"></td>
-    <td align="right"></td>
-  	<td align="right">
-    <select class="textFiels" name="sponsor" id="gender">
+    <td align="right"><select class="textFiels" name="sponsor2" id="gender">
       <option value="1">ذكر</option>
       <option value="0">انثى</option>
-    </select>
-  	  </td>
+    </select></td>
+  	<td align="center">الجنس</td>
     <script type="text/javascript" />
     	
 		// GENDER
@@ -93,7 +101,28 @@
 		}
 	
     </script>
-    <td align="right"><input class="textFiels" name="bd" type="text" id="bd" size="10" maxlength="30" /></td>
+    <td align="center"><table width="200" border="0">
+      <tr>
+        <td><select class="textFiels" id="day">
+          <?php
+	  for($i=1997 ; $i <= date("Y") ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+        <td><select class="textFiels" name="quran3" id="quran3">
+          <?php
+	  for($i=1 ; $i <= 12 ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+        <td><select class="textFiels" name="quran2" id="quran2">
+          <?php
+	  for($i=1 ; $i <= 31 ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+      </tr>
+      </table></td>
     <td align="center">تاريخ الميلاد</td>
   </tr>
   

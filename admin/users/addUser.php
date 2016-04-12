@@ -98,12 +98,103 @@
     </table>
 </form>
 </div>
-<h3>
+<script type="text/javascript" >;
+	var checker = 0; 
+	var data = Array();
+	//var name = 
+	var name = document.getElementById("name");
+	alert(name.defaultValue); 
+	var un = document.getElementById("un");
+	var type = document.getElementById("type");
+	var pass1 = document.getElementById("pass1");
+	var pass2 = document.getElementById("pass2");
+	
+	function IsEmpty(){ 
+	// empty
+	if(name.value == ""){
+	name.style.color = "#ff0000" ;
+	name.setAttribute("placeholder","هذا الحقل فارغ");
+	checker++;
+		}
+	if(un.value == ""){
+	un.style.color = "#ff0000" ;
+	un.setAttribute("placeholder","هذا الحقل فارغ");
+	checker++;
+		}
+	if(pass1.value == ""){
+	pass1.style.color = "#ff0000" ;
+	pass1.setAttribute("placeholder","هذا الحقل فارغ");
+	checker++;
+		}
+	if(pass2.value == ""){
+	pass2.style.color = "#ff0000" ;
+	pass2.setAttribute("placeholder","هذا الحقل فارغ");
+	checker++;
+		}
+			 
+	if(checker == 0)ajax();
+	else 
+	checker = 0; 
+}
+
+function ajax()
+{
+    var ajax;
+	//var d_node = document.getElementById(elementID);
+	elementID = "div";
+	filename = "saveuser.php";
+	str = "name="+name.value+"&un="+un.value+"&type="+type.value+"&pass="+pass1.value;
+	post = true ;
+    if (window.XMLHttpRequest)
+    {
+        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
+    }
+    else if (ActiveXObject("Microsoft.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
+    }
+    else if (ActiveXObject("Msxml2.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
+    }
+    else
+    {
+        alert("Error: Your browser does not support AJAX.");
+        return false;
+    }
+    ajax.onreadystatechange=function()
+    {
+        if (ajax.readyState==4&&ajax.status==200)
+        {
+			alert(ajax.responseText);
+			//window.location.href = "showUsers.php";
+			//document.getElementById(elementID).innerHTML=ajax.responseText;
+        }
+    }
+    if (post==false)
+    {
+        ajax.open("GET",filename+str,true);
+        ajax.send(null);
+		
+    }
+    else
+    {
+        ajax.open("POST",filename,true);
+        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.send(str);
+    }
+    return ajax;
+	
+}
+
+  </script>
+  
+ <!-- 
   <script type="text/javascript" >
 	var i = 0; 
 	var data = Array();
 	var type = document.getElementById("type");
-	data[0] = document.getElementById("name");
+	var type = document.getElementById("name");
 	data[1] = document.getElementById("un");
 	data[2] = document.getElementById("pass1");
 	data[3] = document.getElementById("pass2");
@@ -118,12 +209,12 @@
 		check(res);
 	}
 	<?php 
-	
+	/*
 	include('../../utils/db.php');
 	include('../../utils/usersAPI.php');
 	$user = fp_users_get(" WHERE `username`='".$_POST['un']."'");
 	if($user != NULL) echo 'exist';
-	
+	*/
 	?>
 	 
 }
@@ -191,8 +282,7 @@ function ajax()
 	
 }
 	
-  </script>
-</h3>
+  </script>-->
 <div id="footer">
   <p>جميع الحقوق محفوظة 2016 &copy;</p>
 </div>
