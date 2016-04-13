@@ -1,11 +1,8 @@
 <?php
 
 
-	include("db.php");
+	//include("db.php");
 
-
-
-	
 	// SELSECT ALL
 function fp_student_get($extra = ''){
 	
@@ -26,7 +23,7 @@ function fp_student_get($extra = ''){
 		
 	@mysql_free_result($qresult);
 	
-	return $student ; 
+	return $students ; 
 	}
 	
 	// SELECT BY ID
@@ -34,14 +31,14 @@ function fp_student_get($extra = ''){
 		$oid = (int)$id;
 		if($oid == 0) return NULL ;
 		
-		$students = fp_orphan_get("WHERE `id` = ".$oid);
+		$students = fp_student_get("WHERE `id` = ".$oid);
 		if($students == NULL) return NULL ;
 		$student = $students[0];
 		return $student ;
 		}
 
 	// INSERT	
-	function fp_orphan_add($state , $warranty_organization , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work ,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,$uni_name , $level , $year , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date , $head_dep_name , $head_dep_date ){
+	function fp_student_add($state , $warranty_organization , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work ,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,$uni_name , $level , $year , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date  ){
 		global $fp_handle;
 	
 
@@ -78,13 +75,16 @@ function fp_student_get($extra = ''){
 	$n_expected_grad = @mysql_real_escape_string(strip_tags($expected_grad),$fp_handle);
 	$n_health_state =@mysql_real_escape_string(strip_tags($health_state),$fp_handle);
 	$n_ill_cause =@mysql_real_escape_string(strip_tags($ill_cause),$fp_handle);
-	$n_data_entery_name =@mysql_real_escape_string(strip_tags($data_entery_name),$fp_handle);
+	$n_data_entery_name =@mysql_real_escape_string( 
+	
+	strip_tags($data_entery_name),$fp_handle);
 	$n_data_entery_date=@mysql_real_escape_string(strip_tags($data_entery_date),$fp_handle);
-	$n_head_dep_name=@mysql_real_escape_string(strip_tags($head_dep_name),$fp_handle);
-	$n_head_dep_date=@mysql_real_escape_string(strip_tags($head_dep_date),$fp_handle); 
 
-	$query = ("INSERT INTO `orphan` (id, `state` , warranty_organization , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `father_dead_date` , `father_dead_cause` , 	`father_work` ,sisters_no , brothers_no ,residence_state , `city` , `District` ,section , house_no , phone1 , phone2 ,`school_name` ,`uni_name` , level , year , `last_result`, quran_parts , study_year_no , `study_date_start` , `expected_grad`  , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date` , `head_dep_name` , `head_dep_date`)
-				VALUE(NULL ,'$n_state' , '$n_warranty_organization' , '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_father_dead_date' , '$n_father_dead_cause' , 	'$n_father_work' ,'$n_sisters_no' , '$n_brothers_no' ,'$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2' ,'$n_school_name' ,'$n_uni_name' , '$n_level' , '$n_year' , '$n_last_result','$n_quran_parts' ,'$n_study_year_no' , '$n_study_date_start' , '$n_expected_grad'  , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date' , '$n_head_dep_name' , '$n_head_dep_date' )");
+
+	$query = ("INSERT INTO `student` (id, `state` , warranty_organization , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `father_dead_date` , `father_dead_cause` , 	`father_work` ,sisters_no , brothers_no ,residence_state , `city` , `District` ,section , house_no , phone1 , phone2 ,`school_name` ,`uni_name` , level , year , `last_result`, quran_parts , study_year_no , `study_date_start` , `expected_grad`  , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date` )
+				VALUE(NULL ,'$n_state' , '$n_warranty_organization' , '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_father_dead_date' , '$n_father_dead_cause' , 	'$n_father_work' ,'$n_sisters_no' , '$n_brothers_no' ,'$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2' ,'$n_school_name' ,'$n_uni_name' , '$n_level' , '$n_year' , '$n_last_result','$n_quran_parts' ,'$n_study_year_no' , '$n_study_date_start' , '$n_expected_grad'  , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date' )");
+	
+	echo $query ;
 	
 	$qresult = mysql_query($query);
 	if(!$qresult) return false ;
@@ -95,13 +95,13 @@ function fp_student_get($extra = ''){
 
 	
 	// UPDATE
-function fp_orphan_update($id , $state = Null , $warranty_organization = Null , $first_name = Null , $meddle_name = Null , $last_name = Null , $last_4th_name = Null , $birth_date = Null , $sex = Null , $father_dead_date = Null , $father_dead_cause = Null , 	$father_work = Null ,$sisters_no = Null , $brothers_no = Null ,$residence_state = Null , $city = Null , $District = Null , $section = Null ,$house_no = Null , $phone1 = Null , $phone2 = Null ,$school_name = Null ,$uni_name = Null , $level = Null , $year = Null , $last_result = Null ,$quran_parts = Null ,$study_year_no = Null , $study_date_start = Null , $expected_grad  = Null , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date = Null , $head_dep_name = Null , $head_dep_date = Null ){
+function fp_student_update($id , $state = Null , $warranty_organization = Null , $first_name = Null , $meddle_name = Null , $last_name = Null , $last_4th_name = Null , $birth_date = Null , $sex = Null , $father_dead_date = Null , $father_dead_cause = Null , 	$father_work = Null ,$sisters_no = Null , $brothers_no = Null ,$residence_state = Null , $city = Null , $District = Null , $section = Null ,$house_no = Null , $phone1 = Null , $phone2 = Null ,$school_name = Null ,$uni_name = Null , $level = Null , $year = Null , $last_result = Null ,$quran_parts = Null ,$study_year_no = Null , $study_date_start = Null , $expected_grad  = Null , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date = Null  ){
 
 	global $fp_handle ;
 	$uid = (int)$id;
 	if($uid == 0) return false ;
 
-	$atudent = fp_orphan_get_by_id($uid);
+	$student = fp_student_get_by_id($uid);
 	
 	if(!$student)  return false ;
 	
@@ -193,12 +193,6 @@ function fp_orphan_update($id , $state = Null , $warranty_organization = Null , 
 		$fields[@count($fields)] = " `phone2` = '$n_phone2' ";
 		}
 
-
-
-
-
-
-
 	if(!empty($school_name)){
 		$n_school_name   =(int)$school_name ;
 		$fields[@count($fields)] = " `school_name` = '$n_school_name' ";
@@ -254,14 +248,7 @@ function fp_orphan_update($id , $state = Null , $warranty_organization = Null , 
 		$n_data_entery_date   = mysql_real_escape_string(strip_tags($data_entery_date),$fp_handle);
 		$fields[@count($fields)] = " `data_entery_date` = '$n_data_entery_date' ";
 		}
-	if(!empty($head_dep_name)){
-		$n_head_dep_name   = mysql_real_escape_string(strip_tags($head_dep_name),$fp_handle);
-		$fields[@count($fields)] = " `head_dep_name` = '$n_head_dep_name' ";
-		}
-	if(!empty($head_dep_date)){
-		$n_head_dep_date   = mysql_real_escape_string(strip_tags($head_dep_date),$fp_handle);
-		$fields[@count($fields)] = " `head_dep_date` = '$n_head_dep_date' ";
-		}
+
 	$fields[@count($fields)] = " `id` = '$student->id' ";
 	
 	$fcount = @count($fields);
@@ -295,7 +282,7 @@ function fp_student_delete($id){
 	return true ;
 	}
 
-	//-------------------------------------sibilingAPI----------------------------------------------
+
 	
 	
 		

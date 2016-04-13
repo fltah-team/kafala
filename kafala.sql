@@ -1,19 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.9
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Apr 13, 2016 at 11:35 AM
--- Server version: 5.5.8
--- PHP Version: 5.3.5
+-- Host: 127.0.0.1
+-- Generation Time: Apr 13, 2016 at 03:12 PM
+-- Server version: 5.7.9
+-- PHP Version: 5.6.16
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `kafala`
@@ -25,6 +26,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `employee`
 --
 
+DROP TABLE IF EXISTS `employee`;
 CREATE TABLE IF NOT EXISTS `employee` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -33,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `type` int(10) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `employee`
@@ -51,6 +53,7 @@ INSERT INTO `employee` (`id`, `name`, `username`, `password`, `type`) VALUES
 -- Table structure for table `experience`
 --
 
+DROP TABLE IF EXISTS `experience`;
 CREATE TABLE IF NOT EXISTS `experience` (
   `qualifier_name` varchar(500) NOT NULL,
   `organizaton` varchar(500) NOT NULL,
@@ -60,12 +63,7 @@ CREATE TABLE IF NOT EXISTS `experience` (
   UNIQUE KEY `id_2` (`id`),
   KEY `id` (`id`),
   KEY `preacherID` (`preacherID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `experience`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -73,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `experience` (
 -- Table structure for table `family`
 --
 
+DROP TABLE IF EXISTS `family`;
 CREATE TABLE IF NOT EXISTS `family` (
   `family_id` int(11) NOT NULL,
   `state` varchar(50) NOT NULL,
@@ -117,17 +116,13 @@ CREATE TABLE IF NOT EXISTS `family` (
   KEY `residence_state` (`residence_state`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `family`
---
-
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `family_member`
 --
 
+DROP TABLE IF EXISTS `family_member`;
 CREATE TABLE IF NOT EXISTS `family_member` (
   `family_id` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
@@ -135,17 +130,13 @@ CREATE TABLE IF NOT EXISTS `family_member` (
   KEY `member_id` (`member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `family_member`
---
-
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `f_member`
 --
 
+DROP TABLE IF EXISTS `f_member`;
 CREATE TABLE IF NOT EXISTS `f_member` (
   `member_id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
@@ -160,17 +151,13 @@ CREATE TABLE IF NOT EXISTS `f_member` (
   KEY `member_id` (`member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `f_member`
---
-
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `orphan`
 --
 
+DROP TABLE IF EXISTS `orphan`;
 CREATE TABLE IF NOT EXISTS `orphan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `state` varchar(50) NOT NULL,
@@ -208,18 +195,18 @@ CREATE TABLE IF NOT EXISTS `orphan` (
   `ill_cause` varchar(50) NOT NULL,
   `data_entery_name` varchar(50) NOT NULL,
   `data_entery_date` date NOT NULL,
-  `head_dep_name` varchar(50) NOT NULL,
-  `head_dep_date` date NOT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `warranty_organization` (`warranty_organization`),
   KEY `residence_state` (`residence_state`),
   KEY `sibiling` (`sibiling`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `orphan`
 --
 
+INSERT INTO `orphan` (`id`, `state`, `warranty_organization`, `first_name`, `meddle_name`, `last_name`, `last_4th_name`, `birth_date`, `sex`, `mother_first_name`, `mother_middle_name`, `mother_last_name`, `mother_4th_name`, `mother_Birth_date`, `mother_state`, `father_dead_date`, `father_dead_cause`, `father_work`, `residence_state`, `city`, `District`, `section`, `house_no`, `phone1`, `phone2`, `sibiling`, `studing_state`, `nonstuding_cause`, `school_name`, `level`, `year`, `quran_parts`, `health_state`, `ill_cause`, `data_entery_name`, `data_entery_date`) VALUES
+(2, 'statetttttttttttt', 1, 'ameenah', 's name', ' l name', ' 4 name', '2000-12-10', 'female', 'm f name', 'm m name', ' m l name', ' m 4 name', '2000-12-10', 'state', '2000-12-10', 'accedent', 'work', 1, 'khartoum', 'mamoorah', 1, 5, 18, 200, 0, 'stud', 'work', 'ff', 1, 2, 3, 'health state', 'health', 'ddddd', '2000-12-10');
 
 -- --------------------------------------------------------
 
@@ -227,6 +214,7 @@ CREATE TABLE IF NOT EXISTS `orphan` (
 -- Table structure for table `preacher`
 --
 
+DROP TABLE IF EXISTS `preacher`;
 CREATE TABLE IF NOT EXISTS `preacher` (
   `id` varchar(10) NOT NULL,
   `type` int(11) NOT NULL,
@@ -265,17 +253,13 @@ CREATE TABLE IF NOT EXISTS `preacher` (
   KEY `warranty_organization` (`warranty_organization`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `preacher`
---
-
-
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `sibiling`
 --
 
+DROP TABLE IF EXISTS `sibiling`;
 CREATE TABLE IF NOT EXISTS `sibiling` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -283,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `sibiling` (
   `birth_date` date NOT NULL,
   `state` varchar(50) NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `sibiling`
@@ -298,13 +282,14 @@ INSERT INTO `sibiling` (`id`, `name`, `sex`, `birth_date`, `state`) VALUES
 -- Table structure for table `sponsor`
 --
 
+DROP TABLE IF EXISTS `sponsor`;
 CREATE TABLE IF NOT EXISTS `sponsor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `numberOFSponsored` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `sponsor`
@@ -320,6 +305,7 @@ INSERT INTO `sponsor` (`id`, `name`, `numberOFSponsored`) VALUES
 -- Table structure for table `sponsorship`
 --
 
+DROP TABLE IF EXISTS `sponsorship`;
 CREATE TABLE IF NOT EXISTS `sponsorship` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `amount` int(11) NOT NULL,
@@ -330,7 +316,7 @@ CREATE TABLE IF NOT EXISTS `sponsorship` (
   `sponsored` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `sponsor` (`sponsor`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf32 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf32;
 
 --
 -- Dumping data for table `sponsorship`
@@ -347,6 +333,7 @@ INSERT INTO `sponsorship` (`id`, `amount`, `date`, `saving`, `sponsor`, `month_n
 -- Table structure for table `state`
 --
 
+DROP TABLE IF EXISTS `state`;
 CREATE TABLE IF NOT EXISTS `state` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -366,8 +353,9 @@ INSERT INTO `state` (`id`, `name`) VALUES
 -- Table structure for table `student`
 --
 
+DROP TABLE IF EXISTS `student`;
 CREATE TABLE IF NOT EXISTS `student` (
-  `id` varchar(100) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `state` varchar(50) NOT NULL,
   `warranty_organization` int(11) NOT NULL,
   `first_name` varchar(50) NOT NULL,
@@ -401,18 +389,11 @@ CREATE TABLE IF NOT EXISTS `student` (
   `ill_cause` varchar(50) NOT NULL,
   `data_entery_name` varchar(50) NOT NULL,
   `data_entery_date` date NOT NULL,
-  `head_dep_name` varchar(50) NOT NULL,
-  `head_dep_date` date NOT NULL,
   UNIQUE KEY `id_2` (`id`),
   KEY `id` (`id`),
   KEY `warranty_organization` (`warranty_organization`),
   KEY `residence_state` (`residence_state`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `student`
---
-
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Constraints for dumped tables
@@ -465,3 +446,7 @@ ALTER TABLE `sponsorship`
 ALTER TABLE `student`
   ADD CONSTRAINT `student_sponsor_id` FOREIGN KEY (`warranty_organization`) REFERENCES `sponsor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `student_state_id` FOREIGN KEY (`residence_state`) REFERENCES `state` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
