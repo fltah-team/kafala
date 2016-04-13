@@ -19,10 +19,6 @@ if(!$sel){
 //die("OK");
 //mysql_close($fp_handle);
 @mysql_query("SET NAMES 'utf8'");
-function fb_db_close(){
-	
-	}
-
 
 function fp_db_close(){
 	global $fp_handle;

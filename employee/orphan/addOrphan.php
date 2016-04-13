@@ -37,7 +37,9 @@
 <br />
 <p id="noti"></p>
 <br />
+<form action="saveOrphan.php" method="get" >
 <table width="85%" border="0" align="center">
+
   <tr align="center">
   	<td width="16%" align="right">&nbsp;</td>
   	<td width="18%" align="center">&nbsp;</td>
@@ -84,7 +86,7 @@
 	<td>
         </td>
         <td align="right"></td>
-    <td align="right"><select class="textFiels" name="sponsor2" id="gender">
+    <td align="right"><select class="textFiels" name="gender" id="gender">
       <option value="1">ذكر</option>
       <option value="0">انثى</option>
     </select></td>
@@ -101,21 +103,21 @@
 		}
 	
     </script>
-    <td align="center"><table width="200" border="0">
+    <td align="center"><table width="80%" border="0">
       <tr>
-        <td><select class="textFiels" id="day">
+        <td><select name="y" class="textFiels" id="y">
           <?php
 	  for($i=1997 ; $i <= date("Y") ; $i++)
   	  echo "<option value='".$i."'>$i</option>'";
 	  ?>
         </select></td>
-        <td><select class="textFiels" name="quran3" id="quran3">
+        <td><select class="textFiels" name="m" id="m">
           <?php
 	  for($i=1 ; $i <= 12 ; $i++)
   	  echo "<option value='".$i."'>$i</option>'";
 	  ?>
         </select></td>
-        <td><select class="textFiels" name="quran2" id="quran2">
+        <td><select class="textFiels" name="d" id="d">
           <?php
 	  for($i=1 ; $i <= 31 ; $i++)
   	  echo "<option value='".$i."'>$i</option>'";
@@ -156,9 +158,28 @@
 
   	  </td>
     
-    <td align="right">
-    <input class="textFiels" name="mbd" type="text" id="mbd" size="10" maxlength="30" />
-      </td>
+    <td align="right"><table width="80%" border="0">
+      <tr>
+        <td><select name="my" class="textFiels" id="my">
+          <?php
+	  for($i=1950 ; $i <= date("Y") ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+        <td><select class="textFiels" name="mm" id="mm">
+          <?php
+	  for($i=1 ; $i <= 12 ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+        <td><select class="textFiels" name="md" id="md">
+          <?php
+	  for($i=1 ; $i <= 31 ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+      </tr>
+    </table></td>
     <td align="center">تاريخ ميلادها</td>
   </tr>
   
@@ -186,18 +207,28 @@
 <br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
-  	<td width="16%" align="right"><input class="textFiels" name="district" type="text" id="district" size="10" maxlength="30" /></td>
-  	<td width="14%" align="right">الحي</td>
-    <td width="26%" align="right"><input class="textFiels" name="city" type="text" id="city" size="20" maxlength="30" /></td>
-    <td width="16%" align="center">المدينة/القرية</td>
+  	<td width="13%" align="right"><input class="textFiels" name="district" type="text" id="district" size="10" maxlength="30" /></td>
+  	<td width="11%" align="right">الحي</td>
+    <td width="22%" align="right"><input class="textFiels" name="city" type="text" id="city" size="20" maxlength="30" /></td>
+    <td width="13%" align="center">المدينة/القرية</td>
+        <?php
+    
+	include('../../utils/stateAPI.php');
+	$states = fp_states_get();
+	$scount = count($states);
+	
+	?>
+    
     <td width="14%" align="right">
     <select class="textFiels" name="state" id="state">
-      <option value="0">كسلا</option>
-      <option value="1">بورتسودان</option>
-      <option value="2">القضارف</option>
+    <?php for($i = 0 ; $i < $scount ; $i++){
+		$state = $states[$i] ; ?>
+      <option value="<?php echo $state->id?>"><?php echo $state->name?></option>
+	<?php } ?>
     </select>
+    
       </td>
-    <td width="14%" align="center">الولاية</td>
+    <td width="16%" align="center">الولاية</td>
   </tr>
   
   <tr>
@@ -236,11 +267,11 @@
 <br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
-  	<td width="29%" align="right"><input class="textFiels" name="femaleno" type="text" id="femaleno" size="10" maxlength="30" /></td>
+  	<td width="29%" align="right"><input name="femaleno" type="text" disabled="disabled" id="femaleno" size="10" maxlength="30" /></td>
   	<td width="11%" align="right">الأناث</td>
-    <td width="16%" align="right"><input class="textFiels" name="maleno" type="text" id="maleno" size="10" maxlength="30" /></td>
+    <td width="16%" align="right"><input name="maleno" type="text" disabled="disabled" id="maleno" size="10" maxlength="30" /></td>
     <td width="15%" align="center">الذكور</td>
-    <td width="15%" align="right"><input class="textFiels" name="fno" type="text" id="fno" size="10" maxlength="30" /></td>
+    <td width="15%" align="right"><input name="fno" type="text" disabled="disabled" id="fno" size="10" maxlength="30" /></td>
     <td width="14%" align="center">عدد أفراد الأسرة</td>
   </tr>
   
@@ -307,7 +338,7 @@
   	  </td>
 	<td width="14%" align="center">السبب</td>
         <td width="14%" align="center">
-        <select class="textFiels" name="sponsor" id="learning">
+        <select class="textFiels" name="learning" id="learning">
       <option onclick="checkLearn(1)" value="1">يدرس</option>
       <option onclick="checkLearn(0)" value="0">لا يدرس</option>
     </select>
@@ -400,7 +431,7 @@
   	<td width="35%" align="left"><input class="textFiels" name="illt" type="text" id="illt" size="30" maxlength="30" disabled="disabled" value="جيدة" /></td>
 	<td width="14%" align="center">نوع المرض</td>
         <td width="10%" align="center">
-        <select class="textFiels" name="sponsor" id="اثشمفا">
+        <select class="textFiels" name="ill" id="illness">
       <option onclick="checkIllness(1)" value="1">جيدة</option>
       <option onclick="checkIllness(0)" value="0">سيئة</option>
     </select>
@@ -464,14 +495,67 @@
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td align="right"><input class="bt" name="add" onclick="IsEmpty()" type="button"  value="اضافة يتيم" /></td>
+    <td align="right"><input class="bt" name="add" type="submit"   value="اضافة يتيم" /></td>
     <td>&nbsp;</td>
   </tr>
+  </form>
 </table>
 </div>
 <script type="text/javascript" >
 	
+	var date = document.getElementById("y").value+"-"+document.getElementById("m").value+"-"+document.getElementById("d").value;
+	var gender = document.getElementById("y").value; 
 	var nodes = document.getElementsByClassName("textFiels");
+	var str = "" ;
+	for(var i = 0 ; i <= nodes.length ; i++){
+		str+=nodes[i].getAttribute("id")+"="+nodes[i].value+"&";
+		}
+		
+		/*
+	var str2= "sponsor="+nodes[0].value+
+			  "&status="+nodes.item(1).value+
+			  "&name1="+nodes.item(2).value+
+			  "&name2="+nodes.item(3).value+
+			  "&name3="+nodes.item(4).value+
+			  "&name4="+nodes.item(5).value+
+			  "&bd="+nodes.item(6).value+
+			  
+			  "&mname1="+nodes.item(7).value+
+			  "&mname2="+nodes.item(8).value+
+			  "&mname3="+nodes.item(9).value+
+			  "&mname4="+nodes.item(10).value+
+			   
+			  			  
+			  "&mstatus="+nodes.item(11).value+
+			  "&mbd="+nodes.item(12).value+
+			  "&lw="+nodes.item(13).value+
+			  "&dr="+nodes.item(14).value+
+			  "&fdd="+nodes.item(15).value+
+			  "&district="+nodes.item(16).value+
+			  "&city="+nodes.item(17).value+
+			  
+			  
+			  
+			  "&state="+nodes.item(18).value+
+			  "&hno="+nodes.item(19).value+
+			  "&section="+nodes.item(20).value+
+			  "&tel2="+nodes.item(21).value+
+			  "&tel1="+nodes.item(22).value+
+			  "&femaleno="+nodes.item(23).value+
+			  "&maleno="+nodes.item(24).value+
+			  "&fno="+nodes.item(25).value+
+			  
+			  
+			  
+			  "&teachingr="+nodes.item(26).value+
+			  "&school="+nodes.item(27).value+
+			  "&quran="+nodes.item(28).value+
+			  "&class="+nodes.item(29).value+
+			  "&level="+nodes.item(30).value+
+			  "&illt="+nodes.item(31).value;
+			  "&illness"+document.getElementById("illness");
+			  */
+			  
 	function IsEmpty(){ 
 	var res = 0 ;
 	// empty
@@ -486,7 +570,7 @@
 	 
 }
 function check(res){
-	if(res == 35) alert("FULL");
+	if(res == 32) ajax();
 	}
 
 
@@ -494,47 +578,11 @@ function ajax()
 {
 	
 	var n = document.getElementById("footer");
+	
 	var i = 0;
 	st = "";
-	var str = "?sponsor="+nodes[0].value+
-			  "&status="+nodes.item(1).value+
-			  
-			  "&name1="+nodes.item(2).value+
-			  "&name2="+nodes.item(3).value+
-			  "&name3="+nodes.item(4).value+
-			  "&name4="+nodes.item(5).value+
-			  
-			  "&bd="+nodes.item(6).value+
-			  
-			  "&mname1="+nodes.item(7).value+
-			  "&mname2="+nodes.item(8).value+
-			  "&mname3="+nodes.item(9).value+
-			  "&mname4="+nodes.item(10).value+
-			  
-			  "&mstatus="+nodes.item(11).value+
-			  "&mbd="+nodes.item(12).value+
-			  "&lw="+nodes.item(13).value+
-			  "&dr="+nodes.item(14).value+
-			  "&fdd="+nodes.item(15).value+
-			  "&district="+nodes.item(16).value+
-			  "&city="+nodes.item(17).value+
-			  "&state="+nodes.item(18).value+
-			  "&hno="+nodes.item(19).value+
-			  "&section="+nodes.item(20).value+
-			  "&tel2="+nodes.item(21).value+
-			  "&tel1="+nodes.item(22).value+
-			  "&femaleno="+nodes.item(23).value+
-			  "&maleno="+nodes.item(24).value+
-			  "&fno="+nodes.item(25).value+
-			  "&teachingr="+nodes.item(26).value+
-			  "&school="+nodes.item(27).value+
-			  "&quran="+nodes.item(28).value+
-			  "&class="+nodes.item(29).value+
-			  "&level="+nodes.item(30).value+
-			  "&illt="+nodes.item(31).value+
-			  "&illness"+illness;
-			  
-			
+	var str = "START";
+	
 	
     var ajax;
 	var data ;
@@ -570,7 +618,7 @@ function ajax()
     }
     if (post==false)
     {
-        ajax.open("GET",filename+str,true);
+        ajax.open("GET",filename+"?"+str,true);
         ajax.send(null);
 		
     }
