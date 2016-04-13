@@ -1,5 +1,5 @@
 <?php
-	// SELSECT ALL sponsor
+	// SELSECT ALL state
 function fp_states_get($extra = ''){
 	global $fp_handle ;
 	$query = sprintf("SELECT * FROM `state` %s",$extra);
@@ -18,6 +18,21 @@ function fp_states_get($extra = ''){
 	@mysql_free_result($qresult);
 	
 	return $sponsors ; 
+	}
+	
+	$result = fp_states_get();
+	if(!$result) die("err");
+	echo serialize($result);
+	
+		// SELECT BY ID
+function fp_states_get_by_id($id){
+	global $fp_handle ;
+	$oid = (int)$id;
+	if($oid == 0) return NULL ;
+	$states = fp_states_get("WHERE `id` = ".$oid);
+	if($states == NULL) return NULL ;
+	$state = $states[0];
+	return $state ;
 	}
 
 ?>	
