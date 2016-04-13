@@ -1,16 +1,10 @@
 <?php
-
-
-
-
-
 	
 	// SELSECT ALL
 function fp_orphan_get($extra = ''){
 	
 	global $fp_handle ;
 	$query = sprintf("SELECT * FROM `orphan` %s",$extra);
-
 	$qresult = @mysql_query($query);
 	
 	if(!$qresult) return NULL ; 
@@ -38,13 +32,10 @@ function fp_orphan_get_by_id($id){
 	$orphan = $orphans[0];
 	return $orphan ;
 	}
-
 	// INSERT	
 function fp_orphan_add($state , $warranty_organization , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 , $studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date ){
 	global $fp_handle;
 	
-
-
 	$n_state = @mysql_real_escape_string(strip_tags($state),$fp_handle); 
 	$n_warranty_organization = (int)$warranty_organization;
 	$n_first_name  = @mysql_real_escape_string(strip_tags($first_name),$fp_handle);
@@ -93,11 +84,9 @@ function fp_orphan_add($state , $warranty_organization , $first_name , $meddle_n
 	
 	// UPDATE
 function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null , $first_name = Null , $meddle_name = Null  , $last_name = Null  , $last_4th_name = Null , $birth_date = Null , $sex = Null  , $mother_first_name = Null , $mother_middle_name = Null  , $mother_last_name = Null , $mother_4th_name = Null , $mother_Birth_date = Null , $mother_state = Null ,$father_dead_date = Null  , $father_dead_cause = Null  , $father_work = Null  , $residence_state = Null , $city = Null , $District = Null  , $section = Null ,$house_no = Null  , $phone1 = Null , $phone2 = Null  , $sisters_no = Null , $brothers_no = Null , $sibiling= Null  , $studing_state= Null  ,$nonstuding_cause = Null , $school_name = Null , $level= Null  , $year = Null , $quran_parts= Null  , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date= Null  , $head_dep_name = Null , $head_dep_date= Null  ){
-
 	global $fp_handle ;
 	$uid = (int)$id;
 	if($uid == 0) return false ;
-
 	$orphan = fp_orphan_get_by_id($uid);
 	
 	if(!$orphan)  return false ;
@@ -250,7 +239,6 @@ function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null ,
 		$n_data_entery_name   = mysql_real_escape_string(strip_tags($data_entery_name),$fp_handle);
 		$fields[@count($fields)] = " `data_entery_name` = '$n_data_entery_name' ";
 		}
-
 	if(!empty($data_entery_date)){
 		$n_data_entery_date   = mysql_real_escape_string(strip_tags($data_entery_date),$fp_handle);
 		$fields[@count($fields)] = " `data_entery_date` = '$n_data_entery_date' ";
@@ -295,7 +283,6 @@ function fp_orphan_delete($id){
 	
 	return true ;
 	}
-
 	//-------------------------------------sibilingAPI----------------------------------------------
 	
 	

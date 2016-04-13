@@ -4,11 +4,43 @@
 	include('../../utils/db.php');
 	include('../../utils/orphanAPI.php');
 	
-	$bd = $_GET['y']."-".$_GET['m']."-".$_GET['d'];	
-	$mbd = $_GET['my']."-".$_GET['mm']."-".$_GET['md'];	
+	$state = "state" ;	
+	$warranty_organization = 1;
+	$first_name = "first name";
+	$meddle_name = "s name";
+	$last_name = " l name";
+	$last_4th_name = " 4 name";
+	$birth_date = "2000-12-10";
+	$sex = "female";
+	$mother_first_name = "m f name";
+	$mother_middle_name ="m m name";
+	$mother_last_name = " m l name";
+	$mother_4th_name = " m 4 name";
+	$mother_Birth_date = "2000-12-10";
+	$mother_state = "state";
+	$father_dead_date ="2000-12-10";
+	$father_dead_cause ="accedent";
+	$father_work = "work";
+	$residence_state =1;
+	$city ="khartoum";
+	$District ="mamoorah";
+	$section =1;
+	$house_no = 5;
+	$phone1 =022;
+	$phone2 =200;
+	$studing_state = "stud";
+	$nonstuding_cause = "work";
+	$school_name = "ff";
+	$level = 1;
+	$year = 2;
+	$quran_parts =3;
+	$health_state = "health state";
+	$ill_cause ="health";
+	$data_entery_name = "ddddd";
+	$data_entery_date  ="2000-12-10" ;
 	
-	$result = fp_orphan_add($_GET['status'],$_GET['sponsor'],$_GET['name1'],$_GET['name2'],$_GET['name3'],$_GET['name4'],$bd,$_GET['gender'],$_GET['mname1'],$_GET['mname2'],$_GET['mname3'],$_GET['mname4'],$mbd,$_GET['mstatus'],$_GET['fdd'],$_GET['dr'],$_GET['lw'],$_GET['state'],$_GET['city'],$_GET['district'],$_GET['section'],$_GET['hno'],$_GET['tel1'],$_GET['tel2'],$_GET['learning'],$_GET['teachingr'],$_GET['school'],$_GET['level'],$_GET['class'],$_GET['quran'],$_GET['ill'],$_GET['illt'],"h",date("y-m-d"));
 	
+	$result = fp_orphan_add($state , $warranty_organization , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 , $studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date  );
 	//$_GET['fno']);
 	fp_db_close();
 	
