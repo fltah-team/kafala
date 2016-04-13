@@ -1,12 +1,9 @@
 <?php
-/*	
+	
 include("db.php");
 
-$kafala = fp_kafala_get();
-if(!$kafala) die("err");
-else echo serialize($kafala);
 
-*/
+
 	// SELSECT ALL
 function fp_kafala_get($extra = ''){
 	global $fp_handle ;
@@ -28,7 +25,18 @@ function fp_kafala_get($extra = ''){
 	
 	return $kafala ; 
 	}
+
+
+	// SELECT BY ID
+function fp_kafala_get_by_id($id){
+	$oid = (int)$id;
+	if($oid == 0) return NULL ;
 	
+	$kafalas = fp_kafala_get("WHERE `id` = ".$oid);
+	if($kafalas == NULL) return NULL ;
+	$kafala = $kafalas[0];
+	return $kafala ;
+	}	
 
 
 	// INSERT	
