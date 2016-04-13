@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 12, 2016 at 02:40 PM
+-- Generation Time: Apr 13, 2016 at 11:35 AM
 -- Server version: 5.5.8
 -- PHP Version: 5.3.5
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `type` int(10) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
 
 --
 -- Dumping data for table `employee`
@@ -197,8 +197,6 @@ CREATE TABLE IF NOT EXISTS `orphan` (
   `house_no` int(50) NOT NULL,
   `phone1` int(20) NOT NULL,
   `phone2` int(20) NOT NULL,
-  `sisters_no` int(20) NOT NULL,
-  `brothers_no` int(20) NOT NULL,
   `sibiling` int(11) NOT NULL,
   `studing_state` varchar(50) NOT NULL,
   `nonstuding_cause` varchar(50) NOT NULL,
@@ -285,12 +283,14 @@ CREATE TABLE IF NOT EXISTS `sibiling` (
   `birth_date` date NOT NULL,
   `state` varchar(50) NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `sibiling`
 --
 
+INSERT INTO `sibiling` (`id`, `name`, `sex`, `birth_date`, `state`) VALUES
+(0, '0', '0', '0000-00-00', '1');
 
 -- --------------------------------------------------------
 
@@ -304,14 +304,15 @@ CREATE TABLE IF NOT EXISTS `sponsor` (
   `numberOFSponsored` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `sponsor`
 --
 
 INSERT INTO `sponsor` (`id`, `name`, `numberOFSponsored`) VALUES
-(1, 'jjj', 5);
+(1, 'jjj', 5),
+(2, 'df', 4);
 
 -- --------------------------------------------------------
 
