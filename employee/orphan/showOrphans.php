@@ -1,11 +1,12 @@
 <?php
 	include('../../utils/db.php');
-	include('../../utils/usersAPI.php');
-	$users = fp_users_get();
+	include('../../utils/orphanAPI.php');
+	include('../../utils/stateAPI.php');
+	$orphans = fp_orphan_get();
 	fp_db_close();
-	if(!$users) die ("prolem");
-	$ucount = @count($users);
-	if($ucount == 0 ) die("NO users");
+	if(!$orphans) die ("prolem");
+	$ocount = @count($orphans);
+	if($ocount == 0 ) die("NO orphans");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -43,44 +44,31 @@
 
 <!-- main -->
 <div class="main">
-<h1 align="center" class="adress"> بيانات المستخدمين </h1>
+<h1 align="center" class="adress"> بيانات الأيتام </h1>
 <br />
 <table width="90%" border="2" align="center">
   <tr align="center">
- 	<td width="10%">حذف </td>
-    <td width="9%">عرض </td>
-    <td width="31%">نوع المستخدم</td>
-    <td width="16%">اسم المستخدم</td>
-    <td width="30%">الاسم كامل</td>
+  <td width="7%">العمر</td>
+ 	<td width="9%">الولاية </td>
+    <td width="8%">الجنس </td>
+    <td width="29%">جهة الكفالة</td>
+    <td width="15%">الحالة</td>
+    <td width="28%">الاسم </td>
     <td width="4%">الرقم</td>
+    
   </tr>
   <?php 
-  	for($i = 0 ; $i < $ucount ; $i++){
-		$user = $users[$i];
+  	for($i = 0 ; $i < $ocount ; $i++){
+		$orphan = $orphans[$i];
   ?>
-  <tr align="center">
-    <td>
-    <button name="add" type="button" onclick="ajax(<?php echo $user->id?>)" />حذف</button>
-	<?php /* echo "<a href=\"DeleteUser.php?id=$user->id\"/>"*/?></td>
-    <td><?php echo "<a href=\"user.php?id=$user->id\">عرض</a>" ?></td>
-    <td><?php
-	  if($user->type == 4)
-      echo 'مستخدم عرض البيانات';
-	  else
-	  if($user->type == 3)
-	  echo 'موظف في قسم الحسابات';
-	  else
-	  if($user->type == 2)
-      echo 'موظف في قسم الأيتام';
-	  else
-	  if($user->type == 1)
-	  echo 'مدير نظام';
-	  else
-	   echo 'مستخدم غير معروف';
-	  ?></td>
-    <td><?php echo $user->username?></td>
-    <td><?php echo $user->name?></td>
-    <td><?php echo $user->id?></td>
+    <td width="7%"><?php echo $orphan->id?></td>
+ 	<td width="9%"><?php $st = fp_states_get_by_id($orphan->residence_state) ; echo $st->name 	?> </td>
+    <td width="8%"><?php echo $orphan->sex?> </td>
+    <td width="29%"><?php echo $orphan->warranty_organization?></td>
+    <td width="15%"><?php echo $orphan->state?></td>
+    <td width="28%"> <?php echo $orphan->first_name." ".$orphan->meddle_name." ".$orphan->last_name." ".$orphan->last_4th_name?></td>
+    <td width="4%"><?php echo $orphan->id?></td>
+    
   </tr>
   <?php } ?>
   </table>

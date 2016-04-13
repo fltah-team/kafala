@@ -20,10 +20,6 @@ function fp_states_get($extra = ''){
 	return $sponsors ; 
 	}
 	
-	$result = fp_states_get();
-	if(!$result) die("err");
-	echo serialize($result);
-	
 		// SELECT BY ID
 function fp_states_get_by_id($id){
 	global $fp_handle ;
