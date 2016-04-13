@@ -85,7 +85,7 @@ function fp_orphan_add($state , $warranty_organization , $first_name , $meddle_n
 	
 	
 	// UPDATE
-function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null , $first_name = Null , $meddle_name = Null  , $last_name = Null  , $last_4th_name = Null , $birth_date = Null , $sex = Null  , $mother_first_name = Null , $mother_middle_name = Null  , $mother_last_name = Null , $mother_4th_name = Null , $mother_Birth_date = Null , $mother_state = Null ,$father_dead_date = Null  , $father_dead_cause = Null  , $father_work = Null  , $residence_state = Null , $city = Null , $District = Null  , $section = Null ,$house_no = Null  , $phone1 = Null , $phone2 = Null  , $sisters_no = Null , $brothers_no = Null , $sibiling= Null  , $studing_state= Null  ,$nonstuding_cause = Null , $school_name = Null , $level= Null  , $year = Null , $quran_parts= Null  , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date= Null  , $head_dep_name = Null , $head_dep_date= Null  ){
+function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null , $first_name = Null , $meddle_name = Null     , $last_name = Null  , $last_4th_name = Null , $birth_date = Null , $sex = Null  , $mother_first_name = Null , $mother_middle_name = Null  , $mother_last_name = Null , $mother_4th_name = Null , $mother_Birth_date = Null , $mother_state = Null ,$father_dead_date = Null  , $father_dead_cause = Null  , $father_work = Null  , $residence_state = Null , $city = Null , $District = Null  , $section = Null ,$house_no = Null  , $phone1 = Null , $phone2 = Null  , $sibiling= Null  , $studing_state= Null  ,$nonstuding_cause = Null , $school_name = Null , $level= Null  , $year = Null , $quran_parts= Null  , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date= Null  ){
 	global $fp_handle ;
 	$uid = (int)$id;
 	if($uid == 0) return false ;
@@ -193,14 +193,6 @@ function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null ,
 		$n_phone2   = (int)$phone2 ;
 		$fields[@count($fields)] = " `phone2` = '$n_phone2' ";
 		}
-	if(!empty($sisters_no)){
-		$n_sisters_no   = (int)$sisters_no ;
-		$fields[@count($fields)] = " `sisters_no` = '$n_sisters_no' ";
-		}
-	if(!empty($brothers_no)){
-		$n_brothers_no   = (int)$brothers_no ;
-		$fields[@count($fields)] = " `brothers_no` = '$n_brothers_no' ";
-		}
 	if(!empty($sibiling)){
 		$n_sibiling   =(int)$sibiling ;
 		$fields[@count($fields)] = " `sibiling` = '$n_sibiling' ";
@@ -245,14 +237,7 @@ function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null ,
 		$n_data_entery_date   = mysql_real_escape_string(strip_tags($data_entery_date),$fp_handle);
 		$fields[@count($fields)] = " `data_entery_date` = '$n_data_entery_date' ";
 		}
-	if(!empty($head_dep_name)){
-		$n_head_dep_name   = mysql_real_escape_string(strip_tags($head_dep_name),$fp_handle);
-		$fields[@count($fields)] = " `head_dep_name` = '$n_head_dep_name' ";
-		}
-	if(!empty($head_dep_date)){
-		$n_head_dep_date   = mysql_real_escape_string(strip_tags($head_dep_date),$fp_handle);
-		$fields[@count($fields)] = " `head_dep_date` = '$n_head_dep_date' ";
-		}
+		
 	$fields[@count($fields)] = " `id` = '$orphan->id' ";
 	
 	$fcount = @count($fields);

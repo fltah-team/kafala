@@ -3,8 +3,8 @@
 	
 	include('../../utils/db.php');
 	include('../../utils/orphanAPI.php');
-	$id = 6 ;
-	$state = "state" ;	
+	$id = 2 ;
+	$state = "statetttttttttttt" ;	
 	$warranty_organization = 1;
 	$first_name = "ameenah";
 	$meddle_name = "s name";
