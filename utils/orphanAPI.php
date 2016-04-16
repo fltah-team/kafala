@@ -33,7 +33,7 @@ function fp_orphan_get_by_id($id){
 	return $orphan ;
 	}
 	// INSERT	
-function fp_orphan_add($state , $warranty_organization , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2  , $sibiling , $studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date ){
+function fp_orphan_add($state , $warranty_organization , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2   , $studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date ){
 	global $fp_handle;
 	
 	$n_state = @mysql_real_escape_string(strip_tags($state),$fp_handle); 
@@ -60,7 +60,6 @@ function fp_orphan_add($state , $warranty_organization , $first_name , $meddle_n
 	$n_house_no  = (int)$house_no;
 	$n_phone1  = (int)$phone1;
 	$n_phone2  = (int)$phone2;
- 	$n_sibiling = (int)$sibiling;
 	$n_studing_state =@mysql_real_escape_string(strip_tags($studing_state),$fp_handle);
 	$n_nonstuding_cause =@mysql_real_escape_string(strip_tags($nonstuding_cause),$fp_handle);
 	$n_school_name=@mysql_real_escape_string(strip_tags($school_name),$fp_handle);
@@ -73,8 +72,8 @@ function fp_orphan_add($state , $warranty_organization , $first_name , $meddle_n
 	$n_data_entery_date=@mysql_real_escape_string(strip_tags($data_entery_date),$fp_handle);
 
  
- 	$query = ("INSERT INTO `orphan` (id, `state`	 , `warranty_organization` , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `mother_first_name` , `mother_middle_name` , `mother_last_name` , `mother_4th_name` , `mother_Birth_date` , `mother_state` ,`father_dead_date` , `father_dead_cause` , `father_work` , `residence_state` , `city`, `District` , section,  house_no , phone1 , phone2  , sibiling , `studing_state` ,`nonstuding_cause`, `school_name` , level , year , quran_parts , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date`  )
- 				VALUE(NULL , '$n_state' , '$n_warranty_organization' , '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_mother_first_name' , '$n_mother_middle_name' , '$n_mother_last_name' , '$n_mother_4th_name' , '$n_mother_Birth_date' , '$n_mother_state' ,'$n_father_dead_date' , '$n_father_dead_cause' , '$n_father_work' , '$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2' , '$n_sibiling' , '$n_studing_state' ,'$n_nonstuding_cause', '$n_school_name' , '$n_level' , '$n_year' , '$n_quran_parts' , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date' )");
+ 	$query = ("INSERT INTO `orphan` (id, `state`, `warranty_organization` , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `mother_first_name` , `mother_middle_name` , `mother_last_name` , `mother_4th_name` , `mother_Birth_date` , `mother_state` ,`father_dead_date` , `father_dead_cause` , `father_work` , `residence_state` , `city`, `District` , section,  house_no , phone1 , phone2   , `studing_state` ,`nonstuding_cause`, `school_name` , level , year , quran_parts , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date`  )
+ 				VALUE(NULL , '$n_state' , '$n_warranty_organization' , '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_mother_first_name' , '$n_mother_middle_name' , '$n_mother_last_name' , '$n_mother_4th_name' , '$n_mother_Birth_date' , '$n_mother_state' ,'$n_father_dead_date' , '$n_father_dead_cause' , '$n_father_work' , '$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2'  , '$n_studing_state' ,'$n_nonstuding_cause', '$n_school_name' , '$n_level' , '$n_year' , '$n_quran_parts' , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date' )");
 	
 	echo $query;
 	$qresult = mysql_query($query);
@@ -85,7 +84,7 @@ function fp_orphan_add($state , $warranty_organization , $first_name , $meddle_n
 	
 	
 	// UPDATE
-function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null , $first_name = Null , $meddle_name = Null     , $last_name = Null  , $last_4th_name = Null , $birth_date = Null , $sex = Null  , $mother_first_name = Null , $mother_middle_name = Null  , $mother_last_name = Null , $mother_4th_name = Null , $mother_Birth_date = Null , $mother_state = Null ,$father_dead_date = Null  , $father_dead_cause = Null  , $father_work = Null  , $residence_state = Null , $city = Null , $District = Null  , $section = Null ,$house_no = Null  , $phone1 = Null , $phone2 = Null  , $sibiling= Null  , $studing_state= Null  ,$nonstuding_cause = Null , $school_name = Null , $level= Null  , $year = Null , $quran_parts= Null  , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date= Null  ){
+function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null , $first_name = Null , $meddle_name = Null     , $last_name = Null  , $last_4th_name = Null , $birth_date = Null , $sex = Null  , $mother_first_name = Null , $mother_middle_name = Null  , $mother_last_name = Null , $mother_4th_name = Null , $mother_Birth_date = Null , $mother_state = Null ,$father_dead_date = Null  , $father_dead_cause = Null  , $father_work = Null  , $residence_state = Null , $city = Null , $District = Null  , $section = Null ,$house_no = Null  , $phone1 = Null , $phone2 = Null   , $studing_state= Null  ,$nonstuding_cause = Null , $school_name = Null , $level= Null  , $year = Null , $quran_parts= Null  , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date= Null  ){
 	global $fp_handle ;
 	$uid = (int)$id;
 	if($uid == 0) return false ;
@@ -193,10 +192,7 @@ function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null ,
 		$n_phone2   = (int)$phone2 ;
 		$fields[@count($fields)] = " `phone2` = '$n_phone2' ";
 		}
-	if(!empty($sibiling)){
-		$n_sibiling   =(int)$sibiling ;
-		$fields[@count($fields)] = " `sibiling` = '$n_sibiling' ";
-		}
+
 	if(!empty($studing_state)){
 		$n_studing_state   = mysql_real_escape_string(strip_tags($studing_state),$fp_handle);
 		$fields[@count($fields)] = " `studing_state` = '$n_studing_state' ";
@@ -277,15 +273,16 @@ function fp_orphan_delete($id){
 		
 				
 		// INSERT	
-	function fp_sibiling_add($name , $sex , $birth_date , $state){
+	function fp_sibiling_add( $orphan_id , $name , $sex , $birth_date , $state){
 		global $fp_handle;
 	
+		$n_orphan_id = (int)$orphan_id ;
 		$n_name    = @mysql_real_escape_string(strip_tags($name),$fp_handle);
 		$n_sex    = @mysql_real_escape_string(strip_tags($sex),$fp_handle);
 		$n_birth_date  = @mysql_real_escape_string(strip_tags($birth_date),$fp_handle);
 		$n_state = @mysql_real_escape_string(strip_tags($state),$fp_handle);
 		
-		$query = ("INSERT INTO `sibiling` VALUE(NULL,'$n_name','$n_sex','$n_birth_date','$n_state')");
+		$query = ("INSERT INTO `sibiling` VALUE(NULL,'$n_orphan_id' ,'$n_name','$n_sex','$n_birth_date','$n_state')");
 		echo $query ;
 		
 		$qresult = mysql_query($query);

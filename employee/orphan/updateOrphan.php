@@ -4,7 +4,7 @@
 	include('../../utils/db.php');
 	include('../../utils/orphanAPI.php');
 	$id = 2 ;
-	$state = "statetttttttttttt" ;	
+	$state = "statetttttttttooottt" ;	
 	$warranty_organization = 1;
 	$first_name = "ameenah";
 	$meddle_name = "s name";
@@ -28,7 +28,6 @@
 	$house_no = 5;
 	$phone1 =022;
 	$phone2 =200;
- 	$sibiling = 0;
 	$studing_state = "stud";
 	$nonstuding_cause = "work";
 	$school_name = "ff";
@@ -41,7 +40,7 @@
 	$data_entery_date  ="2000-12-10" ;
 
 	
-	$result = fp_orphan_update($id , $state , $warranty_organization , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2  , $sibiling , $studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date  );
+	$result = fp_orphan_update($id , $state , $warranty_organization , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2  , $studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date  );
 	//$_GET['fno']);
 	fp_db_close();
 	
