@@ -19,6 +19,9 @@ function fp_states_get($extra = ''){
 	
 	return $sponsors ; 
 	}
+	//include('db.php');
+	//$state = fp_states_get_by_id(1); 
+					//echo $state->name;
 	
 		// SELECT BY ID
 function fp_states_get_by_id($id){

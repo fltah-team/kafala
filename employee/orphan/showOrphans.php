@@ -1,7 +1,7 @@
 <?php
 	include('../../utils/db.php');
 	include('../../utils/orphanAPI.php');
-	include('../../utils/stateAPI.php');
+	
 	$orphans = fp_orphan_get();
 	fp_db_close();
 	if(!$orphans) die ("prolem");
@@ -58,14 +58,36 @@
     
   </tr>
   <?php 
+  	include('../../utils/stateAPI.php');
+	include('../../utils/sponsorAPI.php');
+	function ageCalculator($dob){
+    if(!empty($dob)){
+        $birthdate = new DateTime($dob);
+        $today   = new DateTime('today');
+        $age = $birthdate->diff($today)->y;
+        return $age;
+    }
+	else
+        return 0;   
+}
   	for($i = 0 ; $i < $ocount ; $i++){
 		$orphan = $orphans[$i];
   ?>
-    <td width="7%"><?php echo $orphan->id?></td>
- 	<td width="9%"><?php $st = fp_states_get_by_id($orphan->residence_state) ; echo $st->name 	?> </td>
+    <td width="7%"><?php
+echo ageCalculator($orphan->birth_date);?></td>
+ 	<td width="9%"><?php echo $orphan->id?></td>
     <td width="8%"><?php echo $orphan->sex?> </td>
     <td width="29%"><?php echo $orphan->warranty_organization?></td>
-    <td width="15%"><?php echo $orphan->state?></td>
+    <td width="15%"><?php switch($orphan->state){
+						case 1 :
+							echo "مكفول";
+						break;
+						case 2 :
+							echo "قيد التسويق";
+						break;
+						case 3 :
+							echo "متوقف";
+						}?></td>
     <td width="28%"> <?php echo $orphan->first_name." ".$orphan->meddle_name." ".$orphan->last_name." ".$orphan->last_4th_name?></td>
     <td width="4%"><?php echo $orphan->id?></td>
     

@@ -37,7 +37,7 @@
 <br />
 <p id="noti"></p>
 <br />
-<form action="saveOrphan.php" method="get" >
+<form action="saveOrphan.php" method="post" >
 <table width="85%" border="0" align="center">
 
   <tr align="center">
@@ -428,10 +428,10 @@
   <tr align="center">
   	<td width="2%"></td>
   	<td width="28%" align="right"></td>
-  	<td width="35%" align="left"><input class="textFiels" name="illt" type="text" id="illt" size="30" maxlength="30" disabled="disabled" value="جيدة" /></td>
+  	<td width="35%" align="left"><input class="textFiels" name="illt" type="text" id="illt" size="30" maxlength="30"  value="جيدة" /></td>
 	<td width="14%" align="center">نوع المرض</td>
         <td width="10%" align="center">
-        <select class="textFiels" name="ill" id="illness">
+        <select class="textFiels" name="illness" id="illness">
       <option onclick="checkIllness(1)" value="1">جيدة</option>
       <option onclick="checkIllness(0)" value="0">سيئة</option>
     </select>
