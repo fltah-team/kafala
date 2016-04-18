@@ -291,7 +291,7 @@
       <option  value="0">لا يدرس</option>
     </select>
     <script type="text/javascript" >
-            var totalVAL = valueOf() ;
+            var totalVAL = 21 ;
             
     </script>
     </td>
@@ -382,7 +382,7 @@
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td align="center"><button class="bt" name="add" type="button" onclick="alert(totalVAL)" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة يتيم  </button></td>
+    <td align="center"><button class="bt" name="add" type="button" onclick="alert(str)" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة يتيم  </button></td>
     <td>&nbsp;</td>
   </tr>
   </form>
@@ -393,9 +393,16 @@
 	var date = document.getElementById("y").value+"-"+document.getElementById("m").value+"-"+document.getElementById("d").value;
 	var gender = document.getElementById("y").value; 
 	var nodes = document.getElementsByClassName("textFiels");
+        var selectores_nodes = document.getElementsByClassName("select");
 	var str = "" ;
 	for(var i = 0 ; i <= nodes.length ; i++){
 		str+=nodes[i].getAttribute("id")+"="+nodes[i].value+"&\n";
+                if(i==selectores_nodes.length) 
+                    str+=selectores_nodes[i].getAttribute("id")+"="+selectores_nodes[i].value+"&\n";
+		}
+		;
+        for(var i = 0 ; i <= selectores_nodes.length ; i++){
+		
 		}
 		;
 		/*
@@ -452,12 +459,12 @@
 	nodes.item(i).setAttribute("placeholder","هذا الحقل فارغ");
 	
 		} else res++;
-		check(res);
+		ajax();//check(res);
 	}
 	 
 }
 function check(res){
-	if(res == totalVAL) ajax();
+	if(res == 21) ajax();
 	
 	}
 

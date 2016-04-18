@@ -5,7 +5,7 @@
 	include('../../utils/orphanAPI.php');
 	
 
-	
+
 	$state = $_GET['status'];	
 	$warranty_organization =  $_GET['sponsor'];	
 	$first_name = $_GET['name1'];	
