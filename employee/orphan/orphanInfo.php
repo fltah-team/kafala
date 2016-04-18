@@ -1,3 +1,13 @@
+<?php 
+        include('../../utils/db.php');
+	include('../../utils/orphanAPI.php');
+	if(!isset($_GET['id'])) die("no ID");
+	$id = (int)$_GET['id']; 
+	$orphan = fp_orphan_get_by_id($id);
+	fp_db_close();
+	
+	if(!$orphan) die ("prolem");	
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -37,22 +47,28 @@
 <br />
 <p id="noti"></p>
 <br />
+<form action="saveOrphan.php" method="post" >
 <table width="85%" border="0" align="center">
+
   <tr align="center">
-  	<td width="16%" align="right"><select class="textFiels" name="sponsor2" id="sponsor">
-  	  <option value="1">قطر الخيرية</option>
-  	  <option value="2">جهة 2</option>
-  	  <option value="3">جهة 3</option>
-	  </select></td>
-  	<td width="18%">جهة الكفالة</td>
-  	<td width="17%" align="right"><select class="textFiels" name="status" id="status">
-  	  <option value="1">مكفول</option>
-  	  <option value="2">قيد التسويق</option>
-  	  <option value="3">متوقف</option>
-	  </select></td>
-    <td width="18%">الحالة</td>
-    <td width="14%" align="right"><input name="id" type="text" disabled="disabled" class="textFiels" id="id" size="10" maxlength="30" /></td>
-    <td width="20%" align="center">رقم اليتيم</td>
+  	<td width="16%" align="right">&nbsp;</td>
+  	<td width="18%" align="center">&nbsp;</td>
+    <?php
+        
+	include('../../utils/sponsorAPI.php');
+	$sponsors = fp_sponsor_get();
+        $real_sponsor = fp_sponsor_get_by_id($orphan->warranty_organization);
+	$scount = count($sponsors);
+	
+	?>
+    <td width="17%" align="right">
+        <input class="textFiels" size="10" maxlength="30" value="<?php echo $orphan->warranty_organization?>" />
+    </td>
+    <td width="18%">جهة الكفالة</td>
+    <td width="14%" align="right">
+        <input class="textFiels" size="10" maxlength="30" value="<?php echo $orphan->state?>" />
+    </td>
+    <td width="20%" align="center">الحالة</td>
   </tr>
   
   <tr>
@@ -60,10 +76,10 @@
   </tr>
     <tr align="center">
 	<td>&nbsp;</td>
-  	<td align="right"><input class="textFiels" name="name4" type="text" id="name4" size="10" maxlength="30" /></td>
-    <td align="right"><input class="textFiels" name="name3" type="text" id="name3" size="10" maxlength="30" /></td>
-    <td align="right"><input class="textFiels" name="name2" type="text" id="name2" size="10" maxlength="30" /></td>
-    <td align="right"><input class="textFiels" name="name1" type="text" id="name1" size="10" maxlength="30" /></td>
+        <td align="right"><input class="textFiels" name="name4" type="text" id="name4" tabindex="5" size="10" maxlength="30" value="<?php echo $orphan->last_4th_name?>" /></td>
+    <td align="right"><input class="textFiels" name="name3" type="text" tabindex="4" id="name3" size="10" maxlength="30"  value="<?php echo $orphan->last_name?>" /></td>
+    <td align="right"><input class="textFiels" name="name2" type="text" tabindex="3" id="name2" size="10" maxlength="30"  value="<?php echo $orphan->meddle_name?>" /></td>
+    <td align="right"><input class="textFiels" name="name1" tabindex="2" type="text" id="name1" size="10" maxlength="30" value="<?php echo $orphan->first_name?>"  /></td>
     <td align="center">اسم اليتيم</td>
   </tr>
   
@@ -74,26 +90,14 @@
 	<td>
         </td>
         <td align="right"></td>
-    <td align="right"></td>
-  	<td align="right">
-    <select class="textFiels" name="sponsor" id="gender">
-      <option value="1">ذكر</option>
-      <option value="0">انثى</option>
-    </select>
-  	  </td>
-    <script type="text/javascript" />
-    	
-		// GENDER
-	var m = document.getElementById("male");
-	var f = document.getElementById("female");
-	var gender = checkGender();
-	function checkGender(){
-		if(m.checked)return m.value;
-	else if(f.checked)return f.value;
-		}
-	
-    </script>
-    <td align="right"><input class="textFiels" name="bd" type="text" id="bd" size="10" maxlength="30" /></td>
+    <td align="right">
+        <input class="textFiels" size="10" maxlength="30" value="<?php echo $orphan->sex?>" />
+    </td>
+  	<td align="center">الجنس</td>
+    
+        <td align="right">
+        <input class="textFiels" size="10" maxlength="30" value="<?php echo $orphan->birth_date?>" />
+      </td>
     <td align="center">تاريخ الميلاد</td>
   </tr>
   
@@ -103,10 +107,10 @@
   </tr>
     <tr align="center">
 	<td>&nbsp;</td>
-  	<td align="right"><input class="textFiels" name="mname4" type="text" id="mname4" size="10" maxlength="30" /></td>
-    <td align="right"><input class="textFiels" name="mname3" type="text" id="mname3" size="10" maxlength="30" /></td>
-    <td align="right"><input class="textFiels" name="mname2" type="text" id="mname2" size="10" maxlength="30" /></td>
-    <td align="right"><input class="textFiels" name="mname1" type="text" id="mname1" size="10" maxlength="30" /></td>
+  	<td align="right"><input class="textFiels" name="mname4" type="text" id="mname4" size="10" maxlength="30"  value="<?php echo $orphan->mother_4th_name?>" /></td>
+    <td align="right"><input class="textFiels" name="mname3" type="text" id="mname3" size="10" maxlength="30"  value="<?php echo $orphan->mother_last_name?>" /></td>
+    <td align="right"><input class="textFiels" name="mname2" type="text" id="mname2" size="10" maxlength="30"  value="<?php echo $orphan->mother_middle_name?>" /></td>
+    <td align="right"><input class="textFiels" name="mname1" type="text" id="mname1" size="10" maxlength="30"  value="<?php echo $orphan->mother_first_name?>" /></td>
     <td align="center">اسم والدة اليتيم</td>
   </tr>
   
@@ -117,19 +121,15 @@
     <td align="right"></td>
     <td align="right">
       </td>
-		<td>
-        <select class="textFiels" name="mstatus" id="mstatus">
-          <option value="1">متزوجة</option>
-          <option value="2">مطلقة</option>
-        </select>
+    <td>
+        <input class="textFiels" size="10" maxlength="30" value="<?php echo $orphan->mother_state?>" />
     	</td>
   	<td align="right">حالتها الاجتماعية
-
   	  </td>
     
     <td align="right">
-    <input class="textFiels" name="mbd" type="text" id="mbd" size="10" maxlength="30" />
-      </td>
+    <input class="textFiels" size="10" maxlength="30" value="<?php echo $orphan->mother_Birth_date?>" />  
+    </td>
     <td align="center">تاريخ ميلادها</td>
   </tr>
   
@@ -137,11 +137,11 @@
     <td>&nbsp;</td>
   </tr>
     <tr align="center">
-  	<td align="right"><input class="textFiels" name="lw" type="text" id="lw" size="10" maxlength="30" /></td>
+  	<td align="right"><input class="textFiels" name="lw" type="text" id="lw" size="10" maxlength="30" value="<?php echo $orphan->father_work?>" /></td>
     <td>عمله السابق</td>
-    <td align="right"><input class="textFiels" name="dr" type="text" id="dr" size="10" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="dr" type="text" id="dr" size="10" maxlength="30" value="<?php echo $orphan->father_dead_cause?>" /></td>
     <td align="right">سبب الوفاة</td>
-    <td align="right"><input class="textFiels" name="fdd" type="text" id="fdd" size="10" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="fdd" type="text" id="fdd" size="10" maxlength="30" value="<?php echo $orphan->father_dead_date?>" /></td>
     <td align="center">تاريخ وفاة والد اليتيم</td>
   </tr>
     
@@ -157,18 +157,15 @@
 <br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
-  	<td width="16%" align="right"><input class="textFiels" name="district" type="text" id="district" size="10" maxlength="30" /></td>
-  	<td width="14%" align="right">الحي</td>
-    <td width="26%" align="right"><input class="textFiels" name="city" type="text" id="city" size="20" maxlength="30" /></td>
-    <td width="16%" align="center">المدينة/القرية</td>
+  	<td width="13%" align="right"><input class="textFiels" name="district" type="text" id="district" size="10" maxlength="30" value="<?php echo $orphan->District?>"/></td>
+  	<td width="11%" align="right">الحي</td>
+    <td width="22%" align="right"><input class="textFiels" name="city" type="text" id="city" size="20" maxlength="30"  value="<?php echo $orphan->city?>" /></td>
+    <td width="13%" align="center">المدينة/القرية</td>
+        
     <td width="14%" align="right">
-    <select class="textFiels" name="state" id="state">
-      <option value="0">كسلا</option>
-      <option value="1">بورتسودان</option>
-      <option value="2">القضارف</option>
-    </select>
+    <input class="textFiels" name="district" type="text" id="district" size="10" maxlength="30" value="<?php echo $orphan->residence_state?>"/>
       </td>
-    <td width="14%" align="center">الولاية</td>
+    <td width="16%" align="center">الولاية</td>
   </tr>
   
   <tr>
@@ -177,9 +174,9 @@
     <tr align="center">
 	<td>&nbsp;</td>
   	<td align="right"></td>
-    <td align="right"><input class="textFiels" name="hno" type="text" id="hno" size="20" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="hno" type="text" id="hno" size="20" maxlength="30"  value="<?php echo $orphan->house_no?>"/></td>
     <td align="right">رقم المنزل/معلم بارز</td>
-    <td align="right"><input class="textFiels" name="section" type="text" id="section" size="10" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="section" type="text" id="section" size="10" maxlength="30" value="<?php echo $orphan->section?>" /></td>
     <td align="center">المربع</td>
   </tr>
   
@@ -190,9 +187,9 @@
     <tr align="right">
 	<td>&nbsp;</td>
     <td>&nbsp;</td>
-     <td align="right"><input class="textFiels" name="tel2" type="text" id="tel2" size="10" maxlength="30" /></td>
+     <td align="right"><input class="textFiels" name="tel2" type="text" id="tel2" size="10" maxlength="30"  value="<?php echo $orphan->phone2?>"/></td>
     <td align="center">جوال 2</td>
-    <td align="right"><input class="textFiels" name="tel1" type="text" id="tel1" size="10" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="tel1" type="text" id="tel1" size="10" maxlength="30" value="<?php echo $orphan->phone1?>" /></td>
     <td align="center">جوال 1</td>
   </tr>
   
@@ -207,11 +204,11 @@
 <br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
-  	<td width="29%" align="right"><input class="textFiels" name="femaleno" type="text" id="femaleno" size="10" maxlength="30" /></td>
+  	<td width="29%" align="right"><input name="femaleno" type="text" readonly="readonly" id="femaleno" size="10" maxlength="30" /></td>
   	<td width="11%" align="right">الأناث</td>
-    <td width="16%" align="right"><input class="textFiels" name="maleno" type="text" id="maleno" size="10" maxlength="30" /></td>
+    <td width="16%" align="right"><input name="maleno" type="text" readonly="readonly" id="maleno" size="10" maxlength="30" /></td>
     <td width="15%" align="center">الذكور</td>
-    <td width="15%" align="right"><input class="textFiels" name="fno" type="text" id="fno" size="10" maxlength="30" /></td>
+    <td width="15%" align="right"><input name="fno" type="text" readonly="readonly" id="fno" size="10" maxlength="30" /></td>
     <td width="14%" align="center">عدد أفراد الأسرة</td>
   </tr>
   
@@ -229,10 +226,12 @@
   <tr>
     <td align="center"><input class="textFielsS" name="fbstate" type="text" id="un2" size="10" maxlength="30" /></td>
     <td align="center"><input class="textFielsS" name="fmbd" type="text" id="un2" size="10" maxlength="30" /></td>
-    <td align="center"><select class="textFiels" name="fmgender" id="fmgender">
-      <option value="1">ذكر</option>
-      <option value="0">انثى</option>
-    </select></td>
+    <td align="center"><label>
+  	    <input type="radio" name="gender" value="1" id="gender_0" />
+  	    ذكر</label>
+        <label>
+  	    <input type="radio" name="gender" value="2" id="gender_1" />
+  	    انثى</label></td>
     <td align="center"><input class="textFielsS" name="fbname" type="text" id="un2" size="30" maxlength="30" /></td>
     <td align="center">1</td>
   </tr>
@@ -272,44 +271,15 @@
   <tr align="center">
   	<td width="11%"></td>
   	<td width="9%" align="right">&nbsp;</td>
-  	<td width="41%" align="right"><input name="teachingr" type="text" disabled="disabled"  class="textFiels" id="teachingr" value="يدرس" size="40" maxlength="30" />
+  	<td width="41%" align="right"><input name="teachingr" type="text" readonly="readonly"  class="textFiels" id="teachingr" value="<?php echo $orphan->nonstuding_cause?>" size="10" maxlength="30" />
   	  </td>
 	<td width="14%" align="center">السبب</td>
         <td width="14%" align="center">
-        <select class="textFiels" name="sponsor" id="learning">
-      <option onclick="checkLearn(1)" value="1">يدرس</option>
-      <option onclick="checkLearn(0)" value="0">لا يدرس</option>
-    </select>
+        <input class="textFiels" name="illt" type="text" id="illt" size="10" maxlength="30" value="<?php echo $orphan->studing_state?>"  />
     </td>
         <td width="11%">الحالة الدراسية</td>
         
-        <script type="text/javascript" />
-			function checkLearn(learn){
-				if(learn == 0){
-					document.getElementById('teachingr').removeAttribute('disabled');
-       				document.getElementById('teachingr').setAttribute('value','');
-     				document.getElementById('school').setAttribute('disabled','disabled');
-        			document.getElementById('school').setAttribute('value','هذا الطالب لا يدرس');
-        			document.getElementById('level').setAttribute('disabled','disabled');
-        			document.getElementById('level').setAttribute('value','هذا الطالب لا يدرس');
-        			document.getElementById('class').setAttribute('disabled','disabled');
-        			document.getElementById('class').setAttribute('value','هذا الطالب لا يدرس');
-					return 1 ;
-		}
-				else if(learn == 1){
-        			document.getElementById('teachingr').setAttribute('disabled','disabled');
-       				document.getElementById('teachingr').setAttribute('value','يدرس');
-        			document.getElementById('school').removeAttribute('disabled');
-        			document.getElementById('school').setAttribute('value','');
-        			document.getElementById('level').removeAttribute('disabled');
-        			document.getElementById('level').setAttribute('value','');
-        			document.getElementById('class').removeAttribute('disabled');
-        			document.getElementById('class').setAttribute('value','');
-					return 0 ;
-					}
-			}
-    </script>
-    
+        
   </tr>
   
   <tr>
@@ -320,7 +290,7 @@
   	<td></td>
     <td></td>
   	
-	<td width="41%" align="right"><input class="textFiels" name="school" type="text" id="school" size="40" maxlength="30" /></td>
+	<td width="41%" align="right"><input class="textFiels" name="illt" type="text" id="illt" size="30" maxlength="30" value="<?php echo $orphan->school_name?>"  /></td>
         <td width="14%" align="center">اسم المدرسة</td>
         <td></td>
   	<td></td>
@@ -334,16 +304,11 @@
   <table width="85%" border="0" align="center" id=" ">
     <tr align="center">
   	<td width="26%" align="right">جزء
-  	  <select class="textFiels" name="quran" id="quran">
-  	  <?php
-	  for($i=1 ; $i <= 30 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-	  </select></td>
+  	  <input class="textFiels" name="class" type="text" id="class" size="10" maxlength="10" value="<?php echo $orphan->quran_parts?>" /></td></td>
   	<td width="23%" align="right">مستوى حفظ القران</td>
-  	<td width="13%" align="right"><input class="textFiels" name="class" type="text" id="class" size="10" maxlength="30" /></td>
+  	<td width="13%" align="right"><input class="textFiels" name="class" type="text" id="class" size="10" maxlength="30" value="<?php echo $orphan->year?>" /></td>
 	<td width="14%" align="center">الصف</td>
-        <td width="13%" align="center"><input class="textFiels" name="level" type="text" id="level" size="10" maxlength="30" /></td>
+        <td width="13%" align="center"><input class="textFiels" name="level" type="text" id="level" size="10" maxlength="30" value="<?php echo $orphan->level?>"/></td>
         <td width="11%">المرحلة</td>
     
   </tr>
@@ -366,25 +331,30 @@
   <tr align="center">
   	<td width="2%"></td>
   	<td width="28%" align="right"></td>
-  	<td width="35%" align="left"><input class="textFiels" name="illt" type="text" id="illt" size="30" maxlength="30" disabled="disabled" value="جيدة" /></td>
-	<td width="14%" align="center">نوع المرض</td>
+  	<td width="35%" align="left"><input class="textFiels" name="illt" type="text" id="illt" size="30" maxlength="30" value="<?php echo $orphan->ill_cause?>"  /></td>
+	<td width="14%" align="center" id="illLable">نوع المرض</td>
         <td width="10%" align="center">
-        <select class="textFiels" name="sponsor" id="اثشمفا">
-      <option onclick="checkIllness(1)" value="1">جيدة</option>
-      <option onclick="checkIllness(0)" value="0">سيئة</option>
-    </select>
+        <input class="textFiels" name="illt" type="text" id="illt" size="10" maxlength="30" value="<?php echo $orphan->health_state?>"  />
     </td>
-        <td width="11%">الحالة الصحية </td>
+        <td width="18%">الحالة الصحية </td>
     <script type="text/javascript" >
-    	function checkIllness(ill){
+    	function checkIllness(){
 			var illt =document.getElementById('illt');
-			if(ill == 1){
-			illt.setAttribute('disabled','disabled');
-        	illt.setAttribute('value','جيدة' );
+			var illness =document.getElementById('illness');
+			var illLable =document.getElementById('illLable');
+			var autoIll = "GOOD";
+			if(illness.value == 1){
+				illt.style.display='none';
+				illt.setAttribute('value',autoIll);
+				alert(illt.getAttribute('value'));
+				//illt.setAttribute('readonly','readonly');
+        	
 			}
-			else if(ill == 0){
-				illt.removeAttribute('disabled');
-        		illt.removeAttribute('value');
+			else if(illness.value == 0){
+				illt.style.display='block';
+				autoIll = "ILLNESS";
+				illt.setAttribute('value',autoIll);
+				alert(illt.getAttribute('value'));
 				}
 		}
     </script>
@@ -402,30 +372,7 @@
   <tr>
     <td>&nbsp;</td>
   </tr>
-  
-  <tr align="center">
-  	<td width="1%"></td>
-  	<td width="18%" align="right"></td>
-  	<td width="25%" align="left"><input disabled="disabled" class="textFiels" name="udate" type="text" id="udate" size="20" maxlength="30" /></td>
-	<td width="10%" align="center">التاريخ</td>
-        <td width="27%" align="center"><input disabled="disabled" class="textFiels" name="user" type="text" id="user" size="20" maxlength="30" /></td>
-        <td width="19%">مدخل البيانات</td>
-    
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
-  
-    <tr align="center">
-  	<td width="1%"></td>
-  	<td width="18%" align="right"></td>
-  	<td width="25%" align="left"><input disabled="disabled" class="textFiels" name="adate" type="text" id="adate" size="20" maxlength="30" /></td>
-	<td width="10%" align="center">التاريخ</td>
-        <td width="27%" align="center"><input disabled="disabled" class="textFiels" name="admin" type="text" id="admin" size="20" maxlength="30" /></td>
-        <td width="19%">اعتماد رئيس القسم</td>
-    
-  </tr>
-  
+   
    <tr>
     <td>&nbsp;</td>
   </tr>
@@ -433,14 +380,67 @@
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td align="center"><input class="bt" name="add" onclick="IsEmpty()" type="button"  value="حذف" /></td>
-    <td align="center"><input class="bt" name="add" onclick="IsEmpty()" type="button"  value="تعديل بيانات" /></td>
+    <td align="center"><button class="add_bt" name="add" type="button" onclick="IsEmpty()" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة يتيم  </button></td>
+    <td>&nbsp;</td>
   </tr>
+  </form>
 </table>
 </div>
 <script type="text/javascript" >
 	
+	var date = document.getElementById("y").value+"-"+document.getElementById("m").value+"-"+document.getElementById("d").value;
+	var gender = document.getElementById("y").value; 
 	var nodes = document.getElementsByClassName("textFiels");
+	var str = "" ;
+	for(var i = 0 ; i <= nodes.length ; i++){
+		str+=nodes[i].getAttribute("id")+"="+nodes[i].value+"&\n";
+		}
+		;
+		/*
+	var str2= "sponsor="+nodes[0].value+
+			  "&status="+nodes.item(1).value+
+			  "&name1="+nodes.item(2).value+
+			  "&name2="+nodes.item(3).value+
+			  "&name3="+nodes.item(4).value+
+			  "&name4="+nodes.item(5).value+
+			  "&bd="+nodes.item(6).value+
+			  
+			  "&mname1="+nodes.item(7).value+
+			  "&mname2="+nodes.item(8).value+
+			  "&mname3="+nodes.item(9).value+
+			  "&mname4="+nodes.item(10).value+
+			   
+			  			  
+			  "&mstatus="+nodes.item(11).value+
+			  "&mbd="+nodes.item(12).value+
+			  "&lw="+nodes.item(13).value+
+			  "&dr="+nodes.item(14).value+
+			  "&fdd="+nodes.item(15).value+
+			  "&district="+nodes.item(16).value+
+			  "&city="+nodes.item(17).value+
+			  
+			  
+			  
+			  "&state="+nodes.item(18).value+
+			  "&hno="+nodes.item(19).value+
+			  "&section="+nodes.item(20).value+
+			  "&tel2="+nodes.item(21).value+
+			  "&tel1="+nodes.item(22).value+
+			  "&femaleno="+nodes.item(23).value+
+			  "&maleno="+nodes.item(24).value+
+			  "&fno="+nodes.item(25).value+
+			  
+			  
+			  
+			  "&teachingr="+nodes.item(26).value+
+			  "&school="+nodes.item(27).value+
+			  "&quran="+nodes.item(28).value+
+			  "&class="+nodes.item(29).value+
+			  "&level="+nodes.item(30).value+
+			  "&illt="+nodes.item(31).value;
+			  "&illness"+document.getElementById("illness");
+			  */
+			  
 	function IsEmpty(){ 
 	var res = 0 ;
 	// empty
@@ -455,7 +455,8 @@
 	 
 }
 function check(res){
-	if(res == 35) alert("FULL");
+	if(res == 32) ajax();
+	
 	}
 
 
@@ -463,47 +464,9 @@ function ajax()
 {
 	
 	var n = document.getElementById("footer");
+	
 	var i = 0;
-	st = "";
-	var str = "?sponsor="+nodes[0].value+
-			  "&status="+nodes.item(1).value+
-			  
-			  "&name1="+nodes.item(2).value+
-			  "&name2="+nodes.item(3).value+
-			  "&name3="+nodes.item(4).value+
-			  "&name4="+nodes.item(5).value+
-			  
-			  "&bd="+nodes.item(6).value+
-			  
-			  "&mname1="+nodes.item(7).value+
-			  "&mname2="+nodes.item(8).value+
-			  "&mname3="+nodes.item(9).value+
-			  "&mname4="+nodes.item(10).value+
-			  
-			  "&mstatus="+nodes.item(11).value+
-			  "&mbd="+nodes.item(12).value+
-			  "&lw="+nodes.item(13).value+
-			  "&dr="+nodes.item(14).value+
-			  "&fdd="+nodes.item(15).value+
-			  "&district="+nodes.item(16).value+
-			  "&city="+nodes.item(17).value+
-			  "&state="+nodes.item(18).value+
-			  "&hno="+nodes.item(19).value+
-			  "&section="+nodes.item(20).value+
-			  "&tel2="+nodes.item(21).value+
-			  "&tel1="+nodes.item(22).value+
-			  "&femaleno="+nodes.item(23).value+
-			  "&maleno="+nodes.item(24).value+
-			  "&fno="+nodes.item(25).value+
-			  "&teachingr="+nodes.item(26).value+
-			  "&school="+nodes.item(27).value+
-			  "&quran="+nodes.item(28).value+
-			  "&class="+nodes.item(29).value+
-			  "&level="+nodes.item(30).value+
-			  "&illt="+nodes.item(31).value+
-			  "&illness"+illness;
-			  
-			
+	
 	
     var ajax;
 	var data ;
@@ -539,7 +502,7 @@ function ajax()
     }
     if (post==false)
     {
-        ajax.open("GET",filename+str,true);
+        ajax.open("GET",filename+"?"+str,true);
         ajax.send(null);
 		
     }

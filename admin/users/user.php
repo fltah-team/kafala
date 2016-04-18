@@ -1,8 +1,8 @@
 <?php
 	include('../../utils/db.php');
 	include('../../utils/usersAPI.php');
-	
-	$id = $_GET['id']; 
+	if(!isset($_GET['id'])) die("err");
+	$id = (int)$_GET['id']; 
 	$user = fp_users_get_by_id($id);
 	fp_db_close();
 	

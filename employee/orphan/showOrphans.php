@@ -48,7 +48,8 @@
 <br />
 <table width="90%" border="2" align="center">
   <tr align="center">
-  <td width="7%">العمر</td>
+  	<td width="7%">عرض</td>
+  	<td width="7%">العمر</td>
  	<td width="9%">الولاية </td>
     <td width="8%">الجنس </td>
     <td width="29%">جهة الكفالة</td>
@@ -73,6 +74,7 @@
   	for($i = 0 ; $i < $ocount ; $i++){
 		$orphan = $orphans[$i];
   ?>
+  	<td width="9%"><a href="orphanInfo.php?id=<?php echo $orphan->id?>">عرض</a></td>
     <td width="7%"><?php
 echo ageCalculator($orphan->birth_date);?></td>
  	<td width="9%"><?php echo $orphan->id?></td>

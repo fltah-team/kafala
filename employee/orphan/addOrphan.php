@@ -37,12 +37,13 @@
 <br />
 <p id="noti"></p>
 <br />
+
 <form action="saveOrphan.php" method="post" >
 <table width="85%" border="0" align="center">
 
   <tr align="center">
-  	<td width="16%" align="right">&nbsp;</td>
-  	<td width="18%" align="center">&nbsp;</td>
+  	<td width="13%" align="right">&nbsp;</td>
+  	<td width="13%" align="center">&nbsp;</td>
     <?php
     
 	include('../../utils/db.php');
@@ -51,20 +52,20 @@
 	$scount = count($sponsors);
 	
 	?>
-    <td width="17%" align="right">
-    <select class="textFiels" name="sponsor" id="sponsor">
+    <td width="13%" align="right">
+    <select class="select" tabindex="1" name="sponsor" id="sponsor">
     <?php for($i = 0 ; $i < $scount ; $i++){
 		$sponsor = $sponsors[$i] ; ?>
       <option value="<?php echo $sponsor->id?>"><?php echo $sponsor->name?></option>
 	<?php } ?>
     </select></td>
-    <td width="18%">جهة الكفالة</td>
-    <td width="14%" align="right"><select class="textFiels" name="status" id="status">
+    <td width="14%">جهة الكفالة</td>
+    <td width="21%" align="right"><select tabindex="0" class="select" name="status" id="status">
       <option value="1">مكفول</option>
       <option value="2">قيد التسويق</option>
       <option value="3">متوقف</option>
     </select></td>
-    <td width="20%" align="center">الحالة</td>
+    <td width="26%" align="center">الحالة</td>
   </tr>
   
   <tr>
@@ -72,10 +73,10 @@
   </tr>
     <tr align="center">
 	<td>&nbsp;</td>
-  	<td align="right"><input class="textFiels" name="name4" type="text" id="name4" size="10" maxlength="30" /></td>
-    <td align="right"><input class="textFiels" name="name3" type="text" id="name3" size="10" maxlength="30" /></td>
-    <td align="right"><input class="textFiels" name="name2" type="text" id="name2" size="10" maxlength="30" /></td>
-    <td align="right"><input class="textFiels" name="name1" type="text" id="name1" size="10" maxlength="30" /></td>
+  	<td align="right"><input class="textFiels" name="name4" type="text" id="name4" tabindex="5" size="10" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="name3" type="text" tabindex="4" id="name3" size="10" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="name2" type="text" tabindex="3" id="name2" size="10" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="name1" tabindex="2" type="text" id="name1" size="10" maxlength="30" /></td>
     <td align="center">اسم اليتيم</td>
   </tr>
   
@@ -86,38 +87,27 @@
 	<td>
         </td>
         <td align="right"></td>
-    <td align="right"><select class="textFiels" name="gender" id="gender">
+    <td align="right"><select class="select" name="gender" id="gender">
       <option value="1">ذكر</option>
       <option value="0">انثى</option>
     </select></td>
   	<td align="center">الجنس</td>
-    <script type="text/javascript" />
-    	
-		// GENDER
-	var m = document.getElementById("male");
-	var f = document.getElementById("female");
-	var gender = checkGender();
-	function checkGender(){
-		if(m.checked)return m.value;
-	else if(f.checked)return f.value;
-		}
-	
-    </script>
+    
     <td align="center"><table width="80%" border="0">
       <tr>
-        <td><select name="y" class="textFiels" id="y">
+        <td><select name="y" class="select" id="y">
           <?php
 	  for($i=1997 ; $i <= date("Y") ; $i++)
   	  echo "<option value='".$i."'>$i</option>'";
 	  ?>
         </select></td>
-        <td><select class="textFiels" name="m" id="m">
+        <td><select class="select" name="m" id="m">
           <?php
 	  for($i=1 ; $i <= 12 ; $i++)
   	  echo "<option value='".$i."'>$i</option>'";
 	  ?>
         </select></td>
-        <td><select class="textFiels" name="d" id="d">
+        <td><select class="select" name="d" id="d">
           <?php
 	  for($i=1 ; $i <= 31 ; $i++)
   	  echo "<option value='".$i."'>$i</option>'";
@@ -149,9 +139,9 @@
     <td align="right">
       </td>
 		<td>
-        <select class="textFiels" name="mstatus" id="mstatus">
-          <option value="1">متزوجة</option>
-          <option value="2">مطلقة</option>
+        <select class="select" name="mstatus" id="mstatus">
+          <option value="متزوجة">متزوجة</option>
+          <option value="مطلقة">مطلقة</option>
         </select>
     	</td>
   	<td align="right">حالتها الاجتماعية
@@ -160,19 +150,19 @@
     
     <td align="right"><table width="80%" border="0">
       <tr>
-        <td><select name="my" class="textFiels" id="my">
+        <td><select name="my" class="select" id="my">
           <?php
 	  for($i=1950 ; $i <= date("Y") ; $i++)
   	  echo "<option value='".$i."'>$i</option>'";
 	  ?>
         </select></td>
-        <td><select class="textFiels" name="mm" id="mm">
+        <td><select class="select" name="mm" id="mm">
           <?php
 	  for($i=1 ; $i <= 12 ; $i++)
   	  echo "<option value='".$i."'>$i</option>'";
 	  ?>
         </select></td>
-        <td><select class="textFiels" name="md" id="md">
+        <td><select class="select" name="md" id="md">
           <?php
 	  for($i=1 ; $i <= 31 ; $i++)
   	  echo "<option value='".$i."'>$i</option>'";
@@ -191,7 +181,30 @@
     <td>عمله السابق</td>
     <td align="right"><input class="textFiels" name="dr" type="text" id="dr" size="10" maxlength="30" /></td>
     <td align="right">سبب الوفاة</td>
-    <td align="right"><input class="textFiels" name="fdd" type="text" id="fdd" size="10" maxlength="30" /></td>
+    <td align="right">
+       <table width="60%" border="0">
+      <tr>
+        <td><select name="my" class="select" id="my">
+          <?php
+	  for($i=1950 ; $i <= date("Y") ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+        <td><select class="select" name="mm" id="mm">
+          <?php
+	  for($i=1 ; $i <= 12 ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+        <td><select class="select" name="md" id="md">
+          <?php
+	  for($i=1 ; $i <= 31 ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+      </tr>
+    </table>
+    </td>
     <td align="center">تاريخ وفاة والد اليتيم</td>
   </tr>
     
@@ -208,9 +221,9 @@
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
   	<td width="13%" align="right"><input class="textFiels" name="district" type="text" id="district" size="10" maxlength="30" /></td>
-  	<td width="11%" align="right">الحي</td>
-    <td width="22%" align="right"><input class="textFiels" name="city" type="text" id="city" size="20" maxlength="30" /></td>
-    <td width="13%" align="center">المدينة/القرية</td>
+  	<td width="7%" align="right">الحي</td>
+    <td width="25%" align="right"><input class="textFiels" name="city" type="text" id="city" size="15" maxlength="30" /></td>
+    <td width="24%" align="center">المدينة/القرية</td>
         <?php
     
 	include('../../utils/stateAPI.php');
@@ -219,8 +232,8 @@
 	
 	?>
     
-    <td width="14%" align="right">
-    <select class="textFiels" name="state" id="state">
+    <td width="13%" align="right">
+    <select class="select" name="state" id="state">
     <?php for($i = 0 ; $i < $scount ; $i++){
 		$state = $states[$i] ; ?>
       <option value="<?php echo $state->id?>"><?php echo $state->name?></option>
@@ -228,7 +241,7 @@
     </select>
     
       </td>
-    <td width="16%" align="center">الولاية</td>
+    <td width="18%" align="center">الولاية</td>
   </tr>
   
   <tr>
@@ -237,7 +250,7 @@
     <tr align="center">
 	<td>&nbsp;</td>
   	<td align="right"></td>
-    <td align="right"><input class="textFiels" name="hno" type="text" id="hno" size="20" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="hno" type="text" id="hno" size="15" maxlength="30" /></td>
     <td align="right">رقم المنزل/معلم بارز</td>
     <td align="right"><input class="textFiels" name="section" type="text" id="section" size="10" maxlength="30" /></td>
     <td align="center">المربع</td>
@@ -259,71 +272,6 @@
   
 </table>
 
-<!--   Family   -->
-
-
-<br />
-<h2 align="center">عدد افراد الأسرة</h2>
-<br />
-<table width="85%" border="0" align="center" id=" ">
-  <tr align="center">
-  	<td width="29%" align="right"><input name="femaleno" type="text" disabled="disabled" id="femaleno" size="10" maxlength="30" /></td>
-  	<td width="11%" align="right">الأناث</td>
-    <td width="16%" align="right"><input name="maleno" type="text" disabled="disabled" id="maleno" size="10" maxlength="30" /></td>
-    <td width="15%" align="center">الذكور</td>
-    <td width="15%" align="right"><input name="fno" type="text" disabled="disabled" id="fno" size="10" maxlength="30" /></td>
-    <td width="14%" align="center">عدد أفراد الأسرة</td>
-  </tr>
-  
-  
- <table width="70%" border="1" align="center">
- <form action="" method="get">
-   <br />
-  <tr>
-    <td align="center">الحالة</td>
-    <td align="center">تاريخ الميلاد</td>
-    <td align="center">الجنس</td>
-    <td align="center">الاسم</td>
-    <td align="center">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="center"><input class="textFielsS" name="fbstate" type="text" id="un2" size="10" maxlength="30" /></td>
-    <td align="center"><input class="textFielsS" name="fmbd" type="text" id="un2" size="10" maxlength="30" /></td>
-    <td align="center"><label>
-  	    <input type="radio" name="gender" value="1" id="gender_0" />
-  	    ذكر</label>
-        <label>
-  	    <input type="radio" name="gender" value="2" id="gender_1" />
-  	    انثى</label></td>
-    <td align="center"><input class="textFielsS" name="fbname" type="text" id="un2" size="30" maxlength="30" /></td>
-    <td align="center">1</td>
-  </tr>
-  <tr >
-  	<td></td>
-    <td></td>
-    <td></td>
-    <td align="center"><input type="button" name="login " id="login " onclick="goto_save_family_member()" value="اضافة فرد" /></td>
-    <td></td>
-  </tr>
-  <script type="text/javascript">
-  		var fmdata = Array();
-		fmdata[0] = document.getElementById("fbname").value;
-		fmdata[1] = document.getElementById("fmbd");
-		fmdata[2] = document.getElementById("fbstate");
-		function goto_save_family_member(){
-			//var site = fmdata[0].value;
-			//"save_family_member.php?orphan=1&name="+fbname.value+"&sex=1&bd="+fmbd.value+"&state="+fbstate.value ;
-			alert(fmdata[0]);
-			//window.location.href = site ;
-		}
-</script>
-    </form>
-</table>
-
-
-</table>
-
-
 <!--   Learning   -->
 
 
@@ -332,46 +280,24 @@
 <br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
-  	<td width="11%"></td>
-  	<td width="9%" align="right">&nbsp;</td>
-  	<td width="41%" align="right"><input name="teachingr" type="text" disabled="disabled"  class="textFiels" id="teachingr" value="يدرس" size="40" maxlength="30" />
+  	<td width="16%"></td>
+  	<td width="7%" align="right">&nbsp;</td>
+  	<td width="23%" align="right"><input name="teachingr" type="text"  class="textFiels" id="teachingr" size="20" maxlength="30" />
   	  </td>
-	<td width="14%" align="center">السبب</td>
-        <td width="14%" align="center">
-        <select class="textFiels" name="learning" id="learning">
-      <option onclick="checkLearn(1)" value="1">يدرس</option>
-      <option onclick="checkLearn(0)" value="0">لا يدرس</option>
+	<td width="12%" align="center">السبب</td>
+        <td width="19%" align="center">
+        <select class="select" name="learning" id="learning">
+      <option  value="1">يدرس</option>
+      <option  value="0">لا يدرس</option>
     </select>
-    </td>
-        <td width="11%">الحالة الدراسية</td>
-        
-        <script type="text/javascript" />
-			function checkLearn(learn){
-				if(learn == 0){
-					document.getElementById('teachingr').removeAttribute('disabled');
-       				document.getElementById('teachingr').setAttribute('value','');
-     				document.getElementById('school').setAttribute('disabled','disabled');
-        			document.getElementById('school').setAttribute('value','هذا الطالب لا يدرس');
-        			document.getElementById('level').setAttribute('disabled','disabled');
-        			document.getElementById('level').setAttribute('value','هذا الطالب لا يدرس');
-        			document.getElementById('class').setAttribute('disabled','disabled');
-        			document.getElementById('class').setAttribute('value','هذا الطالب لا يدرس');
-					return 1 ;
-		}
-				else if(learn == 1){
-        			document.getElementById('teachingr').setAttribute('disabled','disabled');
-       				document.getElementById('teachingr').setAttribute('value','يدرس');
-        			document.getElementById('school').removeAttribute('disabled');
-        			document.getElementById('school').setAttribute('value','');
-        			document.getElementById('level').removeAttribute('disabled');
-        			document.getElementById('level').setAttribute('value','');
-        			document.getElementById('class').removeAttribute('disabled');
-        			document.getElementById('class').setAttribute('value','');
-					return 0 ;
-					}
-			}
+    <script type="text/javascript" >
+            var totalVAL = valueOf() ;
+            
     </script>
-    
+    </td>
+        <td width="23%">الحالة الدراسية</td>
+        
+        
   </tr>
   
   <tr>
@@ -379,36 +305,32 @@
   </tr>
   
   <tr align="center">
-  	<td></td>
-    <td></td>
+  	<td><input class="textFiels" name="class" type="text" id="class" size="10" maxlength="30" /></td>
+    <td>الصف</td>
   	
-	<td width="41%" align="right"><input class="textFiels" name="school" type="text" id="school" size="40" maxlength="30" /></td>
-        <td width="14%" align="center">اسم المدرسة</td>
-        <td></td>
-  	<td></td>
+	<td width="23%" align="right"><input class="textFiels" name="school" type="text" id="school" size="20" maxlength="30" /></td>
+        <td width="12%" align="center">اسم المدرسة</td>
+        <td align="center"><input class="textFiels" name="level" type="text" id="level" size="10" maxlength="30" /></td>
+  	<td>المرحلة</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
   </tr>
   
-  </table>
-  
-  <table width="85%" border="0" align="center" id=" ">
     <tr align="center">
-  	<td width="26%" align="right">جزء
-  	  <select class="textFiels" name="quran" id="quran">
-  	  <?php
+  	<td width="16%" align="right">&nbsp;</td>
+  	<td width="7%" align="right">&nbsp;</td>
+  	<td width="23%" align="right">&nbsp;</td>
+	<td width="12%" align="center">&nbsp;</td>
+	<td width="19%" align="center">جزء
+	  <select class="select" name="quran" id="quran">
+	    <?php
 	  for($i=1 ; $i <= 30 ; $i++)
   	  echo "<option value='".$i."'>$i</option>'";
 	  ?>
-	  </select></td>
-  	<td width="23%" align="right">مستوى حفظ القران</td>
-  	<td width="13%" align="right"><input class="textFiels" name="class" type="text" id="class" size="10" maxlength="30" /></td>
-	<td width="14%" align="center">الصف</td>
-        <td width="13%" align="center"><input class="textFiels" name="level" type="text" id="level" size="10" maxlength="30" /></td>
-        <td width="11%">المرحلة</td>
-    
-  </tr>
+	    </select></td>
+	<td width="23%" align="right">مستوى حفظ القران</td>
+        </tr>
   <tr>
     <td>&nbsp;</td>
   </tr>
@@ -427,29 +349,17 @@
 
   <tr align="center">
   	<td width="2%"></td>
-  	<td width="28%" align="right"></td>
-  	<td width="35%" align="left"><input class="textFiels" name="illt" type="text" id="illt" size="30" maxlength="30"  value="جيدة" /></td>
-	<td width="14%" align="center">نوع المرض</td>
-        <td width="10%" align="center">
-        <select class="textFiels" name="illness" id="illness">
-      <option onclick="checkIllness(1)" value="1">جيدة</option>
-      <option onclick="checkIllness(0)" value="0">سيئة</option>
+  	<td width="12%" align="right"></td>
+  	<td width="38%" align="left"><input class="textFiels" name="illt" type="text" id="illt" size="30" maxlength="30"   /></td>
+	<td width="12%" align="center" id="illLable">نوع المرض</td>
+        <td width="8%" align="center">
+        <select class="select" name="illness" id="illness">
+      <option value="1">جيدة</option>
+      <option value="0">سيئة</option>
     </select>
     </td>
-        <td width="11%">الحالة الصحية </td>
-    <script type="text/javascript" >
-    	function checkIllness(ill){
-			var illt =document.getElementById('illt');
-			if(ill == 1){
-			illt.setAttribute('disabled','disabled');
-        	illt.setAttribute('value','جيدة' );
-			}
-			else if(ill == 0){
-				illt.removeAttribute('disabled');
-        		illt.removeAttribute('value');
-				}
-		}
-    </script>
+        <td width="28%">الحالة الصحية </td>
+    
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -459,35 +369,12 @@
 
 <!-- Employee -->
 
-<table width="85%" border="0" align="center" id=" ">
+<table width="85%" border="0" align="center" >
 </tr>
   <tr>
     <td>&nbsp;</td>
   </tr>
-  
-  <tr align="center">
-  	<td width="1%"></td>
-  	<td width="18%" align="right"></td>
-  	<td width="25%" align="left"><input disabled="disabled" class="textFiels" name="udate" type="text" id="udate" size="20" maxlength="30" /></td>
-	<td width="10%" align="center">التاريخ</td>
-        <td width="27%" align="center"><input disabled="disabled" class="textFiels" name="user" type="text" id="user" size="20" maxlength="30" /></td>
-        <td width="19%">مدخل البيانات</td>
-    
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
-  
-    <tr align="center">
-  	<td width="1%"></td>
-  	<td width="18%" align="right"></td>
-  	<td width="25%" align="left"><input disabled="disabled" class="textFiels" name="adate" type="text" id="adate" size="20" maxlength="30" /></td>
-	<td width="10%" align="center">التاريخ</td>
-        <td width="27%" align="center"><input disabled="disabled" class="textFiels" name="admin" type="text" id="admin" size="20" maxlength="30" /></td>
-        <td width="19%">اعتماد رئيس القسم</td>
-    
-  </tr>
-  
+   
    <tr>
     <td>&nbsp;</td>
   </tr>
@@ -495,7 +382,7 @@
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td align="right"><input class="bt" name="add" type="submit"   value="اضافة يتيم" /></td>
+    <td align="center"><button class="bt" name="add" type="button" onclick="alert(totalVAL)" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة يتيم  </button></td>
     <td>&nbsp;</td>
   </tr>
   </form>
@@ -508,9 +395,9 @@
 	var nodes = document.getElementsByClassName("textFiels");
 	var str = "" ;
 	for(var i = 0 ; i <= nodes.length ; i++){
-		str+=nodes[i].getAttribute("id")+"="+nodes[i].value+"&";
+		str+=nodes[i].getAttribute("id")+"="+nodes[i].value+"&\n";
 		}
-		
+		;
 		/*
 	var str2= "sponsor="+nodes[0].value+
 			  "&status="+nodes.item(1).value+
@@ -570,7 +457,8 @@
 	 
 }
 function check(res){
-	if(res == 32) ajax();
+	if(res == totalVAL) ajax();
+	
 	}
 
 
@@ -580,8 +468,6 @@ function ajax()
 	var n = document.getElementById("footer");
 	
 	var i = 0;
-	st = "";
-	var str = "START";
 	
 	
     var ajax;

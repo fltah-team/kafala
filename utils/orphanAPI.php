@@ -58,8 +58,8 @@ function fp_orphan_add($state , $warranty_organization , $first_name , $meddle_n
 	$n_District = @mysql_real_escape_string(strip_tags($District),$fp_handle);
 	$n_section  = (int)$section;
 	$n_house_no  = (int)$house_no;
-	$n_phone1  = (int)$phone1;
-	$n_phone2  = (int)$phone2;
+	$n_phone1  = @mysql_real_escape_string(strip_tags($phone1),$fp_handle);
+	$n_phone2  = @mysql_real_escape_string(strip_tags($phone2),$fp_handle);
 	$n_studing_state =@mysql_real_escape_string(strip_tags($studing_state),$fp_handle);
 	$n_nonstuding_cause =@mysql_real_escape_string(strip_tags($nonstuding_cause),$fp_handle);
 	$n_school_name=@mysql_real_escape_string(strip_tags($school_name),$fp_handle);
@@ -75,8 +75,8 @@ function fp_orphan_add($state , $warranty_organization , $first_name , $meddle_n
  	$query = ("INSERT INTO `orphan` (id, `state`, `warranty_organization` , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `mother_first_name` , `mother_middle_name` , `mother_last_name` , `mother_4th_name` , `mother_Birth_date` , `mother_state` ,`father_dead_date` , `father_dead_cause` , `father_work` , `residence_state` , `city`, `District` , section,  house_no , phone1 , phone2   , `studing_state` ,`nonstuding_cause`, `school_name` , level , year , quran_parts , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date`  )
  				VALUE(NULL , '$n_state' , '$n_warranty_organization' , '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_mother_first_name' , '$n_mother_middle_name' , '$n_mother_last_name' , '$n_mother_4th_name' , '$n_mother_Birth_date' , '$n_mother_state' ,'$n_father_dead_date' , '$n_father_dead_cause' , '$n_father_work' , '$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2'  , '$n_studing_state' ,'$n_nonstuding_cause', '$n_school_name' , '$n_level' , '$n_year' , '$n_quran_parts' , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date' )");
 	
-	echo $query;
 	$qresult = mysql_query($query);
+	echo $query;
 	if(!$qresult) return false ;
 	
 	return true ;
@@ -269,7 +269,7 @@ function fp_orphan_delete($id){
 	//-------------------------------------sibilingAPI----------------------------------------------
 	
 	
-		fp_sibiling_delete(1);
+		
 		
 				
 		// INSERT	

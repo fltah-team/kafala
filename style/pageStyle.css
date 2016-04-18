@@ -1,6 +1,21 @@
 *{
 	font-family:Droid Arabic Kufi;
-	}
+        
+}
+* td{
+    
+    font-size: 10pt;
+}
+#alertBox {
+    position:relative;
+    width:300px;
+    min-height:100px;
+    margin-top:50px;
+    border:1px solid #666;
+    background-color:#fff;
+    background-repeat:no-repeat;
+    background-position:20px 30px;
+}
 .main{
 	width:80%;
 	margin:0 auto ; 
@@ -82,10 +97,23 @@
 	padding-right:10px;
 	text-align:right;
 	}
+	
+	
+
+/*    BUTTONS STYLE       */
+
+
 .bt{
+	width:150px;
 	padding-right:5px;
 	padding-left:5px;
 	}
+	
+	
+.select{
+        padding: 0;
+        
+        }
 #footer{
 	margin-top:70px;
 	text-align:center;
