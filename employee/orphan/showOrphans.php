@@ -46,23 +46,23 @@
 <div class="main">
 <h1 align="center" class="adress"> بيانات الأيتام </h1>
 <br />
-<table width="90%" border="2" align="center">
-  <tr align="center">
-  	<td width="7%">عرض</td>
-  	<td width="7%">العمر</td>
- 	<td width="9%">الولاية </td>
-    <td width="8%">الجنس </td>
-    <td width="29%">جهة الكفالة</td>
-    <td width="15%">الحالة</td>
-    <td width="28%">الاسم </td>
-    <td width="4%">الرقم</td>
+<table width="90%" border="0" align="center">
+    <tr class="table_header" align="center">
+    <td class="table_header" width="7%">عرض</td>
+    <td class="table_header" width="7%">العمر</td>
+    <td class="table_header" width="9%">الولاية </td>
+    <td class="table_header" width="8%">الجنس </td>
+    <td class="table_header" width="29%">جهة الكفالة</td>
+    <td class="table_header" width="15%">الحالة</td>
+    <td class="table_header" width="28%">الاسم </td>
+    <td  class="table_header" width="4%">الرقم</td>
     
   </tr>
   <?php 
   	include('../../utils/stateAPI.php');
 	include('../../utils/sponsorAPI.php');
-	function ageCalculator($dob){
-    if(!empty($dob)){
+function ageCalculator($dob){
+        if(!empty($dob)){
         $birthdate = new DateTime($dob);
         $today   = new DateTime('today');
         $age = $birthdate->diff($today)->y;
@@ -74,13 +74,13 @@
   	for($i = 0 ; $i < $ocount ; $i++){
 		$orphan = $orphans[$i];
   ?>
-  	<td width="9%"><a href="orphanInfo.php?id=<?php echo $orphan->id?>">عرض</a></td>
-    <td width="7%"><?php
+  	<td class="table_data" width="9%"><a href="orphanInfo.php?id=<?php echo $orphan->id?>">عرض</a></td>
+    <td class="table_data" width="7%"><?php
 echo ageCalculator($orphan->birth_date);?></td>
- 	<td width="9%"><?php echo $orphan->id?></td>
-    <td width="8%"><?php echo $orphan->sex?> </td>
-    <td width="29%"><?php echo $orphan->warranty_organization?></td>
-    <td width="15%"><?php switch($orphan->state){
+ 	<td class="table_data" width="9%"><?php echo $orphan->id?></td>
+    <td class="table_data" width="8%"><?php echo $orphan->sex?> </td>
+    <td class="table_data" width="29%"><?php echo $orphan->warranty_organization?></td>
+    <td class="table_data" width="15%"><?php switch($orphan->state){
 						case 1 :
 							echo "مكفول";
 						break;
@@ -90,8 +90,8 @@ echo ageCalculator($orphan->birth_date);?></td>
 						case 3 :
 							echo "متوقف";
 						}?></td>
-    <td width="28%"> <?php echo $orphan->first_name." ".$orphan->meddle_name." ".$orphan->last_name." ".$orphan->last_4th_name?></td>
-    <td width="4%"><?php echo $orphan->id?></td>
+    <td class="table_data" width="28%"> <?php echo $orphan->first_name." ".$orphan->meddle_name." ".$orphan->last_name." ".$orphan->last_4th_name?></td>
+    <td class="table_data" width="4%"><?php echo $orphan->id?></td>
     
   </tr>
   <?php } ?>

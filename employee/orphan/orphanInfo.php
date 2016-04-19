@@ -8,7 +8,10 @@
 	fp_db_close();
 	
 	if(!$orphan) die ("prolem");	
-
+        
+	if(!$sibilings) die ("sibilings");
+	$scount = @count($sibilings);
+	if($scount == 0 ) die("NO sibilings");
 	
 
 ?>
@@ -227,11 +230,13 @@
     <td align="center">الاسم</td>
     <td align="center">&nbsp;</td>
   </tr>
-   <?php for($i = 0 ; $i < $ocount ; $i++){
-		$orphan = $orphans[$i];
+   <?php 
+        $scount = @count($sibilings);
+        for($i = 0 ; $i < $scount ; $i++){
+		$one_sibling = $sibilings[$i];
   ?>
     <tr>
-    <td align="center">الحالة</td>
+    <td align="center"><?php echo "ok" ?></td>
     <td align="center">تاريخ الميلاد</td>
     <td align="center">الجنس</td>
     <td align="center">الاسم</td>

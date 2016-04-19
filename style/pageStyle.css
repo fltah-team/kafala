@@ -139,3 +139,18 @@
 	font-weight:bold;
 	text-decoration:none;
 	}
+ 
+        .table_header{
+            
+            background: #cccccc;
+            border:solid 2px #C00;
+            border-radius: 5px;
+            
+        }
+        .table_data{
+            
+            background: #8BEBDF;
+            border:solid 2px #399;
+            border-radius: 5px;
+            
+        }
