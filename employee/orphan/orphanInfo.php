@@ -5,13 +5,14 @@
 	$id = (int)$_GET['id']; 
 	$orphan = fp_orphan_get_by_id($id);
         $sibilings = fp_sibiling_get($id);
+        $siblings_male = fp_sibiling_get_for_gender($id," and sex = 1 ");
+        $siblings_female = fp_sibiling_get_for_gender($id," and sex = 0 ");
 	fp_db_close();
-	
+	$male_count = @count($siblings_male);
+        $female_count = @count($siblings_female);
 	if(!$orphan) die ("prolem");	
         
-	if(!$sibilings) die ("sibilings");
 	$scount = @count($sibilings);
-	if($scount == 0 ) die("NO sibilings");
 	
 
 ?>
@@ -211,11 +212,11 @@
 <br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
-  	<td width="29%" align="right"><input name="femaleno" type="text" readonly="readonly" id="femaleno" size="10" maxlength="30" /></td>
+  	<td width="29%" align="right"><input name="femaleno" type="text" value="<?php echo $female_count?>" readonly="readonly" id="femaleno" size="10" maxlength="30" /></td>
   	<td width="11%" align="right">الأناث</td>
-    <td width="16%" align="right"><input name="maleno" type="text" readonly="readonly" id="maleno" size="10" maxlength="30" /></td>
+        <td width="16%" align="right"><input name="maleno" type="text" value="<?php echo $male_count?>" readonly="readonly" id="maleno" size="10" maxlength="30" /></td>
     <td width="15%" align="center">الذكور</td>
-    <td width="15%" align="right"><input name="fno" type="text" readonly="readonly" id="fno" size="10" maxlength="30" /></td>
+    <td width="15%" align="right"><input name="fno" type="text" value="<?php echo $male_count+$female_count?>" readonly="readonly" id="fno" size="10" maxlength="30" /></td>
     <td width="14%" align="center">عدد أفراد الأسرة</td>
   </tr>
   
@@ -236,11 +237,11 @@
 		$one_sibling = $sibilings[$i];
   ?>
     <tr>
-    <td align="center"><?php echo "ok" ?></td>
-    <td align="center">تاريخ الميلاد</td>
-    <td align="center">الجنس</td>
-    <td align="center">الاسم</td>
-    <td align="center">&nbsp;</td>
+    <td align="center"><?php echo $one_sibling->state ?></td>
+    <td align="center"><?php echo $one_sibling->birth_date ?></td>
+    <td align="center"><?php echo $one_sibling->sex ?></td>
+    <td align="center"><?php echo $one_sibling->name ?></td>
+    <td align="center"><?php echo $i ?></td>
   </tr>
    <?php } ?>
   <tr>
@@ -340,7 +341,7 @@
         if (ajax.readyState==4&&ajax.status==200)
         {
             alert(ajax.responseText);
-			//window.location.href = "showUsers.php";
+            window.location.href = "orphanInfo.php?id="+<?php echo $id ?>;
 			//document.getElementById(elementID).innerHTML=ajax.responseText;
         }
     }
