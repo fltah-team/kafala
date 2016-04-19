@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2016 at 04:06 PM
+-- Generation Time: Apr 19, 2016 at 08:59 AM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `experience` (
   `organizaton` varchar(500) NOT NULL,
   `date` date NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `preacherID` varchar(10) NOT NULL,
+  `preacherID` int(10) NOT NULL,
   UNIQUE KEY `id_2` (`id`),
   KEY `id` (`id`),
   KEY `preacherID` (`preacherID`)
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `experience` (
 
 DROP TABLE IF EXISTS `family`;
 CREATE TABLE IF NOT EXISTS `family` (
-  `family_id` int(11) NOT NULL,
+  `family_id` int(11) NOT NULL AUTO_INCREMENT,
   `state` varchar(50) NOT NULL,
   `warranty_organization` int(11) NOT NULL,
   `father_first_name` varchar(50) NOT NULL,
@@ -102,17 +102,20 @@ CREATE TABLE IF NOT EXISTS `family` (
   `house_no` int(11) NOT NULL,
   `phone1` int(11) NOT NULL,
   `phone2` int(11) NOT NULL,
-  `male_memebers_no` int(11) NOT NULL,
-  `female_memebers_no` int(11) NOT NULL,
   `data_entery_name` varchar(50) NOT NULL,
   `data_entery_date` date NOT NULL,
-  `head_dep_name` varchar(50) NOT NULL,
-  `head_dep_date` date NOT NULL,
   UNIQUE KEY `family_id` (`family_id`),
   KEY `id` (`family_id`),
   KEY `warranty_organization` (`warranty_organization`),
   KEY `residence_state` (`residence_state`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `family`
+--
+
+INSERT INTO `family` (`family_id`, `state`, `warranty_organization`, `father_first_name`, `father_middle_name`, `father_last_name`, `father_4th_name`, `birth_date`, `sex`, `social_state`, `father_dead_date`, `father_dead_cause`, `father_work`, `supporter_first_name`, `supporter_meddle_name`, `supporter_last_name`, `supporter_4th_name`, `supporter_birth_date`, `supporter_sex`, `supporter_state`, `supporter_relation`, `supporter_work`, `residence_state`, `city`, `District`, `section`, `house_no`, `phone1`, `phone2`, `data_entery_name`, `data_entery_date`) VALUES
+(2, 'state', 1, 'first name', 's name', ' l name', ' 4 name', '2000-12-10', 'female', 5, '2000-12-10', 'accedent', 'work', 'dd', 'dd', 'dd', 'dd', '2000-12-10', 'male', '5', 'dd', 'dd', 1, 'khartoum', 'mamoorah', 1, 5, 18, 200, 'ddddd', '2000-12-10');
 
 -- --------------------------------------------------------
 
@@ -122,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `family` (
 
 DROP TABLE IF EXISTS `f_member`;
 CREATE TABLE IF NOT EXISTS `f_member` (
-  `member_id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `sex` varchar(50) NOT NULL,
   `birth_date` varchar(50) NOT NULL,
@@ -199,7 +202,7 @@ INSERT INTO `orphan` (`id`, `state`, `warranty_organization`, `first_name`, `med
 
 DROP TABLE IF EXISTS `preacher`;
 CREATE TABLE IF NOT EXISTS `preacher` (
-  `id` varchar(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `type` int(11) NOT NULL,
   `state` varchar(50) NOT NULL,
   `warranty_organization` int(11) NOT NULL,
@@ -209,8 +212,8 @@ CREATE TABLE IF NOT EXISTS `preacher` (
   `last_4th_name` varchar(50) NOT NULL,
   `birth_date` date NOT NULL,
   `sex` varchar(6) NOT NULL,
-  `male_memebers_no` int(10) NOT NULL,
-  `female_memebers_no` int(10) NOT NULL,
+  `male_members_no` int(10) NOT NULL,
+  `female_members_no` int(10) NOT NULL,
   `residence_state` int(11) NOT NULL,
   `city` varchar(50) NOT NULL,
   `District` varchar(50) NOT NULL,
@@ -229,12 +232,10 @@ CREATE TABLE IF NOT EXISTS `preacher` (
   `ill_cause` varchar(50) NOT NULL,
   `data_entery_name` varchar(50) NOT NULL,
   `data_entery_date` date NOT NULL,
-  `head_dep_name` varchar(50) NOT NULL,
-  `head_dep_date` date NOT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `residence_state` (`residence_state`),
   KEY `warranty_organization` (`warranty_organization`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -378,7 +379,7 @@ CREATE TABLE IF NOT EXISTS `student` (
   KEY `id` (`id`),
   KEY `warranty_organization` (`warranty_organization`),
   KEY `residence_state` (`residence_state`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Constraints for dumped tables
@@ -388,7 +389,7 @@ CREATE TABLE IF NOT EXISTS `student` (
 -- Constraints for table `experience`
 --
 ALTER TABLE `experience`
-  ADD CONSTRAINT `experience_ibfk_1` FOREIGN KEY (`preacherID`) REFERENCES `preacher` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `preacher_id` FOREIGN KEY (`preacherID`) REFERENCES `preacher` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `family`
@@ -400,7 +401,7 @@ ALTER TABLE `family`
 -- Constraints for table `f_member`
 --
 ALTER TABLE `f_member`
-  ADD CONSTRAINT `family_id` FOREIGN KEY (`familyID`) REFERENCES `family` (`family_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `family` FOREIGN KEY (`familyID`) REFERENCES `family` (`family_id`);
 
 --
 -- Constraints for table `orphan`
@@ -413,7 +414,7 @@ ALTER TABLE `orphan`
 -- Constraints for table `preacher`
 --
 ALTER TABLE `preacher`
-  ADD CONSTRAINT `preacher_sponsor_id` FOREIGN KEY (`warranty_organization`) REFERENCES `sponsor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `preacher_sponsor_id` FOREIGN KEY (`id`) REFERENCES `sponsor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `preacher_state_id` FOREIGN KEY (`residence_state`) REFERENCES `state` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
