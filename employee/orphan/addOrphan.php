@@ -382,14 +382,13 @@
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td align="center"><button class="bt" name="add" type="button" onclick="" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة يتيم  </button></td>
+    <td align="center"><button class="bt" name="add" type="button" onclick="ajax()" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة يتيم  </button></td>
     <td>&nbsp;</td>
   </tr>
   </form>
 </table>
 </div>
 <script type="text/javascript" >
-	alert();
 	var nodes = document.getElementsByClassName("textFiels");//+document.getElementsByClassName("select");
         var selectores_nodes = document.getElementsByClassName("select");
 	var str = "" ;
@@ -417,19 +416,13 @@
 	 
 }
 function check(res){
-	if(res == ) ajax();
+	if(res == 5 ) ajax();
 	
 	}
 
 
 function ajax()
-{
-	
-	var n = document.getElementById("footer");
-	
-	var i = 0;
-	
-	
+{		
     var ajax;
 	var data ;
 	//var d_node = document.getElementById(elementID);

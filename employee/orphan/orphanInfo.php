@@ -224,35 +224,121 @@
     <td align="center">&nbsp;</td>
   </tr>
   <tr>
-    <td align="center"><input class="textFielsS" name="fbstate" type="text" id="un2" size="10" maxlength="30" /></td>
-    <td align="center"><input class="textFielsS" name="fmbd" type="text" id="un2" size="10" maxlength="30" /></td>
-    <td align="center"><label>
-  	    <input type="radio" name="gender" value="1" id="gender_0" />
-  	    ذكر</label>
-        <label>
-  	    <input type="radio" name="gender" value="2" id="gender_1" />
-  	    انثى</label></td>
-    <td align="center"><input class="textFielsS" name="fbname" type="text" id="un2" size="30" maxlength="30" /></td>
+    <td align="center">
+        <select tabindex="0" class="select" name="status" id="sibling_status">
+      <option value="1">مكفول</option>
+      <option value="2">قيد التسويق</option>
+      <option value="3">متوقف</option>
+    </select>
+    </td>
+    <td align="center">
+        <table width="60%" border="0">
+      <tr>
+        <td><select name="my" class="select" id="sy">
+          <?php
+	  for($i=1950 ; $i <= date("Y") ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+        <td><select class="select" name="mm" id="sm">
+          <?php
+	  for($i=1 ; $i <= 12 ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+        <td><select class="select" name="md" id="sd">
+          <?php
+	  for($i=1 ; $i <= 31 ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+      </tr>
+    </table>
+    </td>
+    <td align="center">
+  	    ذكر<input type="radio" name="s_gender" value="1" id="sibling_male_gender" />
+            <br />
+  	    أنثى<input type="radio" name="s_gender" value="0" id="sibling_female_gender" />
+  	    
+    </td>
+    <td align="center"><input class="textFielsS" name="fbname" type="text" id="sibling_name" size="30" maxlength="30" /></td>
     <td align="center">1</td>
   </tr>
   <tr >
   	<td></td>
     <td></td>
     <td></td>
-    <td align="center"><input type="button" name="login " id="login " onclick="goto_save_family_member()" value="اضافة فرد" /></td>
+    <td align="center"><input type="button" name="login " id="login " onclick="sibling_ajax()" value="اضافة فرد" /></td>
     <td></td>
   </tr>
   <script type="text/javascript">
-  		var fmdata = Array();
-		fmdata[0] = document.getElementById("fbname").value;
-		fmdata[1] = document.getElementById("fmbd");
-		fmdata[2] = document.getElementById("fbstate");
-		function goto_save_family_member(){
-			//var site = fmdata[0].value;
-			//"save_family_member.php?orphan=1&name="+fbname.value+"&sex=1&bd="+fmbd.value+"&state="+fbstate.value ;
-			alert(fmdata[0]);
-			//window.location.href = site ;
-		}
+      var s_str = "" ;
+      var sname = document.getElementById('sibling_name');
+      var s_bd = document.getElementById('sy').value+"-"+document.getElementById('sm').value+"-"+document.getElementById('sd').value;
+      var s_status = document.getElementById("sibling_status");
+      /*var s_male = document.getElementById("sibling_male_gender");
+      var s_female = document.getElementById("sibling_female_gender");*/
+      var s_gender_nodes = document.getElementsByName("s_gender");
+      var s_gender_value ="" ;
+      /*
+      for(var i=0 ; i<= s_gender_nodes.length ; i++){
+          if(s_gender_nodes[i].checked s_gender_value = s_gender_nodes[i].value ;
+      }
+      */
+     if(document.getElementById("sibling_male_gender").checked == true) s_gender_value = "1" ;
+        else s_gender_value = "0" ;
+      s_str += sname.getAttribute("id")+"="+sname.value+"&\n"
+            +"s_bd="+s_bd+"&\n"
+            +s_status.getAttribute("id")+"="+s_status.value+"&\n"
+            +"s_gender="+s_gender_value+"&\n"
+            +"o_id="+<?php echo $orphan->id ?> ;
+  function sibling_ajax()
+{		
+    var ajax;
+	var data ;
+	filename = "saveSibiling.php";
+	post = false ;
+    if (window.XMLHttpRequest)
+    {
+        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
+    } 
+    else if (ActiveXObject("Microsoft.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
+    }
+    else if (ActiveXObject("Msxml2.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
+    }
+    else
+    {
+        alert("Error: Your browser does not support AJAX.");
+        return false;
+    }
+    ajax.onreadystatechange=function()
+    {
+        if (ajax.readyState==4&&ajax.status==200)
+        {
+            alert(ajax.responseText);
+			//window.location.href = "showUsers.php";
+			//document.getElementById(elementID).innerHTML=ajax.responseText;
+        }
+    }
+    if (post==false)
+    {
+        ajax.open("GET",filename+"?"+s_str,true);
+        ajax.send(null);
+		
+    }
+    else 
+    {
+        ajax.open("POST",filename,true);
+        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.send(s_str);
+    }
+    return ajax;
+	
+}
 </script>
     </form>
 </table>

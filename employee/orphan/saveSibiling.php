@@ -3,12 +3,12 @@
 	
 	include('../../utils/db.php');
 	include('../../utils/orphanAPI.php');
-	
-	$orphan_id = 2 ;
-	$name  = "ss" ;
-	$sex = "male";
-	$birth_date  =  "2000-12-10";
-	$state = "";
+
+	$orphan_id = $_GET['o_id'] ;
+	$name  = $_GET['sibling_name'] ; 
+	$sex = $_GET['s_gender'] ;;
+	$birth_date  =  $_GET['s_bd'] ;
+	$state = $_GET['sibling_status'] ;
 	
 	
 	$result = fp_sibiling_add( $orphan_id ,$name , $sex , $birth_date , $state) ;
