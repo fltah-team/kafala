@@ -277,10 +277,10 @@
 		
 		return true ;
 		}	
-
+                
 		function fp_member_get($extra = ''){
 			global $fp_handle ;
-			$query = sprintf("SELECT * FROM `f_member`  WHERE `orphan_id` =  %d ",$extra);
+			$query = sprintf("SELECT * FROM `f_member` %s ",$extra);
 		
 			$qresult = @mysql_query($query);
 			
@@ -298,6 +298,7 @@
 			
 			return $member ; 
 		}
+                
 	
 		// DELETE
 	function fp_member_delete($id){

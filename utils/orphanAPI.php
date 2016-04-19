@@ -1,5 +1,7 @@
 <?php
 	
+        include("db.php");
+
 	// SELSECT ALL
 function fp_orphan_get($extra = ''){
 	
@@ -291,13 +293,16 @@ function fp_orphan_delete($id){
 		return true ;
 		}	
 	
-	
+	        $d = fp_sibiling_get(7);
+                if(!$d) die("error");
+                else echo serialize ($d);
 	
 		// show all
-	function fp_sibiling_get($extra = ''){
+	function fp_sibiling_get($orphan_id ){
 		global $fp_handle ;
-		$query = sprintf("SELECT * FROM `sibiling` %s",$extra);
-	
+		$query = sprintf("SELECT * FROM `sibiling` WHERE `orphan_id`= %d",$orphan_id);
+                echo $query ;
+                
 		$qresult = @mysql_query($query);
 		
 		if(!$qresult) return NULL ; 
@@ -314,6 +319,8 @@ function fp_orphan_delete($id){
 		
 		return $sibiling ; 
 		}
+    
+       
 			
 		// DELETE
 	function fp_sibiling_delete($id){
