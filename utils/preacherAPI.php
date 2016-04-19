@@ -1,6 +1,6 @@
 <?php
  
-        
+        include("db.php");
 		// SELSECT ALL
 	function fp_preacher_get($extra = ''){
 		
@@ -252,18 +252,20 @@
 		}
 		
 		//--------------------------------experience -------------------
+                
+                fp_experience_add("ddd" , "ss" , "2000-12-10" , 2);
 		
 	// INSERT	
-	function fp_experience_add( $id , $qualifier_name , $organizaton , $date , $preacherID){
+	function fp_experience_add(  $qualifier_name , $organizaton , $date , $preacherID){
 		global $fp_handle;
 	
 		$n_qualifier_name = (int)$qualifier_name ;
 		$n_organizaton    = @mysql_real_escape_string(strip_tags($organizaton),$fp_handle);
 		$n_date    = @mysql_real_escape_string(strip_tags($date),$fp_handle);
 		$n_birth_date  = @mysql_real_escape_string(strip_tags($birth_date),$fp_handle);
-		$n_state = @mysql_real_escape_string(strip_tags($state),$fp_handle);
-		
-		$query = ("INSERT INTO `experience` VALUE(NULL , '$n_qualifier_name' , '$n_organizaton' , '$n_date' , '$n_preacherID')");
+		$n_preacherID = (int)$preacherID ;
+                
+		$query = ("INSERT INTO `experience`(`id` , `qualifier_name` , `organizaton` , `date` , `preacherID`)) VALUE(NULL , '$n_qualifier_name' , '$n_organizaton' , '$n_date' , '$n_preacherID')");
 		echo $query ;
 		
 		$qresult = mysql_query($query);
@@ -303,5 +305,8 @@
 		if(!$qresult) return false ;
 		
 		return true ;
-		}	
+		}
+               
+                
+               
 ?>
