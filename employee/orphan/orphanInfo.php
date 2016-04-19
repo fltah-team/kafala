@@ -221,8 +221,7 @@
   </tr>
   
   
- <table width="70%" border="1" align="center">
- <form action="" method="get">
+ <table width="80%" border="1" align="center">
    <br />
   <tr>
     <td align="center">الحالة</td>
@@ -289,10 +288,16 @@
   	<td></td>
     <td></td>
     <td></td>
-    <td align="center"><input type="button" name="login " id="login " onclick="sibling_ajax()" value="اضافة فرد" /></td>
+    <td align="center"><input type="button" name="login " id="login " onclick="window.location.reload(true);sibling_ajax();" value="اضافة فرد" /></td>
     <td></td>
   </tr>
-  <script type="text/javascript">
+
+</table>
+
+
+</table>
+
+<script type="text/javascript">
       var s_str = "" ;
       var sname = document.getElementById('sibling_name');
       var s_bd = document.getElementById('sy').value+"-"+document.getElementById('sm').value+"-"+document.getElementById('sd').value;
@@ -314,7 +319,7 @@
             +"s_gender="+s_gender_value+"&\n"
             +"o_id="+<?php echo $orphan->id ?> ;
   function sibling_ajax()
-{		
+{	
     var ajax;
 	var data ;
 	filename = "saveSibiling.php";
@@ -341,7 +346,7 @@
         if (ajax.readyState==4&&ajax.status==200)
         {
             alert(ajax.responseText);
-            window.location.href = "orphanInfo.php?id="+<?php echo $id ?>;
+            window.location.href = "orphanInfo.php?id="+<?php echo $id?>
 			//document.getElementById(elementID).innerHTML=ajax.responseText;
         }
     }
@@ -361,13 +366,6 @@
 	
 }
 </script>
-    </form>
-</table>
-
-
-</table>
-
-
 <!--   Learning   -->
 
 
