@@ -4,9 +4,13 @@
 	if(!isset($_GET['id'])) die("no ID");
 	$id = (int)$_GET['id']; 
 	$orphan = fp_orphan_get_by_id($id);
+        $sibilings = fp_sibiling_get($id);
 	fp_db_close();
 	
 	if(!$orphan) die ("prolem");	
+
+	
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -223,6 +227,17 @@
     <td align="center">الاسم</td>
     <td align="center">&nbsp;</td>
   </tr>
+   <?php for($i = 0 ; $i < $ocount ; $i++){
+		$orphan = $orphans[$i];
+  ?>
+    <tr>
+    <td align="center">الحالة</td>
+    <td align="center">تاريخ الميلاد</td>
+    <td align="center">الجنس</td>
+    <td align="center">الاسم</td>
+    <td align="center">&nbsp;</td>
+  </tr>
+   <?php } ?>
   <tr>
     <td align="center">
         <select tabindex="0" class="select" name="status" id="sibling_status">
