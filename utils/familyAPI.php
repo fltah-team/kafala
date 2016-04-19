@@ -280,7 +280,7 @@
 
 		function fp_member_get($extra = ''){
 			global $fp_handle ;
-			$query = sprintf("SELECT * FROM `f_member` %s",$extra);
+			$query = sprintf("SELECT * FROM `f_member`  WHERE `orphan_id` =  %d ",$extra);
 		
 			$qresult = @mysql_query($query);
 			
