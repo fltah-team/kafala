@@ -150,19 +150,19 @@
     
     <td align="right"><table width="80%" border="0">
       <tr>
-        <td><select name="my" class="select" id="my">
+        <td><select name="fy" class="select" id="fy">
           <?php
 	  for($i=1950 ; $i <= date("Y") ; $i++)
   	  echo "<option value='".$i."'>$i</option>'";
 	  ?>
         </select></td>
-        <td><select class="select" name="mm" id="mm">
+        <td><select class="select" name="fm" id="fm">
           <?php
 	  for($i=1 ; $i <= 12 ; $i++)
   	  echo "<option value='".$i."'>$i</option>'";
 	  ?>
         </select></td>
-        <td><select class="select" name="md" id="md">
+        <td><select class="select" name="fd" id="fd">
           <?php
 	  for($i=1 ; $i <= 31 ; $i++)
   	  echo "<option value='".$i."'>$i</option>'";
@@ -382,89 +382,42 @@
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td align="center"><button class="bt" name="add" type="button" onclick="alert(str)" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة يتيم  </button></td>
+    <td align="center"><button class="bt" name="add" type="button" onclick="" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة يتيم  </button></td>
     <td>&nbsp;</td>
   </tr>
   </form>
 </table>
 </div>
 <script type="text/javascript" >
-	
-	var date = document.getElementById("y").value+"-"+document.getElementById("m").value+"-"+document.getElementById("d").value;
-	var gender = document.getElementById("y").value; 
-	var nodes = document.getElementsByClassName("textFiels");
+	alert();
+	var nodes = document.getElementsByClassName("textFiels");//+document.getElementsByClassName("select");
         var selectores_nodes = document.getElementsByClassName("select");
 	var str = "" ;
+        
 	for(var i = 0 ; i <= nodes.length ; i++){
 		str+=nodes[i].getAttribute("id")+"="+nodes[i].value+"&\n";
-                if(i==selectores_nodes.length) 
+                if(selectores_nodes[i])
                     str+=selectores_nodes[i].getAttribute("id")+"="+selectores_nodes[i].value+"&\n";
+                
 		}
-		;
-        for(var i = 0 ; i <= selectores_nodes.length ; i++){
-		
-		}
-		;
-		/*
-	var str2= "sponsor="+nodes[0].value+
-			  "&status="+nodes.item(1).value+
-			  "&name1="+nodes.item(2).value+
-			  "&name2="+nodes.item(3).value+
-			  "&name3="+nodes.item(4).value+
-			  "&name4="+nodes.item(5).value+
-			  "&bd="+nodes.item(6).value+
-			  
-			  "&mname1="+nodes.item(7).value+
-			  "&mname2="+nodes.item(8).value+
-			  "&mname3="+nodes.item(9).value+
-			  "&mname4="+nodes.item(10).value+
-			   
-			  			  
-			  "&mstatus="+nodes.item(11).value+
-			  "&mbd="+nodes.item(12).value+
-			  "&lw="+nodes.item(13).value+
-			  "&dr="+nodes.item(14).value+
-			  "&fdd="+nodes.item(15).value+
-			  "&district="+nodes.item(16).value+
-			  "&city="+nodes.item(17).value+
-			  
-			  
-			  
-			  "&state="+nodes.item(18).value+
-			  "&hno="+nodes.item(19).value+
-			  "&section="+nodes.item(20).value+
-			  "&tel2="+nodes.item(21).value+
-			  "&tel1="+nodes.item(22).value+
-			  "&femaleno="+nodes.item(23).value+
-			  "&maleno="+nodes.item(24).value+
-			  "&fno="+nodes.item(25).value+
-			  
-			  
-			  
-			  "&teachingr="+nodes.item(26).value+
-			  "&school="+nodes.item(27).value+
-			  "&quran="+nodes.item(28).value+
-			  "&class="+nodes.item(29).value+
-			  "&level="+nodes.item(30).value+
-			  "&illt="+nodes.item(31).value;
-			  "&illness"+document.getElementById("illness");
-			  */
+	
 			  
 	function IsEmpty(){ 
 	var res = 0 ;
+        
 	// empty
-	for(i=0 ; i <= (nodes.length-5) ; i++){
+	for(i=0 ; i <= (nodes.length) ; i++){
 	if(nodes.item(i).value == ""){
 	nodes.item(i).style.color = "#ff0000" ;
 	nodes.item(i).setAttribute("placeholder","هذا الحقل فارغ");
 	
 		} else res++;
-		ajax();//check(res);
+		check(res);
 	}
 	 
 }
 function check(res){
-	if(res == 21) ajax();
+	if(res == ) ajax();
 	
 	}
 

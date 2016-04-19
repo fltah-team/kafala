@@ -52,7 +52,7 @@ function fp_orphan_add($state , $warranty_organization , $first_name , $meddle_n
 	$n_mother_state = @mysql_real_escape_string(strip_tags($mother_state),$fp_handle);
 	$n_father_dead_date = @mysql_real_escape_string(strip_tags($father_dead_date),$fp_handle);
 	$n_father_dead_cause = @mysql_real_escape_string(strip_tags($father_dead_cause),$fp_handle);
-    $n_father_work = @mysql_real_escape_string(strip_tags($father_work),$fp_handle);
+        $n_father_work = @mysql_real_escape_string(strip_tags($father_work),$fp_handle);
 	$n_residence_state = @mysql_real_escape_string(strip_tags($residence_state),$fp_handle);
 	$n_city = @mysql_real_escape_string(strip_tags($city),$fp_handle);
 	$n_District = @mysql_real_escape_string(strip_tags($District),$fp_handle);
@@ -63,8 +63,8 @@ function fp_orphan_add($state , $warranty_organization , $first_name , $meddle_n
 	$n_studing_state =@mysql_real_escape_string(strip_tags($studing_state),$fp_handle);
 	$n_nonstuding_cause =@mysql_real_escape_string(strip_tags($nonstuding_cause),$fp_handle);
 	$n_school_name=@mysql_real_escape_string(strip_tags($school_name),$fp_handle);
-	$n_level  = (int)$level;
-	$n_year  = (int)$year;
+	$n_level  = @mysql_real_escape_string(strip_tags($level),$fp_handle);
+	$n_year  = @mysql_real_escape_string(strip_tags($year),$fp_handle);
 	$n_quran_parts  = (int)$quran_parts;
 	$n_health_state =@mysql_real_escape_string(strip_tags($health_state),$fp_handle);
 	$n_ill_cause =@mysql_real_escape_string(strip_tags($ill_cause),$fp_handle);
