@@ -13,6 +13,6 @@
 	if(!$result)
 		die ("fail");
 
-	echo "تمت اضافة".$date;
+	echo "تمت اضافة";
 	
 ?>

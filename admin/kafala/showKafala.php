@@ -3,9 +3,7 @@
 	include('../../utils/kafalaAPI.php');
 	$sponsorships = fp_kafala_get();
 	fp_db_close();
-	if(!$sponsorships) die ("prolem");
-	$scount = @count($sponsorships);
-	if($scount == 0 ) die("NO users");
+	
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -45,23 +43,51 @@
 <div class="main">
 <h1 align="center" class="adress"> عرض الكفالات </h1>
 <br />
-<table width="60%" border="2" align="center">
-  <tr align="center">
-    <td width="14%">عرض </td>
-    <td width="21%">عدد الشهور</td>
-    <td width="21%">التاريخ</td>
-    <td width="21%">الادخار</td>
-    <td width="24%">المبلغ</td>
-    <td width="24%">المكفولين</td>
-    <td width="32%">جهة الكفالة</td>
-    <td width="9%">الرقم</td>
+<?php
+    //if($users[0] == NULL ) die($users[1]) ;
+        if($sponsorships == -1 ) {
+            echo '
+                <div style="text-align:center;color:#fff;">
+                <h1>عفوا !!! هناك مشكلة في الوصول اى قاعدة البيانات</h1>
+                 </div>
+                <div id="footer">
+                <p>جميع الحقوق محفوظة 2016 &copy;</p>
+               </div>';
+            die() ;
+        }
+        else
+        if($sponsorships == 0 ) {
+            echo '
+                <div style="text-align:center;color:#fff;">
+                <h1>لا يوجد كفالات لعرضها</h1>
+                <h3>يمكنك اضافة كفالات من <a href="addKafala.php">هنا</a></h3>
+                </div>
+                <div id="footer">
+                <p>جميع الحقوق محفوظة 2016 &copy;</p>
+               </div>';
+            die() ;
+            
+        }
+        $scount = @count($sponsorships);
+        ?>
+<table width="85%" border="0" align="center" class="table">
+    <tr align="center" class="table_header">
+    <td width="5%">عرض </td>
+    <td width="10%">عدد الشهور</td>
+    <td width="20%">التاريخ</td>
+    <td width="5%">الادخار</td>
+    <td width="5%">المبلغ</td>
+    <td width="20%">المكفولين</td>
+    <td width="30%">جهة الكفالة</td>
+    <td width="5%">الرقم</td>
   </tr>
   <?php 
+        
   	for($i = 0 ; $i < $scount ; $i++){
 		$sponsorship = $sponsorships[$i];
   ?>
-  <tr align="center">
-    <td><?php echo "<a href=\"kafala.php?id=$sponsorship->id\"/>"?>عرض</td>
+    <tr align="center" class="table_data<?php echo $i%2?>">
+        <td  onclick="window.location.href='kafala.php?id='+<?php echo $sponsorship   ->id?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
     <td><?php echo $sponsorship->month_no?></td>
     <td><?php echo $sponsorship->date?></td>
     <td><?php echo $sponsorship->saving?></td>

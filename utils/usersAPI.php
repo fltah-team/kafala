@@ -1,24 +1,19 @@
 <?php
 	
-	
-	/*include('db.php');
-	$users = fp_users_get();
-	fp_db_close();
-	if(!$users) die ("prolem");
-	$ucount = @count($users);
-	if($ucount == 0 ) die("NO users");
-	*/
-	
 	// SELSECT ALL
 function fp_users_get($extra = ''){
+        $res = array();
 	global $fp_handle ;
 	$query = sprintf("SELECT * FROM `employee` %s",$extra);
 	$qresult = @mysql_query($query);
 	
-	if(!$qresult) return NULL ; 
-	
+        if(!$qresult)
+            return -1 ; 
+	else{
 	$rcount = mysql_num_rows($qresult);
-	if($rcount == 0 )  return NULL ;
+        if($rcount == 0 )
+            return 0 ;
+        }
 	
 	$users = array();
 	
@@ -40,7 +35,18 @@ function fp_users_get_by_id($id){
 	$user = $users[0];
 	return $user ;
 	}
-
+	
+	// SELECT BY Username
+function fp_users_get_by_username($un){
+	//$uun = @mysql_real_escape_string(strip_tags($un),$fp_handle);
+	
+	$users = fp_users_get("WHERE `username` = '".$un."'");
+        
+	if($users == NULL) return NULL ;
+	$user = $users[0];
+	return $user ;
+	}
+                
 	// INSERT	
 function fp_users_add($name , $username , $password , $type){
 	global $fp_handle;
@@ -52,7 +58,6 @@ function fp_users_add($name , $username , $password , $type){
 	$n_type = (int)$type;
 	
 	$query = ("INSERT INTO `employee` VALUE(NULL,'$n_name','$n_username','$n_password',$n_type)");
-        echo $query;
 	$qresult = mysql_query($query);
 	if(!$qresult) return false ;
 	

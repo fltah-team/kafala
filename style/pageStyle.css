@@ -82,7 +82,11 @@
 		color:#000;
 }
 .adress{
-	text-decoration:underline;
+        background: #Fff;
+        margin: 0 auto;
+        width: 50%;
+        border: solid #FFEAB7 3px ;
+        border-radius: 10px;
 	}
 
 #title h1{
@@ -105,8 +109,8 @@
 
 .bt{
 	width:150px;
-	padding-right:5px;
-	padding-left:5px;
+	margin: 3px ;
+        
 	}
 	
 	
@@ -139,18 +143,42 @@
 	font-weight:bold;
 	text-decoration:none;
 	}
- 
+        .table{
+            border: 0px;
+            background: #399;
+        }
         .table_header{
             
-            background: #cccccc;
+            background: #ebad6f;
             border:solid 2px #C00;
             border-radius: 5px;
             
         }
-        .table_data{
+        .table_data0{
             
-            background: #FFC;
+            background: #Fff;
             border:solid 2px chocolate;
             border-radius: 5px;
+            
+        }
+        .table_data0:hover{
+           
+            background: #93e7bd;
+            border-radius: 5px;
+            color: #096637;
+            
+        }
+        .table_data1{
+            
+            background: #FFEAB7;
+            border:solid 2px chocolate;
+            border-radius: 5px;
+            
+        }
+        .table_data1:hover{
+            
+            background: #93e7bd;
+            border-radius: 5px;
+            color: #096637;
             
         }

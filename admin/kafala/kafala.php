@@ -1,13 +1,4 @@
-<?php
-	include('../../utils/db.php');
-	include('../../utils/kafalaAPI.php');
-	
-	$id = $_GET['id']; 
-	$sponsor = fp_kafala_get_by_id($id);
-	fp_db_close();
-	
-	if(!$sponsor) die ("prolem");
-?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -44,11 +35,41 @@
 <div class="main">
 
 <div class="login">
-<h2 align="center">بيانات كفالة </h2>
+    <h2 align="center" class="adress">بيانات كفالة </h2>
 <br />
+<?php
+	include('../../utils/db.php');
+	include('../../utils/kafalaAPI.php');
+	if(!isset($_GET['id']) || $_GET['id']==""){
+             echo '
+                <div style="text-align:center;color:#fff;">
+                <h1>عفوا !!! رقم الكفالة غير موجود</h1>
+                <h2><a href="showKafala.php">الرجوع الى قائمة الكفالات</a></h2>
+                 </div>
+                <div id="footer">
+                <p>جميع الحقوق محفوظة 2016 &copy;</p>
+               </div>';
+            die() ;
+        }
+	$id = $_GET['id']; 
+	$sponsorship = fp_kafala_get_by_id($id);
+	fp_db_close();
+	
+	if(!$sponsorship){
+            echo '
+                <div style="text-align:center;color:#fff;">
+                <h1>عفوا !!! هناك مشكلة في رقم الكفالة</h1>
+                <h2><a href="showKafala.php">الرجوع الى قائمة الكفالات</a></h2>
+                 </div>
+                <div id="footer">
+                <p>جميع الحقوق محفوظة 2016 &copy;</p>
+               </div>';
+            die() ;
+        }
+?>
     <table width="60%" border="0" align="center">
        
-    <td align="right" width="44%"><input class="textFiels" name="total" type="text" id="total" value="<?php echo $sponsor->sponsor?>" size="10" maxlength="30" /></td>
+    <td align="right" width="44%"><input class="textFiels" name="total" type="text" id="total" value="<?php echo $sponsorship->sponsor?>" size="10" maxlength="30" /></td>
     <td align="center" width="56%">جهة الكفالة</td>
     </tr>
       <tr>
@@ -56,7 +77,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-      <td align="right"><input class="textFiels" name="total" type="text" id="total" value="<?php echo $sponsor->amount?>" size="10" maxlength="30" /></td>
+      <td align="right"><input class="textFiels" name="total" type="text" id="total" value="<?php echo $sponsorship->amount?>" size="10" maxlength="30" /></td>
     <td align="center">المبلغ الكلي</td>
     </tr>
       <tr>
@@ -64,7 +85,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="right"><input class="textFiels" name="saving" type="text" id="saving" value="<?php echo $sponsor->saving?>" size="10" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="saving" type="text" id="saving" value="<?php echo $sponsorship->saving?>" size="10" maxlength="30" /></td>
     <td align="center">الادخار</td>
     </tr>
       <tr>
@@ -86,7 +107,7 @@
   </tr>
   <tr>
     <td align="right">
-        <input class="textFiels" name="saving" type="text" id="saving" value="<?php fp_get_sponsored($sponsor->sponsored)?>" size="10" maxlength="30" />
+        <input class="textFiels" name="saving" type="text" id="saving" value="<?php fp_get_sponsored($sponsorship->sponsored)?>" size="10" maxlength="30" />
     </td>
     <td align="center">المكفولين</td>
   </tr>
@@ -95,7 +116,8 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="right"><input name="add" type="button" onclick="IsEmpty()" value="اضافة كفالة" /></td>
+    <td align="right"><button name="add"  type="button" onclick="ajax(<?php echo $sponsorship->id?>)"> حذف <img  align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" /></button></td>
+    
     <td>&nbsp;</td>
   </tr>
   <tr>
@@ -104,7 +126,65 @@
   </tr>
     </table>
 </div>
+<script type="text/javascript">
 
+	//var del = document.getElementById("delete");
+	
+	//ajax("div","deleteuser.php","?id=7",false);
+	
+	function ajax(ID)
+{
+    var ajax;
+	//var d_node = document.getElementById(elementID);
+	elementID = "div";
+	filename = "deleteKafala.php";
+	str = "?id="+ID;
+	post = false ;
+	conf = confirm("هل تريد المسح ");
+	if(conf){
+    if (window.XMLHttpRequest)
+    {
+        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
+    }
+    else if (ActiveXObject("Microsoft.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
+    }
+    else if (ActiveXObject("Msxml2.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
+    }
+    else
+    {
+        alert("Error: Your browser does not support AJAX.");
+        return false;
+    }
+    ajax.onreadystatechange=function()
+    {
+        if (ajax.readyState==4&&ajax.status==200)
+        {
+            alert(ajax.responseText);
+            window.location.href = "showKafala.php";
+			//document.getElementById(elementID).innerHTML=ajax.responseText;
+        }
+    }
+    if (post==false)
+    {
+        ajax.open("GET",filename+str,true);
+        ajax.send(null);
+		
+    }
+    else
+    {
+        ajax.open("POST",filename,true);
+        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.send(str);
+    }
+    return ajax;
+	}
+}
+	
+</script>
 <div id="footer">
 <p>جميع الحقوق محفوظة 2016 &copy;</p>
 </div>

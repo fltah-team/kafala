@@ -1,11 +1,11 @@
 <?php
 	include('../../utils/db.php');
-	include('../../utils/usersAPI.php');
+	include('../../utils/kafalaAPI.php');
 	$id = $_GET['id'];
-	$result = fp_users_delete($id); echo $id ;
+	$result = fp_kafala_delete($id); 
 	fp_db_close();
 	if(!$result)
-		die ("fail");
+		die ("تعذر الحذف");
 
-	echo "deleted";
+	echo "تمت عملية الحذف";
 ?>

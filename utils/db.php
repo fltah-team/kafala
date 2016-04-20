@@ -53,4 +53,21 @@ function fp_db_close(){
                     echo "الأسر";
         }
         }
+ 
+ 
+   function fp_get_user_type($user_type){
+            switch($user_type){
+		case 1 :
+                    echo "مدير نظام";
+                    break;
+                case 2 :
+                    echo "موظف في قسم الأيتام";
+                    break;
+		case 3 :
+                    echo "موظف في قسم الحسابات";
+                    break;
+                case 4 :
+                    echo "مستخدم عرض البيانات";
+        }
+   }
 ?>

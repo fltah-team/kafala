@@ -6,7 +6,7 @@
 <link href="../../style/pageStyle.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body>
+    <body >
 <!-- Title -->
 <div id="title">
 <table width="90%" border="0" align="center">
@@ -34,7 +34,7 @@
 <div class="main">
 
 <div class="login">
-<h2 align="center">اضافة كفالة حديدة</h2>
+    <h2 align="center" class="adress">اضافة كفالة جديدة</h2>
 <br />
 <form action="saveuser.php" method="post">
 	<table width="60%" border="0" align="center">
@@ -101,7 +101,8 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="right"><input name="add" type="button" onclick="alert()" value="اضافة كفالة" /></td>
+      <td align="right"><button name="add"  type="button" onclick="IsEmpty()"    >اضافة كفالة <img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /></button></td>
+
     <td>&nbsp;</td>
   </tr>
   <tr>
@@ -113,7 +114,6 @@
 </div>
 <script type="text/javascript" >;
 	var checker = 0; 
-	var data = Array();
 	var sponsor = document.getElementById("sponsor");
 	var total = document.getElementById("total");
 	var saving = document.getElementById("saving");
@@ -127,12 +127,12 @@
 	total.setAttribute("placeholder","هذا الحقل فارغ");
 	checker++;
 		}
+        
 	if(saving.value == ""){
 	saving.style.color = "#ff0000" ;
 	saving.setAttribute("placeholder","هذا الحقل فارغ");
 	checker++;
-		}
-			 
+		}	 
 	if(checker == 0)ajax();
 	else 
 	checker = 0; 

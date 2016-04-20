@@ -1,13 +1,4 @@
-<?php
-	include('../../utils/db.php');
-	include('../../utils/usersAPI.php');
-	if(!isset($_GET['id'])) die("err");
-	$id = (int)$_GET['id']; 
-	$user = fp_users_get_by_id($id);
-	fp_db_close();
-	
-	if(!$user) die ("prolem");
-?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -44,8 +35,38 @@
 <div class="main">
 
 <div class="login">
-<h2 align="center">بيانات يتيم </h2>
+    <h2 align="center" class="adress">بيانات مستخدم </h2>
 <br />
+<?php
+	include('../../utils/db.php');
+	include('../../utils/usersAPI.php');
+        if(!isset($_GET['id']) || $_GET['id']==""){
+             echo '
+                <div style="text-align:center;color:#fff;">
+                <h1>عفوا !!! رقم المستخدم غير موجود</h1>
+                <h2><a href="showUsers.php">الرجوع الى قائمة المستخدمين</a></h2>
+                 </div>
+                <div id="footer">
+                <p>جميع الحقوق محفوظة 2016 &copy;</p>
+               </div>';
+            die() ;
+        }
+	$id = (int)$_GET['id']; 
+	$user = fp_users_get_by_id($id);
+	fp_db_close();
+	
+        if(!$user){
+            echo '
+                <div style="text-align:center;color:#fff;">
+                <h1>عفوا !!! هناك مشكلة في رقم المستخدم</h1>
+                <h2><a href="showUsers.php">الرجوع الى قائمة المستخدمين</a></h2>
+                 </div>
+                <div id="footer">
+                <p>جميع الحقوق محفوظة 2016 &copy;</p>
+               </div>';
+            die() ;
+        }
+?>
 <form  method="post">
 	<table width="60%" border="0" align="center">
   <tr>
@@ -57,7 +78,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="center"><input class="textFiels" name="un" type="text" id="un" size="30" maxlength="30" value="<?php echo $user->username?>" /></td>
+      <td align="center"><input class="textFiels" name="un" type="text" disabled="disabled" id="un" size="30" maxlength="30" value="<?php echo $user->username?>" /></td>
     <td align="center">اسم المستخدم</td>
     </tr>
       <tr>
@@ -67,19 +88,7 @@
   <tr>
     <td align="center"><input name="un" type="text" disabled="disabled" class="textFiels" id="un" value="
       <?php
-	  if($user->type == 4)
-      echo 'مستخدم عرض البيانات';
-	  else
-	  if($user->type == 3)
-	  echo 'موظف في قسم الحسابات';
-	  else
-	  if($user->type == 2)
-      echo 'موظف في قسم الأيتام';
-	  else
-	  if($user->type == 1)
-	  echo 'مدير نظام';
-	  else
-	   echo 'مستخدم غير معروف';
+	  fp_get_user_type($user->type);
 	  ?>
     " size="30" maxlength="30" /></td>
     <td align="center">نوع المستخدم</td>
@@ -94,7 +103,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="right"><input name="add" type="submit" onclick="ajax()" value="تعديل البيانات " /></td>
+      <td align="right"><input name="add" type="submit" onclick="" value=" رجوع " /></td>
     <td>&nbsp;</td>
   </tr>
   <tr>

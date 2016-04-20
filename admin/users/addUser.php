@@ -34,7 +34,7 @@
 <div class="main">
 
 <div class="login">
-<h2 align="center">بيانات مستخدم </h2>
+    <h2 align="center" class="adress">بيانات مستخدم </h2>
 <br />
 <form >
 	<table width="60%" border="0" align="center">
@@ -43,7 +43,7 @@
     <td >&nbsp;</td>
   </tr>
   <tr>
-    <td align="right" width="58%"><input class="textFiels" name="name" type="text" id="name" size="30" maxlength="30" /></td>
+    <td align="right" width="58%"><input class="textFiels" name="un" type="text" id="complete_name" size="30" maxlength="30" /></td>
     <td align="center" width="42%">الاسم بالكامل</td>
     </tr>
       <tr>
@@ -88,7 +88,8 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="right"><input name="add"  type="button" onclick="IsEmpty()"   value="اضافة مستخدم" /></td>
+      <td align="right"><button name="add"  type="button" onclick="IsEmpty()"    >اضافة مستخدم <img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /></button></td>
+    
     <td>&nbsp;</td>
   </tr>
   <tr>
@@ -100,10 +101,8 @@
 </div>
 <script type="text/javascript" >;
 	var checker = 0; 
-	var data = Array();
-	//var name = 
-	var name = document.getElementById("name");
-	alert(name.defaultValue); 
+	
+	var complete_name = document.getElementById("complete_name");
 	var un = document.getElementById("un");
 	var type = document.getElementById("type");
 	var pass1 = document.getElementById("pass1");
@@ -111,9 +110,9 @@
 	
 	function IsEmpty(){ 
 	// empty
-	if(name.value == ""){
-	name.style.color = "#ff0000" ;
-	name.setAttribute("placeholder","هذا الحقل فارغ");
+	if(complete_name.value == ""){
+	complete_name.style.color = "#ff0000" ;
+	complete_name.setAttribute("placeholder","هذا الحقل فارغ");
 	checker++;
 		}
 	if(un.value == ""){
@@ -132,18 +131,28 @@
 	checker++;
 		}
 			 
-	if(checker == 0)ajax();
+	if(checker == 0 )check_pass(pass1.value,pass2.value);
 	else 
-	checker = 0; 
-}
+            checker = 0; 
 
+	
+}
+function check_pass(p1,p2){
+        if(p1.length < 8|| p2.length < 8)alert("كلمة المرور قصيرة ,, الحد الدنى 8 حروف");
+        else if(p1 != p2 ){
+            alert("كلمات المرور غير متطابقة .. الرجاء التأكد");
+            pass1.value = "";
+            pass2.value = "";
+        } 
+        else ajax();
+}
 function ajax()
 {
     var ajax;
 	//var d_node = document.getElementById(elementID);
 	elementID = "div";
 	filename = "saveuser.php";
-	str = "name="+name.value+"&un="+un.value+"&type="+type.value+"&pass="+pass1.value;
+	str = "name="+complete_name.value+"&un="+un.value+"&type="+type.value+"&pass="+pass1.value;
 	post = true ;
     if (window.XMLHttpRequest)
     {
@@ -189,100 +198,6 @@ function ajax()
 
   </script>
   
- <!-- 
-  <script type="text/javascript" >
-	var i = 0; 
-	var data = Array();
-	var type = document.getElementById("type");
-	var type = document.getElementById("name");
-	data[1] = document.getElementById("un");
-	data[2] = document.getElementById("pass1");
-	data[3] = document.getElementById("pass2");
-	function IsEmpty(){ 
-	var res = 0 ;
-	// empty
-	for(i=0 ; i <= data.length ; i++){
-	if(data[i].value == ""){
-	data[i].style.color = "#ff0000" ;
-	data[i].setAttribute("placeholder","هذا الحقل فارغ");
-		} else res++;
-		check(res);
-	}
-	<?php 
-	/*
-	include('../../utils/db.php');
-	include('../../utils/usersAPI.php');
-	$user = fp_users_get(" WHERE `username`='".$_POST['un']."'");
-	if($user != NULL) echo 'exist';
-	*/
-	?>
-	 
-}
-
-function check(res){
-	if(res == 4){
-		if(data[2].value == data[3].value) ajax(); 
-		else 
-			document.getElementById("passnoti").innerHTML = "كلمات المرور غير متطابقة";
-			document.getElementById("passnoti").style.color = "#F00";
-			data[2].value = "";
-			data[3].value = "";
-			//setAttribute("placeholder","err");
-		}
-	
-	}
-
-function ajax()
-{
-    var ajax;
-	//var d_node = document.getElementById(elementID);
-	elementID = "div";
-	filename = "saveuser.php";
-	str = "name="+data[0].value+"&un="+data[1].value+"&type="+type.value+"&pass="+data[2].value;
-	post = true ;
-    if (window.XMLHttpRequest)
-    {
-        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
-    }
-    else if (ActiveXObject("Microsoft.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
-    }
-    else if (ActiveXObject("Msxml2.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
-    }
-    else
-    {
-        alert("Error: Your browser does not support AJAX.");
-        return false;
-    }
-    ajax.onreadystatechange=function()
-    {
-        if (ajax.readyState==4&&ajax.status==200)
-        {
-            alert(ajax.responseText);
-			//window.location.href = "showUsers.php";
-			//document.getElementById(elementID).innerHTML=ajax.responseText;
-        }
-    }
-    if (post==false)
-    {
-        ajax.open("GET",filename+str,true);
-        ajax.send(null);
-		
-    }
-    else
-    {
-        ajax.open("POST",filename,true);
-        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        ajax.send(str);
-    }
-    return ajax;
-	
-}
-	
-  </script>-->
 <div id="footer">
   <p>جميع الحقوق محفوظة 2016 &copy;</p>
 </div>

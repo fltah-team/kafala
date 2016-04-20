@@ -3,9 +3,9 @@
 	include('../../utils/usersAPI.php');
 	$users = fp_users_get();
 	fp_db_close();
-	if(!$users) die ("prolem");
-	$ucount = @count($users);
-	if($ucount == 0 ) die("NO users");
+        
+	
+	
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -45,42 +45,68 @@
 <div class="main">
 <h1 align="center" class="adress"> بيانات المستخدمين </h1>
 <br />
-<table width="90%" border="2" align="center">
-  <tr align="center">
- 	<td width="10%">حذف </td>
-    <td width="9%">عرض </td>
-    <td width="31%">نوع المستخدم</td>
-    <td width="16%">اسم المستخدم</td>
-    <td width="30%">الاسم كامل</td>
-    <td width="4%">الرقم</td>
+<?php
+    //if($users[0] == NULL ) die($users[1]) ;
+        if($users == -1 ) {
+            echo '
+                <div style="text-align:center;color:#fff;">
+                <h1>عفوا !!! هناك مشكلة في الوصول اى قاعدة البيانات</h1>
+                 </div>
+                <div id="footer">
+                <p>جميع الحقوق محفوظة 2016 &copy;</p>
+               </div>';
+            die() ;
+        }
+        else
+        if($users == 0 ) {
+            echo '
+                <div style="text-align:center;color:#fff;">
+                <h1>لا يوجد مستخدمين لعرضهم</h1>
+                <h3>يمكنك اضافة مستخدمين من <a href="addUser.php">هنا</a></h3>
+                </div>
+                <div id="footer">
+                <p>جميع الحقوق محفوظة 2016 &copy;</p>
+               </div>';
+            die() ;
+        }
+        
+	$ucount = @count($users);
+?>
+
+<table width="90%" align="center" class="table">
+    <tr align="center" >
+ <td width="10%"> </td>
+    <td width="9%"> </td>    
+    <td width="30%"></td>
+    <td width="4%"></td>
+    <td width="31%"><button name="add" class="bt"  type="button" onclick="window.open('print_users.php')"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
+    <td width="16%"></td>
+    
+  </tr>
+    <tr align="center" class="table_header">
+ <td width="5%">حذف </td>
+ <td width="5%">عرض </td>
+    <td width="30%">نوع المستخدم</td>
+    <td width="15%">اسم المستخدم</td>
+    <td width="40%">الاسم كامل</td>
+    <td width="5%">الرقم</td>
   </tr>
   <?php 
   	for($i = 0 ; $i < $ucount ; $i++){
 		$user = $users[$i];
   ?>
-  <tr align="center">
+    <tr align="center" class="table_data<?php echo $i%2?>"  >
     <td>
-    <button name="add" type="button" onclick="ajax(<?php echo $user->id?>)" />حذف</button>
-	<?php /* echo "<a href=\"DeleteUser.php?id=$user->id\"/>"*/?></td>
-    <td><?php echo "<a href=\"user.php?id=$user->id\">عرض</a>" ?></td>
+        <img width="22px" align="middle" alt="حذف" src="../../images/style images/delete_icon.png" style="padding-left:5px" onclick="ajax(<?php echo $user->id?>)" />
+    </td>
+        <td  onclick="window.location.href='user.php?id='+<?php echo $user->id?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
     <td><?php
-	  if($user->type == 4)
-      echo 'مستخدم عرض البيانات';
-	  else
-	  if($user->type == 3)
-	  echo 'موظف في قسم الحسابات';
-	  else
-	  if($user->type == 2)
-      echo 'موظف في قسم الأيتام';
-	  else
-	  if($user->type == 1)
-	  echo 'مدير نظام';
-	  else
-	   echo 'مستخدم غير معروف';
+  fp_get_user_type($user->type);
 	  ?></td>
     <td><?php echo $user->username?></td>
     <td><?php echo $user->name?></td>
     <td><?php echo $user->id?></td>
+    
   </tr>
   <?php } ?>
   </table>

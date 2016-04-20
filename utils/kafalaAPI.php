@@ -10,10 +10,10 @@ function fp_kafala_get($extra = ''){
 
 	$qresult = @mysql_query($query);
 	
-	if(!$qresult) return NULL ; 
+	if(!$qresult) return -1 ; 
 	
 	$rcount = mysql_num_rows($qresult);
-	if($rcount == 0 )  return NULL ;
+	if($rcount == 0 )  return 0 ;
 	
 	$kafala = array();
 	
@@ -52,10 +52,32 @@ function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$month_no,$sponsored
 	$query = ("INSERT INTO `sponsorship` (`id`,`amount` , `saving` , `date` ,`sponsor`, `month_no` ,`sponsored`) VALUE(NULL, $n_amount, $n_saving, '$n_date' ,$n_sponsor , $month_no , $n_sponsored)");
 	$qresult = mysql_query($query);
 	if(!$qresult) return false ;
-	
-	return true ;
+        fp_kafala_insert_sponsorships();
+        return true ;
 	}
-	
+
+function fp_kafala_insert_sponsorships(){
+        
+        $last_id = mysql_insert_id();
+        //$sponsored_name = fp_kafala_get_table_name($sponsored);
+        //if($sponsored_name) echo "OK"; else echo "err";
+       
+	//$sponsorships_query = ("INSERT INTO `sponsorships` (`sponsorship`,`sponsored`) VALUE($last_id,$sponsored_name)");
+        //echo $sponsorships_query;
+}
+function fp_kafala_get_table_name($no){
+    switch ($no){
+        case 1 : return; '';
+            return $orphans;
+            break;
+        case 2 : return "`student`";
+            break;
+        case 3 : return; "`preacher`";
+            break;
+        case 4 : return "`family`";
+        
+    }
+} 
 
 	
 	// DELETE
