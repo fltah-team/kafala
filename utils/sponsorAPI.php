@@ -30,4 +30,8 @@ function fp_sponsor_get_by_id($id){
 	$sponsor = $sponsors[0];
 	return $sponsors ;
 	}
+        function fp_get_sponsor_name($id){
+            $sponsor = fp_sponsor_get_by_id($id);
+            echo $sponsor->name;
+        }
 ?>	

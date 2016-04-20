@@ -34,7 +34,7 @@
 <div class="main">
 
 <div class="login">
-<h2 align="center">بيانات مستخدم </h2>
+<h2 align="center">اضافة كفالة حديدة</h2>
 <br />
 <form action="saveuser.php" method="post">
 	<table width="60%" border="0" align="center">
@@ -101,7 +101,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="right"><input name="add" type="button" onclick="IsEmpty()" value="اضافة كفالة" /></td>
+    <td align="right"><input name="add" type="button" onclick="alert()" value="اضافة كفالة" /></td>
     <td>&nbsp;</td>
   </tr>
   <tr>

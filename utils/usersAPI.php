@@ -52,6 +52,7 @@ function fp_users_add($name , $username , $password , $type){
 	$n_type = (int)$type;
 	
 	$query = ("INSERT INTO `employee` VALUE(NULL,'$n_name','$n_username','$n_password',$n_type)");
+        echo $query;
 	$qresult = mysql_query($query);
 	if(!$qresult) return false ;
 	

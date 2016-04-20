@@ -1,11 +1,11 @@
 <?php
 	include('../../utils/db.php');
-	include('../../utils/usersAPI.php');
-	$users = fp_users_get();
+	include('../../utils/kafalaAPI.php');
+	$sponsorships = fp_kafala_get();
 	fp_db_close();
-	if(!$users) die ("prolem");
-	$ucount = @count($users);
-	if($ucount == 0 ) die("NO users");
+	if(!$sponsorships) die ("prolem");
+	$scount = @count($sponsorships);
+	if($scount == 0 ) die("NO users");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -43,28 +43,32 @@
 
 <!-- main -->
 <div class="main">
-<h1 align="center" class="adress"> بيانات المستخدمين </h1>
+<h1 align="center" class="adress"> عرض الكفالات </h1>
 <br />
 <table width="60%" border="2" align="center">
   <tr align="center">
- 	<td width="14%">حذف </td>
     <td width="14%">عرض </td>
-    <td width="21%">نوع المستخدم</td>
-    <td width="24%">اسم المستخدم</td>
-    <td width="32%">الاسم كامل</td>
+    <td width="21%">عدد الشهور</td>
+    <td width="21%">التاريخ</td>
+    <td width="21%">الادخار</td>
+    <td width="24%">المبلغ</td>
+    <td width="24%">المكفولين</td>
+    <td width="32%">جهة الكفالة</td>
     <td width="9%">الرقم</td>
   </tr>
   <?php 
-  	for($i = 0 ; $i < $ucount ; $i++){
-		$user = $users[$i];
+  	for($i = 0 ; $i < $scount ; $i++){
+		$sponsorship = $sponsorships[$i];
   ?>
   <tr align="center">
-    <td><?php echo "<a href=\"DeleteUser.php?id=$user->id\"/>"?>حذف</td>
-    <td><?php echo "<a href=\"user.php?id=$user->id\"/>"?>عرض</td>
-    <td><?php echo $user->type?></td>
-    <td><?php echo $user->username?></td>
-    <td><?php echo $user->name?></td>
-    <td><?php echo $user->id?></td>
+    <td><?php echo "<a href=\"kafala.php?id=$sponsorship->id\"/>"?>عرض</td>
+    <td><?php echo $sponsorship->month_no?></td>
+    <td><?php echo $sponsorship->date?></td>
+    <td><?php echo $sponsorship->saving?></td>
+    <td><?php echo $sponsorship->amount?></td>
+    <td><?php fp_get_sponsored($sponsorship->sponsored)?></td>
+    <td><?php echo $sponsorship->sponsor?></td>
+    <td><?php echo $sponsorship->id?></td>
   </tr>
   <?php } ?>
   </table>

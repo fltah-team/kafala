@@ -79,17 +79,10 @@ function ageCalculator($dob){
 echo ageCalculator($orphan->birth_date);?></td>
  	<td class="table_data" width="9%"><?php echo $orphan->id?></td>
     <td class="table_data" width="8%"><?php echo $orphan->sex?> </td>
-    <td class="table_data" width="29%"><?php echo $orphan->warranty_organization?></td>
-    <td class="table_data" width="15%"><?php switch($orphan->state){
-						case 1 :
-							echo "مكفول";
-						break;
-						case 2 :
-							echo "قيد التسويق";
-						break;
-						case 3 :
-							echo "متوقف";
-						}?></td>
+    <td class="table_data" width="29%"><?php 
+                                            echo $orphan->warranty_organization;
+                                                    ?></td>
+    <td class="table_data" width="15%"><?php fp_get_state($orphan->state)?></td>
     <td class="table_data" width="28%"> <?php echo $orphan->first_name." ".$orphan->meddle_name." ".$orphan->last_name." ".$orphan->last_4th_name?></td>
     <td class="table_data" width="4%"><?php echo $orphan->id?></td>
     

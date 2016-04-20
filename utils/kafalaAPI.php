@@ -1,6 +1,5 @@
 <?php
 	
-include("db.php");
 
 
 

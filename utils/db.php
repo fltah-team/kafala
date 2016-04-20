@@ -25,4 +25,32 @@ function fp_db_close(){
 	@mysql_close($fp_handle);
 	}
 
+        function fp_get_state($state){
+            switch($state){
+		case 1 :
+                    echo "مكفول";
+                    break;
+                case 2 :
+                    echo "قيد التسويق";
+                    break;
+		case 3 :
+                    echo "متوقف";
+        }
+        }
+       
+   function fp_get_sponsored($sponsored){
+            switch($sponsored){
+		case 1 :
+                    echo "الأيتام";
+                    break;
+                case 2 :
+                    echo "الطلاب";
+                    break;
+		case 3 :
+                    echo "الدعاة/المقرئين/المعلمين";
+                    break;
+                case 4 :
+                    echo "الأسر";
+        }
+        }
 ?>
