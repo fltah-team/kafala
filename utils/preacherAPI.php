@@ -1,6 +1,6 @@
 <?php
  
-        include("db.php");
+     //   include("db.php");
 		// SELSECT ALL
 	function fp_preacher_get($extra = ''){
 		
@@ -253,7 +253,6 @@
 		
 		//--------------------------------experience -------------------
                 
-                fp_experience_add("ddd" , "ss" , "2000-12-10" , 2);
 		
 	// INSERT	
 	function fp_experience_add(  $qualifier_name , $organizaton , $date , $preacherID){
@@ -265,14 +264,14 @@
 		$n_birth_date  = @mysql_real_escape_string(strip_tags($birth_date),$fp_handle);
 		$n_preacherID = (int)$preacherID ;
                 
-		$query = ("INSERT INTO `experience`(`id` , `qualifier_name` , `organizaton` , `date` , `preacherID`)) VALUE(NULL , '$n_qualifier_name' , '$n_organizaton' , '$n_date' , '$n_preacherID')");
+		$query = ("INSERT INTO `experience`(`id` , `qualifier_name` , `organizaton` , `date` , `preacherID`) VALUE(NULL , '$n_qualifier_name' , '$n_organizaton' , '$n_date' , '$n_preacherID')");
 		echo $query ;
 		
 		$qresult = mysql_query($query);
 		if(!$qresult) return false ;
 		
 		return true ;
-		}	
+	}	
 
 		// show all
 	function fp_experience_get($extra = ''){
@@ -294,7 +293,29 @@
 		@mysql_free_result($qresult);
 		
 		return $experience ; 
-		}		
+		}
+                
+    	function fp_experience_get_by_preacherID($preacherID){
+            
+		global $fp_handle ;
+		$query = sprintf("SELECT * FROM `experience` WHERE `preacherID` = %d ",$preacherID);
+	
+		$qresult = @mysql_query($query);
+		
+		if(!$qresult) return NULL ; 
+		
+		$rcount = mysql_num_rows($qresult);
+		if($rcount == 0 )  return NULL ;
+		
+		$experience = array();
+		
+		for($i = 0 ; $i < $rcount ; $i++)
+			$experience[@count($experience)] = @mysql_fetch_object($qresult);
+			
+		@mysql_free_result($qresult);
+		
+		return $experience ; 
+		}
 		
 		// DELETE
 	function fp_experience_delete($id){
