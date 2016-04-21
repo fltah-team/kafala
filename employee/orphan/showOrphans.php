@@ -4,9 +4,6 @@
 	
 	$orphans = fp_orphan_get();
 	fp_db_close();
-	if(!$orphans) die ("prolem");
-	$ocount = @count($orphans);
-	if($ocount == 0 ) die("NO orphans");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -25,6 +22,7 @@
     <td><h1>الهيئة الخيرية الاسلامية للرعاية الاجتماعية</h1></td>
     <td><img src="../../images/logo.png" /></td>
   </tr>
+   
 </table>
 </div>
 
@@ -46,6 +44,34 @@
 <div class="main">
 <h1 align="center" class="adress"> بيانات الأيتام </h1>
 <br />
+ <?php
+    //if($users[0] == NULL ) die($users[1]) ;
+        if($orphans == -1 ) {
+            echo '
+                <div style="text-align:center;color:#fff;">
+                <div class="alert-box error"><span>خطأ: </span>هناك مشكلة في الاتصال بقاعدة البيانات    </div>
+                 </div>
+                <div id="footer">
+                <p>جميع الحقوق محفوظة 2016 &copy;</p>
+               </div>';
+            die() ;
+        }
+        else
+        if($orphans == 0 ) {
+            echo '
+                <div style="text-align:center;color:#fff;">
+                <div class="alert-box notice"><span>تنبيه: </span>لا يوجد أيتام لعرضهم
+                <p>يمكنك اضافة أيتام من <a href="addOrphan.php">هنا</a></p>
+                </div>
+                <div id="footer">
+                <p>جميع الحقوق محفوظة 2016 &copy;</p>
+               </div>';
+            die() ;
+        }
+        
+	$ocount = @count($orphans);
+
+?>
 <table width="90%" border="0" align="center" class="table">
     <tr class="table_header" align="center">
     <td width="7%">عرض</td>

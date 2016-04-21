@@ -4,7 +4,7 @@
 	include('../../utils/db.php');
 	include('../../utils/studentAPI.php');
 	
-	$state = "state" ;	
+	$state = $_GET['state']  ;	
 	$warranty_organization = 1;
 	$first_name = "first name";
 	$meddle_name = "s name";

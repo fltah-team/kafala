@@ -48,9 +48,9 @@
 	fp_db_close();
 	
 	if(!$result)
-		die ("fail");
+		die ('<div id="success_notice"  class="alert-box error">'."<span>خطأ :   </span>"."لم تتم عملية اضافةاليتيم "."</div>");
 
-	echo "تمت اضافة اليتيم : ".$first_name." ".$meddle_name;
+	echo ('<div id="success_notice"  class="alert-box success"><span>نجاح :   </span>تمت اضافة اليتيم بنجاح</div>');
 	/*
 sponsor=1&status=1&name4=r&name3=&name2=&name1=&gender=1&y=1997&m=9&d=17&mname4=&mname3=&mname2=&mname1=&mstatus=1&mbd=&lw=&dr=&fdd=&district=&city=&state=0&hno=&section=&tel2=&tel1=&teachingr=يدرس&learning=1&school=&quran=1&class=&level=&illt=جيدة&illness=1&udate=&user=&adate=&admin=&
 

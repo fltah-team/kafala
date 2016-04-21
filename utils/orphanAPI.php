@@ -8,10 +8,10 @@ function fp_orphan_get($extra = ''){
 	$query = sprintf("SELECT * FROM `orphan` %s",$extra);
 	$qresult = @mysql_query($query);
 	
-	if(!$qresult) return NULL ; 
+	if(!$qresult) return -1 ; 
 	
 	$rcount = mysql_num_rows($qresult);
-	if($rcount == 0 )  return NULL ;
+	if($rcount == 0 )  return 0 ;
 	
 	$orphans = array();
 	
