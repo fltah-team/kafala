@@ -50,7 +50,8 @@ function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$month_no,$sponsored
 	$n_month_no = (int)$month_no;
 	$n_sponsored = (int)$sponsored;
 	$query = ("INSERT INTO `sponsorship` (`id`,`amount` , `saving` , `date` ,`sponsor`, `month_no` ,`sponsored`) VALUE(NULL, $n_amount, $n_saving, '$n_date' ,$n_sponsor , $month_no , $n_sponsored)");
-	$qresult = mysql_query($query);
+	
+        $qresult = mysql_query($query);
 	if(!$qresult) return false ;
         fp_kafala_insert_sponsorships();
         return true ;
@@ -59,7 +60,8 @@ function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$month_no,$sponsored
 function fp_kafala_insert_sponsorships(){
         
         $last_id = mysql_insert_id();
-        //$sponsored_name = fp_kafala_get_table_name($sponsored);
+        $sponsored_name = fp_kafala_get_table_name($sponsored);
+        echo $sponsored_name;
         //if($sponsored_name) echo "OK"; else echo "err";
        
 	//$sponsorships_query = ("INSERT INTO `sponsorships` (`sponsorship`,`sponsored`) VALUE($last_id,$sponsored_name)");

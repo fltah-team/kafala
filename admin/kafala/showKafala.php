@@ -47,9 +47,7 @@
     //if($users[0] == NULL ) die($users[1]) ;
         if($sponsorships == -1 ) {
             echo '
-                <div style="text-align:center;color:#fff;">
-                <h1>عفوا !!! هناك مشكلة في الوصول اى قاعدة البيانات</h1>
-                 </div>
+                <div class="alert-box error"><span>خطأ: </span>هناك مشكلة في الاتصال بقاعدة البيانات    </div>
                 <div id="footer">
                 <p>جميع الحقوق محفوظة 2016 &copy;</p>
                </div>';
@@ -59,8 +57,10 @@
         if($sponsorships == 0 ) {
             echo '
                 <div style="text-align:center;color:#fff;">
-                <h1>لا يوجد كفالات لعرضها</h1>
-                <h3>يمكنك اضافة كفالات من <a href="addKafala.php">هنا</a></h3>
+                <div class="alert-box warning"><span>تنبيه: </span>لا يوجد كفالات لعرضها
+                <p>يمكنك اضافة كفالات من <a href="addKafala.php">هنا</a></p>
+                </div>    
+                
                 </div>
                 <div id="footer">
                 <p>جميع الحقوق محفوظة 2016 &copy;</p>
@@ -70,6 +70,7 @@
         }
         $scount = @count($sponsorships);
         ?>
+
 <table width="85%" border="0" align="center" class="table">
     <tr align="center" class="table_header">
     <td width="5%">عرض </td>

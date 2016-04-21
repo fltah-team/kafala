@@ -45,12 +45,13 @@
 <div class="main">
 <h1 align="center" class="adress"> بيانات المستخدمين </h1>
 <br />
+
 <?php
     //if($users[0] == NULL ) die($users[1]) ;
         if($users == -1 ) {
             echo '
                 <div style="text-align:center;color:#fff;">
-                <h1>عفوا !!! هناك مشكلة في الوصول اى قاعدة البيانات</h1>
+                <div class="alert-box error"><span>خطأ: </span>هناك مشكلة في الاتصال بقاعدة البيانات    </div>
                  </div>
                 <div id="footer">
                 <p>جميع الحقوق محفوظة 2016 &copy;</p>
@@ -61,8 +62,8 @@
         if($users == 0 ) {
             echo '
                 <div style="text-align:center;color:#fff;">
-                <h1>لا يوجد مستخدمين لعرضهم</h1>
-                <h3>يمكنك اضافة مستخدمين من <a href="addUser.php">هنا</a></h3>
+                <div class="alert-box notice"><span>تنبيه: </span>لا يوجد مستخدمين لعرضهم
+                <p>يمكنك اضافة مستخدمين من <a href="addUser.php">هنا</a></p>
                 </div>
                 <div id="footer">
                 <p>جميع الحقوق محفوظة 2016 &copy;</p>
@@ -76,7 +77,7 @@
 <table width="90%" align="center" class="table">
     <tr align="center" >
  <td width="10%"> </td>
-    <td width="9%"> </td>    
+    <td width="9%"></td>    
     <td width="30%"></td>
     <td width="4%"></td>
     <td width="31%"><button name="add" class="bt"  type="button" onclick="window.open('print_users.php')"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
@@ -85,6 +86,7 @@
   </tr>
     <tr align="center" class="table_header">
  <td width="5%">حذف </td>
+ 
  <td width="5%">عرض </td>
     <td width="30%">نوع المستخدم</td>
     <td width="15%">اسم المستخدم</td>
@@ -95,9 +97,10 @@
   	for($i = 0 ; $i < $ucount ; $i++){
 		$user = $users[$i];
   ?>
+
     <tr align="center" class="table_data<?php echo $i%2?>"  >
-    <td>
-        <img width="22px" align="middle" alt="حذف" src="../../images/style images/delete_icon.png" style="padding-left:5px" onclick="ajax(<?php echo $user->id?>)" />
+        <td onclick="ajax(<?php echo $user->id?>)" >
+        <img width="22px"   align="middle" alt="حذف" src="../../images/style images/delete_icon.png" style="padding-left:5px"  />
     </td>
         <td  onclick="window.location.href='user.php?id='+<?php echo $user->id?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
     <td><?php
@@ -109,6 +112,7 @@
     
   </tr>
   <?php } ?>
+    
   </table>
 
 <br />
@@ -117,7 +121,10 @@
 </div>
 </div>
 <script type="text/javascript">
-
+function show_confirm(id){
+    var confirm = "<div  id='show_confirm' class='confirm' ><img src='../../images/style images/success.png'alt='yes' class='yes' onclick='ajax(id)'/><img src='../../images/style images/error.png' alt='no' class='yes' onclick'' /></div>";
+    return confirm;
+}
 	//var del = document.getElementById("delete");
 	
 	//ajax("div","deleteuser.php","?id=7",false);
@@ -126,7 +133,7 @@
 {
     var ajax;
 	//var d_node = document.getElementById(elementID);
-	elementID = "div";
+	elementID = "sucsses_notice";
 	filename = "deleteuser.php";
 	str = "?id="+ID;
 	post = false ;

@@ -35,9 +35,11 @@
 
 <div class="login">
     <h2 align="center" class="adress">اضافة كفالة جديدة</h2>
+
 <br />
 <form action="saveuser.php" method="post">
 	<table width="60%" border="0" align="center">
+            
         <?php
     
 	include('../../utils/db.php');
@@ -56,7 +58,7 @@
     </tr>
       <tr>
     <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td></td>
   </tr>
   <tr>
     <td align="right"><input class="textFiels" name="total" type="text" id="total" size="10" maxlength="30" /></td>
@@ -101,18 +103,24 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-      <td align="right"><button name="add"  type="button" onclick="IsEmpty()"    >اضافة كفالة <img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /></button></td>
+      <td align="right"><button name="add"  id="bt"  type="button" onclick="IsEmpty()"    >اضافة كفالة <img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /></button></td>
 
     <td>&nbsp;</td>
   </tr>
+
+
+
   <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td ></td>
+    
   </tr>
     </table>
 </form>
+<dir id="space"></dir>
 </div>
 <script type="text/javascript" >;
+ 
 	var checker = 0; 
 	var sponsor = document.getElementById("sponsor");
 	var total = document.getElementById("total");
@@ -145,7 +153,7 @@ function ajax()
 	elementID = "div";
 	filename = "saveKafala.php"; 
 	str = "sponsor="+sponsor.value+"&total="+total.value+"&saving="+saving.value+"&months="+months.value+"&ponsored="+sponsored.value;
-	post = true ;
+	post = false ;
     if (window.XMLHttpRequest)
     {
         ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
@@ -167,14 +175,16 @@ function ajax()
     {
         if (ajax.readyState==4&&ajax.status==200)
         {
-            alert(ajax.responseText);
-			//window.location.href = "showUsers.php";
-			//document.getElementById(elementID).innerHTML=ajax.responseText;
+            //alert(ajax.responseText);
+            document.getElementById("space").innerHTML = ajax.responseText;
+            document.getElementById("bt").setAttribute("disabled","disabled");
+            //window.location.href = "showUsers.php";
+            //document.getElementById(elementID).innerHTML=ajax.responseText;
         }
     }
     if (post==false)
     {
-        ajax.open("GET",filename+str,true);
+        ajax.open("GET",filename+"?"+str,true);
         ajax.send(null);
 		
     }
