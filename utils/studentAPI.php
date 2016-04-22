@@ -38,13 +38,14 @@ function fp_student_get($extra = ''){
 		}
 
 	// INSERT	
-	function fp_student_add($state , $warranty_organization , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work ,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,$uni_name , $level , $year , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date  ){
+	function fp_student_add($state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work ,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,$uni_name , $level , $year , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date  ){
 		global $fp_handle;
 	
 
 
 	$n_state = @mysql_real_escape_string(strip_tags($state),$fp_handle); 
 	$n_warranty_organization = (int)$warranty_organization;
+        $n_saving = (int)$saving ;
 	$n_first_name  = @mysql_real_escape_string(strip_tags($first_name),$fp_handle);
 	$n_meddle_name  = @mysql_real_escape_string(strip_tags($meddle_name),$fp_handle);
 	$n_last_name  = @mysql_real_escape_string(strip_tags($last_name),$fp_handle);
@@ -53,7 +54,7 @@ function fp_student_get($extra = ''){
 	$n_sex = @mysql_real_escape_string(strip_tags($sex),$fp_handle);
 	$n_father_dead_date = @mysql_real_escape_string(strip_tags($father_dead_date),$fp_handle);
 	$n_father_dead_cause = @mysql_real_escape_string(strip_tags($father_dead_cause),$fp_handle);
-    $n_father_work = @mysql_real_escape_string(strip_tags($father_work),$fp_handle);
+        $n_father_work = @mysql_real_escape_string(strip_tags($father_work),$fp_handle);
 	$n_sisters_no  = (int)$sisters_no;
 	$n_brothers_no  = (int)$brothers_no;	
 	$n_residence_state = @mysql_real_escape_string(strip_tags($residence_state),$fp_handle);
@@ -81,8 +82,8 @@ function fp_student_get($extra = ''){
 	$n_data_entery_date=@mysql_real_escape_string(strip_tags($data_entery_date),$fp_handle);
 
 
-	$query = ("INSERT INTO `student` (id, `state` , warranty_organization , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `father_dead_date` , `father_dead_cause` , 	`father_work` ,sisters_no , brothers_no ,residence_state , `city` , `District` ,section , house_no , phone1 , phone2 ,`school_name` ,`uni_name` , level , year , `last_result`, quran_parts , study_year_no , `study_date_start` , `expected_grad`  , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date` )
-				VALUE(NULL ,'$n_state' , '$n_warranty_organization' , '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_father_dead_date' , '$n_father_dead_cause' , 	'$n_father_work' ,'$n_sisters_no' , '$n_brothers_no' ,'$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2' ,'$n_school_name' ,'$n_uni_name' , '$n_level' , '$n_year' , '$n_last_result','$n_quran_parts' ,'$n_study_year_no' , '$n_study_date_start' , '$n_expected_grad'  , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date' )");
+	$query = ("INSERT INTO `student` (id, `state` , warranty_organization , saving , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `father_dead_date` , `father_dead_cause` , 	`father_work` ,sisters_no , brothers_no ,residence_state , `city` , `District` ,section , house_no , phone1 , phone2 ,`school_name` ,`uni_name` , level , year , `last_result`, quran_parts , study_year_no , `study_date_start` , `expected_grad`  , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date` )
+				VALUE(NULL ,'$n_state' , '$n_warranty_organization', '$n_saving' , '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_father_dead_date' , '$n_father_dead_cause' , 	'$n_father_work' ,'$n_sisters_no' , '$n_brothers_no' ,'$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2' ,'$n_school_name' ,'$n_uni_name' , '$n_level' , '$n_year' , '$n_last_result','$n_quran_parts' ,'$n_study_year_no' , '$n_study_date_start' , '$n_expected_grad'  , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date' )");
 	
 	echo $query ;
 	
@@ -95,7 +96,7 @@ function fp_student_get($extra = ''){
 
 	
 	// UPDATE
-function fp_student_update($id , $state = Null , $warranty_organization = Null , $first_name = Null , $meddle_name = Null , $last_name = Null , $last_4th_name = Null , $birth_date = Null , $sex = Null , $father_dead_date = Null , $father_dead_cause = Null , 	$father_work = Null ,$sisters_no = Null , $brothers_no = Null ,$residence_state = Null , $city = Null , $District = Null , $section = Null ,$house_no = Null , $phone1 = Null , $phone2 = Null ,$school_name = Null ,$uni_name = Null , $level = Null , $year = Null , $last_result = Null ,$quran_parts = Null ,$study_year_no = Null , $study_date_start = Null , $expected_grad  = Null , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date = Null  ){
+function fp_student_update($id , $state = Null , $warranty_organization = Null, $saving = Null , $first_name = Null , $meddle_name = Null , $last_name = Null , $last_4th_name = Null , $birth_date = Null , $sex = Null , $father_dead_date = Null , $father_dead_cause = Null , 	$father_work = Null ,$sisters_no = Null , $brothers_no = Null ,$residence_state = Null , $city = Null , $District = Null , $section = Null ,$house_no = Null , $phone1 = Null , $phone2 = Null ,$school_name = Null ,$uni_name = Null , $level = Null , $year = Null , $last_result = Null ,$quran_parts = Null ,$study_year_no = Null , $study_date_start = Null , $expected_grad  = Null , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date = Null  ){
 
 	global $fp_handle ;
 	$uid = (int)$id;
@@ -116,6 +117,10 @@ function fp_student_update($id , $state = Null , $warranty_organization = Null ,
 		$n_warranty_organization    = @mysql_real_escape_string(strip_tags($warranty_organization),$fp_handle);
 		$fields[@count($fields)] = " `warranty_organization` = '$n_warranty_organization' ";
 		}
+ 	if(!empty($saving)){
+		$n_saving    = (int)$saving;
+		$fields[@count($fields)] = " `saving` = '$n_saving' ";
+		}               
 	if(!empty($first_name)){
 		$n_first_name   = mysql_real_escape_string(strip_tags($first_name),$fp_handle);
 		$fields[@count($fields)] = " `first_name` = '$n_first_name' ";

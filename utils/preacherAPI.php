@@ -8,10 +8,10 @@
 		$query = sprintf("SELECT * FROM `preacher` %s",$extra);
 		$qresult = @mysql_query($query);
 		
-		if(!$qresult) return NULL ; 
+		if(!$qresult) return -1 ; 
 		
 		$rcount = mysql_num_rows($qresult);
-		if($rcount == 0 )  return NULL ;
+		if($rcount == 0 )  return 0 ;
 		
 		$preachers = array();
 		
@@ -33,12 +33,13 @@
 		return $preacher ;
 		}
 	// INSERT	
-	function fp_preacher_add($type, $state ,  $warranty_organization , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $male_members_no , $female_members_no , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 , $qualify_name , $qualify_date , $qualify_rating , $quran_parts , $Issuer , $current_work , $Joining_Date , $health_state , $ill_cause , $data_entery_name , $data_entery_date ){
+	function fp_preacher_add($type, $state ,  $warranty_organization ,$saving ,  $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $male_members_no , $female_members_no , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 , $qualify_name , $qualify_date , $qualify_rating , $quran_parts , $Issuer , $current_work , $Joining_Date , $health_state , $ill_cause , $data_entery_name , $data_entery_date ){
 		global $fp_handle;
 		
 		$n_state = @mysql_real_escape_string(strip_tags($state),$fp_handle); 
 		$n_type = (int)$type ;
 		$n_warranty_organization = (int)$warranty_organization;
+                $n_saving = (int)$saving ;
 		$n_first_name  = @mysql_real_escape_string(strip_tags($first_name),$fp_handle);
 		$n_meddle_name  = @mysql_real_escape_string(strip_tags($meddle_name),$fp_handle);
 		$n_last_name  = @mysql_real_escape_string(strip_tags($last_name),$fp_handle);
@@ -67,8 +68,8 @@
 		$n_data_entery_date=@mysql_real_escape_string(strip_tags($data_entery_date),$fp_handle);
 
 	 
-		$query = ("INSERT INTO `preacher` (id, `state` ,`type` ,  `warranty_organization` , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `male_members_no` , `female_members_no` , `residence_state` , `city` , `District` , `section`,`house_no` , `phone1` , `phone2` , `qualify_name` , `qualify_date` , `qualify_rating` , `quran_parts` , `Issuer` , `current_work` , `Joining_Date` , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date`  )
-					VALUE(NULL  , '$n_state' ,'$n_type' ,  '$n_warranty_organization' , '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_male_members_no' , '$n_female_members_no' , '$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$house_no' , '$n_phone1' , '$n_phone2' , '$n_qualify_name', '$n_qualify_date' , '$n_qualify_rating' , '$n_quran_parts' , '$n_Issuer' , '$n_current_work' , '$n_Joining_Date' , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date'  )");
+		$query = ("INSERT INTO `preacher` (id, `state` ,`type` ,  `warranty_organization` , saving , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `male_members_no` , `female_members_no` , `residence_state` , `city` , `District` , `section`,`house_no` , `phone1` , `phone2` , `qualify_name` , `qualify_date` , `qualify_rating` , `quran_parts` , `Issuer` , `current_work` , `Joining_Date` , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date`  )
+					VALUE(NULL  , '$n_state' ,'$n_type' ,  '$n_warranty_organization' ,'$n_saving', '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_male_members_no' , '$n_female_members_no' , '$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$house_no' , '$n_phone1' , '$n_phone2' , '$n_qualify_name', '$n_qualify_date' , '$n_qualify_rating' , '$n_quran_parts' , '$n_Issuer' , '$n_current_work' , '$n_Joining_Date' , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date'  )");
 		
 		echo $query;
 		$qresult = mysql_query($query);
@@ -79,7 +80,7 @@
 		
 
 		// UPDATE
-	function fp_preacher_update( $id ,$type  = null ,$state = null  ,  $warranty_organization = null  , $first_name = null  , $meddle_name = null  , $last_name = null  , $last_4th_name = null  , $birth_date = null  , $sex = null  , $male_members_no = null  , $female_members_no = null  , $residence_state = null  , $city = null  , $Distrit = null  , $section = null ,$house_no = null  , $phone1 = null  , $phone2 = null  , $qualify_name = null  , $qualify_date = null  , $qualify_rating = null  , $quran_parts = null  , $Issuer = null  , $current_work = null  , $Joining_Date = null  , $health_state = null  , $ill_cause = null  , $data_entery_name = null  , $data_entery_date = null  ){
+	function fp_preacher_update( $id ,$type  = null ,$state = null  ,  $warranty_organization = null , $saving = Null  , $first_name = null  , $meddle_name = null  , $last_name = null  , $last_4th_name = null  , $birth_date = null  , $sex = null  , $male_members_no = null  , $female_members_no = null  , $residence_state = null  , $city = null  , $Distrit = null  , $section = null ,$house_no = null  , $phone1 = null  , $phone2 = null  , $qualify_name = null  , $qualify_date = null  , $qualify_rating = null  , $quran_parts = null  , $Issuer = null  , $current_work = null  , $Joining_Date = null  , $health_state = null  , $ill_cause = null  , $data_entery_name = null  , $data_entery_date = null  ){
 		global $fp_handle ;
 		$uid = (int)$id;
 		if($uid == 0) return false ;
@@ -104,6 +105,10 @@
 			$n_warranty_organization    = @mysql_real_escape_string(strip_tags($warranty_organization),$fp_handle);
 			$fields[@count($fields)] = " `warranty_organization` = '$n_warranty_organization' ";
 			}
+		if(!empty($saving)){
+			$n_saving    = (int)$saving;
+			$fields[@count($fields)] = " `saving` = '$n_saving' ";
+			}                      
 		if(!empty($first_name)){
 			$n_first_name   = mysql_real_escape_string(strip_tags($first_name),$fp_handle);
 			$fields[@count($fields)] = " `first_name` = '$n_first_name' ";

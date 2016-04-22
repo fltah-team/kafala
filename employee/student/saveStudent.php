@@ -4,8 +4,9 @@
 	include('../../utils/db.php');
 	include('../../utils/studentAPI.php');
 	
-	$state = $_GET['state']  ;	
+	$state = "state" ;	
 	$warranty_organization = 1;
+        $saving = 1 ;
 	$first_name = "first name";
 	$meddle_name = "s name";
 	$last_name = " l name";
@@ -39,14 +40,16 @@
 	$data_entery_date  ="2000-12-10" ;
 
 	
-	$result = fp_student_add($state , $warranty_organization , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work ,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,$uni_name , $level , $year , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date  );
+	$result = fp_student_add($state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work ,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,$uni_name , $level , $year , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date  );
 	//$_GET['fno']);
 	fp_db_close();
 	
 	if(!$result)
-		die ("fail");
+		die ('<div id="success_notice"  class="alert-box error">'."<span>خطأ :   </span>"."لم تتم عملية اضافةالطالب "."</div>");
 
-	echo " student record is added ";
+	echo ('<div id="success_notice"  class="alert-box success"><span>نجاح :   </span>تمت اضافة الطالب بنجاح</div>');
+
+	
 
 		
 	

@@ -6,6 +6,7 @@
 
 	$state = "state" ;	
 	$warranty_organization = 1;
+        $saving = 1 ;
 	$father_first_name = "first name";
 	$father_middle_name = "s name";
 	$father_last_name = " l name";
@@ -37,7 +38,7 @@
 	$data_entery_date  ="2000-12-10" ;
 
 	
-	$result = fp_family_add($state , $warranty_organization , $father_first_name , $father_middle_name , $father_last_name , $father_4th_name , $birth_date , $sex ,$social_state ,$father_dead_date , $father_dead_cause , $father_work ,  $supporter_first_name , $supporter_meddle_name , $supporter_last_name , $supporter_4th_name , $supporter_birth_date , $supporter_sex , $supporter_state , $supporter_relation  , $supporter_work  , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 , $data_entery_name , $data_entery_date  );
+	$result = fp_family_add($state , $warranty_organization ,$saving, $father_first_name , $father_middle_name , $father_last_name , $father_4th_name , $birth_date , $sex ,$social_state ,$father_dead_date , $father_dead_cause , $father_work ,  $supporter_first_name , $supporter_meddle_name , $supporter_last_name , $supporter_4th_name , $supporter_birth_date , $supporter_sex , $supporter_state , $supporter_relation  , $supporter_work  , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 , $data_entery_name , $data_entery_date  );
 	//$_GET['fno']);
 	fp_db_close();
 	
