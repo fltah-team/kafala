@@ -275,7 +275,7 @@
 		$study_level = @mysql_real_escape_string(strip_tags($study_level),$fp_handle);
 		$health_state  = @mysql_real_escape_string(strip_tags($health_state),$fp_handle);
 		$familyID = (int)$familyID ;
-		$query = ("INSERT INTO `f_member` VALUE(NULL,'$n_member_id' , '$n_name' , '$n_sex' , '$n_birth_date' , '$n_relation' ,'$n_study_level' , '$n_health_state'  , '$n_familyID')");
+		$query = ("INSERT INTO `f_member`( `member_id` , `name` , `sex` , `birth_date` , `relation` ,`study_level` , `health_state`  , `familyID`) VALUE(NULL,'$n_member_id' , '$n_name' , '$n_sex' , '$n_birth_date' , '$n_relation' ,'$n_study_level' , '$n_health_state'  , '$n_familyID')");
 		echo $query ;
 		
 		$qresult = mysql_query($query);

@@ -288,7 +288,7 @@ function fp_orphan_delete($id){
 		$n_birth_date  = @mysql_real_escape_string(strip_tags($birth_date),$fp_handle);
 		$n_state = @mysql_real_escape_string(strip_tags($state),$fp_handle);
 		
-		$query = ("INSERT INTO `sibiling` VALUE(NULL,'$n_orphan_id' ,'$n_name','$n_sex','$n_birth_date','$n_state')");
+		$query = ("INSERT INTO `sibiling`( `orphan_id` , `name` , `sex` , `birth_date` , `state`) VALUE(NULL,'$n_orphan_id' ,'$n_name','$n_sex','$n_birth_date','$n_state')");
 		
 		
 		$qresult = mysql_query($query);
