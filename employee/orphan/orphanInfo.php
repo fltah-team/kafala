@@ -21,8 +21,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>?????? ??????? ????????? ??????? ??????????</title>
+<title> الهيئة الخيرية الاسلامية للرعاية الاجتماعية</title>
 <link href="../../style/pageStyle.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.auto-style1 {
+	direction: rtl;
+}
+</style>
 </head>
 
 <body>
@@ -31,7 +36,7 @@
 <table width="90%" border="0" align="center">
   <tr>
     <td><img src="../../images/logo.png" /></td>
-    <td><h1>?????? ??????? ????????? ??????? الرلارىلاh1></td>
+    <td><h1>الهيئة الخيرية الاسلامية للرعاية الاجتماعية</h1></td>
     <td><img src="../../images/logo.png" /></td>
   </tr>
   
@@ -40,11 +45,11 @@
 <!-- menu -->
 <div class="menu">
 	<ul>
-      <li><a href="cars.html">????? ????</a>
-      <li><a href="customers.html">??????</a>
-      <li><a href="employees.html">??????</a>
-      <li><a href="reports.html">?????</a>
-      <li><a href="main.html">???????</a>
+      <li><a href="cars.html">تسجيل خروج</a>
+      <li><a href="customers.html">الدعاة</a>
+      <li><a href="employees.html">الطلاب</a>
+      <li><a href="reports.html">الأسر</a>
+      <li><a href="main.html">الأيتام</a>
    </ul>
 </div>
 
@@ -52,7 +57,7 @@
 <div class="main">
 
 <div class="login">
-<h2 align="center">?????? ???? </h2>
+<h2 align="center">بيانات يتيم </h2>
 <br />
 <p id="noti"></p>
 <br />
@@ -73,11 +78,15 @@
     <td width="17%" align="right">
         <input class="textFiels" size="10" maxlength="30" value="<?php echo $orphan->warranty_organization?>" />
     </td>
-    <td width="18%">??? ???????</td>
+    <td width="18%">جهة الكفالة</td>
     <td width="14%" align="right">
-        <input class="textFiels" size="10" maxlength="30" value="<?php echo $orphan->state?>" />
+        <select tabindex="0" class="select" name="status0" id="status0">
+      <option value="1">مكفول</option>
+      <option value="2">قيد التسويق</option>
+      <option value="3">متوقف</option>
+    </select>
     </td>
-    <td width="20%" align="center">??????</td>
+    <td width="20%" align="center">الحالة</td>
   </tr>
   
   <tr>
@@ -89,7 +98,7 @@
     <td align="right"><input class="textFiels" name="name3" type="text" tabindex="4" id="name3" size="10" maxlength="30"  value="<?php echo $orphan->last_name?>" /></td>
     <td align="right"><input class="textFiels" name="name2" type="text" tabindex="3" id="name2" size="10" maxlength="30"  value="<?php echo $orphan->meddle_name?>" /></td>
     <td align="right"><input class="textFiels" name="name1" tabindex="2" type="text" id="name1" size="10" maxlength="30" value="<?php echo $orphan->first_name?>"  /></td>
-    <td align="center">??? ??????</td>
+    <td align="center">اسم اليتيم</td>
   </tr>
   
     <tr>
@@ -103,12 +112,12 @@
     <td align="right">
         <input class="textFiels" size="10" maxlength="30" value="<?php echo $orphan->sex?>" />
     </td>
-  	<td align="center">?????</td>
+  	<td align="center">الجنس</td>
     
         <td align="right">
         <input class="textFiels" size="10" maxlength="30" value="<?php echo $orphan->birth_date?>" />
       </td>
-    <td align="center">????? ???????</td>
+    <td align="center">تاريخ الميلاد</td>
   </tr>
   
 
@@ -121,7 +130,7 @@
     <td align="right"><input class="textFiels" name="mname3" type="text" id="mname3" size="10" maxlength="30"  value="<?php echo $orphan->mother_last_name?>" /></td>
     <td align="right"><input class="textFiels" name="mname2" type="text" id="mname2" size="10" maxlength="30"  value="<?php echo $orphan->mother_middle_name?>" /></td>
     <td align="right"><input class="textFiels" name="mname1" type="text" id="mname1" size="10" maxlength="30"  value="<?php echo $orphan->mother_first_name?>" /></td>
-    <td align="center">??? ????? ??????</td>
+    <td align="center">اسم والدة اليتيم</td>
   </tr>
   
   <tr>
@@ -134,13 +143,14 @@
     <td>
         <input class="textFiels" size="10" maxlength="30" value="<?php echo $orphan->mother_state?>" />
     	</td>
-  	<td align="right">?????? ??????????
+  	<td align="right">حالتها الاجتماعية
+
   	  </td>
     
     <td align="right">
     <input class="textFiels" size="10" maxlength="30" value="<?php echo $orphan->mother_Birth_date?>" />  
     </td>
-    <td align="center">????? ???????</td>
+    <td align="center">تاريخ ميلادها</td>
   </tr>
   
   <tr>
@@ -148,11 +158,11 @@
   </tr>
     <tr align="center">
   	<td align="right"><input class="textFiels" name="lw" type="text" id="lw" size="10" maxlength="30" value="<?php echo $orphan->father_work?>" /></td>
-    <td>???? ??????</td>
+    <td>عمله السابق</td>
     <td align="right"><input class="textFiels" name="dr" type="text" id="dr" size="10" maxlength="30" value="<?php echo $orphan->father_dead_cause?>" /></td>
-    <td align="right">??? ??????</td>
+    <td align="right">سبب الوفاة</td>
     <td align="right"><input class="textFiels" name="fdd" type="text" id="fdd" size="10" maxlength="30" value="<?php echo $orphan->father_dead_date?>" /></td>
-    <td align="center">????? ???? ???? ??????</td>
+    <td align="center">تاريخ وفاة والد اليتيم</td>
   </tr>
     
 </table>
@@ -204,19 +214,19 @@
 
 
 <br />
-<h2 align="center">???????</h2>
+<h2 align="center">العنوان</h2>
 <br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
   	<td width="13%" align="right"><input class="textFiels" name="district" type="text" id="district" size="10" maxlength="30" value="<?php echo $orphan->District?>"/></td>
-  	<td width="11%" align="right">????</td>
+  	<td width="11%" align="right">الحي</td>
     <td width="22%" align="right"><input class="textFiels" name="city" type="text" id="city" size="20" maxlength="30"  value="<?php echo $orphan->city?>" /></td>
-    <td width="13%" align="center">???????/??????</td>
+    <td width="13%" align="center">المدينة/القرية</td>
         
     <td width="14%" align="right">
     <input class="textFiels" name="district" type="text" id="district" size="10" maxlength="30" value="<?php echo $orphan->residence_state?>"/>
       </td>
-    <td width="16%" align="center">???????</td>
+    <td width="16%" align="center">الولاية</td>
   </tr>
   
   <tr>
@@ -226,9 +236,9 @@
 	<td>&nbsp;</td>
   	<td align="right"></td>
     <td align="right"><input class="textFiels" name="hno" type="text" id="hno" size="20" maxlength="30"  value="<?php echo $orphan->house_no?>"/></td>
-    <td align="right">??? ??????/???? ????</td>
+    <td align="right">رقم المنزل/معلم بارز</td>
     <td align="right"><input class="textFiels" name="section" type="text" id="section" size="10" maxlength="30" value="<?php echo $orphan->section?>" /></td>
-    <td align="center">??????</td>
+    <td align="center">المربع</td>
   </tr>
   
   
@@ -239,9 +249,9 @@
 	<td>&nbsp;</td>
     <td>&nbsp;</td>
      <td align="right"><input class="textFiels" name="tel2" type="text" id="tel2" size="10" maxlength="30"  value="<?php echo $orphan->phone2?>"/></td>
-    <td align="center">???? 2</td>
+    <td align="center">جوال 2</td>
     <td align="right"><input class="textFiels" name="tel1" type="text" id="tel1" size="10" maxlength="30" value="<?php echo $orphan->phone1?>" /></td>
-    <td align="center">???? 1</td>
+    <td align="center">جوال 1</td>
   </tr>
   
   
@@ -251,26 +261,27 @@
 
 
 <br />
-<h2 align="center">??? ????? ??????</h2>
+<h2 align="center"><b><span dir="RTL" lang="AR-SA">عدد افراد الاسرة </span>
+</b></h2>
 <br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
   	<td width="29%" align="right"><input name="femaleno" type="text" value="<?php echo $female_count?>" readonly="readonly" id="femaleno" size="10" maxlength="30" /></td>
-  	<td width="11%" align="right">??????</td>
+  	<td width="11%" align="right"><span dir="RTL" lang="AR-SA">الاناث </span></td>
         <td width="16%" align="right"><input name="maleno" type="text" value="<?php echo $male_count?>" readonly="readonly" id="maleno" size="10" maxlength="30" /></td>
-    <td width="15%" align="center">??????</td>
+    <td width="15%" align="center"><span dir="RTL" lang="AR-SA">الذكور </span></td>
     <td width="15%" align="right"><input name="fno" type="text" value="<?php echo $male_count+$female_count?>" readonly="readonly" id="fno" size="10" maxlength="30" /></td>
-    <td width="14%" align="center">??? ????? ??????</td>
+    <td width="14%" align="center"><span dir="RTL" lang="AR-SA">عدد الاخوان</span></td>
   </tr>
   
   
  <table width="80%" border="1" align="center">
    <br />
   <tr>
-    <td align="center">??????</td>
-    <td align="center">????? ???????</td>
-    <td align="center">?????</td>
-    <td align="center">?????</td>
+    <td align="center">الحالة</td>
+    <td align="center">تاريخ الميلاد</td>
+    <td align="center">الجنس</td>
+    <td align="center">الإسم</td>
     <td align="center">&nbsp;</td>
   </tr>
    <?php 
@@ -288,10 +299,10 @@
    <?php } ?>
   <tr>
     <td align="center">
-        <select tabindex="0" class="select" name="status" id="sibling_status">
-      <option value="1">?????</option>
-      <option value="2">??? ???????</option>
-      <option value="3">?????</option>
+        <select tabindex="0" class="select" name="status" id="status">
+      <option value="1">مكفول</option>
+      <option value="2">قيد التسويق</option>
+      <option value="3">متوقف</option>
     </select>
     </td>
     <td align="center">
@@ -319,9 +330,9 @@
     </table>
     </td>
     <td align="center">
-  	    ???<input type="radio" name="s_gender" value="1" id="sibling_male_gender" />
+  	    ذكر<input type="radio" name="s_gender" value="1" id="sibling_male_gender" />
             <br />
-  	    ????<input type="radio" name="s_gender" value="0" id="sibling_female_gender" />
+  	    أنثى<input type="radio" name="s_gender" value="0" id="sibling_female_gender" />
   	    
     </td>
     <td align="center"><input class="textFielsS" name="fbname" type="text" id="sibling_name" size="30" maxlength="30" /></td>
@@ -413,7 +424,7 @@
 
 
 <br />
-<h2 align="center">???????</h2>
+<h2 align="center" class="auto-style1">التعليم</h2>
 <br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
@@ -421,11 +432,14 @@
   	<td width="9%" align="right">&nbsp;</td>
   	<td width="41%" align="right"><input name="teachingr" type="text" readonly="readonly"  class="textFiels" id="teachingr" value="<?php echo $orphan->nonstuding_cause?>" size="10" maxlength="30" />
   	  </td>
-	<td width="14%" align="center">?????</td>
+	<td width="14%" align="center">السبب</td>
         <td width="14%" align="center">
-        <input class="textFiels" name="illt" type="text" id="illt" size="10" maxlength="30" value="<?php echo $orphan->studing_state?>"  />
+        <select class="select" name="learning" id="learning">
+      <option  value="1">يدرس</option>
+      <option  value="0">لا يدرس</option>
+    </select>
     </td>
-        <td width="11%">?????? ????????</td>
+        <td width="11%">الحالة الدراسية</td>
         
         
   </tr>
@@ -439,9 +453,9 @@
     <td></td>
   	
 	<td width="41%" align="right"><input class="textFiels" name="illt" type="text" id="illt" size="30" maxlength="30" value="<?php echo $orphan->school_name?>"  /></td>
-        <td width="14%" align="center">??? ???????</td>
-        <td></td>
-  	<td></td>
+        <td width="14%" align="center">اسم المدرسة</td>
+        <td>&nbsp;</td>
+  	<td style="height: 29px">&nbsp;</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -451,17 +465,16 @@
   
   <table width="85%" border="0" align="center" id=" ">
     <tr align="center">
-  	<td width="26%" align="right">???
-  	  <input class="textFiels" name="class" type="text" id="class" size="10" maxlength="10" value="<?php echo $orphan->quran_parts?>" /></td></td>
-  	<td width="23%" align="right">????? ??? ??????</td>
+  	<td width="26%" align="right">جزء   	  <input class="textFiels" name="class" type="text" id="class" size="10" maxlength="10" value="<?php echo $orphan->quran_parts?>" /></td></td>
+  	<td width="23%" align="right">مستوى حفظ القرآن</td>
   	<td width="13%" align="right"><input class="textFiels" name="class" type="text" id="class" size="10" maxlength="30" value="<?php echo $orphan->year?>" /></td>
-	<td width="14%" align="center">????</td>
+	<td width="14%" align="center">الصف</td>
         <td width="13%" align="center"><input class="textFiels" name="level" type="text" id="level" size="10" maxlength="30" value="<?php echo $orphan->level?>"/></td>
-        <td width="11%">???????</td>
+        <td width="11%">المرحلة</td>
     
   </tr>
   <tr>
-    <td>&nbsp;</td>
+    <td>&&nbsp;</td>
   </tr>
   
 </table>
@@ -471,7 +484,7 @@
 
 
 <br />
-<h2 align="center">?????? ??????</h2>
+<h2 align="center">الحالة الصحية</h2>
 <br />
 
   <table width="85%" border="0" align="center" id=" ">
@@ -480,11 +493,11 @@
   	<td width="2%"></td>
   	<td width="28%" align="right"></td>
   	<td width="35%" align="left"><input class="textFiels" name="illt" type="text" id="illt" size="30" maxlength="30" value="<?php echo $orphan->ill_cause?>"  /></td>
-	<td width="14%" align="center" id="illLable">??? ?????</td>
+	<td width="14%" align="center" id="illLable">نوع المرض</td>
         <td width="10%" align="center">
         <input class="textFiels" name="illt" type="text" id="illt" size="10" maxlength="30" value="<?php echo $orphan->health_state?>"  />
     </td>
-        <td width="18%">?????? ?????? </td>
+        <td width="18%">الحالة الصحية  </td>
     <script type="text/javascript" >
     	function checkIllness(){
 			var illt =document.getElementById('illt');
@@ -528,7 +541,7 @@
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td align="center"><button class="add_bt" name="add" type="button" onclick="IsEmpty()" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> ????? ????  </button></td>
+    <td align="center"><button class="add_bt" name="add" type="button" onclick="IsEmpty()" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" />  </button></td>
     <td>&nbsp;</td>
   </tr>
   </form>
@@ -667,8 +680,7 @@ function ajax()
 	
 </script>
 <div id="footer">
-<p>???? ?????? ?????? 2016 &copy;</p>
-</div>
+<p>جميع الحقوق محفوظة 2016 &copy;</div>
 </div>
 </body>
 </html>

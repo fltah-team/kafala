@@ -305,13 +305,13 @@
   </tr>
   
   <tr align="center">
-  	<td><input class="textFiels" name="class" type="text" id="class" size="10" maxlength="30" /></td>
-    <td>الصف</td>
+  	<td style="height: 29px"><input class="textFiels" name="class" type="text" id="class" size="10" maxlength="30" /></td>
+    <td style="height: 29px">الصف</td>
   	
-	<td width="23%" align="right"><input class="textFiels" name="school" type="text" id="school" size="20" maxlength="30" /></td>
-        <td width="12%" align="center">اسم المدرسة</td>
-        <td align="center"><input class="textFiels" name="level" type="text" id="level" size="10" maxlength="30" /></td>
-  	<td>المرحلة</td>
+	<td width="23%" align="right" style="height: 29px"><input class="textFiels" name="school" type="text" id="school" size="20" maxlength="30" /></td>
+        <td width="12%" align="center" style="height: 29px">اسم المدرسة</td>
+        <td align="center" style="height: 29px"><input class="textFiels" name="level" type="text" id="level" size="10" maxlength="30" /></td>
+  	<td style="height: 29px">المرحلة</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
