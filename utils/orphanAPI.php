@@ -354,5 +354,7 @@ function fp_orphan_delete($id){
 		if(!$qresult) return false ;
 		
 		return true ;
-		}		
+		}
+    
+     
 ?>

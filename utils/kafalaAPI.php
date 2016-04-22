@@ -58,9 +58,8 @@ function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$month_no,$sponsored
 	}
 
 function fp_kafala_insert_sponsorships($sponsored_id){
-        
+        global $fp_handle;
         $last_id = mysql_insert_id();
-        
         switch ($sponsored_id){
         case 1 : 
                 include 'orphanAPI.php';
@@ -117,7 +116,7 @@ function fp_kafala_insert_sponsorships($sponsored_id){
 	
 	// DELETE
 function fp_kafala_delete($id){
-	
+	global $fp_handle ;
 	$kid = (int)$id;
 	if($kid == 0) return false ;
 	$query = sprintf("DELETE FROM `sponsorship` WHERE `id` = %d",$kid);
@@ -128,5 +127,25 @@ function fp_kafala_delete($id){
 	}
 
 	 	
+function fp_sposored_get_kafala($id){
+        global $fp_handle ;
+	$query = sprintf("SELECT * FROM `sponsorships` WHERE `sponsored`= %d",$id);
+        echo $query;
+	$qresult = @mysql_query($query);
+	serialize($qresult);
+	if(!$qresult) return -1 ; 
+	
+	$rcount = mysql_num_rows($qresult);
+	if($rcount == 0 )  return 0 ;
+	
+	$kafala = array();
+	
+	for($i = 0 ; $i < $rcount ; $i++)
+		$kafala[@count($kafala)] = @mysql_fetch_object($qresult);
 		
+	@mysql_free_result($qresult);
+	
+	return $kafala ; 
+       
+       }	
 ?>

@@ -171,14 +171,14 @@
 <h2 align="center">????????</h2>
 <br />
      <?php
-        $kafalas = fp_orphan_get_kafala($orphan->id);
+        $kafalas = fp_sposored_get_kafala($orphan->id);
         fp_db_close();
-        if (!kafala)
-                        die("err kafala");
+        if ($kafalas = -1)
+        echo "DB err";
+        if($kafalas == 0)
+            echo ("no kafalas");
+        serialize($kafalas);
         $kcount = @count($kafalas);
-        if($kcount == 0)
-            die("no kafalas");
-        
     ?>
 
 <table width="85%" border="0" align="center" id=" ">
