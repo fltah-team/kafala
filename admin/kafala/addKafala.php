@@ -34,7 +34,7 @@
 <div class="main">
 
 <div class="login">
-    <h2 align="center" class="adress">اضافة كفالة جديدة</h2>
+    <h2 align="center" class="adress">اضا�?ة ك�?الة جديدة</h2>
 
 <br />
 <form action="saveuser.php" method="post">
@@ -54,7 +54,7 @@
       <option value="<?php echo $sponsor->id?>"><?php echo $sponsor->name?></option>
 	<?php } ?>
     </select></td>
-    <td align="center" width="56%">جهة الكفالة</td>
+    <td align="center" width="56%">جهة الك�?الة</td>
     </tr>
       <tr>
     <td>&nbsp;</td>
@@ -96,14 +96,14 @@
       <option value="3">الدعاة/المقرئين/المعلمين</option>
       <option value="4">الأسر</option>
     </select></td>
-    <td align="center">المكفولين</td>
+    <td align="center">المك�?ولين</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
-      <td align="right"><button name="add"  id="bt"  type="button" onclick="IsEmpty()"    >اضافة كفالة <img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /></button></td>
+      <td align="right"><button name="add"  id="bt"  type="button" onclick="IsEmpty()"    >اضا�?ة ك�?الة <img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /></button></td>
 
     <td>&nbsp;</td>
   </tr>
@@ -132,13 +132,13 @@
 	// empty
 	if(total.value == ""){
 	total.style.color = "#ff0000" ;
-	total.setAttribute("placeholder","هذا الحقل فارغ");
+	total.setAttribute("placeholder","هذا الحقل �?ارغ");
 	checker++;
 		}
         
 	if(saving.value == ""){
 	saving.style.color = "#ff0000" ;
-	saving.setAttribute("placeholder","هذا الحقل فارغ");
+	saving.setAttribute("placeholder","هذا الحقل �?ارغ");
 	checker++;
 		}	 
 	if(checker == 0)ajax();
@@ -177,7 +177,7 @@ function ajax()
         {
             //alert(ajax.responseText);
             document.getElementById("space").innerHTML = ajax.responseText;
-            document.getElementById("bt").setAttribute("disabled","disabled");
+            //document.getElementById("bt").setAttribute("disabled","disabled");
             //window.location.href = "showUsers.php";
             //document.getElementById(elementID).innerHTML=ajax.responseText;
         }
@@ -200,7 +200,7 @@ function ajax()
 	
   </script>
 <div id="footer">
-<p>جميع الحقوق محفوظة 2016 &copy;</p>
+<p>جميع الحقوق مح�?وظة 2016 &copy;</p>
 </div>
 </div>
 </body>

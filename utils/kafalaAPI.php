@@ -50,46 +50,13 @@ function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$month_no,$sponsored
 	$n_sponsored = (int)$sponsored;
         
 	$query = ("INSERT INTO `sponsorship` (`id`,`amount` , `saving` , `date` ,`sponsor`, `month_no` ,`sponsored`) VALUE(NULL, $n_amount, $n_saving, '$n_date' ,$n_sponsor , $month_no , $n_sponsored)");
-	$checker = fp_kafala_check_sponsored_avalability($n_sponsored);
-        die($checkerx);
         $qresult = mysql_query($query);
 	if(!$qresult) return false ;
         fp_kafala_insert_sponsorships($n_sponsored);
 
         return true ;
 	}
-function fp_kafala_check_sponsored_avalability($sponsored_id){
-        switch ($sponsored_id){
-        case 1 : 
-                include 'orphanAPI.php';
-                $orphans = fp_orphan_get();
-                if(!$orphans) return -1;
-                $ocount = @count($orphans);
-                if($ocount == 0) return 0 ;
-                break;
-        case 2 : 
-                include 'studentAPI.php';
-                $orphans = fp_student_get();
-                if(!$orphans) return -1;
-                $ocount = @count($orphans);
-                if($ocount == 0) return 0 ;
-                break;
-        case 3 : 
-                include 'preacherAPI.php';
-                $orphans = fp_preacher_get();
-                if(!$orphans) return -1;
-                $ocount = @count($orphans);
-                if($ocount == 0) return 0 ;
-                break;
-        case 4 : 
-                include 'familyAPI.php';
-                $orphans = fp_family_get();
-                if(!$orphans) return -1;
-                $ocount = @count($orphans);
-                if($ocount == 0) return 0 ;
-                
-        }
-}
+
 function fp_kafala_insert_sponsorships($sponsored_id){
         
         $last_id = mysql_insert_id();
@@ -102,10 +69,7 @@ function fp_kafala_insert_sponsorships($sponsored_id){
                 for($i = 0 ; $i < $ocount ; $i++){
 		$orphan = $orphans[$i];
                 $add_kafala_qurey = "INSERT INTO `sponsorships` VALUE($last_id,$orphan->id)";
-                echo $add_kafala_qurey;
                 $res = mysql_query($add_kafala_qurey);
-                if(!$res)die("err");
-                else echo "kafala";
                 
                 }
             break;
@@ -116,7 +80,6 @@ function fp_kafala_insert_sponsorships($sponsored_id){
                 for($i = 0 ; $i < $ocount ; $i++){
 		$orphan = $orphans[$i];
                 $add_kafala_qurey = "INSERT INTO `sponsorships` VALUE($last_id,$orphan->id)";
-                echo $add_kafala_qurey;
                 $res = mysql_query($add_kafala_qurey);
                 if(!$res)die("err");
                 else echo "kafala";
@@ -129,7 +92,6 @@ function fp_kafala_insert_sponsorships($sponsored_id){
                 for($i = 0 ; $i < $ocount ; $i++){
 		$orphan = $orphans[$i];
                 $add_kafala_qurey = "INSERT INTO `sponsorships` VALUE($last_id,$orphan->id)";
-                echo $add_kafala_qurey;
                 $res = mysql_query($add_kafala_qurey);
                 if(!$res)die("err");
                 else echo "kafala";
@@ -143,7 +105,6 @@ function fp_kafala_insert_sponsorships($sponsored_id){
                 for($i = 0 ; $i < $ocount ; $i++){
 		$orphan = $orphans[$i];
                 $add_kafala_qurey = "INSERT INTO `sponsorships` VALUE($last_id,$orphan->id)";
-                echo $add_kafala_qurey;
                 $res = mysql_query($add_kafala_qurey);
                 if(!$res)die("err");
                 else echo "kafala";
