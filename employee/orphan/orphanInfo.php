@@ -1,6 +1,7 @@
 <?php 
         include('../../utils/db.php');
 	include('../../utils/orphanAPI.php');
+        include ('../../utils/kafalaAPI.php');
 	if(!isset($_GET['id'])) die("no ID");
 	$id = (int)$_GET['id']; 
 	$orphan = fp_orphan_get_by_id($id);
@@ -94,6 +95,7 @@
     <tr>
     <td>&nbsp;</td>
   </tr>
+   
     <tr align="right">
 	<td>
         </td>
@@ -155,8 +157,46 @@
     
 </table>
 
+<br />
+<h2 align="center">الكفالات</h2>
+<br />
+     <?php
+        $kafalas = fp_orphan_get_kafala($orphan->id);
+        fp_db_close();
+        if (!kafala)
+                        die("err kafala");
+        $kcount = @count($kafalas);
+        if($kcount == 0)
+            die("no kafalas");
+        
+    ?>
 
+<table width="85%" border="0" align="center" id=" ">
 
+<tr align="center" class="table_header">
+    <td width="10%"></td>
+    <td width="20%"></td>
+    <td width="5%"></td>
+    <td width="5%">الادخار</td>
+    <td width="5%"></td>
+  </tr>
+<tr align="center" class="table_header">
+    <td width="10%">عدد الشهور</td>
+    <td width="20%">التاريخ</td>
+    <td width="5%">الادخار</td>
+    <td width="5%">المبلغ</td>
+    <td width="5%">الرقم</td>
+  </tr>
+
+    <tr align="center" class="table_header">
+    <td width="10%">عدد الشهور</td>
+    <td width="20%">التاريخ</td>
+    <td width="5%">الادخار</td>
+    <td width="5%">المبلغ</td>
+    <td width="5%">الرقم</td>
+  </tr>
+    <?php } ?>
+</table>
 <!--   Aderss   -->
 
 
