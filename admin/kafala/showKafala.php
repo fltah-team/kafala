@@ -1,6 +1,7 @@
 <?php
 	include('../../utils/db.php');
 	include('../../utils/kafalaAPI.php');
+        include('../../utils/orphanAPI.php');
 	$sponsorships = fp_kafala_get();
 	fp_db_close();
 	

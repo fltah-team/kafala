@@ -8,7 +8,7 @@
         $sibilings = fp_sibiling_get($id);
         $siblings_male = fp_sibiling_get_for_gender($id," and sex = 1 ");
         $siblings_female = fp_sibiling_get_for_gender($id," and sex = 0 ");
-	fp_db_close();
+        $kafalas = fp_sposored_get_kafala($id);
 	$male_count = @count($siblings_male);
         $female_count = @count($siblings_female);
 	if(!$orphan) die ("prolem");	
@@ -168,48 +168,69 @@
 </table>
 
 <br />
-<h2 align="center">????????</h2>
+<h2 align="center"> الكفالات </h2>
+
 <br />
-     <?php
-        $kafalas = fp_sposored_get_kafala($orphan->id);
-        fp_db_close();
-        if ($kafalas = -1)
-        echo "DB err";
-        if($kafalas == 0)
-            echo ("no kafalas");
-        serialize($kafalas);
-        $kcount = @count($kafalas);
-    ?>
-
-<table width="85%" border="0" align="center" id=" ">
-
-<tr align="center" class="table_header">
-    <td width="10%"></td>
-    <td width="20%"></td>
-    <td width="5%"></td>
-    <td width="5%">???????</td>
-    <td width="5%"></td>
-  </tr>
-<tr align="center" class="table_header">
-    <td width="10%">??? ??????</td>
-    <td width="20%">???????</td>
-    <td width="5%">???????</td>
-    <td width="5%">??????</td>
-    <td width="5%">?????</td>
-  </tr>
-<?php 
-    for($j = 0 ; $j<= $kcount ; $j++){
-        $kafala = $kafalas[$j]
-?>
-    <tr align="center" class="table_header">
-    <td width="10%">??? ??????</td>
-    <td width="20%">???????</td>
-    <td width="5%">???????</td>
-    <td width="5%">??????</td>
-    <td width="5%">?????</td>
-  </tr>
-    <?php } ?>
+     
+<table align="center" width="60%" >
+    <tr>
+        <td><input class="textFiels" id="saving" disabled size="10px" ></input></td>
+        <td>اجمالي الادخار</td>
+        <td><input class="textFiels" id="saving" disabled size="10px" ></input></td>
+        <td>تاريخ اخر كفالة</td>
+    </tr>
 </table>
+
+<br />
+
+<div id="db_err" style="display: none" class="alert-box error"><span>خطأ: </span>هناك مشكلة في الاتصال بقاعدة البيانات    </div>
+
+<div id="no_kafala" style="display: none" class="alert-box warning"><span>تنبيه: </span>لا يوجد كفالات لعرضها</div>
+
+<div id="kafalas" style="display: none">
+    <?php
+        $kcount = @count($kafalas);
+        
+    ?>
+    <table width="60%" border="0" align="center" class="table">
+    <tr align="center" class="table_header">
+    <td width="10%">عدد الشهور</td>
+    <td width="20%">التاريخ</td>
+    <td width="5%">الادخار</td>
+    <td width="5%">المبلغ</td>
+    <td width="5%">الرقم</td>
+  </tr>
+  <?php 
+        
+                
+  	for($i = 0 ; $i < $kcount ; $i++){
+                $kafala = $kafalas[$i];
+		$sponsorship = fp_kafala_get_by_id($kafala->sponsorship);
+                
+  ?>
+    <tr align="center" class="table_data<?php echo $i%2?>">
+    <td><?php echo $sponsorship->month_no?></td>
+    <td><?php echo $sponsorship->date?></td>
+    <td><?php echo $sponsorship->saving?></td>
+    <td><?php echo $sponsorship->amount?></td>
+    <td><?php echo $sponsorship->id?></td>
+  </tr>
+  <?php } 
+  
+	fp_db_close();
+        ?>
+  </table>
+
+</div>
+
+<?php
+        if($kafalas == -1 )echo "<script type='text/javascript'>document.getElementById('db_err').style.display = 'block';</script>";
+        else if($kafalas == 0) echo "<script type='text/javascript'>document.getElementById('no_kafala').style.display = 'block';</script>";
+        else echo "<script type='text/javascript'>document.getElementById('kafalas').style.display = 'block';</script>";
+        
+    ?>     
+     
+
 <!--   Aderss   -->
 
 

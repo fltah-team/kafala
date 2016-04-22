@@ -6,7 +6,6 @@
 function fp_kafala_get($extra = ''){
 	global $fp_handle ;
 	$query = sprintf("SELECT * FROM `sponsorship` %s",$extra);
-
 	$qresult = @mysql_query($query);
 	
 	if(!$qresult) return -1 ; 
@@ -29,7 +28,6 @@ function fp_kafala_get($extra = ''){
 function fp_kafala_get_by_id($id){
 	$oid = (int)$id;
 	if($oid == 0) return NULL ;
-	
 	$kafalas = fp_kafala_get("WHERE `id` = ".$oid);
 	if($kafalas == NULL) return NULL ;
 	$kafala = $kafalas[0];
@@ -52,7 +50,7 @@ function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$month_no,$sponsored
 	$query = ("INSERT INTO `sponsorship` (`id`,`amount` , `saving` , `date` ,`sponsor`, `month_no` ,`sponsored`) VALUE(NULL, $n_amount, $n_saving, '$n_date' ,$n_sponsor , $month_no , $n_sponsored)");
         $qresult = mysql_query($query);
 	if(!$qresult) return false ;
-        fp_kafala_insert_sponsorships($n_sponsored);
+        fp_kafala_insert_sponsorships($n_sponsored,$saving);
 
         return true ;
 	}
@@ -129,10 +127,9 @@ function fp_kafala_delete($id){
 	 	
 function fp_sposored_get_kafala($id){
         global $fp_handle ;
-	$query = sprintf("SELECT * FROM `sponsorships` WHERE `sponsored`= %d",$id);
-        echo $query;
+	$query = sprintf("SELECT * FROM `sponsorships` WHERE `sponsored`= ".$id);
 	$qresult = @mysql_query($query);
-	serialize($qresult);
+	
 	if(!$qresult) return -1 ; 
 	
 	$rcount = mysql_num_rows($qresult);
@@ -145,7 +142,6 @@ function fp_sposored_get_kafala($id){
 		
 	@mysql_free_result($qresult);
 	
-	return $kafala ; 
-       
+	return $kafala ;       
        }	
 ?>
