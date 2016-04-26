@@ -284,15 +284,33 @@
   	<td width="7%" align="right">&nbsp;</td>
   	<td width="23%" align="right"><input name="teachingr" type="text"  class="textFiels" id="teachingr" size="20" maxlength="30" />
   	  </td>
-	<td width="12%" align="center">السبب</td>
+        <td width="12%" align="center" id="teachingr_lable">السبب</td>
         <td width="19%" align="center">
         <select class="select" name="learning" id="learning">
-      <option  value="1">يدرس</option>
-      <option  value="0">لا يدرس</option>
+            <option  value="1" onclick="learning1()">يدرس</option>
+            <option  value="0" onclick="learning0()">لا يدرس</option>
     </select>
     <script type="text/javascript" >
-            var totalVAL = 21 ;
-            
+     function learning0(){
+         document.getElementById('class').style.display = 'none';
+         document.getElementById('class_lable').style.display = 'none'; 
+         document.getElementById('level').style.display = 'none';
+         document.getElementById('level_lable').style.display = 'none';
+         document.getElementById('school').style.display = 'none';
+         document.getElementById('school_lable').style.display = 'none';
+         document.getElementById('teachingr').style.display = 'block';
+         document.getElementById('teachingr_lable').style.display = 'block';
+     }   
+          function learning1(){
+         document.getElementById('class').style.display = 'block';
+         document.getElementById('class_lable').style.display = 'block'; 
+         document.getElementById('level').style.display = 'block';
+         document.getElementById('level_lable').style.display = 'block';
+         document.getElementById('school').style.display = 'block';
+         document.getElementById('school_lable').style.display = 'block';
+         document.getElementById('teachingr').style.display = 'none';
+         document.getElementById('teachingr_lable').style.display = 'none';
+     }
     </script>
     </td>
         <td width="23%">الحالة الدراسية</td>
@@ -306,12 +324,12 @@
   
   <tr align="center">
   	<td style="height: 29px"><input class="textFiels" name="class" type="text" id="class" size="10" maxlength="30" /></td>
-    <td style="height: 29px">الصف</td>
+        <td style="height: 29px" id="class_lable">الصف</td>
   	
 	<td width="23%" align="right" style="height: 29px"><input class="textFiels" name="school" type="text" id="school" size="20" maxlength="30" /></td>
-        <td width="12%" align="center" style="height: 29px">اسم المدرسة</td>
+        <td width="12%" align="center" style="height: 29px" id="school_lable">اسم المدرسة</td>
         <td align="center" style="height: 29px"><input class="textFiels" name="level" type="text" id="level" size="10" maxlength="30" /></td>
-  	<td style="height: 29px">المرحلة</td>
+        <td style="height: 29px" id="level_lable">المرحلة</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -351,11 +369,15 @@
   	<td width="2%"></td>
   	<td width="12%" align="right"></td>
   	<td width="38%" align="left"><input class="textFiels" name="illt" type="text" id="illt" size="30" maxlength="30"   /></td>
-	<td width="12%" align="center" id="illLable">نوع المرض</td>
+	<td width="18%" align="center" id="illLable">نوع المرض</td>
         <td width="8%" align="center">
         <select class="select" name="illness" id="illness">
-      <option value="1">جيدة</option>
-      <option value="0">سيئة</option>
+            <option id="goodill" onclick="document.getElementById('illt').style.display = 'none';
+                                          document.getElementById('illLable').style.display = 'none';
+                                         " value="1">جيدة</option>
+            <option id="badill"  onclick="document.getElementById('illt').style.display = 'block';
+                                          document.getElementById('illLable').style.display = 'block'; 
+                                           " value="0">سيئة</option>
     </select>
     </td>
         <td width="28%">الحالة الصحية </td>
@@ -366,7 +388,9 @@
   </tr>
   
 </table>
-
+<script type="text/javascript" id="illt1" >
+    
+</script>
 <!-- Employee -->
 
 <table width="85%" border="0" align="center" >
@@ -382,43 +406,21 @@
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td align="center"><button class="bt" name="add" type="button" onclick="ajax()" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة يتيم  </button></td>
+    <td align="center"><button class="bt" name="add" type="button" onclick="alert(str);" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة يتيم  </button></td>
     <td>&nbsp;</td>
   </tr>
   </form>
 </table>
 </div>
 <script type="text/javascript" >
-	var nodes = document.getElementsByClassName("textFiels");//+document.getElementsByClassName("select");
-        var selectores_nodes = document.getElementsByClassName("select");
-	var str = "" ;
-        
-	for(var i = 0 ; i <= nodes.length ; i++){
-		str+=nodes[i].getAttribute("id")+"="+nodes[i].value+"&\n";
-                if(selectores_nodes[i])
-                    str+=selectores_nodes[i].getAttribute("id")+"="+selectores_nodes[i].value+"&\n";
-                
-		}
-	
-			  
+	var name1 = document.getElementById("name1"); 	
+        alert(name1.value);
 	function IsEmpty(){ 
-	var res = 0 ;
-        
-	// empty
-	for(i=0 ; i <= (nodes.length) ; i++){
-	if(nodes.item(i).value == ""){
-	nodes.item(i).style.color = "#ff0000" ;
-	nodes.item(i).setAttribute("placeholder","هذا الحقل فارغ");
-	
-		} else res++;
-		check(res);
-	}
-	 
-}
-function check(res){
-	if(res == 5 ) ajax();
-	
-	}
+            
+                if(document.getElementById('name1').value == null){
+                    alert("i");
+                }
+           }
 
 
 function ajax()

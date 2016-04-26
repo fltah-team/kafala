@@ -40,32 +40,16 @@
 <?php
 	include('../../utils/db.php');
 	include('../../utils/kafalaAPI.php');
-	if(!isset($_GET['id']) || $_GET['id']==""){
-             echo '
-                <div style="text-align:center;color:#fff;">
-                <h1>عفوا !!! رقم الكفالة غير موجود</h1>
-                <h2><a href="showKafala.php">الرجوع الى قائمة الكفالات</a></h2>
-                 </div>
-                <div id="footer">
-                <p>جميع الحقوق محفوظة 2016 &copy;</p>
-               </div>';
-            die() ;
+        include('../../utils/error_handler.php');
+	if(!isset($_GET['id']) || $_GET['id']=="" || (int)$_GET['id']==0){
+            fp_err_show_record("الكفالة");
         }
 	$id = $_GET['id']; 
 	$sponsorship = fp_kafala_get_by_id($id);
 	fp_db_close();
-	
-	if(!$sponsorship){
-            echo '
-                <div style="text-align:center;color:#fff;">
-                <h1>عفوا !!! هناك مشكلة في رقم الكفالة</h1>
-                <h2><a href="showKafala.php">الرجوع الى قائمة الكفالات</a></h2>
-                 </div>
-                <div id="footer">
-                <p>جميع الحقوق محفوظة 2016 &copy;</p>
-               </div>';
-            die() ;
-        }
+	if(!$sponsorship)fp_err_show_record("الكفالة");
+        
+
 ?>
     <table width="60%" border="0" align="center">
        
@@ -116,7 +100,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="right"><button name="add"  type="button" onclick="ajax(<?php echo $sponsorship->id?>)"> حذف <img  align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" /></button></td>
+      <td align="right"><button name="add" id="bt"  type="button" onclick="ajax(<?php echo $sponsorship->id?>)"> حذف <img  align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" /></button></td>
     
     <td>&nbsp;</td>
   </tr>
@@ -125,6 +109,9 @@
     <td>&nbsp;</td>
   </tr>
     </table>
+</div>
+    <div style="margin: 0 auto; text-align: center ; width: 60%;" id="reponse">
+    <span id="res_stattus"></span>
 </div>
 <script type="text/javascript">
 
@@ -135,12 +122,13 @@
 	function ajax(ID)
 {
     var ajax;
+    document.getElementById('bt').style.display = 'none';
 	//var d_node = document.getElementById(elementID);
 	elementID = "div";
 	filename = "deleteKafala.php";
 	str = "?id="+ID;
 	post = false ;
-	conf = confirm("هل تريد المسح ");
+	conf = confirm("ستقوم بحذف الكفالة من المكفولين \n هل أنت متأكد");
 	if(conf){
     if (window.XMLHttpRequest)
     {
@@ -161,10 +149,14 @@
     }
     ajax.onreadystatechange=function()
     {
+        if (ajax.readyState==1){ document.getElementById("reponse").innerHTML += '<img src="../../images/style images/blue_loader.gif" alt="جاري التحميل" width="60px" />';
+        document.getElementById("res_stattus").innerText = "جاري معالجة الطلب";
+        }
+        
         if (ajax.readyState==4&&ajax.status==200)
         {
-            alert(ajax.responseText);
-            window.location.href = "showKafala.php";
+            //alert(ajax.responseText);
+            document.getElementById("reponse").innerHTML = ajax.responseText;
 			//document.getElementById(elementID).innerHTML=ajax.responseText;
         }
     }

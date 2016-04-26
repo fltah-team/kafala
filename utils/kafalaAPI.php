@@ -22,7 +22,15 @@ function fp_kafala_get($extra = ''){
 	
 	return $kafala ; 
 	}
-
+function fp_kafala_get_num_rows(){
+        global $fp_handle ;
+	$query = sprintf("SELECT * FROM `sponsorship`");
+	$qresult = @mysql_query($query);
+	
+	if(!$qresult) return -1 ; 
+	
+        return mysql_num_rows($qresult);
+}
 
 	// SELECT BY ID
 function fp_kafala_get_by_id($id){
@@ -50,15 +58,14 @@ function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$month_no,$sponsored
 	$query = ("INSERT INTO `sponsorship` (`id`,`amount` , `saving` , `date` ,`sponsor`, `month_no` ,`sponsored`) VALUE(NULL, $n_amount, $n_saving, '$n_date' ,$n_sponsor , $month_no , $n_sponsored)");
         $qresult = mysql_query($query);
 	if(!$qresult) return false ;
-        fp_kafala_insert_sponsorships($n_sponsored,$saving);
+        fp_kafala_insert_sponsorships($n_sponsored,$n_saving,$n_date);
 
         return true ;
 	}
-
-function fp_kafala_insert_sponsorships($sponsored_id){
+function fp_kafala_insert_sponsorships($n_sponsored_id,$n_saving,$n_date){
         global $fp_handle;
         $last_id = mysql_insert_id();
-        switch ($sponsored_id){
+        switch ($n_sponsored_id){
         case 1 : 
                 include 'orphanAPI.php';
                 $orphans = fp_orphan_get();
@@ -67,6 +74,9 @@ function fp_kafala_insert_sponsorships($sponsored_id){
 		$orphan = $orphans[$i];
                 $add_kafala_qurey = "INSERT INTO `sponsorships` VALUE($last_id,$orphan->id)";
                 $res = mysql_query($add_kafala_qurey);
+                $com_saving = $orphan->saving + $n_saving;
+                fp_orphan_update($orphan->id,Null,Null,$com_saving,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null);
+                $up = fp_orphan_update($orphan->id,Null,Null,null,$n_date,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null);
                 
                 }
             break;
@@ -119,6 +129,7 @@ function fp_kafala_delete($id){
 	if($kid == 0) return false ;
 	$query = sprintf("DELETE FROM `sponsorship` WHERE `id` = %d",$kid);
 	$qresult = @mysql_query($query);
+        mysql_query("DELETE FROM `sponsorship` WHERE `sponsorship` =".$kid);
 	if(!$qresult) return false ;
 	
 	return true ;

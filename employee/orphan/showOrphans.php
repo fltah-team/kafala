@@ -1,9 +1,22 @@
 <?php
 	include('../../utils/db.php');
 	include('../../utils/orphanAPI.php');
-	
-	$orphans = fp_orphan_get();
+        include('../../utils/error_handler.php');
+        $start=0;
+    $limit=20;
+    $total_results = fp_orphan_get_num_rows();
+        $total=ceil($total_results/$limit);
+    if(!isset($_GET['page']) || $_GET['page'] == '' || (int)$_GET['page'] == 0 || $_GET['page']>$total)
+    {
+    $page=1;
+    }
+    else{
+    $page=$_GET['page'];
+    $start=($page-1)*$limit;
+    }
+        $orphans = fp_orphan_get("LIMIT $start, $limit");
 	fp_db_close();
+        
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -100,8 +113,8 @@ function ageCalculator($dob){
   	for($i = 0 ; $i < $ocount ; $i++){
 		$orphan = $orphans[$i];
   ?>
-    <tr align="center" class="table_data">
-  	<td width="9%"><a href="orphanInfo.php?id=<?php echo $orphan->id?>">عرض</a></td>
+    <tr align="center" class="table_data<?php echo $i%2?>">
+    <td  onclick="window.location.href='orphanInfo.php?id='+<?php echo $orphan->id?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
     <td width="7%"><?php
 echo ageCalculator($orphan->birth_date);?></td>
  	<td width="9%"><?php echo $orphan->id?></td>
@@ -118,6 +131,32 @@ echo ageCalculator($orphan->birth_date);?></td>
   </table>
 
 <br />
+<div class="pagination">
+    <ul class='page'>
+  <?php
+    
+if($page>1)
+{
+    //Go to previous page to show previous 10 items. If its in page 1 then it is inactive
+    echo "<a href='?page=".($page-1)."' class='button'>السابق</a>";
+}
+
+//show all the page link with page number. When click on these numbers go to particular page.
+        for($i=1;$i<=$total;$i++)
+        {
+            if($i==$page) { echo "<li class='current'>".$i."</li>"; }
+             
+            else { echo "<li><a href='?page=".$i."'>".$i."</a></li>"; }
+        }
+   if($page!=$total)
+{
+    ////Go to previous page to show next 10 items.
+    echo "<a href='?page=".($page+1)."' class='button'>التالي</a>";
+} 
+
+?>
+</ul>
+</div> 
 <div id="footer">
   <p>جميع الحقوق محفوظة 2016 &copy;</p>
 </div>

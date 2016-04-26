@@ -24,7 +24,17 @@ function fp_users_get($extra = ''){
 	
 	return $users ; 
 	}
+
+        function fp_user_get_num_rows(){
+        global $fp_handle ;
+	$query = sprintf("SELECT * FROM `employee`");
+	$qresult = @mysql_query($query);
 	
+	if(!$qresult) return -1 ; 
+	
+        return mysql_num_rows($qresult);
+}
+
 	// SELECT BY ID
 function fp_users_get_by_id($id){
 	$uid = (int)$id;

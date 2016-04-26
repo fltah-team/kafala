@@ -40,32 +40,15 @@
 <?php
 	include('../../utils/db.php');
 	include('../../utils/usersAPI.php');
-        if(!isset($_GET['id']) || $_GET['id']==""){
-             echo '
-                <div style="text-align:center;color:#fff;">
-                <h1>عفوا !!! رقم المستخدم غير موجود</h1>
-                <h2><a href="showUsers.php">الرجوع الى قائمة المستخدمين</a></h2>
-                 </div>
-                <div id="footer">
-                <p>جميع الحقوق محفوظة 2016 &copy;</p>
-               </div>';
-            die() ;
+        include('../../utils/error_handler.php');
+	if(!isset($_GET['id']) || $_GET['id']=="" || (int)$_GET['id']==0){
+            fp_err_show_record("المستخدم");
         }
+
 	$id = (int)$_GET['id']; 
 	$user = fp_users_get_by_id($id);
 	fp_db_close();
-	
-        if(!$user){
-            echo '
-                <div style="text-align:center;color:#fff;">
-                <h1>عفوا !!! هناك مشكلة في رقم المستخدم</h1>
-                <h2><a href="showUsers.php">الرجوع الى قائمة المستخدمين</a></h2>
-                 </div>
-                <div id="footer">
-                <p>جميع الحقوق محفوظة 2016 &copy;</p>
-               </div>';
-            die() ;
-        }
+	if(!$user)fp_err_show_record("المستخدم");
 ?>
 <form  method="post">
 	<table width="60%" border="0" align="center">
@@ -103,7 +86,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-      <td align="right"><input name="add" type="submit" onclick="" value=" رجوع " /></td>
+      <td align="right"><input name="add" type="button" onclick="window.location.href ='showUsers.php'" value="قائمة المستخدمين"/></td>
     <td>&nbsp;</td>
   </tr>
   <tr>

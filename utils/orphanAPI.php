@@ -22,7 +22,15 @@ function fp_orphan_get($extra = ''){
 	
 	return $orphans ; 
 	}
+function fp_orphan_get_num_rows(){
+        global $fp_handle ;
+	$query = sprintf("SELECT * FROM `orphan`");
+	$qresult = @mysql_query($query);
 	
+	if(!$qresult) return -1 ; 
+	
+        return mysql_num_rows($qresult);
+}	
 	// SELECT BY ID
 function fp_orphan_get_by_id($id){
 	$oid = (int)$id;
@@ -86,7 +94,7 @@ function fp_orphan_add($state , $warranty_organization  , $saving , $first_name 
 	
 	
 	// UPDATE
-function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null ,$saving = null, $first_name = Null , $meddle_name = Null     , $last_name = Null  , $last_4th_name = Null , $birth_date = Null , $sex = Null  , $mother_first_name = Null , $mother_middle_name = Null  , $mother_last_name = Null , $mother_4th_name = Null , $mother_Birth_date = Null , $mother_state = Null ,$father_dead_date = Null  , $father_dead_cause = Null  , $father_work = Null  , $residence_state = Null , $city = Null , $District = Null  , $section = Null ,$house_no = Null  , $phone1 = Null , $phone2 = Null   , $studing_state= Null  ,$nonstuding_cause = Null , $school_name = Null , $level= Null  , $year = Null , $quran_parts= Null  , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date= Null  ){
+function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null ,$saving = null, $last_sponsorship_date = Null , $first_name = Null , $meddle_name = Null     , $last_name = Null  , $last_4th_name = Null , $birth_date = Null , $sex = Null  , $mother_first_name = Null , $mother_middle_name = Null  , $mother_last_name = Null , $mother_4th_name = Null , $mother_Birth_date = Null , $mother_state = Null ,$father_dead_date = Null  , $father_dead_cause = Null  , $father_work = Null  , $residence_state = Null , $city = Null , $District = Null  , $section = Null ,$house_no = Null  , $phone1 = Null , $phone2 = Null   , $studing_state= Null  ,$nonstuding_cause = Null , $school_name = Null , $level= Null  , $year = Null , $quran_parts= Null  , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date= Null  ){
 	global $fp_handle ;
 	$uid = (int)$id;
 	if($uid == 0) return false ;
@@ -108,6 +116,10 @@ function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null ,
 	if(!empty($saving)){
 		$n_saving   = (int)$saving ;
 		$fields[@count($fields)] = " `saving` = '$n_saving' ";
+		}
+        if(!empty($last_sponsorship_date)){
+		$n_saving   = @mysql_real_escape_string(strip_tags($last_sponsorship_date),$fp_handle);
+		$fields[@count($fields)] = " `last_sponsorship_date` = '$last_sponsorship_date' ";
 		}
 	if(!empty($first_name)){
 		$n_first_name   = mysql_real_escape_string(strip_tags($first_name),$fp_handle);
@@ -255,7 +267,7 @@ function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null ,
 		if($i != ($fcount - 1 ))
 		$query .= ' , ';
 		}
-	$query .= ' WHERE `id` = '.$uid; echo $query;
+	$query .= ' WHERE `id` = '.$uid; 
 	$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
 		else return true ;
@@ -288,12 +300,11 @@ function fp_orphan_delete($id){
 		$n_birth_date  = @mysql_real_escape_string(strip_tags($birth_date),$fp_handle);
 		$n_state = @mysql_real_escape_string(strip_tags($state),$fp_handle);
 		
-		$query = ("INSERT INTO `sibiling`( `orphan_id` , `name` , `sex` , `birth_date` , `state`) VALUE(NULL,'$n_orphan_id' ,'$n_name','$n_sex','$n_birth_date','$n_state')");
-		
+		$query = ("INSERT INTO `sibiling`( `id` ,`orphan_id` , `name` , `sex` , `birth_date` , `state`) VALUE(NULL,'$n_orphan_id' ,'$n_name','$n_sex','$n_birth_date','$n_state')");
+		echo $query;
 		
 		$qresult = mysql_query($query);
 		if(!$qresult) return false ;
-		
 		return true ;
 		}	
 	
@@ -355,6 +366,5 @@ function fp_orphan_delete($id){
 		
 		return true ;
 		}
-    
-     
+             
 ?>

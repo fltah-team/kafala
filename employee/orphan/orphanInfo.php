@@ -1,6 +1,7 @@
 <?php 
         include('../../utils/db.php');
 	include('../../utils/orphanAPI.php');
+        include('../../utils/sponsorAPI.php');
         include ('../../utils/kafalaAPI.php');
 	if(!isset($_GET['id'])) die("no ID");
 	$id = (int)$_GET['id']; 
@@ -12,7 +13,6 @@
 	$male_count = @count($siblings_male);
         $female_count = @count($siblings_female);
 	if(!$orphan) die ("prolem");	
-        
 	$scount = @count($sibilings);
 	
 
@@ -67,16 +67,8 @@
   <tr align="center">
   	<td width="16%" align="right">&nbsp;</td>
   	<td width="18%" align="center">&nbsp;</td>
-    <?php
-        
-	include('../../utils/sponsorAPI.php');
-	$sponsors = fp_sponsor_get();
-        $real_sponsor = fp_sponsor_get_by_id($orphan->warranty_organization);
-	$scount = count($sponsors);
-	
-	?>
     <td width="17%" align="right">
-        <input class="textFiels" size="10" maxlength="30" value="<?php echo $orphan->warranty_organization?>" />
+        <input class="textFiels" size="10" maxlength="30" value="<?php echo "orgg"?>" />
     </td>
     <td width="18%">جهة الكفالة</td>
     <td width="14%" align="right">
@@ -174,9 +166,9 @@
      
 <table align="center" width="60%" >
     <tr>
-        <td><input class="textFiels" id="saving" disabled size="10px" ></input></td>
+        <td><input class="textFiels" id="saving" disabled size="10px" value="<?php echo $orphan->saving?>" ></input></td>
         <td>اجمالي الادخار</td>
-        <td><input class="textFiels" id="saving" disabled size="10px" ></input></td>
+        <td><input class="textFiels" id="saving" disabled size="10px" value="<?php echo $orphan->last_sponsorship_date?>" ></input></td>
         <td>تاريخ اخر كفالة</td>
     </tr>
 </table>
@@ -205,8 +197,7 @@
                 
   	for($i = 0 ; $i < $kcount ; $i++){
                 $kafala = $kafalas[$i];
-		$sponsorship = fp_kafala_get_by_id($kafala->sponsorship);
-                
+		$sponsorship = fp_kafala_get_by_id($kafala->sponsorship);                
   ?>
     <tr align="center" class="table_data<?php echo $i%2?>">
     <td><?php echo $sponsorship->month_no?></td>
@@ -320,7 +311,7 @@
    <?php } ?>
   <tr>
     <td align="center">
-        <select tabindex="0" class="select" name="status" id="status">
+        <select tabindex="0" class="select" name="status" id="s_status">
       <option value="1">مكفول</option>
       <option value="2">قيد التسويق</option>
       <option value="3">متوقف</option>
@@ -363,7 +354,7 @@
   	<td></td>
     <td></td>
     <td></td>
-    <td align="center"><input type="button" name="login " id="login " onclick="window.location.reload(true);sibling_ajax();" value="????? ???" /></td>
+    <td align="center"><input type="button" name="login " id="login " onclick="sibling_ajax();" value="????? ???" /></td>
     <td></td>
   </tr>
 
@@ -375,27 +366,21 @@
 <script type="text/javascript">
       var s_str = "" ;
       var sname = document.getElementById('sibling_name');
+      s_str+='sibling_name='+sname.value+'&';
       var s_bd = document.getElementById('sy').value+"-"+document.getElementById('sm').value+"-"+document.getElementById('sd').value;
-      var s_status = document.getElementById("sibling_status");
-      /*var s_male = document.getElementById("sibling_male_gender");
-      var s_female = document.getElementById("sibling_female_gender");*/
+      s_str+='s_bd='+s_bd+'&';
+      var s_status = document.getElementById("s_status");
+      s_str+='sibling_status='+s_status.value+'&';
       var s_gender_nodes = document.getElementsByName("s_gender");
-      var s_gender_value ="" ;
-      /*
-      for(var i=0 ; i<= s_gender_nodes.length ; i++){
-          if(s_gender_nodes[i].checked s_gender_value = s_gender_nodes[i].value ;
-      }
-      */
-     if(document.getElementById("sibling_male_gender").checked == true) s_gender_value = "1" ;
+
+      if(document.getElementById("sibling_male_gender").checked == true) s_gender_value = "1" ;
         else s_gender_value = "0" ;
-      s_str += sname.getAttribute("id")+"="+sname.value+"&\n"
-            +"s_bd="+s_bd+"&\n"
-            +s_status.getAttribute("id")+"="+s_status.value+"&\n"
-            +"s_gender="+s_gender_value+"&\n"
-            +"o_id="+<?php echo $orphan->id ?> ;
+      s_str+='s_gender='+s_gender_value+'&';
+      s_str+='o_id='+<?php echo $orphan->id ?>;
+      alert(s_str);
   function sibling_ajax()
 {	
-    var ajax;
+        var ajax;
 	var data ;
 	filename = "saveSibiling.php";
 	post = false ;
@@ -421,13 +406,15 @@
         if (ajax.readyState==4&&ajax.status==200)
         {
             alert(ajax.responseText);
-            window.location.href = "orphanInfo.php?id="+<?php echo $id?>
+            alert(s_str);
+            //window.location.href = "orphanInfo.php?id="+<?php //echo $id?>
 			//document.getElementById(elementID).innerHTML=ajax.responseText;
         }
     }
     if (post==false)
     {
         ajax.open("GET",filename+"?"+s_str,true);
+        s_str = '';
         ajax.send(null);
 		
     }
@@ -436,6 +423,7 @@
         ajax.open("POST",filename,true);
         ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
         ajax.send(s_str);
+        s_str = '';
     }
     return ajax;
 	

@@ -1,11 +1,10 @@
 <?php
 	include('../../utils/db.php');
-	include('../../utils/usersAPI.php');
+	include('../../utils/orphanAPI.php');
         include('../../utils/error_handler.php');
-	
         $start=0;
     $limit=20;
-    $total_results = fp_user_get_num_rows();
+    $total_results = fp_orphan_get_num_rows();
         $total=ceil($total_results/$limit);
     if(!isset($_GET['page']) || $_GET['page'] == '' || (int)$_GET['page'] == 0 || $_GET['page']>$total)
     {
@@ -15,7 +14,7 @@
     $page=$_GET['page'];
     $start=($page-1)*$limit;
     }
-        $users = fp_users_get("LIMIT $start, $limit");
+        $orphans = fp_orphan_get("LIMIT $start, $limit");
 	fp_db_close();
         
 ?>
@@ -36,6 +35,7 @@
     <td><h1>الهيئة الخيرية الاسلامية للرعاية الاجتماعية</h1></td>
     <td><img src="../../images/logo.png" /></td>
   </tr>
+   
 </table>
 </div>
 
@@ -55,56 +55,79 @@
 
 <!-- main -->
 <div class="main">
-<h1 align="center" class="adress"> بيانات المستخدمين </h1>
+<h1 align="center" class="adress"> بيانات الأيتام </h1>
 <br />
-
-<?php
-    if($users == 0 ||$users == -1 ) {
-            fp_err_show_records("مستخدمين");
+ <?php
+    //if($users[0] == NULL ) die($users[1]) ;
+        if($orphans == -1 ) {
+            echo '
+                <div style="text-align:center;color:#fff;">
+                <div class="alert-box error"><span>خطأ: </span>هناك مشكلة في الاتصال بقاعدة البيانات    </div>
+                 </div>
+                <div id="footer">
+                <p>جميع الحقوق محفوظة 2016 &copy;</p>
+               </div>';
+            die() ;
+        }
+        else
+        if($orphans == 0 ) {
+            echo '
+                <div style="text-align:center;color:#fff;">
+                <div class="alert-box notice"><span>تنبيه: </span>لا يوجد أيتام لعرضهم
+                <p>يمكنك اضافة أيتام من <a href="addOrphan.php">هنا</a></p>
+                </div>
+                <div id="footer">
+                <p>جميع الحقوق محفوظة 2016 &copy;</p>
+               </div>';
+            die() ;
         }
         
-	$ucount = @count($users);
-?>
+	$ocount = @count($orphans);
 
-<table width="90%" align="center" class="table">
-    <tr align="center" >
- <td width="10%"> </td>
-    <td width="9%"></td>    
-    <td width="30%"></td>
-    <td width="4%"></td>
-    <td width="31%"><button name="add" class="bt"  type="button" onclick="window.open('print_users.php')"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
-    <td width="16%"></td>
+?>
+<table width="90%" border="0" align="center" class="table">
+    <tr class="table_header" align="center">
+    <td width="7%">عرض</td>
+    <td width="7%">العمر</td>
+    <td width="9%">الولاية </td>
+    <td width="8%">الجنس </td>
+    <td width="29%">جهة الكفالة</td>
+    <td width="15%">الحالة</td>
+    <td width="28%">الاسم </td>
+    <td  width="4%">الرقم</td>
     
   </tr>
-    <tr align="center" class="table_header">
- <td width="5%">حذف </td>
- 
- <td width="5%">عرض </td>
-    <td width="30%">نوع المستخدم</td>
-    <td width="15%">اسم المستخدم</td>
-    <td width="40%">الاسم كامل</td>
-    <td width="5%">الرقم</td>
-  </tr>
   <?php 
-  	for($i = 0 ; $i < $ucount ; $i++){
-		$user = $users[$i];
+  	include('../../utils/stateAPI.php');
+	include('../../utils/sponsorAPI.php');
+function ageCalculator($dob){
+        if(!empty($dob)){
+        $birthdate = new DateTime($dob);
+        $today   = new DateTime('today');
+        $age = $birthdate->diff($today)->y;
+        return $age;
+    }
+	else
+        return 0;   
+}
+  	for($i = 0 ; $i < $ocount ; $i++){
+		$orphan = $orphans[$i];
   ?>
-
-    <tr align="center" class="table_data<?php echo $i%2?>"  >
-        <td onclick="ajax(<?php echo $user->id?>)" >
-        <img width="22px"   align="middle" alt="حذف" src="../../images/style images/delete_icon.png" style="padding-left:5px"  />
-    </td>
-        <td  onclick="window.location.href='user.php?id='+<?php echo $user->id?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
-    <td><?php
-  fp_get_user_type($user->type);
-	  ?></td>
-    <td><?php echo $user->username?></td>
-    <td><?php echo $user->name?></td>
-    <td><?php echo $user->id?></td>
+    <tr align="center" class="table_data<?php echo $i%2?>">
+    <td  onclick="window.location.href='orphanInfo.php?id='+<?php echo $orphan->id?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
+    <td width="7%"><?php
+echo ageCalculator($orphan->birth_date);?></td>
+ 	<td width="9%"><?php echo $orphan->id?></td>
+    <td width="8%"><?php echo $orphan->sex?> </td>
+    <td width="29%"><?php 
+                                            echo $orphan->warranty_organization;
+                                                    ?></td>
+    <td width="15%"><?php fp_get_state($orphan->state)?></td>
+    <td width="28%"> <?php echo $orphan->first_name." ".$orphan->meddle_name." ".$orphan->last_name." ".$orphan->last_4th_name?></td>
+    <td width="4%"><?php echo $orphan->id?></td>
     
   </tr>
   <?php } ?>
-    
   </table>
 
 <br />
@@ -139,10 +162,7 @@ if($page>1)
 </div>
 </div>
 <script type="text/javascript">
-function show_confirm(id){
-    var confirm = "<div  id='show_confirm' class='confirm' ><img src='../../images/style images/success.png'alt='yes' class='yes' onclick='ajax(id)'/><img src='../../images/style images/error.png' alt='no' class='yes' onclick'' /></div>";
-    return confirm;
-}
+
 	//var del = document.getElementById("delete");
 	
 	//ajax("div","deleteuser.php","?id=7",false);
@@ -151,7 +171,7 @@ function show_confirm(id){
 {
     var ajax;
 	//var d_node = document.getElementById(elementID);
-	elementID = "sucsses_notice";
+	elementID = "div";
 	filename = "deleteuser.php";
 	str = "?id="+ID;
 	post = false ;

@@ -30,16 +30,27 @@
 	$section = $_GET['section'];	
 	$house_no = $_GET['hno'];	
 	$phone1 = $_GET['tel1'];	
-	$phone2 = $_GET['tel2'];	
- 	$sibiling = 0 ;
+	$phone2 = $_GET['tel2'];
 	$studing_state = $_GET['learning'];	
-	$nonstuding_cause = $_GET['teachingr'];	
-	$school_name = $_GET['school'];	
-	$level = $_GET['level'];	
-	$year = $_GET['class'];	
+        if($studing_state == 1){
+            $nonstuding_cause = "لا يوجد";
+            $school_name = $_GET['school'];	
+            $level = $_GET['level'];	
+            $year = $_GET['class'];	
+        }  
+        else{
+            $nonstuding_cause = $_GET['teachingr'];	
+            $school_name = "لا يوجد" ;	
+            $level = "لا يوجد";	
+            $year = "لا يوجد";	
+        }
+	
 	$quran_parts = $_GET['quran'];	
-	$health_state = $_GET['illness'];	
-	$ill_cause = $_GET['illt'];	
+	$health_state = $_GET['illness'];
+        if($health_state == 1)
+            $ill_cause = "لا يوجد";
+            else
+            $ill_cause = $_GET['illt'];	
 	$data_entery_name = "user";	
 	$data_entery_date  = date("d-m-y");	
 

@@ -88,7 +88,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-      <td align="right"><button name="add"  type="button" onclick="IsEmpty()"    >اضافة مستخدم <img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /></button></td>
+      <td align="right"><button id="bt" name="add"  type="button" onclick="IsEmpty()"    >اضافة مستخدم <img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /></button></td>
     
     <td>&nbsp;</td>
   </tr>
@@ -98,6 +98,9 @@
   </tr>
     </table>
 </form>
+<div style="margin: 0 auto; text-align: center ; width: 60%;" id="reponse">
+    <span id="res_stattus"></span>
+</div>
 </div>
 <script type="text/javascript" >;
 	var checker = 0; 
@@ -149,6 +152,7 @@ function check_pass(p1,p2){
 function ajax()
 {
     var ajax;
+    document.getElementById('bt').style.display = 'none';
 	//var d_node = document.getElementById(elementID);
 	elementID = "div";
 	filename = "saveuser.php";
@@ -175,7 +179,7 @@ function ajax()
     {
         if (ajax.readyState==4&&ajax.status==200)
         {
-			alert(ajax.responseText);
+			document.getElementById("reponse").innerHTML = ajax.responseText;
 			//window.location.href = "showUsers.php";
 			//document.getElementById(elementID).innerHTML=ajax.responseText;
         }
