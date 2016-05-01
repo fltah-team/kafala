@@ -15,7 +15,7 @@
     $start=($page-1)*$limit;
     }
         $orphans = fp_orphan_get("LIMIT $start, $limit");
-	fp_db_close();
+	
         
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -100,6 +100,7 @@
   <?php 
   	include('../../utils/stateAPI.php');
 	include('../../utils/sponsorAPI.php');
+
 function ageCalculator($dob){
         if(!empty($dob)){
         $birthdate = new DateTime($dob);
@@ -115,19 +116,17 @@ function ageCalculator($dob){
   ?>
     <tr align="center" class="table_data<?php echo $i%2?>">
     <td  onclick="window.location.href='orphanInfo.php?id='+<?php echo $orphan->id?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
-    <td width="7%"><?php
-echo ageCalculator($orphan->birth_date);?></td>
- 	<td width="9%"><?php echo $orphan->id?></td>
-    <td width="8%"><?php echo $orphan->sex?> </td>
-    <td width="29%"><?php 
-                                            echo $orphan->warranty_organization;
-                                                    ?></td>
-    <td width="15%"><?php fp_get_state($orphan->state)?></td>
+    <td width="7%"><?php echo ageCalculator($orphan->birth_date);?></td>
+ 	<td width="9%"><?php echo fp_states_get_by_id($orphan->residence_state)->name;?></td>
+    <td width="8%"><?php if($orphan->sex==1)echo "ذكر"; else echo "أنثى" ; ?> </td>
+    <td width="29%"><?php echo fp_sponsor_get_by_id($orphan->warranty_organization)->name;?></td>
+    <td width="15%"><?php fp_one_status_get_by_id($orphan->state)?></td>
     <td width="28%"> <?php echo $orphan->first_name." ".$orphan->meddle_name." ".$orphan->last_name." ".$orphan->last_4th_name?></td>
     <td width="4%"><?php echo $orphan->id?></td>
     
   </tr>
-  <?php } ?>
+  <?php }
+  fp_db_close();?>
   </table>
 
 <br />

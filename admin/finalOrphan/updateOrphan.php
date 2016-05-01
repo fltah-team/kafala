@@ -1,15 +1,11 @@
 <?php
 
-	
 	include('../../utils/db.php');
-	include('../../utils/orphanAPI.php');
+	include('../../utils/finalOrphanAPI.php');
         include('../../utils/error_handler.php');
-	
-
-
+	$id = $_GET['id'];
 	$state = $_GET['status'];	
 	$warranty_organization =  $_GET['sponsor'];
-        $saving = 0 ;
 	$first_name = $_GET['name1'];	
 	$meddle_name = $_GET['name2'];	
 	$last_name = $_GET['name3'];	
@@ -54,14 +50,15 @@
             $ill_cause = $_GET['illt'];	
 	$data_entery_name = "user";	
 	$data_entery_date  = date("d-m-y");	
-        
-	$result = fp_orphan_add($state , $warranty_organization ,$saving , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date );
-	//$_GET['fno']);
 
+	
+	$result = fp_final_orphan_update($id , $state , $warranty_organization ,null ,null ,  $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2  , $studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date  );
+	//$_GET['fno']);
 	fp_db_close();
 	
 	if(!$result)
-            fp_err_add_fail($first_name." ".$meddle_name);
-	else
-            fp_err_add_succes($first_name." ".$meddle_name,$result);
-?>
+            fp_err_upadte_fail("اليتيم");
+        else 
+            fp_err_update_succes("اليتيم");
+	
+	?>

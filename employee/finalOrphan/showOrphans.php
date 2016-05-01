@@ -1,10 +1,10 @@
 <?php
 	include('../../utils/db.php');
-	include('../../utils/orphanAPI.php');
+	include('../../utils/finalOrphanAPI.php');
         include('../../utils/error_handler.php');
         $start=0;
     $limit=20;
-    $total_results = fp_orphan_get_num_rows();
+    $total_results = fp_final_orphan_get_num_rows();
         $total=ceil($total_results/$limit);
     if(!isset($_GET['page']) || $_GET['page'] == '' || (int)$_GET['page'] == 0 || $_GET['page']>$total)
     {
@@ -14,7 +14,7 @@
     $page=$_GET['page'];
     $start=($page-1)*$limit;
     }
-        $orphans = fp_orphan_get("LIMIT $start, $limit");
+        $orphans = fp_final_orphan_get("LIMIT $start, $limit");
 	
         
 ?>

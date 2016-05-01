@@ -22,7 +22,16 @@ function fp_final_orphan_get($extra = ''){
 	
 	return $orphans ; 
 	}
+
+function fp_final_orphan_get_num_rows(){
+        global $fp_handle ;
+	$query = sprintf("SELECT * FROM `finalOrphan`");
+	$qresult = @mysql_query($query);
 	
+	if(!$qresult) return -1 ; 
+	
+        return mysql_num_rows($qresult);
+}	
 	// SELECT BY ID
 function fp_final_orphan_get_by_id($id){
 	$oid = (int)$id;
@@ -34,7 +43,7 @@ function fp_final_orphan_get_by_id($id){
 	return $orphan ;
 	}
 	// INSERT	
-function fp_final_orphan_add($state , $warranty_organization  , $saving , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2   , $studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date  , $head_dep_name , $head_dep_name){
+function fp_final_orphan_add($state , $warranty_organization  , $saving , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2   , $studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date  , $head_dep_name , $head_dep_date){
 	global $fp_handle;
 	
 	$n_state = @mysql_real_escape_string(strip_tags($state),$fp_handle); 
@@ -75,7 +84,7 @@ function fp_final_orphan_add($state , $warranty_organization  , $saving , $first
         $n_head_dep_name = @mysql_real_escape_string(strip_tags($head_dep_name),$fp_handle);
         $n_head_dep_date = @mysql_real_escape_string(strip_tags($head_dep_date),$fp_handle);
  
- 	$query = ("INSERT INTO `finalorphan` (id, `state`, `warranty_organization` ,`saving`, `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `mother_first_name` , `mother_middle_name` , `mother_last_name` , `mother_4th_name` , `mother_Birth_date` , `mother_state` ,`father_dead_date` , `father_dead_cause` , `father_work` , `residence_state` , `city`, `District` , section,  house_no , phone1 , phone2   , `studing_state` ,`nonstuding_cause`, `school_name` , level , year , quran_parts , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date` , `head_dep_date` , `head_dep_date`  )
+ 	$query = ("INSERT INTO `finalorphan` (id, `state`, `warranty_organization` ,`saving`, `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `mother_first_name` , `mother_middle_name` , `mother_last_name` , `mother_4th_name` , `mother_Birth_date` , `mother_state` ,`father_dead_date` , `father_dead_cause` , `father_work` , `residence_state` , `city`, `District` , section,  house_no , phone1 , phone2   , `studing_state` ,`nonstuding_cause`, `school_name` , level , year , quran_parts , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date` , `head_dep_name` , `head_dep_date`  )
  				VALUE(NULL , '$n_state' , '$n_warranty_organization' , '$n_saving', '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_mother_first_name' , '$n_mother_middle_name' , '$n_mother_last_name' , '$n_mother_4th_name' , '$n_mother_Birth_date' , '$n_mother_state' ,'$n_father_dead_date' , '$n_father_dead_cause' , '$n_father_work' , '$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2'  , '$n_studing_state' ,'$n_nonstuding_cause', '$n_school_name' , '$n_level' , '$n_year' , '$n_quran_parts' , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date'  , '$n_head_dep_name' , '$n_head_dep_date' )");
 	
 	$qresult = mysql_query($query);
@@ -87,7 +96,7 @@ function fp_final_orphan_add($state , $warranty_organization  , $saving , $first
 	
 	
 	// UPDATE
-function fp_final_orphan_update($id ,  $state = Null , $warranty_organization = Null ,$saving = null, $first_name = Null , $meddle_name = Null     , $last_name = Null  , $last_4th_name = Null , $birth_date = Null , $sex = Null  , $mother_first_name = Null , $mother_middle_name = Null  , $mother_last_name = Null , $mother_4th_name = Null , $mother_Birth_date = Null , $mother_state = Null ,$father_dead_date = Null  , $father_dead_cause = Null  , $father_work = Null  , $residence_state = Null , $city = Null , $District = Null  , $section = Null ,$house_no = Null  , $phone1 = Null , $phone2 = Null   , $studing_state= Null  ,$nonstuding_cause = Null , $school_name = Null , $level= Null  , $year = Null , $quran_parts= Null  , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date= Null ,  $head_dep_name = Null ,$head_dep_date = Null ){
+function fp_final_orphan_update($id ,  $state = Null , $warranty_organization = Null ,$saving = null,$last_sponsorship_date = Null , $first_name = Null , $meddle_name = Null     , $last_name = Null  , $last_4th_name = Null , $birth_date = Null , $sex = Null  , $mother_first_name = Null , $mother_middle_name = Null  , $mother_last_name = Null , $mother_4th_name = Null , $mother_Birth_date = Null , $mother_state = Null ,$father_dead_date = Null  , $father_dead_cause = Null  , $father_work = Null  , $residence_state = Null , $city = Null , $District = Null  , $section = Null ,$house_no = Null  , $phone1 = Null , $phone2 = Null   , $studing_state= Null  ,$nonstuding_cause = Null , $school_name = Null , $level= Null  , $year = Null , $quran_parts= Null  , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date= Null ,  $head_dep_name = Null ,$head_dep_date = Null ){
 	global $fp_handle ;
 	$uid = (int)$id;
 	if($uid == 0) return false ;
@@ -281,4 +290,5 @@ function fp_final_orphan_delete($id){
 	return true ;
 	}
 	
+   
 ?>

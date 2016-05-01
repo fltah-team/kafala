@@ -86,7 +86,6 @@ function fp_orphan_add($state , $warranty_organization  , $saving , $first_name 
  				VALUE(NULL , '$n_state' , '$n_warranty_organization' , '$n_saving', '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_mother_first_name' , '$n_mother_middle_name' , '$n_mother_last_name' , '$n_mother_4th_name' , '$n_mother_Birth_date' , '$n_mother_state' ,'$n_father_dead_date' , '$n_father_dead_cause' , '$n_father_work' , '$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2'  , '$n_studing_state' ,'$n_nonstuding_cause', '$n_school_name' , '$n_level' , '$n_year' , '$n_quran_parts' , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date' )");
 	
 	$qresult = mysql_query($query);
-	echo $query;
 	if(!$qresult) return false ;
 	
 	return true ;
@@ -101,7 +100,6 @@ function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null ,
 	$orphan = fp_orphan_get_by_id($uid);
 	
 	if(!$orphan)  return false ;
-	
 	
 	$fields = array();
 	$query = "UPDATE `orphan` SET ";
@@ -142,10 +140,10 @@ function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null ,
 		$n_birth_date  = mysql_real_escape_string(strip_tags($birth_date),$fp_handle);
 		$fields[@count($fields)] = " `birth_date` = '$n_birth_date' ";
 		}
-	if(!empty($sex)){
+	//if(!empty($sex)){
 		$n_sex   = mysql_real_escape_string(strip_tags($sex),$fp_handle);
 		$fields[@count($fields)] = " `sex` = '$n_sex' ";
-		}
+		//}
 	if(!empty($mother_first_name)){
 		$n_mother_first_name   = mysql_real_escape_string(strip_tags($mother_first_name),$fp_handle);
 		$fields[@count($fields)] = " `mother_first_name` = '$n_mother_first_name' ";
@@ -267,7 +265,7 @@ function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null ,
 		if($i != ($fcount - 1 ))
 		$query .= ' , ';
 		}
-	$query .= ' WHERE `id` = '.$uid; 
+	$query .= ' WHERE `id` = '.$uid;
 	$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
 		else return true ;
@@ -301,10 +299,14 @@ function fp_orphan_delete($id){
 		$n_state = @mysql_real_escape_string(strip_tags($state),$fp_handle);
 		
 		$query = ("INSERT INTO `sibiling`( `id` ,`orphan_id` , `name` , `sex` , `birth_date` , `state`) VALUE(NULL,'$n_orphan_id' ,'$n_name','$n_sex','$n_birth_date','$n_state')");
-		echo $query;
 		
 		$qresult = mysql_query($query);
-		if(!$qresult) return false ;
+                
+		if(!$qresult){
+                    @mysql_free_result($qresult);
+                    return false ;
+                }
+                @mysql_free_result($qresult);
 		return true ;
 		}	
 	

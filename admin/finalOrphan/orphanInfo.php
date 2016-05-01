@@ -43,7 +43,7 @@
 <br />
 <?php 
         include('../../utils/db.php');
-	include('../../utils/orphanAPI.php');
+	include('../../utils/finalOrphanAPI.php');
         include('../../utils/sponsorAPI.php');
         include ('../../utils/kafalaAPI.php');
         include ('../../utils/error_handler.php');
@@ -52,7 +52,7 @@
         }
         
 	$id = (int)$_GET['id']; 
-	$orphan = fp_orphan_get_by_id($id);
+	$orphan = fp_final_orphan_get_by_id($id);
         $sibilings = fp_sibiling_get($id);
         $siblings_male = fp_sibiling_get_for_gender($id," and sex = 1 ");
         $siblings_female = fp_sibiling_get_for_gender($id," and sex = 0 ");
@@ -202,7 +202,7 @@
     <tr>
         <td><input class="textFiels" id="saving" disabled size="10px" value="<?php echo $orphan->saving?>" ></input></td>
         <td>اجمالي الادخار</td>
-        <td><input class="textFiels" id="saving" disabled size="10px" value="<?php echo $orphan->last_sponsorship_date?>" ></input></td>
+        <td><input class="textFiels" id="saving" disabled size="10px" value="<?php echo 4?>" ></input></td>
         <td>تاريخ اخر كفالة</td>
     </tr>
 </table>
@@ -624,27 +624,48 @@ function delete_sibling_ajax(id)
   </tr>
   
 </table>
-
+<br />
 <!-- Employee -->
 
-<table width="50%" border="0" align="center" id=" ">
-
+<table width="70%" border="0" align="center" id=" ">
+  <tr>
+      <td>&nbsp;</td>
+      
+      <td><input class="textFiels" disabled name="level" type="text" id="level" size="10" maxlength="30" value="<?php echo $orphan->data_entery_date?>"/</td>
+    <td>التاريخ</td>
+              <td align="center"><input class="textFiels" disabled name="level" type="text" id="level" size="10" maxlength="30" value="<?php echo $orphan->data_entery_name?>"/</td>
+    <td>مدخل البيانات   </td>
+  </tr>
+   
+    <tr>
+       <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td align="center"></td>    
+      <tr>
+      <td>&nbsp;</td>
+      
+      <td><input class="textFiels" disabled name="level" type="text" id="level" size="10" maxlength="30" value="<?php echo $orphan->head_dep_date?>"/>   </td>
+    <td>التاريخ</td>
+              <td align="center"><input class="textFiels" disabled name="level" type="text" id="level" size="10" maxlength="30" value="<?php echo $orphan->head_dep_name?>"/</td>
+    <td>اعتماد رئيس القسم</td>
+  </tr>
+    
    <tr>
+       <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td width="40%" >&nbsp;</td>
     <td>&nbsp;</td>
-    <td width="40%">&nbsp;</td>
-    <td>&nbsp;</td>
+    <td align="center"></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
-  	<td>&nbsp;</td>
-        <td align="center"><button class="add_bt" name="add" type="button" onclick="delete_ajax()" > الغاء البيانات<img align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" />  </button></td>
     <td>&nbsp;</td>
-    <td align="center"><button class="add_bt" name="add" type="button" onclick="get_str()" >اعتماد البيانات<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
     <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td align="center"><button class="add_bt" name="add" type="button" onclick="get_str()" >تعديل البيانات<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
     <td>&nbsp;</td>
   </tr>
+
 </table>
   </form>
 </div>
@@ -684,8 +705,8 @@ function get_str(){
             if(document.getElementById("female_gender").checked == true) gender_value = "0" ;
         else gender_value = "1" ;
         str+="gender="+gender_value;
-        window.location.href = "finalOrphan.php?"+str;
-        //ajax(str);
+        //window.location.href = "updateOrphan.php?"+str;
+        ajax(str);
 }
 function ajax(str)
 {		
@@ -693,7 +714,7 @@ function ajax(str)
 	var data ;
 	//var d_node = document.getElementById(elementID);
 	elementID = "div";
-	filename = "finalOrphan.php";
+	filename = "updateOrphan.php";
 	post = false ;
     if (window.XMLHttpRequest)
     {

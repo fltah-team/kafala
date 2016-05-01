@@ -45,9 +45,9 @@
   	<td width="13%" align="right">&nbsp;</td>
   	<td width="13%" align="center">&nbsp;</td>
     <?php
-    
 	include('../../utils/db.php');
 	include('../../utils/sponsorAPI.php');
+        include('../../utils/error_handler.php');
 	$sponsors = fp_sponsor_get();
 	$scount = count($sponsors);
 	
@@ -60,11 +60,9 @@
 	<?php } ?>
     </select></td>
     <td width="14%">جهة الكفالة</td>
-    <td width="21%" align="right"><select tabindex="0" class="select" name="status" id="status">
-      <option value="1">مكفول</option>
-      <option value="2">قيد التسويق</option>
-      <option value="3">متوقف</option>
-    </select></td>
+    <td width="21%" align="right">
+        <?php fp_select_status_get()?>
+    </td>
     <td width="26%" align="center">الحالة</td>
   </tr>
   
@@ -86,35 +84,19 @@
     <tr align="right">
 	<td>
         </td>
-        <td align="right"></td>
-    <td align="right"><select class="select" name="gender" id="gender">
-      <option value="1">ذكر</option>
-      <option value="0">انثى</option>
-    </select></td>
+    <td align="right">
+                <td align="center" dir="rtl" >
+  	    ذكر<input type="radio" name="s_gender" value="1" id="male_gender" />
+            &nbsp;&nbsp;
+  	    أنثى<input type="radio" name="s_gender" value="0" id="female_gender" />
+  	    
+    </td>
+    </td>
   	<td align="center">الجنس</td>
     
-    <td align="center"><table width="80%" border="0">
-      <tr>
-        <td><select name="y" class="select" id="y">
-          <?php
-	  for($i=1997 ; $i <= date("Y") ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-        <td><select class="select" name="m" id="m">
-          <?php
-	  for($i=1 ; $i <= 12 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-        <td><select class="select" name="d" id="d">
-          <?php
-	  for($i=1 ; $i <= 31 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-      </tr>
-      </table></td>
+    <td align="center">
+        <?php fp_select_date_get(1990,null)?>
+    </td>
     <td align="center">تاريخ الميلاد</td>
   </tr>
   
@@ -138,38 +120,16 @@
     <td align="right"></td>
     <td align="right">
       </td>
-		<td>
-        <select class="select" name="mstatus" id="mstatus">
-          <option value="متزوجة">متزوجة</option>
-          <option value="مطلقة">مطلقة</option>
-        </select>
+	<td>
+        <?php fp_select_mother_status_get()?>
     	</td>
   	<td align="right">حالتها الاجتماعية
 
   	  </td>
     
-    <td align="right"><table width="80%" border="0">
-      <tr>
-        <td><select name="fy" class="select" id="fy">
-          <?php
-	  for($i=1950 ; $i <= date("Y") ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-        <td><select class="select" name="fm" id="fm">
-          <?php
-	  for($i=1 ; $i <= 12 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-        <td><select class="select" name="fd" id="fd">
-          <?php
-	  for($i=1 ; $i <= 31 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-      </tr>
-    </table></td>
+    <td align="right">
+        <?php fp_select_date_get(1960,'m')?>
+    </td>
     <td align="center">تاريخ ميلادها</td>
   </tr>
   
@@ -182,28 +142,7 @@
     <td align="right"><input class="textFiels" name="dr" type="text" id="dr" size="10" maxlength="30" /></td>
     <td align="right">سبب الوفاة</td>
     <td align="right">
-       <table width="60%" border="0">
-      <tr>
-        <td><select name="my" class="select" id="my">
-          <?php
-	  for($i=1950 ; $i <= date("Y") ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-        <td><select class="select" name="mm" id="mm">
-          <?php
-	  for($i=1 ; $i <= 12 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-        <td><select class="select" name="md" id="md">
-          <?php
-	  for($i=1 ; $i <= 31 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-      </tr>
-    </table>
+       <?php fp_select_date_get(1995,'f')?>
     </td>
     <td align="center">تاريخ وفاة والد اليتيم</td>
   </tr>
@@ -272,6 +211,124 @@
   
 </table>
 
+<!--   Family   -->
+
+
+<br />
+<h2 align="center"><b><span dir="RTL" lang="AR-SA">عدد افراد الاسرة </span>
+</b></h2>
+<table width="60%" border="0" align="center" id=" ">
+  <tr align="center">
+      <td width="29%" align="right" id="num_male_sib">0</td>
+  	<td width="11%" align="right">الاناث </td>
+        <td width="16%" align="right" id="num_female_sib">0</td>
+    <td width="15%" align="center"> الذكور</td>
+    <td width="15%" align="right" id="num_sib">0</td>
+    <td width="14%" align="center">  عدد الاخوان  </td>
+  </tr>
+  
+  
+    <table class="table" width="70%" border="0" align="center">
+   <br />
+   <tr class="table_header">
+       <td align="center" width="15%">حذف</td>
+      <td align="center" width="15%">الحالة</td>
+    <td align="center" width="15%">تاريخ الميلاد</td>
+    <td align="center" width="25%">الجنس</td>
+    <td align="center" width="20%">الإسم</td>
+    <td align="center" width="10%">&nbsp;</td>
+  </tr>
+   <?php 
+        $scount = @count($sibilings);
+        for($i = 0 ; $i < $scount ; $i++){
+		$one_sibling = $sibilings[$i];
+  ?>
+   <tr class="table_data<?php echo $i%2?>">
+       <td onclick="delete_sibling_ajax(<?php echo $one_sibling->id?>)" align="center" >
+        <img width="22px"   align="middle" alt="حذف" src="../../images/style images/delete_icon.png"   />
+    </td>
+    <td align="center"><?php fp_get_state($one_sibling->state)?></td>
+    <td align="center"><?php echo $one_sibling->birth_date ?></td>
+    <td align="center"><?php if($one_sibling->sex == 1) echo "ذكر"; else echo "أنثى";?></td>
+    <td align="center"><?php echo $one_sibling->name ?></td>
+    <td align="center"><?php echo $i+1 ?></td>
+  </tr>
+   <?php } ?>
+   <tr class="table_data<?php echo $i%2?>">
+       <td></td>
+    <td align="center" >
+        <select tabindex="0" class="select" name="status" id="s_status">
+      <option value="1">مكفول</option>
+      <option value="2">قيد التسويق</option>
+      <option value="3">متوقف</option>
+    </select>
+    </td>
+    <td align="center">
+        <table width="60%" border="0">
+      <tr>
+        <td><select name="my" class="select" id="sy">
+          <?php
+	  for($i=1950 ; $i <= date("Y") ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+        <td><select class="select" name="mm" id="sm">
+          <?php
+	  for($i=1 ; $i <= 12 ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+        <td><select class="select" name="md" id="sd">
+          <?php
+	  for($i=1 ; $i <= 31 ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+      </tr>
+    </table>
+    </td>
+       <td align="center" dir="rtl" >
+  	    ذكر<input type="radio" name="s_gender" value="1" id="sibling_male_gender" />
+            &nbsp;&nbsp;
+  	    أنثى<input type="radio" name="s_gender" value="0" id="sibling_female_gender" />
+  	    
+    </td>
+    <td align="center"><input class="textFielsS" name="fbname" type="text" id="sibling_name" size="10" maxlength="30" /></td>
+    <td></td>
+  </tr>
+  <tr >
+  	
+    <td align="center"><input type="button" name="login " id="login " onclick="get_s_str()" value="إضافة فرد" /></td>
+   </tr>
+
+</table>
+
+
+</table>
+<script type="text/javascript" >
+    
+    var index = 0;
+    var s_str_array = Array();
+    function get_s_str(){
+      var s_str = "" ;
+      var sname = document.getElementById('sibling_name');
+      s_str+='sibling_name='+sname.value+'&';
+      var s_bd = document.getElementById('sy').value+"-"+document.getElementById('sm').value+"-"+document.getElementById('sd').value;
+      s_str+='s_bd='+s_bd+'&';
+      var s_status = document.getElementById("s_status");
+      s_str+='sibling_status='+s_status.value+'&';
+      var s_gender_nodes = document.getElementsByName("s_gender");
+
+      if(document.getElementById("sibling_male_gender").checked == true) s_gender_value = "1" ;
+      else
+      if(document.getElementById("sibling_female_gender").checked == true) s_gender_value = "0" ;
+      else s_gender_value = "1" ;
+      s_str+='s_gender='+s_gender_value+'&';
+      s_str_array[index] = s_str;
+      alert(index);
+      index++;
+      }
+</script>
 <!--   Learning   -->
 
 
@@ -284,32 +341,34 @@
   	<td width="7%" align="right">&nbsp;</td>
   	<td width="23%" align="right"><input name="teachingr" type="text"  class="textFiels" id="teachingr" size="20" maxlength="30" />
   	  </td>
-        <td width="12%" align="center" id="teachingr_lable">السبب</td>
+        <td width="12%" align="center"  id="teachingr_lable">السبب</td>
         <td width="19%" align="center">
         <select class="select" name="learning" id="learning">
             <option  value="1" onclick="learning1()">يدرس</option>
             <option  value="0" onclick="learning0()">لا يدرس</option>
     </select>
     <script type="text/javascript" >
+        document.getElementById('teachingr').style.display = 'none';
+         document.getElementById('teachingr_lable').innerText = '';
      function learning0(){
          document.getElementById('class').style.display = 'none';
-         document.getElementById('class_lable').style.display = 'none'; 
+         document.getElementById('class_lable').innerText = ''; 
          document.getElementById('level').style.display = 'none';
-         document.getElementById('level_lable').style.display = 'none';
+         document.getElementById('level_lable').innerText = ''; 
          document.getElementById('school').style.display = 'none';
-         document.getElementById('school_lable').style.display = 'none';
+         document.getElementById('school_lable').innerText = '';
          document.getElementById('teachingr').style.display = 'block';
-         document.getElementById('teachingr_lable').style.display = 'block';
+         document.getElementById('teachingr_lable').innerText = 'السبب';
      }   
           function learning1(){
          document.getElementById('class').style.display = 'block';
-         document.getElementById('class_lable').style.display = 'block'; 
+         document.getElementById('class_lable').innerText = 'الصف';  
          document.getElementById('level').style.display = 'block';
-         document.getElementById('level_lable').style.display = 'block';
+         document.getElementById('level_lable').innerText = 'المرحلة'; 
          document.getElementById('school').style.display = 'block';
-         document.getElementById('school_lable').style.display = 'block';
+         document.getElementById('school_lable').innerText = 'اسم المدرسة'; 
          document.getElementById('teachingr').style.display = 'none';
-         document.getElementById('teachingr_lable').style.display = 'none';
+         document.getElementById('teachingr_lable').innerText = ''; 
      }
     </script>
     </td>
@@ -343,7 +402,7 @@
 	<td width="19%" align="center">جزء
 	  <select class="select" name="quran" id="quran">
 	    <?php
-	  for($i=1 ; $i <= 30 ; $i++)
+	  for($i=0 ; $i <= 30 ; $i++)
   	  echo "<option value='".$i."'>$i</option>'";
 	  ?>
 	    </select></td>
@@ -372,16 +431,24 @@
 	<td width="18%" align="center" id="illLable">نوع المرض</td>
         <td width="8%" align="center">
         <select class="select" name="illness" id="illness">
-            <option id="goodill" onclick="document.getElementById('illt').style.display = 'none';
-                                          document.getElementById('illLable').style.display = 'none';
-                                         " value="1">جيدة</option>
-            <option id="badill"  onclick="document.getElementById('illt').style.display = 'block';
-                                          document.getElementById('illLable').style.display = 'block'; 
-                                           " value="0">سيئة</option>
+            <option id="goodill" onclick="illness1()" value="1">جيدة</option>
+            <option id="badill"  onclick="illness0()" value="0">سيئة</option>
     </select>
     </td>
+        
         <td width="28%">الحالة الصحية </td>
-    
+        <script type="text/javascript" >
+         document.getElementById('illt').style.display = 'none';
+         document.getElementById('illLable').innerText = '';
+        function illness1(){
+             document.getElementById('illt').style.display = 'none';
+             document.getElementById('illLable').innerText = '';
+         }
+         function illness0(){
+             document.getElementById('illt').style.display = 'block';
+             document.getElementById('illLable').innerText = 'نوع المرض';
+         }
+        </script>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -406,24 +473,51 @@
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td align="center"><button class="bt" name="add" type="button" onclick="alert(str);" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة يتيم  </button></td>
+    <td align="center"><button class="bt" name="add" type="button" onclick="get_str()" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة يتيم  </button></td>
     <td>&nbsp;</td>
   </tr>
   </form>
 </table>
 </div>
+    <div  style="margin: 0 auto; text-align: center ; width: 60%;" id="reponse">
+    <span id="res_stattus"></span>
+</div>
 <script type="text/javascript" >
-	var name1 = document.getElementById("name1"); 	
-        alert(name1.value);
-	function IsEmpty(){ 
-            
-                if(document.getElementById('name1').value == null){
-                    alert("i");
-                }
+        
+function IsEmpty(){ 
+        var text = document.getElementsByTagName('input');
+        var empty_checker = 0 ;
+        for(var i = 0 ; i< text.length ; i++){
+           if(text[i].value == ''){
+               text.item(i).style.color = "#ff0000" ;
+               text.item(i).setAttribute("placeholder","هذا الحقل فارغ");
+               empty_checker++;
            }
+        }
+        if(empty_checker > 0 )alert("هناك حقول يجب تعبئتها");
+        else get_str();
+}
 
-
-function ajax()
+function get_str(){
+        
+	var text = document.getElementsByTagName('input');
+        var select = document.getElementsByTagName('select');
+        var str = '';
+        for(var i = 0 ; i< text.length ; i++){
+           str += text[i].getAttribute('id')+'='+text[i].value+'&';
+        }
+        for(var i = 0 ; i< select.length ; i++){
+           str += select[i].getAttribute('id')+'='+select[i].value+'&';
+        }
+        gender_value = 1 ;
+        if(document.getElementById("male_gender").checked == true) gender_value = "1" ;
+        else gender_value = "0" ;
+        str+="gender="+gender_value;
+        //window.location.href = "saveOrphan.php?"+str;
+        alert(str);
+       ajax(str);
+}
+function ajax(str)
 {		
     var ajax;
 	var data ;
@@ -452,9 +546,7 @@ function ajax()
     {
         if (ajax.readyState==4&&ajax.status==200)
         {
-            alert(ajax.responseText);
-			//window.location.href = "showUsers.php";
-			//document.getElementById(elementID).innerHTML=ajax.responseText;
+            document.getElementById("res_stattus").innerHTML=ajax.responseText;
         }
     }
     if (post==false)
@@ -473,7 +565,14 @@ function ajax()
 	
 }
 
-	
+function add_sibling (){
+    var s_final_str = "";
+    if(s_str_array.length != 0)
+    for(var i =0 ; i < s_str_array.length ; i++){
+        s_final_str+=s_str_array[i];
+    }
+     alert(document.getElementById("success_notice").getAttribute("name"));
+}	
 </script>
 <div id="footer">
 <p>جميع الحقوق محفوظة 2016 &copy;</p>

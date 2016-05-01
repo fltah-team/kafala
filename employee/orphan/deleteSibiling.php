@@ -5,7 +5,7 @@
 	include('../../utils/orphanAPI.php');
 	
 	
-	$id = 3 ;
+        $id = $_GET['id'];
 	
 	
 	$result = fp_sibiling_delete($id) ;
@@ -15,7 +15,7 @@
 	
 	if(!$result)
 		die ("fail");
-
+        else
 	echo " sibiling record is deleted ";
 	
 	?>

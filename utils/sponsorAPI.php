@@ -17,19 +17,17 @@ function fp_sponsor_get($extra = ''){
 		$sponsors[@count($sponsors)] = @mysql_fetch_object($qresult);
 		
 	@mysql_free_result($qresult);
-	
 	return $sponsors ; 
 	}
 
 			// SELECT BY ID
 function fp_sponsor_get_by_id($id){
-	global $fp_handle ;
 	$oid = (int)$id;
 	if($oid == 0) return NULL ;
 	$sponsors = fp_sponsor_get("WHERE `id` = ".$oid);
 	if($sponsors == NULL) return NULL ;
 	$sponsor = $sponsors[0];
-	return $sponsors ;
+	return $sponsor ;
 	}
         
 ?>	

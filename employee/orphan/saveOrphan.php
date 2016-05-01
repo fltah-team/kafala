@@ -3,12 +3,11 @@
 	
 	include('../../utils/db.php');
 	include('../../utils/orphanAPI.php');
+        include('../../utils/error_handler.php');
 	
-
-
 	$state = $_GET['status'];	
 	$warranty_organization =  $_GET['sponsor'];
-        $saving = 1 ;
+        $saving = 0 ;
 	$first_name = $_GET['name1'];	
 	$meddle_name = $_GET['name2'];	
 	$last_name = $_GET['name3'];	
@@ -53,35 +52,14 @@
             $ill_cause = $_GET['illt'];	
 	$data_entery_name = "user";	
 	$data_entery_date  = date("d-m-y");	
-
+        
 	$result = fp_orphan_add($state , $warranty_organization ,$saving , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date );
 	//$_GET['fno']);
 
 	fp_db_close();
 	
 	if(!$result)
-		die ('<div id="success_notice"  class="alert-box error">'."<span>خطأ :   </span>"."لم تتم عملية اضافةاليتيم "."</div>");
-
-	echo ('<div id="success_notice"  class="alert-box success"><span>نجاح :   </span>تمت اضافة اليتيم بنجاح</div>');
-	/*
-sponsor=1&status=1&name4=r&name3=&name2=&name1=&gender=1&y=1997&m=9&d=17&mname4=&mname3=&mname2=&mname1=&mstatus=1&mbd=&lw=&dr=&fdd=&district=&city=&state=0&hno=&section=&tel2=&tel1=&teachingr=يدرس&learning=1&school=&quran=1&class=&level=&illt=جيدة&illness=1&udate=&user=&adate=&admin=&
-
-sponsor=1&status=1&name1=j&name2=j&name3=j&name4=kj&bd=1&mname1=1997&mname2=1&mname3=1&mname4=j&mstatus=j&mbd=j&lw=j&dr=1&fdd=j&district=j&city=j&state=j&hno=j&section=j&tel2=0&tel1=j&femaleno=j&maleno=j&fno=j&teachingr=يدرس&school=1&quran=j&class=1&level=j&illt=j
-	echo $str ;
-	
-include('../../utils/db.php');
-	include('../../utils/usersAPI.php');
-	
-	$result = fp_users_add($_GET['name'],$_GET['un'],$_GET['pass'],$_GET['type']);
-	fp_db_close();
-	if(!$result)
-		die ("fail");
-
-	echo "تمت اضافة".$_GET['name'];*/
-		
-	
-	
-	
-	
-	
+            fp_err_add_fail($first_name." ".$meddle_name);
+	else
+            fp_err_add_succes($first_name." ".$meddle_name,$result);
 ?>
