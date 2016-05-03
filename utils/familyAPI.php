@@ -26,7 +26,15 @@
 		return $families ; 
 	}
 	
-	
+        function fp_family_get_num_rows(){
+                global $fp_handle ;
+                $query = sprintf("SELECT * FROM `family`");
+                $qresult = @mysql_query($query);
+
+                if(!$qresult) return -1 ; 
+
+                return mysql_num_rows($qresult);
+        }	
 	function fp_family_get_by_id($id){
 		$oid = (int)$id;
 		if($oid == 0) return NULL ;
@@ -68,8 +76,8 @@
 		$n_District = @mysql_real_escape_string(strip_tags($District),$fp_handle);
 		$n_section  = (int)$section;
 		$n_house_no  = (int)$house_no;
-		$n_phone1  = (int)$phone1;
-		$n_phone2  = (int)$phone2;
+		$n_phone1  = @mysql_real_escape_string(strip_tags($phone1),$fp_handle);
+		$n_phone2  = @mysql_real_escape_string(strip_tags($phone2),$fp_handle);
 		$n_data_entery_name =@mysql_real_escape_string(strip_tags($data_entery_name),$fp_handle);
 		$n_data_entery_date=@mysql_real_escape_string(strip_tags($data_entery_date),$fp_handle);
 
@@ -210,11 +218,11 @@
 			$fields[@count($fields)] = " `house_no` = '$n_house_no' ";
 			}
 		if(!empty($phone1)){
-			$n_phone1   = (int)$phone1 ;
+			$n_phone1   = mysql_real_escape_string(strip_tags($phone1),$fp_handle) ;
 			$fields[@count($fields)] = " `phone1` = '$n_phone1' ";
 			}
 		if(!empty($phone2)){
-			$n_phone2   = (int)$phone2 ;
+			$n_phone2   = mysql_real_escape_string(strip_tags($phone2),$fp_handle);
 			$fields[@count($fields)] = " `phone2` = '$n_phone2' ";
 			}
 			

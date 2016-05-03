@@ -1,19 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.9
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: May 02, 2016 at 07:57 AM
--- Server version: 5.5.8
--- PHP Version: 5.3.5
+-- Host: 127.0.0.1
+-- Generation Time: May 03, 2016 at 03:08 PM
+-- Server version: 5.7.9
+-- PHP Version: 5.6.16
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `kafala`
@@ -25,6 +26,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- Table structure for table `employee`
 --
 
+DROP TABLE IF EXISTS `employee`;
 CREATE TABLE IF NOT EXISTS `employee` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -33,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `type` int(10) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `employee`
@@ -57,6 +59,7 @@ INSERT INTO `employee` (`id`, `name`, `username`, `password`, `type`) VALUES
 -- Table structure for table `experience`
 --
 
+DROP TABLE IF EXISTS `experience`;
 CREATE TABLE IF NOT EXISTS `experience` (
   `qualifier_name` varchar(500) NOT NULL,
   `organizaton` varchar(500) NOT NULL,
@@ -66,12 +69,7 @@ CREATE TABLE IF NOT EXISTS `experience` (
   UNIQUE KEY `id_2` (`id`),
   KEY `id` (`id`),
   KEY `preacherID` (`preacherID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `experience`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -79,6 +77,7 @@ CREATE TABLE IF NOT EXISTS `experience` (
 -- Table structure for table `family`
 --
 
+DROP TABLE IF EXISTS `family`;
 CREATE TABLE IF NOT EXISTS `family` (
   `family_id` int(11) NOT NULL AUTO_INCREMENT,
   `state` varchar(50) NOT NULL,
@@ -108,20 +107,15 @@ CREATE TABLE IF NOT EXISTS `family` (
   `District` varchar(50) NOT NULL,
   `section` int(11) NOT NULL,
   `house_no` int(11) NOT NULL,
-  `phone1` int(11) NOT NULL,
-  `phone2` int(11) NOT NULL,
+  `phone1` varchar(50) NOT NULL,
+  `phone2` varchar(50) NOT NULL,
   `data_entery_name` varchar(50) NOT NULL,
   `data_entery_date` date NOT NULL,
   UNIQUE KEY `family_id` (`family_id`),
   KEY `id` (`family_id`),
   KEY `warranty_organization` (`warranty_organization`),
   KEY `residence_state` (`residence_state`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `family`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -129,6 +123,7 @@ CREATE TABLE IF NOT EXISTS `family` (
 -- Table structure for table `finalfamily`
 --
 
+DROP TABLE IF EXISTS `finalfamily`;
 CREATE TABLE IF NOT EXISTS `finalfamily` (
   `family_id` int(11) NOT NULL AUTO_INCREMENT,
   `state` varchar(50) NOT NULL,
@@ -158,8 +153,8 @@ CREATE TABLE IF NOT EXISTS `finalfamily` (
   `District` varchar(50) NOT NULL,
   `section` int(11) NOT NULL,
   `house_no` int(11) NOT NULL,
-  `phone1` int(11) NOT NULL,
-  `phone2` int(11) NOT NULL,
+  `phone1` varchar(50) NOT NULL,
+  `phone2` varchar(50) NOT NULL,
   `data_entery_name` varchar(50) NOT NULL,
   `data_entery_date` date NOT NULL,
   `head_dep_name` varchar(100) NOT NULL,
@@ -168,12 +163,7 @@ CREATE TABLE IF NOT EXISTS `finalfamily` (
   KEY `id` (`family_id`),
   KEY `warranty_organization` (`warranty_organization`),
   KEY `residence_state` (`residence_state`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `finalfamily`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -181,6 +171,7 @@ CREATE TABLE IF NOT EXISTS `finalfamily` (
 -- Table structure for table `finalorphan`
 --
 
+DROP TABLE IF EXISTS `finalorphan`;
 CREATE TABLE IF NOT EXISTS `finalorphan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `state` varchar(50) NOT NULL,
@@ -206,8 +197,8 @@ CREATE TABLE IF NOT EXISTS `finalorphan` (
   `District` varchar(100) NOT NULL,
   `section` int(10) NOT NULL,
   `house_no` int(50) NOT NULL,
-  `phone1` int(20) NOT NULL,
-  `phone2` int(20) NOT NULL,
+  `phone1` varchar(50) NOT NULL,
+  `phone2` varchar(50) NOT NULL,
   `studing_state` varchar(50) NOT NULL,
   `nonstuding_cause` varchar(50) NOT NULL,
   `school_name` varchar(50) NOT NULL,
@@ -223,21 +214,19 @@ CREATE TABLE IF NOT EXISTS `finalorphan` (
   UNIQUE KEY `id` (`id`),
   KEY `warranty_organization` (`warranty_organization`),
   KEY `residence_state` (`residence_state`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `finalorphan`
 --
 
 INSERT INTO `finalorphan` (`id`, `state`, `warranty_organization`, `saving`, `first_name`, `meddle_name`, `last_name`, `last_4th_name`, `birth_date`, `sex`, `mother_first_name`, `mother_middle_name`, `mother_last_name`, `mother_4th_name`, `mother_Birth_date`, `mother_state`, `father_dead_date`, `father_dead_cause`, `father_work`, `residence_state`, `city`, `District`, `section`, `house_no`, `phone1`, `phone2`, `studing_state`, `nonstuding_cause`, `school_name`, `level`, `year`, `quran_parts`, `health_state`, `ill_cause`, `data_entery_name`, `data_entery_date`, `head_dep_name`, `head_dep_date`) VALUES
-(2, '1', 1, 1, 'خالد ', 'أحمد', 'أبوبكر', 'أحمد', '2030-04-16', '0', 'khl', 'l', 'ln', 'kj', '2030-04-16', '1', '2030-04-16', 'jh', 'hk', 1, 'kj', 'kjh', 0, 0, 0, 0, '1', 'لا يوجد', 'h', '16', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16', '16-04-30', '0000-00-00'),
-(3, '2', 1, 1, 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', 'متزوجة', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, 91, 92, '1', 'لا يوجد', 'المرحلة', 'المرحلة', 'المرحلة', 1, '1', 'لا يوجد', 'user', '2030-04-16', '16-04-30', '0000-00-00'),
-(4, '2', 1, 1, 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', 'متزوجة', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, 91, 92, '1', 'لا يوجد', 'المرحلة', 'المرحلة', 'المرحلة', 1, '1', 'لا يوجد', 'user', '2030-04-16', 'admin', '2016-04-30'),
-(5, '2', 1, 1, 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', '1', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, 91, 92, '1', 'لا يوجد', 'المرحلة', '0', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16', 'admin', '2016-04-30'),
-(6, '2', 1, 1, 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', 'متزوجة', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, 91, 92, '1', 'لا يوجد', 'المرحلة', 'المرحلة', 'المرحلة', 1, '1', 'لا يوجد', 'user', '2030-04-16', 'admin', '2016-04-30'),
-(7, '2', 1, 1, 'أحمد خالد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', '1', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, 91, 92, '1', 'لا يوجد', 'المرحلة', '0', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16', 'admin', '2016-04-30'),
-(8, '3', 1, 0, 'خالدددد5465', 'محمد', 'أبوبكر', 'خالد', '2001-05-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2001-05-16', '1', '2001-05-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, 91, 92, '1', 'لا يوجد', 'المرحلة', 'admin', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16', 'admin', '2016-05-01'),
-(9, '2', 1, 1, 'خالدددد', 'محمد', 'أبوبكر', 'خالد', '2001-05-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2001-05-16', '1', '2001-05-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, 91, 92, '1', 'لا يوجد', 'المرحلة', '', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16', 'admin', '2016-05-01');
+(4, '2', 1, 1, 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', 'متزوجة', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', 'المرحلة', 'المرحلة', 1, '1', 'لا يوجد', 'user', '2030-04-16', 'admin', '2016-04-30'),
+(5, '2', 1, 1, 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', '1', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', '0', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16', 'admin', '2016-04-30'),
+(6, '2', 1, 1, 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', 'متزوجة', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', 'المرحلة', 'المرحلة', 1, '1', 'لا يوجد', 'user', '2030-04-16', 'admin', '2016-04-30'),
+(7, '2', 1, 1, 'أحمد خالد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', '1', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', '0', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16', 'admin', '2016-04-30'),
+(8, '3', 1, 0, 'خالدددد5465', 'محمد', 'أبوبكر', 'خالد', '2001-05-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2001-05-16', '1', '2001-05-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', 'admin', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16', 'admin', '2016-05-01'),
+(9, '2', 1, 1, 'خالدددد', 'محمد', 'أبوبكر', 'خالد', '2001-05-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2001-05-16', '1', '2001-05-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', '', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16', 'admin', '2016-05-01');
 
 -- --------------------------------------------------------
 
@@ -245,6 +234,7 @@ INSERT INTO `finalorphan` (`id`, `state`, `warranty_organization`, `saving`, `fi
 -- Table structure for table `finalpreacher`
 --
 
+DROP TABLE IF EXISTS `finalpreacher`;
 CREATE TABLE IF NOT EXISTS `finalpreacher` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `type` int(11) NOT NULL,
@@ -264,8 +254,8 @@ CREATE TABLE IF NOT EXISTS `finalpreacher` (
   `District` varchar(50) NOT NULL,
   `section` int(10) NOT NULL,
   `house_no` int(10) NOT NULL,
-  `phone1` int(11) NOT NULL,
-  `phone2` int(11) NOT NULL,
+  `phone1` varchar(50) NOT NULL,
+  `phone2` varchar(50) NOT NULL,
   `qualify_name` varchar(50) NOT NULL,
   `qualify_date` varchar(50) NOT NULL,
   `qualify_rating` varchar(50) NOT NULL,
@@ -282,12 +272,7 @@ CREATE TABLE IF NOT EXISTS `finalpreacher` (
   UNIQUE KEY `id` (`id`),
   KEY `residence_state` (`residence_state`),
   KEY `warranty_organization` (`warranty_organization`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `finalpreacher`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -295,6 +280,7 @@ CREATE TABLE IF NOT EXISTS `finalpreacher` (
 -- Table structure for table `finalstudent`
 --
 
+DROP TABLE IF EXISTS `finalstudent`;
 CREATE TABLE IF NOT EXISTS `finalstudent` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `state` varchar(50) NOT NULL,
@@ -316,12 +302,12 @@ CREATE TABLE IF NOT EXISTS `finalstudent` (
   `District` varchar(100) NOT NULL,
   `section` int(20) NOT NULL,
   `house_no` int(20) NOT NULL,
-  `phone1` int(20) NOT NULL,
-  `phone2` int(20) NOT NULL,
+  `phone1` varchar(50) NOT NULL,
+  `phone2` varchar(50) NOT NULL,
   `school_name` varchar(100) NOT NULL,
   `uni_name` varchar(100) NOT NULL,
-  `level` int(20) NOT NULL,
-  `year` int(20) NOT NULL,
+  `level` varchar(50) NOT NULL,
+  `year` varchar(50) NOT NULL,
   `last_result` varchar(100) NOT NULL,
   `quran_parts` int(20) NOT NULL,
   `study_year_no` int(20) NOT NULL,
@@ -337,12 +323,7 @@ CREATE TABLE IF NOT EXISTS `finalstudent` (
   KEY `id` (`id`),
   KEY `warranty_organization` (`warranty_organization`),
   KEY `residence_state` (`residence_state`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `finalstudent`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -350,6 +331,7 @@ CREATE TABLE IF NOT EXISTS `finalstudent` (
 -- Table structure for table `f_member`
 --
 
+DROP TABLE IF EXISTS `f_member`;
 CREATE TABLE IF NOT EXISTS `f_member` (
   `member_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -362,12 +344,7 @@ CREATE TABLE IF NOT EXISTS `f_member` (
   KEY `id` (`member_id`),
   KEY `familyID` (`familyID`),
   KEY `member_id` (`member_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `f_member`
---
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -375,6 +352,7 @@ CREATE TABLE IF NOT EXISTS `f_member` (
 -- Table structure for table `orphan`
 --
 
+DROP TABLE IF EXISTS `orphan`;
 CREATE TABLE IF NOT EXISTS `orphan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `state` varchar(50) NOT NULL,
@@ -401,8 +379,8 @@ CREATE TABLE IF NOT EXISTS `orphan` (
   `District` varchar(100) NOT NULL,
   `section` int(10) NOT NULL,
   `house_no` int(50) NOT NULL,
-  `phone1` int(20) NOT NULL,
-  `phone2` int(20) NOT NULL,
+  `phone1` varchar(50) NOT NULL,
+  `phone2` varchar(50) NOT NULL,
   `studing_state` varchar(50) NOT NULL,
   `nonstuding_cause` varchar(50) NOT NULL,
   `school_name` varchar(50) NOT NULL,
@@ -416,27 +394,18 @@ CREATE TABLE IF NOT EXISTS `orphan` (
   UNIQUE KEY `id` (`id`),
   KEY `warranty_organization` (`warranty_organization`),
   KEY `residence_state` (`residence_state`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `orphan`
 --
 
 INSERT INTO `orphan` (`id`, `state`, `warranty_organization`, `saving`, `last_sponsorship_date`, `first_name`, `meddle_name`, `last_name`, `last_4th_name`, `birth_date`, `sex`, `mother_first_name`, `mother_middle_name`, `mother_last_name`, `mother_4th_name`, `mother_Birth_date`, `mother_state`, `father_dead_date`, `father_dead_cause`, `father_work`, `residence_state`, `city`, `District`, `section`, `house_no`, `phone1`, `phone2`, `studing_state`, `nonstuding_cause`, `school_name`, `level`, `year`, `quran_parts`, `health_state`, `ill_cause`, `data_entery_name`, `data_entery_date`) VALUES
-(1, '3', 2, 11, '2016-04-30', 'nam1', 'name2', 'name3', 'name4', '2012-12-12', '', 'mn1', 'mn2', 'mn3', 'mn4', '2011-11-11', '1', '2010-10-10', 'وفاة', 'عمل', 1, 'مد', 'حي', 0, 0, 991, 992, '1', 'لا يوجد', 'لا يوجد', '0', '0', 1, '1', 'لا يوجد', 'user', '2030-04-16'),
-(2, '1', 1, 11, '2016-04-30', '', '', '', '', '1990-01-01', '1', '', '', '', '', '1960-01-01', '1', '1995-01-01', '', '', 1, '', '', 0, 0, 0, 0, '1', 'لا يوجد', '', '', '', 0, '1', 'لا يوجد', 'user', '2001-05-16'),
-(3, '1', 1, 11, '2016-04-30', '', '', '', '', '1990-01-01', '', 'dssdf', 'dsf', 'fds', 'fds', '1960-01-01', '1', '1995-01-01', '', '', 1, '', '', 0, 0, 0, 0, '1', 'لا يوجد', '', '', '', 0, '1', 'لا يوجد', 'user', '2030-04-16'),
-(4, '1', 1, 11, '2016-04-30', '', '', '', '', '1990-01-01', '', '', '', '', '', '1960-01-01', '1', '1995-01-01', '', '', 1, '', '', 0, 0, 0, 0, '1', 'لا يوجد', '', '', '', 0, '1', 'لا يوجد', 'user', '2030-04-16'),
-(5, '2', 1, 11, '2016-04-30', 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', '1', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, 91, 92, '1', 'لا يوجد', 'المرحلة', '0', '', 1, '1', 'لا يوجد', 'user', '2001-05-16'),
-(6, '1', 1, 0, '0000-00-00', '', '', '', '', '1990-01-01', '0', '', '', '', '', '1960-01-01', '1', '1995-01-01', '', '', 1, '', '', 0, 0, 0, 0, '1', 'لا يوجد', '', '', '', 0, '1', 'لا يوجد', 'user', '2030-04-16'),
-(7, '1', 1, 0, '0000-00-00', '', '', '', '', '1990-01-01', '0', '', '', '', '', '1960-01-01', '1', '1995-01-01', '', '', 1, '', '', 0, 0, 0, 0, '1', 'لا يوجد', '', '', '', 0, '1', 'لا يوجد', 'user', '2030-04-16'),
-(8, '3', 1, 0, '0000-00-00', 'خالدددد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', '1', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, 91, 92, '1', 'لا يوجد', 'المرحلة', '0', '', 1, '1', 'لا يوجد', 'user', '2001-05-16'),
-(9, '1', 1, 0, '0000-00-00', '', '', '', '', '1990-01-01', '0', '', '', '', '', '1960-01-01', '1', '1995-01-01', '', '', 1, '', '', 0, 0, 0, 0, '1', 'لا يوجد', '', '', '', 0, '1', 'لا يوجد', 'user', '2030-04-16'),
-(10, '1', 1, 0, '0000-00-00', '', '', '', '', '1990-01-01', '0', '', '', '', '', '1960-01-01', '1', '1995-01-01', '', '', 1, '', '', 0, 0, 0, 0, '1', 'لا يوجد', '', '', '', 0, '1', 'لا يوجد', 'user', '2030-04-16'),
-(11, '2', 1, 0, '0000-00-00', 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', '1', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, 91, 92, '1', 'لا يوجد', 'المرحلة', 'admin', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16'),
-(12, '2', 1, 0, '0000-00-00', 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', '1', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, 91, 92, '1', 'لا يوجد', 'المرحلة', 'admin', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16'),
-(13, '2', 1, 0, '0000-00-00', 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', '1', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, 91, 92, '1', 'لا يوجد', 'المرحلة', '0', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16'),
-(14, '2', 1, 0, '0000-00-00', 'خالدددد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', '1', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, 91, 92, '1', 'لا يوجد', 'المرحلة', '', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16');
+(1, '3', 2, 11, '2016-04-30', 'nam1', 'name2', 'name3', 'name4', '2012-12-12', '', 'mn1', 'mn2', 'mn3', 'mn4', '2011-11-11', '1', '2010-10-10', 'وفاة', 'عمل', 1, 'مد', 'حي', 0, 0, '991', '992', '1', 'لا يوجد', 'لا يوجد', '0', '0', 1, '1', 'لا يوجد', 'user', '2030-04-16'),
+(2, '1', 1, 11, '2016-04-30', '', '', '', '', '1990-01-01', '1', '', '', '', '', '1960-01-01', '1', '1995-01-01', '', '', 1, '', '', 0, 0, '0', '0', '1', 'لا يوجد', '', '', '', 0, '1', 'لا يوجد', 'user', '2001-05-16'),
+(3, '1', 1, 11, '2016-04-30', '', '', '', '', '1990-01-01', '', 'dssdf', 'dsf', 'fds', 'fds', '1960-01-01', '1', '1995-01-01', '', '', 1, '', '', 0, 0, '0', '0', '1', 'لا يوجد', '', '', '', 0, '1', 'لا يوجد', 'user', '2030-04-16'),
+(4, '1', 1, 11, '2016-04-30', '', '', '', '', '1990-01-01', '', '', '', '', '', '1960-01-01', '1', '1995-01-01', '', '', 1, '', '', 0, 0, '0', '0', '1', 'لا يوجد', '', '', '', 0, '1', 'لا يوجد', 'user', '2030-04-16'),
+(5, '2', 1, 11, '2016-04-30', 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', '1', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', '0', '', 1, '1', 'لا يوجد', 'user', '2001-05-16');
 
 -- --------------------------------------------------------
 
@@ -444,6 +413,7 @@ INSERT INTO `orphan` (`id`, `state`, `warranty_organization`, `saving`, `last_sp
 -- Table structure for table `preacher`
 --
 
+DROP TABLE IF EXISTS `preacher`;
 CREATE TABLE IF NOT EXISTS `preacher` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `type` int(11) NOT NULL,
@@ -463,8 +433,8 @@ CREATE TABLE IF NOT EXISTS `preacher` (
   `District` varchar(50) NOT NULL,
   `section` int(10) NOT NULL,
   `house_no` int(10) NOT NULL,
-  `phone1` int(11) NOT NULL,
-  `phone2` int(11) NOT NULL,
+  `phone1` varchar(50) NOT NULL,
+  `phone2` varchar(50) NOT NULL,
   `qualify_name` varchar(50) NOT NULL,
   `qualify_date` varchar(50) NOT NULL,
   `qualify_rating` varchar(50) NOT NULL,
@@ -479,14 +449,14 @@ CREATE TABLE IF NOT EXISTS `preacher` (
   UNIQUE KEY `id` (`id`),
   KEY `residence_state` (`residence_state`),
   KEY `warranty_organization` (`warranty_organization`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `preacher`
 --
 
 INSERT INTO `preacher` (`id`, `type`, `state`, `warranty_organization`, `saving`, `first_name`, `meddle_name`, `last_name`, `last_4th_name`, `birth_date`, `sex`, `male_members_no`, `female_members_no`, `residence_state`, `city`, `District`, `section`, `house_no`, `phone1`, `phone2`, `qualify_name`, `qualify_date`, `qualify_rating`, `quran_parts`, `Issuer`, `current_work`, `Joining_Date`, `health_state`, `ill_cause`, `data_entery_name`, `data_entery_date`) VALUES
-(1, 0, 'state rrrrrrrrrrr', 1, 1, 'first name', 's name', ' l name', ' 4 name', '2000-12-10', 'female', 1, 2, 1, 'khartoum', 'mamoorah', 1, 5, 18, 200, 'sss', '2000-12-10', 'very good ', 4, '44', '0', '2000-12-10', 'health state', 'health', 'ddddd', '2000-12-10');
+(1, 0, 'state rrrrrrrrrrr', 1, 1, 'first name', 's name', ' l name', ' 4 name', '2000-12-10', 'female', 1, 2, 1, 'khartoum', 'mamoorah', 1, 5, '18', '200', 'sss', '2000-12-10', 'very good ', 4, '44', '0', '2000-12-10', 'health state', 'health', 'ddddd', '2000-12-10');
 
 -- --------------------------------------------------------
 
@@ -494,6 +464,7 @@ INSERT INTO `preacher` (`id`, `type`, `state`, `warranty_organization`, `saving`
 -- Table structure for table `sibiling`
 --
 
+DROP TABLE IF EXISTS `sibiling`;
 CREATE TABLE IF NOT EXISTS `sibiling` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `orphan_id` int(11) NOT NULL,
@@ -504,7 +475,7 @@ CREATE TABLE IF NOT EXISTS `sibiling` (
   UNIQUE KEY `id` (`id`),
   KEY `orphan_id` (`orphan_id`),
   KEY `orphan_id_2` (`orphan_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=96 ;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `sibiling`
@@ -572,13 +543,14 @@ INSERT INTO `sibiling` (`id`, `orphan_id`, `name`, `sex`, `birth_date`, `state`)
 -- Table structure for table `sponsor`
 --
 
+DROP TABLE IF EXISTS `sponsor`;
 CREATE TABLE IF NOT EXISTS `sponsor` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `numberOFSponsored` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `sponsor`
@@ -594,6 +566,7 @@ INSERT INTO `sponsor` (`id`, `name`, `numberOFSponsored`) VALUES
 -- Table structure for table `sponsorship`
 --
 
+DROP TABLE IF EXISTS `sponsorship`;
 CREATE TABLE IF NOT EXISTS `sponsorship` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `amount` int(11) NOT NULL,
@@ -604,7 +577,7 @@ CREATE TABLE IF NOT EXISTS `sponsorship` (
   `sponsored` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `sponsor` (`sponsor`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf32 AUTO_INCREMENT=123 ;
+) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf32;
 
 --
 -- Dumping data for table `sponsorship`
@@ -690,16 +663,12 @@ INSERT INTO `sponsorship` (`id`, `amount`, `date`, `saving`, `sponsor`, `month_n
 -- Table structure for table `sponsorships`
 --
 
+DROP TABLE IF EXISTS `sponsorships`;
 CREATE TABLE IF NOT EXISTS `sponsorships` (
   `sponsorship` int(11) NOT NULL,
   `sponsored` int(11) NOT NULL,
   KEY `sponsorship` (`sponsorship`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `sponsorships`
---
-
 
 -- --------------------------------------------------------
 
@@ -707,6 +676,7 @@ CREATE TABLE IF NOT EXISTS `sponsorships` (
 -- Table structure for table `state`
 --
 
+DROP TABLE IF EXISTS `state`;
 CREATE TABLE IF NOT EXISTS `state` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
@@ -726,6 +696,7 @@ INSERT INTO `state` (`id`, `name`) VALUES
 -- Table structure for table `student`
 --
 
+DROP TABLE IF EXISTS `student`;
 CREATE TABLE IF NOT EXISTS `student` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `state` varchar(50) NOT NULL,
@@ -747,12 +718,12 @@ CREATE TABLE IF NOT EXISTS `student` (
   `District` varchar(100) NOT NULL,
   `section` int(20) NOT NULL,
   `house_no` int(20) NOT NULL,
-  `phone1` int(20) NOT NULL,
-  `phone2` int(20) NOT NULL,
+  `phone1` varchar(50) NOT NULL,
+  `phone2` varchar(50) NOT NULL,
   `school_name` varchar(100) NOT NULL,
   `uni_name` varchar(100) NOT NULL,
-  `level` int(20) NOT NULL,
-  `year` int(20) NOT NULL,
+  `level` varchar(50) NOT NULL,
+  `year` varchar(50) NOT NULL,
   `last_result` varchar(100) NOT NULL,
   `quran_parts` int(20) NOT NULL,
   `study_year_no` int(20) NOT NULL,
@@ -766,15 +737,14 @@ CREATE TABLE IF NOT EXISTS `student` (
   KEY `id` (`id`),
   KEY `warranty_organization` (`warranty_organization`),
   KEY `residence_state` (`residence_state`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `student`
 --
 
 INSERT INTO `student` (`id`, `state`, `warranty_organization`, `saving`, `first_name`, `meddle_name`, `last_name`, `last_4th_name`, `birth_date`, `sex`, `father_dead_date`, `father_dead_cause`, `father_work`, `sisters_no`, `brothers_no`, `residence_state`, `city`, `District`, `section`, `house_no`, `phone1`, `phone2`, `school_name`, `uni_name`, `level`, `year`, `last_result`, `quran_parts`, `study_year_no`, `study_date_start`, `expected_grad`, `health_state`, `ill_cause`, `data_entery_name`, `data_entery_date`) VALUES
-(2, '', 2, 0, '', '', '', '', '0000-00-00', '', '0000-00-00', '', '', 0, 0, 1, '', '', 0, 0, 0, 0, '', '', 0, 0, '', 0, 0, 0000, 0000, '', '', '', '0000-00-00'),
-(3, 'state of sudan ', 1, 1, 'first name', 's name', ' l name', ' 4 name', '2000-12-10', 'female', '2000-12-10', 'accedent', 'work', 2, 5, 1, 'khartoum', 'mamoorah', 1, 5, 18, 200, '0', ' ', 1, 2, ' ', 3, 1, 2000, 2000, 'health state', 'health', 'ddddd', '2000-12-10');
+(3, 'state of sudan ', 1, 1, 'first name', 's name', ' l name', ' 4 name', '2000-12-10', 'female', '2000-12-10', 'accedent', 'work', 2, 5, 1, 'khartoum', 'mamoorah', 1, 5, '18', '200', '0', ' ', '1', '2', ' ', 3, 1, 2000, 2000, 'health state', 'health', 'ddddd', '2000-12-10');
 
 --
 -- Constraints for dumped tables
@@ -805,8 +775,8 @@ ALTER TABLE `finalfamily`
 -- Constraints for table `finalorphan`
 --
 ALTER TABLE `finalorphan`
-  ADD CONSTRAINT `finalorphan_ibfk_1` FOREIGN KEY (`residence_state`) REFERENCES `state` (`id`),
-  ADD CONSTRAINT `f_sponsorship_organization` FOREIGN KEY (`warranty_organization`) REFERENCES `sponsor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `f_sponsorship_organization` FOREIGN KEY (`warranty_organization`) REFERENCES `sponsor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `finalorphan_ibfk_1` FOREIGN KEY (`residence_state`) REFERENCES `state` (`id`);
 
 --
 -- Constraints for table `finalpreacher`
@@ -826,8 +796,8 @@ ALTER TABLE `finalstudent`
 -- Constraints for table `f_member`
 --
 ALTER TABLE `f_member`
-  ADD CONSTRAINT `family` FOREIGN KEY (`familyID`) REFERENCES `family` (`family_id`),
-  ADD CONSTRAINT `f_family` FOREIGN KEY (`familyID`) REFERENCES `finalfamily` (`family_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `f_family` FOREIGN KEY (`familyID`) REFERENCES `finalfamily` (`family_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `family` FOREIGN KEY (`familyID`) REFERENCES `family` (`family_id`);
 
 --
 -- Constraints for table `orphan`
@@ -861,3 +831,7 @@ ALTER TABLE `sponsorships`
 ALTER TABLE `student`
   ADD CONSTRAINT `student_sponsor_id` FOREIGN KEY (`warranty_organization`) REFERENCES `sponsor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `student_state_id` FOREIGN KEY (`residence_state`) REFERENCES `state` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
