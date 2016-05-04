@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>الهيئة الخيرية الاسلامية للرعاية الاجتماعية</title>
 <link href="style/pageStyle.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -17,84 +18,105 @@
   </tr>
 </table>
 </div>
-<div class="main">
 <div class="login">
-<h2 align="center">النظـــــــــام الإلكتروني</h2>
-<table width="60%" border="0" align="center">
-<form onsubmit="return validateForm()" method="post">
+		<div class="login-screen">
+			<div class="app-title">
+                            <h1>تسجيل دخول</h1>
+			</div>
 
-  <tr>
-    <td width="25%">&nbsp;</td>
-    <td width="55%" id="noti">&nbsp;</td>
-  </tr>
-  <tr>
-  	<td id="vun">&nbsp;</td>
-    <td><input class="textFiels" name="un" type="text" id="un" size="30" maxlength="30" /></td>
-    <td width="20%">اسم المستخدم</td>
-    </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-  	<td id="vpass">&nbsp;</td>
-    <td><input class="textFiels"	 name="pass" type="password" id="pass" size="30" /></td>
-    <td>كلمة المرور</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-    <tr>
-    <td align="center">&nbsp;</td>
-    <td align="center"><input type="submit" name="login " id="login" value="تسجيل الدخول " /></td>
-  </tr>
-</form>
-</table>
-</div>
+			<div class="login-form">
+				<div class="control-group">
+				<input type="text" class="login-field" value="" placeholder="اسم المستخدم" id="login-name" />
+				<label class="login-field-icon fui-user" for="login-name"></label>
+				</div>
+
+				<div class="control-group">
+				<input type="password" class="login-field" value="" placeholder="كلمة المرور" id="login-pass" />
+				<label class="login-field-icon fui-lock" for="login-pass"></label>
+				</div>
+
+                            <a class="btn btn-primary btn-large btn-block" onclick="get_str()">تسجيل دخول</a>
+				<a class="login-link" href="#">نسيت كلمة المرور ؟</a>
+			</div>
+		</div>
+	</div>
+<script >
+    function IsEmpty(){ 
+        var text = document.getElementsByTagName('input');
+        var empty_checker = 0 ;
+        for(var i = 0 ; i< text.length ; i++){
+           if(text[i].value == ''){
+               text.item(i).style.color = "#ff0000" ;
+               text.item(i).setAttribute("placeholder","هذا الحقل فارغ");
+               empty_checker++;
+           }
+        }
+        if(empty_checker > 0 )alert("هناك حقول يجب تعبئتها");
+        else get_str();
+}
+
+function get_str(){
+        
+	var text = document.getElementsByTagName('input');
+        var str = '';
+        for(var i = 0 ; i< text.length ; i++){
+           str += text[i].getAttribute('id')+'='+text[i].value+'&';
+        }
+        //window.location.href = "auth/login.php?"+str;
+        //alert(str);
+        ajax(str);
+}
+function ajax(str)
+{		
+    var ajax;
+	var data ;
+	//var d_node = document.getElementById(elementID);
+	elementID = "div";
+	filename = "auth/login.php";
+	post = false ;
+    if (window.XMLHttpRequest)
+    {
+        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
+    }
+    else if (ActiveXObject("Microsoft.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
+    }
+    else if (ActiveXObject("Msxml2.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
+    }
+    else
+    {
+        alert("Error: Your browser does not support AJAX.");
+        return false;
+    }
+    ajax.onreadystatechange=function()
+    {
+        if (ajax.readyState==4&&ajax.status==200)
+        {
+            alert(ajax.responseText);
+            //document.getElementById("res_stattus").innerHTML=ajax.responseText;
+        }
+    }
+    if (post==false)
+    {
+        ajax.open("GET",filename+"?"+str,true);
+        ajax.send(null);
+		
+    }
+    else
+    {
+        ajax.open("POST",filename,true);
+        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.send(str);
+    }
+    return ajax;
+	
+}
+</script>
 <div id="footer">
 <p>جميع الحقوق محفوظة 2016 &copy;</p>
 </div>
-</div>
-<script type="application/javascript">
-	
-	function validateForm() {
-		var res; 
-		var un_node = document.getElementById("un");
-		var pass_node = document.getElementById("pass");
-		var noti_node = document.getElementById("noti");
-		if (un_node.value == null || un_node.value == "" || pass_node.value == null || pass_node.value == ""){
-		noti_node.style.color = "#ff0000";
-		noti_node.innerHTML = "رجاءا قم بتعبئة كل الحقول" ; res = false } return res ; }
-		/*var ok = confirm("fd");
-		alert(ok);
-		var res ;
-		var unout = document.getElementById("vun");
-		var passout = document.getElementById("vpass");
-		
-	//var un = document.forms["myForm"]["un"].value;
-	un_node = document.getElementById("un");
-    if ((un_node.value == null || un_node.value == "")&()) {
-		un_node.style.color = "#ff0000";
-		un_node.setAttribute("placeholder","ادخل اسم المستخدم");
-        res = false;
-    }
-		else { 
-			unout.innerHTML = "";
-			res = true;
-		}
-	pass_node = document.getElementById("pass");
-	if (pass_node.value == null || pass_node.value == "") {
-		pass_node.style.color = "#ff0000";
-		pass_node.setAttribute("placeholder","ادخل كلمة المرور");
-        res = false;
-    }
-	else { 
-			passout.innerHTML = "";
-			res = true;
-		}
-	return res ;
-	}*/
-</script>
 </body>
 </html>

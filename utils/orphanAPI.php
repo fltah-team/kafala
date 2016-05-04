@@ -213,7 +213,7 @@ function fp_orphan_update($id = NULL ,  $state = Null , $warranty_organization =
 		$fields[@count($fields)] = " `phone1` = '$n_phone1' ";
 		//}
 	if(!empty($phone2)){
-		$n_phone2   = (int)$phone2 ;
+		$n_phone2   = mysql_real_escape_string(strip_tags($phone2),$fp_handle);
 		$fields[@count($fields)] = " `phone2` = '$n_phone2' ";
 		}
 
@@ -230,11 +230,11 @@ function fp_orphan_update($id = NULL ,  $state = Null , $warranty_organization =
 		$fields[@count($fields)] = " `school_name` = '$n_school_name' ";
 		}
 	if(!empty($level)){
-		$n_level   = (int)$level;
+		$n_level   = mysql_real_escape_string(strip_tags($level),$fp_handle);
 		$fields[@count($fields)] = " `level` = '$n_level' ";
 		}
 	if(!empty($year)){
-		$n_year  = (int)$year;
+		$n_year   = mysql_real_escape_string(strip_tags($year),$fp_handle);
 		$fields[@count($fields)] = " `year` = '$n_year' ";
 		}
 	if(!empty($quran_parts)){
@@ -292,5 +292,5 @@ function fp_orphan_delete($id){
 	
 	return true ;
 	}
-	
+
 ?>

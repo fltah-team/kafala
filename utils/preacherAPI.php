@@ -23,6 +23,15 @@
 		return $preachers ; 
 		}
 
+        function fp_preacher_get_num_rows(){
+            global $fp_handle ;
+            $query = sprintf("SELECT * FROM `preacher`");
+            $qresult = @mysql_query($query);
+
+            if(!$qresult) return -1 ; 
+
+            return mysql_num_rows($qresult);
+    }
 	function fp_preacher_get_by_id($id){
 		$oid = (int)$id;
 		if($oid == 0) return NULL ;
@@ -53,8 +62,8 @@
 		$n_District = @mysql_real_escape_string(strip_tags($District),$fp_handle);
 		$n_section  = (int)$section;
 		$n_house_no  = (int)$house_no;
-		$n_phone1  = (int)$phone1;
-		$n_phone2  = (int)$phone2;	
+		$n_phone1  = mysql_real_escape_string(strip_tags($phone1),$fp_handle);
+		$n_phone2  = mysql_real_escape_string(strip_tags($phone2),$fp_handle);	
 		$n_qualify_name = mysql_real_escape_string (strip_tags($qualify_name),$fp_handle);
 		$n_qualify_date = mysql_real_escape_string (strip_tags($qualify_date),$fp_handle);
 		$n_qualify_rating  = mysql_real_escape_string (strip_tags($qualify_rating),$fp_handle);
@@ -130,10 +139,10 @@
 			$n_birth_date  = mysql_real_escape_string(strip_tags($birth_date),$fp_handle);
 			$fields[@count($fields)] = " `birth_date` = '$n_birth_date' ";
 			}
-		if(!empty($sex)){
+		//if(!empty($sex)){
 			$n_sex   = mysql_real_escape_string(strip_tags($sex),$fp_handle);
 			$fields[@count($fields)] = " `sex` = '$n_sex' ";
-			}
+			//}
 			
 		if(!empty($male_members_no)){
 			$n_male_members_no   = mysql_real_escape_string(strip_tags($male_members_no),$fp_handle);
@@ -169,16 +178,16 @@
 			$fields[@count($fields)] = " `house_no` = '$n_house_no' ";
 			}
 		if(!empty($phone1)){
-			$n_phone1   = (int)$phone1 ;
+			$n_phone1   = @mysql_real_escape_string(strip_tags($phone1),$fp_handle);
 			$fields[@count($fields)] = " `phone1` = '$n_phone1' ";
 			}
 		if(!empty($phone2)){
-			$n_phone2   = (int)$phone2 ;
+			$n_phone2   = @mysql_real_escape_string(strip_tags($phone2),$fp_handle) ;
 			$fields[@count($fields)] = " `phone2` = '$n_phone2' ";
 			}
 
 		if(!empty($qualify_name)){
-			$n_qualify_name = mysql_real_escape_string(strip_tags($qualify_name),$fp_handle);
+			$n_qualify_name = @mysql_real_escape_string(strip_tags($qualify_name),$fp_handle);
 			$fields[@count($fields)] = " `qualify_name` = '$n_qualify_name' ";
 			}
 		if(!empty($qualify_date)){

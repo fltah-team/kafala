@@ -145,10 +145,10 @@ function fp_final_orphan_update($id ,  $state = Null , $warranty_organization = 
 		$n_birth_date  = mysql_real_escape_string(strip_tags($birth_date),$fp_handle);
 		$fields[@count($fields)] = " `birth_date` = '$n_birth_date' ";
 		}
-	if(!empty($sex)){
+	//if(!empty($sex)){
 		$n_sex   = mysql_real_escape_string(strip_tags($sex),$fp_handle);
 		$fields[@count($fields)] = " `sex` = '$n_sex' ";
-		}
+		//}
 	if(!empty($mother_first_name)){
 		$n_mother_first_name   = mysql_real_escape_string(strip_tags($mother_first_name),$fp_handle);
 		$fields[@count($fields)] = " `mother_first_name` = '$n_mother_first_name' ";
@@ -227,11 +227,11 @@ function fp_final_orphan_update($id ,  $state = Null , $warranty_organization = 
 		$fields[@count($fields)] = " `school_name` = '$n_school_name' ";
 		}
 	if(!empty($level)){
-		$n_level   = (int)$level;
+		$n_level   = mysql_real_escape_string(strip_tags($level),$fp_handle);;
 		$fields[@count($fields)] = " `level` = '$n_level' ";
 		}
 	if(!empty($year)){
-		$n_year  = (int)$year;
+		$n_year  = mysql_real_escape_string(strip_tags($year),$fp_handle);;
 		$fields[@count($fields)] = " `year` = '$n_year' ";
 		}
 	if(!empty($quran_parts)){
