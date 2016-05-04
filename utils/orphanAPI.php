@@ -41,6 +41,14 @@ function fp_orphan_get_by_id($id){
 	$orphan = $orphans[0];
 	return $orphan ;
 	}
+function fp_orphan_get_by_phone1($id){
+	$oid = (int)$id;
+	if($oid == 0) return NULL ;
+	$orphans = fp_orphan_get("WHERE `phone1` = ".$oid);
+	if($orphans == NULL) return NULL ;
+	$orphan = $orphans[0];
+	return $orphan ;
+	}
 	// INSERT	
 function fp_orphan_add($state , $warranty_organization  , $saving , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2   , $studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date ){
 	global $fp_handle;
@@ -93,7 +101,7 @@ function fp_orphan_add($state , $warranty_organization  , $saving , $first_name 
 	
 	
 	// UPDATE
-function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null ,$saving = null, $last_sponsorship_date = Null , $first_name = Null , $meddle_name = Null     , $last_name = Null  , $last_4th_name = Null , $birth_date = Null , $sex = Null  , $mother_first_name = Null , $mother_middle_name = Null  , $mother_last_name = Null , $mother_4th_name = Null , $mother_Birth_date = Null , $mother_state = Null ,$father_dead_date = Null  , $father_dead_cause = Null  , $father_work = Null  , $residence_state = Null , $city = Null , $District = Null  , $section = Null ,$house_no = Null  , $phone1 = Null , $phone2 = Null   , $studing_state= Null  ,$nonstuding_cause = Null , $school_name = Null , $level= Null  , $year = Null , $quran_parts= Null  , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date= Null  ){
+function fp_orphan_update($id = NULL ,  $state = Null , $warranty_organization = Null ,$saving = null, $last_sponsorship_date = Null , $first_name = Null , $meddle_name = Null     , $last_name = Null  , $last_4th_name = Null , $birth_date = Null , $sex = Null  , $mother_first_name = Null , $mother_middle_name = Null  , $mother_last_name = Null , $mother_4th_name = Null , $mother_Birth_date = Null , $mother_state = Null ,$father_dead_date = Null  , $father_dead_cause = Null  , $father_work = Null  , $residence_state = Null , $city = Null , $District = Null  , $section = Null ,$house_no = Null  , $phone1 , $phone2 = Null   , $studing_state= Null  ,$nonstuding_cause = Null , $school_name = Null , $level= Null  , $year = Null , $quran_parts= Null  , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date= Null  ){
 	global $fp_handle ;
 	$uid = (int)$id;
 	if($uid == 0) return false ;
@@ -200,10 +208,10 @@ function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null ,
 		$n_house_no   = (int)$house_no ;
 		$fields[@count($fields)] = " `house_no` = '$n_house_no' ";
 		}
-	if(!empty($phone1)){
-		$n_phone1   = (int)$phone1 ;
+	//if(!empty($phone1)){
+		$n_phone1   = mysql_real_escape_string(strip_tags($phone1),$fp_handle);
 		$fields[@count($fields)] = " `phone1` = '$n_phone1' ";
-		}
+		//}
 	if(!empty($phone2)){
 		$n_phone2   = (int)$phone2 ;
 		$fields[@count($fields)] = " `phone2` = '$n_phone2' ";
@@ -255,7 +263,7 @@ function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null ,
 	$fcount = @count($fields);
 	
 	if($fcount == 1){
-		$query .= $fields[0].' WHERE `id` = '.$uid;
+		$query .= $fields[0].' WHERE `phone1` = '.$n_phone1;
 		$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
 		else return true ;
@@ -265,7 +273,8 @@ function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null ,
 		if($i != ($fcount - 1 ))
 		$query .= ' , ';
 		}
-	$query .= ' WHERE `id` = '.$uid;
+	$query .= ' WHERE `phone1` = '.$n_phone1;
+        echo $query;
 	$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
 		else return true ;
@@ -274,99 +283,14 @@ function fp_orphan_update($id ,  $state = Null , $warranty_organization = Null ,
 	
 	// DELETE
 function fp_orphan_delete($id){
-	$uid = (int)$id;
-	if($uid == 0) return false ;
-	$query = sprintf("DELETE FROM `orphan` WHERE `id` = %d",$uid);
+        global $fp_handle;
+	$uid   = mysql_real_escape_string(strip_tags($id),$fp_handle);
+        //echo "---------".$uid;
+	$query = sprintf("DELETE FROM `orphan` WHERE `phone1` = %d",$id);echo $query;
 	$qresult = @mysql_query($query);
 	if(!$qresult) return false ;
 	
 	return true ;
 	}
-	//-------------------------------------sibilingAPI----------------------------------------------
 	
-	
-		
-		
-				
-		// INSERT	
-	function fp_sibiling_add( $orphan_id , $name , $sex , $birth_date , $state){
-		global $fp_handle;
-	
-		$n_orphan_id = (int)$orphan_id ;
-		$n_name    = @mysql_real_escape_string(strip_tags($name),$fp_handle);
-		$n_sex    = @mysql_real_escape_string(strip_tags($sex),$fp_handle);
-		$n_birth_date  = @mysql_real_escape_string(strip_tags($birth_date),$fp_handle);
-		$n_state = @mysql_real_escape_string(strip_tags($state),$fp_handle);
-		
-		$query = ("INSERT INTO `sibiling`( `id` ,`orphan_id` , `name` , `sex` , `birth_date` , `state`) VALUE(NULL,'$n_orphan_id' ,'$n_name','$n_sex','$n_birth_date','$n_state')");
-		
-		$qresult = mysql_query($query);
-                
-		if(!$qresult){
-                    @mysql_free_result($qresult);
-                    return false ;
-                }
-                @mysql_free_result($qresult);
-		return true ;
-		}	
-	
-	        
-	
-		// show all
-	function fp_sibiling_get($orphan_id ){
-		global $fp_handle ;
-		$query = sprintf("SELECT * FROM `sibiling` WHERE `orphan_id`= %d",$orphan_id);
-                //echo $query ;
-                
-		$qresult = @mysql_query($query);
-		
-		if(!$qresult) return NULL ; 
-		
-		$rcount = mysql_num_rows($qresult);
-		if($rcount == 0 )  return NULL ;
-		
-		$sibiling = array();
-		
-		for($i = 0 ; $i < $rcount ; $i++)
-			$sibiling[@count($sibiling)] = @mysql_fetch_object($qresult);
-			
-		@mysql_free_result($qresult);
-		
-		return $sibiling ; 
-		}
-    
-       	// get with extra 
-	function fp_sibiling_get_for_gender($orphan_id,$extra ){
-		global $fp_handle ;
-		$query = sprintf("SELECT * FROM `sibiling` WHERE `orphan_id`= %d  %s",$orphan_id ,$extra);
-                
-                
-		$qresult = @mysql_query($query);
-		
-		if(!$qresult) return NULL ; 
-		
-		$rcount = mysql_num_rows($qresult);
-		if($rcount == 0 )  return NULL ;
-		
-		$sibiling = array();
-		
-		for($i = 0 ; $i < $rcount ; $i++)
-			$sibiling[@count($sibiling)] = @mysql_fetch_object($qresult);
-			
-		@mysql_free_result($qresult);
-		
-		return $sibiling ; 
-		}
-			
-		// DELETE
-	function fp_sibiling_delete($id){
-		$uid = (int)$id;
-		if($uid == 0) return false ;
-		$query = sprintf("DELETE FROM `sibiling` WHERE `id` = %d",$uid);
-		$qresult = @mysql_query($query);
-		if(!$qresult) return false ;
-		
-		return true ;
-		}
-             
 ?>

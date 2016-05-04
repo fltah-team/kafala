@@ -50,10 +50,10 @@
 	if(!isset($_GET['id']) || $_GET['id']=="" || (int)$_GET['id']==0){
             fp_err_show_record("اليتيم");
         }
-        
-	$id = (int)$_GET['id']; 
-	$orphan = fp_orphan_get_by_id($id);
-        $sibilings = fp_sibiling_get($id);
+        global $fp_handle;
+	$id = @mysql_real_escape_string(strip_tags($_GET['id']),$fp_handle);
+	$orphan = fp_orphan_get_by_phone1($id);
+        $sibilings = fp_sibiling_get($orphan->phone1);
         $siblings_male = fp_sibiling_get_for_gender($id," and sex = 1 ");
         $siblings_female = fp_sibiling_get_for_gender($id," and sex = 0 ");
         $kafalas = fp_sposored_get_kafala($id);
@@ -420,7 +420,7 @@ function get_s_str(){
       if(document.getElementById("sibling_male_gender").checked == true) s_gender_value = "1" ;
         else s_gender_value = "0" ;
       s_str+='s_gender='+s_gender_value+'&';
-      s_str+='o_id='+<?php echo $orphan->id ?>;
+      s_str+='o_id='+<?php echo $orphan->phone1 ?>;
       sibling_ajax(s_str);
       }
   function sibling_ajax(s_str)
@@ -698,6 +698,7 @@ function get_str(){
             if(document.getElementById("female_gender").checked == true) gender_value = "0" ;
         else gender_value = "1" ;
         str+="gender="+gender_value;
+        alert(str);
         //window.location.href = "updateOrphan.php?"+str;
         ajax(str);
 }

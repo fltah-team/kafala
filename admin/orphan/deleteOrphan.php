@@ -3,16 +3,16 @@
 	
 	include('../../utils/db.php');
 	include('../../utils/orphanAPI.php');
-	$id = 6 ;
-
+        include('../../utils/error_handler.php');
+	$id = $_GET['id'] ;
 	$result = fp_orphan_delete($id) ;
 	
 
 	fp_db_close();
 	
 	if(!$result)
-		die ("fail");
-
-	echo " record is deleted ";
+            fp_err_delete_fail ('اليتيم');
+        else 
+            fp_err_delete_succes ('اليتيم');
 	
 	?>

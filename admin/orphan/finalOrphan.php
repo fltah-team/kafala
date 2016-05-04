@@ -2,6 +2,7 @@
 
 	
 	include('../../utils/db.php');
+	include('../../utils/orphanAPI.php');
 	include('../../utils/finalOrphanAPI.php');
         include('../../utils/error_handler.php');
 	$id = $_GET['id'];
@@ -57,16 +58,19 @@
         $data_admin_date = date("y-m-d");
                 
                 
-        if(fp_final_orphan_get_by_id($id))echo "find";
-        //$result = fp_final_orphan_update($id,$state , $warranty_organization ,null ,null , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date ,$data_admin_name , $data_admin_date );   
-        else echo "not";
-	//$result = fp_final_orphan_add($state , $warranty_organization ,$saving , "0", $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date ,$data_admin_name , $data_admin_date);
+        if(fp_final_orphan_get_by_id($id))
+        $result = fp_final_orphan_update($id,$state , $warranty_organization ,$saving , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date ,$data_admin_name , $data_admin_date );   
+        else 
+	$result = fp_final_orphan_add($state , $warranty_organization ,$saving , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date ,$data_admin_name , $data_admin_date);
 	//$_GET['fno']);
 
 	fp_db_close();
 	
-	/*if(!$result)
+	if(!$result)
             echo "err";//fp_err_add_fail($first_name." ".$meddle_name);
-	else
-            echo "succ";//fp_err_add_succes($first_name." ".$meddle_name,$result);*/
+	else{
+            //fp_orphan_delete($phone1);
+            fp_err_add_succes($first_name." ".$meddle_name,$result);
+            
+        }
 ?>

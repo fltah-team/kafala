@@ -33,6 +33,14 @@
  die();
  }
  
+ function fp_err_orphan_add_succes($name,$id=null){
+ echo '<div id="success_notice" name="'.$id.'"  class="alert-box success"><span >نجاح :   </span>تمت اضافة '.$name.' بنجاح
+      <br />
+      <a href="../orphan/orphanInfo.php?id='.$id.'" >اضافة افراد الاسرة</a>
+      </div>';
+ die();
+ }
+ 
  function fp_err_upadte_fail($name){
      echo '<div id="success_notice"   class="alert-box error">
      <span>خطأ :   </span>لم تتم عملية تعديل بيانات '.$name.'</div>';

@@ -43,6 +43,7 @@
 <br />
 <?php 
         include('../../utils/db.php');
+        include('../../utils/siblingAPI.php');
 	include('../../utils/finalOrphanAPI.php');
         include('../../utils/sponsorAPI.php');
         include ('../../utils/kafalaAPI.php');
@@ -670,7 +671,6 @@ function delete_sibling_ajax(id)
   </form>
 </div>
 <div  style="margin: 0 auto; text-align: center ; width: 60%;" id="reponse">
-    <span id="res_stattus"></span>
 </div>
 <script type="text/javascript" >
         
@@ -737,8 +737,7 @@ function ajax(str)
     {
         if (ajax.readyState==4&&ajax.status==200)
         {
-            document.getElementById("res_stattus").innerHTML=ajax.responseText;
-            add_sibling();
+            document.getElementById("reponse").innerHTML=ajax.responseText;
         }
     }
     if (post==false)

@@ -5,8 +5,6 @@
 	include('../../utils/orphanAPI.php');
         include('../../utils/error_handler.php');
 	
-
-
 	$state = $_GET['status'];	
 	$warranty_organization =  $_GET['sponsor'];
         $saving = 0 ;
@@ -63,5 +61,5 @@
 	if(!$result)
             fp_err_add_fail($first_name." ".$meddle_name);
 	else
-            fp_err_add_succes($first_name." ".$meddle_name,$result);
+            fp_err_orphan_add_succes($first_name." ".$meddle_name,$phone1);
 ?>

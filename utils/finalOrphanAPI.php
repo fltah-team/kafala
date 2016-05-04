@@ -88,9 +88,14 @@ function fp_final_orphan_add($state , $warranty_organization  , $saving , $first
  				VALUE(NULL , '$n_state' , '$n_warranty_organization' , '$n_saving', '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_mother_first_name' , '$n_mother_middle_name' , '$n_mother_last_name' , '$n_mother_4th_name' , '$n_mother_Birth_date' , '$n_mother_state' ,'$n_father_dead_date' , '$n_father_dead_cause' , '$n_father_work' , '$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2'  , '$n_studing_state' ,'$n_nonstuding_cause', '$n_school_name' , '$n_level' , '$n_year' , '$n_quran_parts' , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date'  , '$n_head_dep_name' , '$n_head_dep_date' )");
 	
 	$qresult = mysql_query($query);
-	echo $query;
 	if(!$qresult) return false ;
-	
+        include('../../utils/siblingAPI.php');
+        $sibilings = fp_sibiling_get($phone1);
+        $scount = @count($sibilings);
+        for($i = 0 ; $i < $scount ; $i++){
+            $sibling = $sibilings[$i];
+            echo $sibling->name;
+        }
 	return true ;
 	}
 	

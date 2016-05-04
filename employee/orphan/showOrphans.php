@@ -115,7 +115,7 @@ function ageCalculator($dob){
 		$orphan = $orphans[$i];
   ?>
     <tr align="center" class="table_data<?php echo $i%2?>">
-    <td  onclick="window.location.href='orphanInfo.php?id='+<?php echo $orphan->id?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
+    <td  onclick="window.location.href='orphanInfo.php?id='+<?php echo $orphan->phone1?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
     <td width="7%"><?php echo ageCalculator($orphan->birth_date);?></td>
  	<td width="9%"><?php echo fp_states_get_by_id($orphan->residence_state)->name;?></td>
     <td width="8%"><?php if($orphan->sex==1)echo "ذكر"; else echo "أنثى" ; ?> </td>

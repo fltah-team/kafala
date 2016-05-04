@@ -44,22 +44,24 @@
 <?php 
         include('../../utils/db.php');
 	include('../../utils/orphanAPI.php');
+        include('../../utils/siblingAPI.php');
         include('../../utils/sponsorAPI.php');
         include ('../../utils/kafalaAPI.php');
         include ('../../utils/error_handler.php');
 	if(!isset($_GET['id']) || $_GET['id']=="" || (int)$_GET['id']==0){
             fp_err_show_record("اليتيم");
         }
+        global $fp_handle;
+	$id = @mysql_real_escape_string(strip_tags($_GET['id']),$fp_handle);
+	$orphan = fp_orphan_get_by_phone1($id);
+	if(!$orphan) fp_err_show_record("اليتيم");
         
-	$id = (int)$_GET['id']; 
-	$orphan = fp_orphan_get_by_id($id);
-        $sibilings = fp_sibiling_get($id);
+        $sibilings = fp_sibiling_get($orphan->phone1);
         $siblings_male = fp_sibiling_get_for_gender($id," and sex = 1 ");
         $siblings_female = fp_sibiling_get_for_gender($id," and sex = 0 ");
         $kafalas = fp_sposored_get_kafala($id);
 	$male_count = @count($siblings_male);
-        $female_count = @count($siblings_female);
-	if(!$orphan) fp_err_show_record("اليتيم");	
+        $female_count = @count($siblings_female);	
 	$scount = @count($sibilings);
         include('../../utils/stateAPI.php');
 	$states = fp_states_get();
@@ -420,7 +422,7 @@ function get_s_str(){
       if(document.getElementById("sibling_male_gender").checked == true) s_gender_value = "1" ;
         else s_gender_value = "0" ;
       s_str+='s_gender='+s_gender_value+'&';
-      s_str+='o_id='+<?php echo $orphan->id ?>;
+      s_str+='o_id='+<?php echo $orphan->phone1 ?>;
       sibling_ajax(s_str);
       }
   function sibling_ajax(s_str)
@@ -624,32 +626,46 @@ function delete_sibling_ajax(id)
   </tr>
   
 </table>
-
+<br />
 <!-- Employee -->
-
 <table width="50%" border="0" align="center" id=" ">
-
+  <tr>
+      <td>&nbsp;</td>
+      
+      <td align="center"><input class="textFiels" disabled name="level" type="text" id="level" size="10" maxlength="30" value="<?php echo $orphan->data_entery_date?>"/></td>
+    <td align="center">التاريخ</td>
+    <td align="center"><input class="textFiels" disabled name="level" type="text" id="level" size="10" maxlength="30" value="<?php echo $orphan->data_entery_name?>"/></td>
+    <td align="center">مدخل البيانات   </td>
+  </tr>
+   
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td align="center"></td>    
+    <td align="center"></td> 
+    
+    
    <tr>
+        <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td width="40%" >&nbsp;</td>
     <td>&nbsp;</td>
-    <td width="40%">&nbsp;</td>
-    <td>&nbsp;</td>
+    <td align="center"></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
-  	<td>&nbsp;</td>
-        <td align="center"><button class="add_bt" name="add" type="button" onclick="delete_ajax()" > الغاء البيانات<img align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" />  </button></td>
     <td>&nbsp;</td>
-    <td align="center"><button class="add_bt" name="add" type="button" onclick="get_str()" >اعتماد البيانات<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
+    <td align="center"><button class="add_bt" name="add" type="button" onclick="del_ajax(<?php echo $orphan->phone1?>)" >الغاء البيانات<img align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" />  </button>
     <td>&nbsp;</td>
+    <td align="center"><button class="add_bt" name="add" type="button" onclick="i3_get_str()" >اعتماد البيانات<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
     <td>&nbsp;</td>
   </tr>
+
 </table>
-  </form>
+
+
 </div>
 <div  style="margin: 0 auto; text-align: center ; width: 60%;" id="reponse">
-    <span id="res_stattus"></span>
 </div>
 <script type="text/javascript" >
         
@@ -664,10 +680,10 @@ function IsEmpty(){
            }
         }
         if(empty_checker > 0 )alert("هناك حقول يجب تعبئتها");
-        else get_str();
+        else i3_get_str();
 }
 
-function get_str(){
+function i3_get_str(){
         
 	var text = document.getElementsByTagName('input');
         var select = document.getElementsByTagName('select');
@@ -684,8 +700,9 @@ function get_str(){
             if(document.getElementById("female_gender").checked == true) gender_value = "0" ;
         else gender_value = "1" ;
         str+="gender="+gender_value;
-        window.location.href = "finalOrphan.php?"+str;
-        //ajax(str);
+        alert(str);
+        //window.location.href = "updateOrphan.php?"+str;
+        ajax(str);
 }
 function ajax(str)
 {		
@@ -716,8 +733,7 @@ function ajax(str)
     {
         if (ajax.readyState==4&&ajax.status==200)
         {
-            document.getElementById("res_stattus").innerHTML=ajax.responseText;
-            add_sibling();
+            document.getElementById("reponse").innerHTML=ajax.responseText;
         }
     }
     if (post==false)
@@ -743,7 +759,60 @@ function add_sibling (){
         s_final_str+=s_str_array[i];
     }
      alert(document.getElementById("success_notice").getAttribute("name"));
-}		
+}	
+
+//*********************  DELETE
+function del_ajax(ID)
+{		
+        var ajax;
+	var data ;
+        var str = "?id="+ID;
+	alert(str);
+        //var d_node = document.getElementById(elementID);
+	elementID = "div";
+	filename = "deleteOrphan.php";
+	post = false ;
+    if (window.XMLHttpRequest)
+    {
+        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
+    }
+    else if (ActiveXObject("Microsoft.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
+    }
+    else if (ActiveXObject("Msxml2.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
+    }
+    else
+    {
+        alert("Error: Your browser does not support AJAX.");
+        return false;
+    }
+    ajax.onreadystatechange=function()
+    {
+        if (ajax.readyState==4&&ajax.status==200)
+        {
+            document.getElementById("reponse").innerHTML=ajax.responseText;
+        }
+    }
+    if (post==false)
+    {
+        ajax.open("GET",filename+str,true);
+        ajax.send(null);
+		
+    }
+    else
+    {
+        ajax.open("POST",filename,true);
+        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.send(str);
+    }
+    return ajax;
+	
+}
+
+	
 </script>
 <div id="footer">
 <p>جميع الحقوق محفوظة 2016 &copy;</div>
