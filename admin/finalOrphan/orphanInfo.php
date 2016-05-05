@@ -54,6 +54,7 @@
         
 	$id = (int)$_GET['id']; 
 	$orphan = fp_final_orphan_get_by_id($id);
+        if(!$orphan) fp_err_show_record("اليتيم");
         $sibilings = fp_sibiling_get($id);
         $siblings_male = fp_sibiling_get_for_gender($id," and sex = 1 ");
         $siblings_female = fp_sibiling_get_for_gender($id," and sex = 0 ");

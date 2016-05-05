@@ -1,10 +1,45 @@
 <?php
-	include('../../utils/db.php');
-	include('../../utils/finalOrphanAPI.php');
-        include('../../utils/error_handler.php');
-        $start=0;
+    include('../../utils/db.php');
+    include('../../utils/finalOrphanAPI.php');
+    include('../../utils/error_handler.php');
+    $fields = array();
+    $extra = '';
+    if(isset($_GET['gender']) && $_GET['gender'] != ''){
+        if($_GET['gender'] != '-1')
+        $fields[@count($fields)] = " `sex` = ".(int)$_GET['gender'];
+    }
+    if(isset($_GET['states']) && (int)$_GET['states']!=0 && $_GET['states'] != ''){
+        if($_GET['states'] != '-1')
+        $fields[@count($fields)] = " `residence_state` = ".$_GET['states'];
+    }
+    if(isset($_GET['status']) && (int)$_GET['status']!=0 && $_GET['status'] != ''){
+        if($_GET['status'] != '-1')
+        $fields[@count($fields)] = " `state` = ".$_GET['status'];
+    }
+if(isset($_GET['sponsor']) && (int)$_GET['sponsor']!=0 && $_GET['sponsor'] != ''){
+        if($_GET['sponsor'] != '-1')
+        $fields[@count($fields)] = " `warranty_organization` = ".$_GET['sponsor'];
+    }
+if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['age2'] != ''){
+        if($_GET['age'] != '-1'){
+            $first = date("Y")-(int)$_GET['age']-1;
+            $seonnd = date("Y")-(int)$_GET['age2']-1;
+            $fields[@count($fields)] = " `birth_date` between '$seonnd-01-01' and '$first-01-01' ";
+        }
+    }
+	
+        $fcount = @count($fields);
+	if($fcount > 0 ){
+            $extra .= 'WHERE ';
+        for($i = 0 ; $i < $fcount ; $i++){
+		$extra .= $fields[$i];
+		if($i != ($fcount - 1 ))
+		$extra .= ' and ';
+		}
+        }
+    $start=0;
     $limit=20;
-    $total_results = fp_final_orphan_get_num_rows();
+    $total_results = fp_final_orphan_get_num_rows($extra);
         $total=ceil($total_results/$limit);
     if(!isset($_GET['page']) || $_GET['page'] == '' || (int)$_GET['page'] == 0 || $_GET['page']>$total)
     {
@@ -14,7 +49,7 @@
     $page=$_GET['page'];
     $start=($page-1)*$limit;
     }
-        $orphans = fp_final_orphan_get("LIMIT $start, $limit");
+        $orphans = fp_final_orphan_get($extra." LIMIT $start, $limit ");
 	
         
 ?>
@@ -55,7 +90,7 @@
 
 <!-- main -->
 <div class="main">
-<h1 align="center" class="adress"> بيانات الأيتام </h1>
+    <h1 align="center" class="adress" dir="rtl">بيانات الأيتام(<?php echo $total_results ?>)</h1>
 <br />
  <?php
     //if($users[0] == NULL ) die($users[1]) ;

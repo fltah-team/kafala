@@ -1,7 +1,4 @@
 <?php
-	
-
-
 	// SELSECT ALL
 function fp_kafala_get($extra = ''){
 	global $fp_handle ;
@@ -67,15 +64,15 @@ function fp_kafala_insert_sponsorships($n_sponsored_id,$n_saving,$n_date){
         $last_id = mysql_insert_id();
         switch ($n_sponsored_id){
         case 1 : 
-                include './finalOrphanAPI.php';
+                include 'finalOrphanAPI.php';
                 $orphans = fp_final_orphan_get();
                 $ocount = @count($orphans);
                 for($i = 0 ; $i < $ocount ; $i++){
 		$orphan = $orphans[$i];
-                $add_kafala_qurey = "INSERT INTO `sponsorships` VALUE($last_id,$orphan->id)";
+                $add_kafala_qurey = "INSERT INTO `sponsorships` VALUE($last_id,$orphan->id,1)";
                 $res = mysql_query($add_kafala_qurey);
-                $com_saving = $orphan->saving + $n_saving;
-                fp_final_orphan_update($orphan->id,Null,Null,$com_saving,$n_date,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null);
+                //$com_saving = $orphan->saving + $n_saving;
+                //fp_final_orphan_update($orphan->id,Null,Null,$com_saving,$n_date,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null);
                 //$up = fp_final_orphan_update($orphan->id,Null,Null,null,$n_date,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null);
                 
                 }

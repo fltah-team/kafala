@@ -3,10 +3,16 @@
 	
 	include('../../utils/db.php');
 	include('../../utils/orphanAPI.php');
-
+        include('../../utils/siblingAPI.php');
+        if(!isset($_GET['o_id']) || (int)$_GET['o_id']== 0 || $_GET['o_id'] == '' ||
+                !isset($_GET['sibling_name'])|| $_GET['sibling_name'] == '' ||
+                !isset($_GET['s_gender']) || $_GET['s_gender'] == '' ||
+                !isset($_GET['sibling_status']) || (int)$_GET['sibling_status']== 0 || $_GET['sibling_status'] == '' ||
+                !isset($_GET['s_bd']) || $_GET['s_bd'] == '')
+            die ("تعذر اضافة الفرد");
 	$orphan_id = $_GET['o_id'] ;
 	$name  = $_GET['sibling_name'] ; 
-	$sex = $_GET['s_gender'] ;;
+	$sex = (int)$_GET['s_gender'] ;;
 	$birth_date  =  $_GET['s_bd'] ;
 	$state = $_GET['sibling_status'] ;
 	
@@ -16,8 +22,8 @@
 	fp_db_close();
 	
 	if(!$result)
-		die ("fail");
-
-	echo " sibiling record is added";
+            die ("تعذر اضافة الفرد");
+        else
+            echo "تمت اضافة الفرد بنجاح";
 	
 	?>
