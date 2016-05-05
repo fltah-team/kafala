@@ -93,7 +93,7 @@
 	}
 		
 		// UPDATE
-	function fp_family_update($family_id ,$state = Null  , $warranty_organization = Null , $saving = Null  , $father_first_name = Null  , $father_middle_name = Null  , $father_last_name = Null  , $father_4th_name = Null  , $birth_date = Null  , $sex = Null  ,$social_state = Null  ,$father_dead_date = Null  , $father_dead_cause = Null  , $father_work = Null  ,  $supporter_first_name = Null  , $supporter_meddle_name = Null  , $supporter_last_name = Null  , $supporter_4th_name = Null  , $supporter_birth_date = Null  , $supporter_sex  = Null , $supporter_state = Null  , $supporter_relation = Null   , $supporter_work  = Null  , $residence_state = Null  , $city = Null  , $District = Null  , $section = Null ,$house_no = Null  , $phone1  = Null , $phone2  = Null   , $data_entery_name  = Null , $data_entery_date = Null  ){
+	function fp_family_update($family_id ,$state = Null  , $warranty_organization = Null , $saving = Null , $last_sponsorship_date = Null  , $father_first_name = Null  , $father_middle_name = Null  , $father_last_name = Null  , $father_4th_name = Null  , $birth_date = Null  , $sex = Null  ,$social_state = Null  ,$father_dead_date = Null  , $father_dead_cause = Null  , $father_work = Null  ,  $supporter_first_name = Null  , $supporter_meddle_name = Null  , $supporter_last_name = Null  , $supporter_4th_name = Null  , $supporter_birth_date = Null  , $supporter_sex  = Null , $supporter_state = Null  , $supporter_relation = Null   , $supporter_work  = Null  , $residence_state = Null  , $city = Null  , $District = Null  , $section = Null ,$house_no = Null  , $phone1  = Null , $phone2  = Null   , $data_entery_name  = Null , $data_entery_date = Null  ){
 		global $fp_handle ;
 		$uid = (int)$family_id ;
 		if($uid == 0) return false ;
@@ -120,7 +120,10 @@
 			$n_saving    = (int)$saving;
 			$fields[@count($fields)] = " `saving` = '$n_saving' ";
 			}                        
-                        
+                if(!empty($last_sponsorship_date)){
+                        $n_saving   = @mysql_real_escape_string(strip_tags($last_sponsorship_date),$fp_handle);
+                        $fields[@count($fields)] = " `last_sponsorship_date` = '$last_sponsorship_date' ";
+                        }                        
 		if(!empty($father_first_name)){
 			$n_father_first_name   = mysql_real_escape_string(strip_tags($father_first_name),$fp_handle);
 			$fields[@count($fields)] = " `father_first_name` = '$n_father_first_name' ";

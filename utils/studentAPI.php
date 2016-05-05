@@ -105,7 +105,7 @@ function fp_student_get($extra = ''){
 
 	
 	// UPDATE
-function fp_student_update($id , $state = Null , $warranty_organization = Null, $saving = Null , $first_name = Null , $meddle_name = Null , $last_name = Null , $last_4th_name = Null , $birth_date = Null , $sex = Null , $father_dead_date = Null , $father_dead_cause = Null , 	$father_work = Null ,$sisters_no = Null , $brothers_no = Null ,$residence_state = Null , $city = Null , $District = Null , $section = Null ,$house_no = Null , $phone1 = Null , $phone2 = Null ,$school_name = Null ,$uni_name = Null , $level = Null , $year = Null , $last_result = Null ,$quran_parts = Null ,$study_year_no = Null , $study_date_start = Null , $expected_grad  = Null , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date = Null  ){
+function fp_student_update($id , $state = Null , $warranty_organization = Null, $saving = Null  , $last_sponsorship_date = Null, $first_name = Null , $meddle_name = Null , $last_name = Null , $last_4th_name = Null , $birth_date = Null , $sex = Null , $father_dead_date = Null , $father_dead_cause = Null , 	$father_work = Null ,$sisters_no = Null , $brothers_no = Null ,$residence_state = Null , $city = Null , $District = Null , $section = Null ,$house_no = Null , $phone1 = Null , $phone2 = Null ,$school_name = Null ,$uni_name = Null , $level = Null , $year = Null , $last_result = Null ,$quran_parts = Null ,$study_year_no = Null , $study_date_start = Null , $expected_grad  = Null , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date = Null  ){
 
 	global $fp_handle ;
 	$uid = (int)$id;
@@ -129,7 +129,11 @@ function fp_student_update($id , $state = Null , $warranty_organization = Null, 
  	if(!empty($saving)){
 		$n_saving    = (int)$saving;
 		$fields[@count($fields)] = " `saving` = '$n_saving' ";
-		}               
+		}   
+        if(!empty($last_sponsorship_date)){
+		$n_saving   = @mysql_real_escape_string(strip_tags($last_sponsorship_date),$fp_handle);
+		$fields[@count($fields)] = " `last_sponsorship_date` = '$last_sponsorship_date' ";
+		}
 	if(!empty($first_name)){
 		$n_first_name   = mysql_real_escape_string(strip_tags($first_name),$fp_handle);
 		$fields[@count($fields)] = " `first_name` = '$n_first_name' ";

@@ -89,7 +89,7 @@
 		
 
 		// UPDATE
-	function fp_preacher_update( $id ,$type  = null ,$state = null  ,  $warranty_organization = null , $saving = Null  , $first_name = null  , $meddle_name = null  , $last_name = null  , $last_4th_name = null  , $birth_date = null  , $sex = null  , $male_members_no = null  , $female_members_no = null  , $residence_state = null  , $city = null  , $Distrit = null  , $section = null ,$house_no = null  , $phone1 = null  , $phone2 = null  , $qualify_name = null  , $qualify_date = null  , $qualify_rating = null  , $quran_parts = null  , $Issuer = null  , $current_work = null  , $Joining_Date = null  , $health_state = null  , $ill_cause = null  , $data_entery_name = null  , $data_entery_date = null  ){
+	function fp_preacher_update( $id ,$type  = null ,$state = null  ,  $warranty_organization = null , $saving = Null , $last_sponsorship_date = Null  , $first_name = null  , $meddle_name = null  , $last_name = null  , $last_4th_name = null  , $birth_date = null  , $sex = null  , $male_members_no = null  , $female_members_no = null  , $residence_state = null  , $city = null  , $Distrit = null  , $section = null ,$house_no = null  , $phone1 = null  , $phone2 = null  , $qualify_name = null  , $qualify_date = null  , $qualify_rating = null  , $quran_parts = null  , $Issuer = null  , $current_work = null  , $Joining_Date = null  , $health_state = null  , $ill_cause = null  , $data_entery_name = null  , $data_entery_date = null  ){
 		global $fp_handle ;
 		$uid = (int)$id;
 		if($uid == 0) return false ;
@@ -117,7 +117,11 @@
 		if(!empty($saving)){
 			$n_saving    = (int)$saving;
 			$fields[@count($fields)] = " `saving` = '$n_saving' ";
-			}                      
+			}    
+                if(!empty($last_sponsorship_date)){
+                        $n_saving   = @mysql_real_escape_string(strip_tags($last_sponsorship_date),$fp_handle);
+                        $fields[@count($fields)] = " `last_sponsorship_date` = '$last_sponsorship_date' ";
+                        }
 		if(!empty($first_name)){
 			$n_first_name   = mysql_real_escape_string(strip_tags($first_name),$fp_handle);
 			$fields[@count($fields)] = " `first_name` = '$n_first_name' ";

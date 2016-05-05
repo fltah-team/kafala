@@ -36,7 +36,7 @@
 	$data_entery_date  ="2000-12-10" ;
 
 	
-	$result = fp_preacher_update($id , $type ,$state ,  $warranty_organization ,$saving , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $male_members_no , $female_members_no , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 , $qualify_name , $qualify_date , $qualify_rating , $quran_parts , $Issuer , $current_work , $Joining_Date , $health_state , $ill_cause , $data_entery_name , $data_entery_date);
+	$result = fp_preacher_update($id , $type ,$state ,  $warranty_organization ,$saving ,null, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $male_members_no , $female_members_no , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 , $qualify_name , $qualify_date , $qualify_rating , $quran_parts , $Issuer , $current_work , $Joining_Date , $health_state , $ill_cause , $data_entery_name , $data_entery_date);
 	//$_GET['fno']);
 	fp_db_close();
 	

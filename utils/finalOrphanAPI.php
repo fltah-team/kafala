@@ -124,10 +124,16 @@ function fp_final_orphan_update($id ,  $state = Null , $warranty_organization = 
 		$n_saving   = (int)$saving ;
 		$fields[@count($fields)] = " `saving` = '$n_saving' ";
 		}
-	if(!empty($first_name)){
+	if(!empty($last_sponsorship_date)){
+		$n_last_sponsorship_date   = mysql_real_escape_string(strip_tags($last_sponsorship_date),$fp_handle);
+		$fields[@count($fields)] = " `last_sponsorship_date` = '$n_last_sponsorship_date' ";
+		}	
+                
+ 	if(!empty($first_name)){
 		$n_first_name   = mysql_real_escape_string(strip_tags($first_name),$fp_handle);
 		$fields[@count($fields)] = " `first_name` = '$n_first_name' ";
-		}	
+		}               
+                
 	if(!empty($meddle_name)){
 		$n_meddle_name   = mysql_real_escape_string(strip_tags($meddle_name),$fp_handle);
 		$fields[@count($fields)] = " `meddle_name` = '$n_meddle_name' ";
