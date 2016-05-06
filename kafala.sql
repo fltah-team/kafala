@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2016 at 03:08 PM
+-- Generation Time: May 06, 2016 at 11:55 AM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -83,6 +83,7 @@ CREATE TABLE IF NOT EXISTS `family` (
   `state` varchar(50) NOT NULL,
   `warranty_organization` int(11) NOT NULL,
   `saving` int(11) NOT NULL,
+  `last_sponsorship_date` date NOT NULL,
   `father_first_name` varchar(50) NOT NULL,
   `father_middle_name` varchar(50) NOT NULL,
   `father_last_name` varchar(50) NOT NULL,
@@ -129,6 +130,7 @@ CREATE TABLE IF NOT EXISTS `finalfamily` (
   `state` varchar(50) NOT NULL,
   `warranty_organization` int(11) NOT NULL,
   `saving` int(11) NOT NULL,
+  `last_sponsorship_date` date NOT NULL,
   `father_first_name` varchar(50) NOT NULL,
   `father_middle_name` varchar(50) NOT NULL,
   `father_last_name` varchar(50) NOT NULL,
@@ -177,6 +179,7 @@ CREATE TABLE IF NOT EXISTS `finalorphan` (
   `state` varchar(50) NOT NULL,
   `warranty_organization` int(11) NOT NULL,
   `saving` int(11) NOT NULL,
+  `last_sponsorship_date` date NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `meddle_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
@@ -220,13 +223,13 @@ CREATE TABLE IF NOT EXISTS `finalorphan` (
 -- Dumping data for table `finalorphan`
 --
 
-INSERT INTO `finalorphan` (`id`, `state`, `warranty_organization`, `saving`, `first_name`, `meddle_name`, `last_name`, `last_4th_name`, `birth_date`, `sex`, `mother_first_name`, `mother_middle_name`, `mother_last_name`, `mother_4th_name`, `mother_Birth_date`, `mother_state`, `father_dead_date`, `father_dead_cause`, `father_work`, `residence_state`, `city`, `District`, `section`, `house_no`, `phone1`, `phone2`, `studing_state`, `nonstuding_cause`, `school_name`, `level`, `year`, `quran_parts`, `health_state`, `ill_cause`, `data_entery_name`, `data_entery_date`, `head_dep_name`, `head_dep_date`) VALUES
-(4, '2', 1, 1, 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', 'متزوجة', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', 'المرحلة', 'المرحلة', 1, '1', 'لا يوجد', 'user', '2030-04-16', 'admin', '2016-04-30'),
-(5, '2', 1, 1, 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', '1', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', '0', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16', 'admin', '2016-04-30'),
-(6, '2', 1, 1, 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', 'متزوجة', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', 'المرحلة', 'المرحلة', 1, '1', 'لا يوجد', 'user', '2030-04-16', 'admin', '2016-04-30'),
-(7, '2', 1, 1, 'أحمد خالد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', '1', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', '0', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16', 'admin', '2016-04-30'),
-(8, '3', 1, 0, 'خالدددد5465', 'محمد', 'أبوبكر', 'خالد', '2001-05-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2001-05-16', '1', '2001-05-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', 'admin', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16', 'admin', '2016-05-01'),
-(9, '2', 1, 1, 'خالدددد', 'محمد', 'أبوبكر', 'خالد', '2001-05-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2001-05-16', '1', '2001-05-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', '', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16', 'admin', '2016-05-01');
+INSERT INTO `finalorphan` (`id`, `state`, `warranty_organization`, `saving`, `last_sponsorship_date`, `first_name`, `meddle_name`, `last_name`, `last_4th_name`, `birth_date`, `sex`, `mother_first_name`, `mother_middle_name`, `mother_last_name`, `mother_4th_name`, `mother_Birth_date`, `mother_state`, `father_dead_date`, `father_dead_cause`, `father_work`, `residence_state`, `city`, `District`, `section`, `house_no`, `phone1`, `phone2`, `studing_state`, `nonstuding_cause`, `school_name`, `level`, `year`, `quran_parts`, `health_state`, `ill_cause`, `data_entery_name`, `data_entery_date`, `head_dep_name`, `head_dep_date`) VALUES
+(4, '2', 1, 1, '0000-00-00', 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', 'متزوجة', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', 'المرحلة', 'المرحلة', 1, '1', 'لا يوجد', 'user', '2030-04-16', 'admin', '2016-04-30'),
+(5, '2', 1, 1, '0000-00-00', 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', '1', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', '0', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16', 'admin', '2016-04-30'),
+(6, '2', 1, 1, '0000-00-00', 'أحمد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', 'متزوجة', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', 'المرحلة', 'المرحلة', 1, '1', 'لا يوجد', 'user', '2030-04-16', 'admin', '2016-04-30'),
+(7, '2', 1, 1, '0000-00-00', 'أحمد خالد', 'محمد', 'أبوبكر', 'خالد', '2030-04-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2030-04-16', '1', '2030-04-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', '0', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16', 'admin', '2016-04-30'),
+(8, '3', 1, 0, '0000-00-00', 'خالدددد5465', 'محمد', 'أبوبكر', 'خالد', '2001-05-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2001-05-16', '1', '2001-05-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', 'admin', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16', 'admin', '2016-05-01'),
+(9, '2', 1, 1, '0000-00-00', 'خالدددد', 'محمد', 'أبوبكر', 'خالد', '2001-05-16', '1', 'صفية', 'احمد', 'علي', 'محمد', '2001-05-16', '1', '2001-05-16', 'مرض', 'مزارع', 1, 'الكلاكة', 'بانت', 5, 5, '91', '92', '1', 'لا يوجد', 'المرحلة', '', '0', 1, '1', 'لا يوجد', 'user', '2001-05-16', 'admin', '2016-05-01');
 
 -- --------------------------------------------------------
 
@@ -241,6 +244,7 @@ CREATE TABLE IF NOT EXISTS `finalpreacher` (
   `state` varchar(50) NOT NULL,
   `warranty_organization` int(11) NOT NULL,
   `saving` int(11) NOT NULL,
+  `last_sponsorship_date` date NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `meddle_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
@@ -286,6 +290,7 @@ CREATE TABLE IF NOT EXISTS `finalstudent` (
   `state` varchar(50) NOT NULL,
   `warranty_organization` int(11) NOT NULL,
   `saving` int(11) NOT NULL,
+  `last_sponsorship_date` date NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `meddle_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
@@ -420,6 +425,7 @@ CREATE TABLE IF NOT EXISTS `preacher` (
   `state` varchar(50) NOT NULL,
   `warranty_organization` int(11) NOT NULL,
   `saving` int(11) NOT NULL,
+  `last_sponsorship_date` date NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `meddle_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
@@ -455,8 +461,8 @@ CREATE TABLE IF NOT EXISTS `preacher` (
 -- Dumping data for table `preacher`
 --
 
-INSERT INTO `preacher` (`id`, `type`, `state`, `warranty_organization`, `saving`, `first_name`, `meddle_name`, `last_name`, `last_4th_name`, `birth_date`, `sex`, `male_members_no`, `female_members_no`, `residence_state`, `city`, `District`, `section`, `house_no`, `phone1`, `phone2`, `qualify_name`, `qualify_date`, `qualify_rating`, `quran_parts`, `Issuer`, `current_work`, `Joining_Date`, `health_state`, `ill_cause`, `data_entery_name`, `data_entery_date`) VALUES
-(1, 0, 'state rrrrrrrrrrr', 1, 1, 'first name', 's name', ' l name', ' 4 name', '2000-12-10', 'female', 1, 2, 1, 'khartoum', 'mamoorah', 1, 5, '18', '200', 'sss', '2000-12-10', 'very good ', 4, '44', '0', '2000-12-10', 'health state', 'health', 'ddddd', '2000-12-10');
+INSERT INTO `preacher` (`id`, `type`, `state`, `warranty_organization`, `saving`, `last_sponsorship_date`, `first_name`, `meddle_name`, `last_name`, `last_4th_name`, `birth_date`, `sex`, `male_members_no`, `female_members_no`, `residence_state`, `city`, `District`, `section`, `house_no`, `phone1`, `phone2`, `qualify_name`, `qualify_date`, `qualify_rating`, `quran_parts`, `Issuer`, `current_work`, `Joining_Date`, `health_state`, `ill_cause`, `data_entery_name`, `data_entery_date`) VALUES
+(1, 0, 'state rrrrrrrrrrr', 1, 1, '0000-00-00', 'first name', 's name', ' l name', ' 4 name', '2000-12-10', 'female', 1, 2, 1, 'khartoum', 'mamoorah', 1, 5, '18', '200', 'sss', '2000-12-10', 'very good ', 4, '44', '0', '2000-12-10', 'health state', 'health', 'ddddd', '2000-12-10');
 
 -- --------------------------------------------------------
 
@@ -550,7 +556,7 @@ CREATE TABLE IF NOT EXISTS `sponsor` (
   `numberOFSponsored` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `sponsor`
@@ -558,7 +564,8 @@ CREATE TABLE IF NOT EXISTS `sponsor` (
 
 INSERT INTO `sponsor` (`id`, `name`, `numberOFSponsored`) VALUES
 (1, 'jjj', 5),
-(2, 'df', 4);
+(2, 'df', 4),
+(3, 'ddd', 33);
 
 -- --------------------------------------------------------
 
@@ -678,10 +685,11 @@ CREATE TABLE IF NOT EXISTS `sponsorships` (
 
 DROP TABLE IF EXISTS `state`;
 CREATE TABLE IF NOT EXISTS `state` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `id` (`id`),
+  KEY `id_2` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `state`
@@ -702,6 +710,7 @@ CREATE TABLE IF NOT EXISTS `student` (
   `state` varchar(50) NOT NULL,
   `warranty_organization` int(11) NOT NULL,
   `saving` int(11) NOT NULL,
+  `last_sponsorship_date` date NOT NULL,
   `first_name` varchar(50) NOT NULL,
   `meddle_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
@@ -743,8 +752,8 @@ CREATE TABLE IF NOT EXISTS `student` (
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`id`, `state`, `warranty_organization`, `saving`, `first_name`, `meddle_name`, `last_name`, `last_4th_name`, `birth_date`, `sex`, `father_dead_date`, `father_dead_cause`, `father_work`, `sisters_no`, `brothers_no`, `residence_state`, `city`, `District`, `section`, `house_no`, `phone1`, `phone2`, `school_name`, `uni_name`, `level`, `year`, `last_result`, `quran_parts`, `study_year_no`, `study_date_start`, `expected_grad`, `health_state`, `ill_cause`, `data_entery_name`, `data_entery_date`) VALUES
-(3, 'state of sudan ', 1, 1, 'first name', 's name', ' l name', ' 4 name', '2000-12-10', 'female', '2000-12-10', 'accedent', 'work', 2, 5, 1, 'khartoum', 'mamoorah', 1, 5, '18', '200', '0', ' ', '1', '2', ' ', 3, 1, 2000, 2000, 'health state', 'health', 'ddddd', '2000-12-10');
+INSERT INTO `student` (`id`, `state`, `warranty_organization`, `saving`, `last_sponsorship_date`, `first_name`, `meddle_name`, `last_name`, `last_4th_name`, `birth_date`, `sex`, `father_dead_date`, `father_dead_cause`, `father_work`, `sisters_no`, `brothers_no`, `residence_state`, `city`, `District`, `section`, `house_no`, `phone1`, `phone2`, `school_name`, `uni_name`, `level`, `year`, `last_result`, `quran_parts`, `study_year_no`, `study_date_start`, `expected_grad`, `health_state`, `ill_cause`, `data_entery_name`, `data_entery_date`) VALUES
+(3, 'state of sudan ', 1, 1, '0000-00-00', 'first name', 's name', ' l name', ' 4 name', '2000-12-10', 'female', '2000-12-10', 'accedent', 'work', 2, 5, 1, 'khartoum', 'mamoorah', 1, 5, '18', '200', '0', ' ', '1', '2', ' ', 3, 1, 2000, 2000, 'health state', 'health', 'ddddd', '2000-12-10');
 
 --
 -- Constraints for dumped tables
@@ -761,7 +770,7 @@ ALTER TABLE `experience`
 -- Constraints for table `family`
 --
 ALTER TABLE `family`
-  ADD CONSTRAINT `family_state_id` FOREIGN KEY (`residence_state`) REFERENCES `state` (`id`),
+  ADD CONSTRAINT `family_state_id` FOREIGN KEY (`residence_state`) REFERENCES `state` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `sponsor` FOREIGN KEY (`warranty_organization`) REFERENCES `sponsorship` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
@@ -775,15 +784,15 @@ ALTER TABLE `finalfamily`
 -- Constraints for table `finalorphan`
 --
 ALTER TABLE `finalorphan`
-  ADD CONSTRAINT `f_sponsorship_organization` FOREIGN KEY (`warranty_organization`) REFERENCES `sponsor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `finalorphan_ibfk_1` FOREIGN KEY (`residence_state`) REFERENCES `state` (`id`);
+  ADD CONSTRAINT `f_orphan_state_id` FOREIGN KEY (`residence_state`) REFERENCES `state` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `f_sponsorship_organization` FOREIGN KEY (`warranty_organization`) REFERENCES `sponsor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `finalpreacher`
 --
 ALTER TABLE `finalpreacher`
-  ADD CONSTRAINT `f_preacher_sponsor_id` FOREIGN KEY (`warranty_organization`) REFERENCES `sponsor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `f_preacher_state_id` FOREIGN KEY (`residence_state`) REFERENCES `state` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `f_pracher_state_id` FOREIGN KEY (`residence_state`) REFERENCES `state` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `f_preacher_sponsor_id` FOREIGN KEY (`warranty_organization`) REFERENCES `sponsor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `finalstudent`
@@ -803,8 +812,8 @@ ALTER TABLE `f_member`
 -- Constraints for table `orphan`
 --
 ALTER TABLE `orphan`
-  ADD CONSTRAINT `sponsorship_organization` FOREIGN KEY (`warranty_organization`) REFERENCES `sponsor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `state_id` FOREIGN KEY (`residence_state`) REFERENCES `state` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `orphan_state_id` FOREIGN KEY (`residence_state`) REFERENCES `state` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `sponsorship_organization` FOREIGN KEY (`warranty_organization`) REFERENCES `sponsor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `preacher`
