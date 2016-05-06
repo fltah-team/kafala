@@ -5,7 +5,7 @@
 function fp_final_orphan_get($extra = ''){
 	
 	global $fp_handle ;
-	$query = sprintf("SELECT * FROM `finalorphan` %s",$extra);
+	$query = sprintf("SELECT * FROM `finalorphan` %s",$extra);echo $query;
 	$qresult = @mysql_query($query);
 	if(!$qresult) return -1 ; 
 	

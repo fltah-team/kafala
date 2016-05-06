@@ -24,17 +24,6 @@
   
 </table>
 </div>
-<!-- menu -->
-<div class="menu">
-	<ul>
-      <li><a href="cars.html">تسجيل خروج</a>
-      <li><a href="customers.html">الدعاة</a>
-      <li><a href="employees.html">الطلاب</a>
-      <li><a href="reports.html">الأسر</a>
-      <li><a href="main.html">الأيتام</a>
-   </ul>
-</div>
-
 <!-- main -->
 <div class="main">
 
@@ -48,11 +37,15 @@
         include('../../utils/sponsorAPI.php');
         include ('../../utils/kafalaAPI.php');
         include ('../../utils/error_handler.php');
-	if(!isset($_GET['id']) || $_GET['id']=="" || (int)$_GET['id']==0){
+	if(!isset($_GET['id']) || $_GET['id']=="" ){
             fp_err_show_record("اليتيم");
         }
-        
-	$id = (int)$_GET['id']; 
+        if((int)$_GET['id']==0){
+            header("location:showOrphans.php?name=".$_GET['id']);
+        }
+        else{
+	$id = (int)$_GET['id'];
+        } 
 	$orphan = fp_final_orphan_get_by_id($id);
         if(!$orphan) fp_err_show_record("اليتيم");
         $sibilings = fp_sibiling_get($id);

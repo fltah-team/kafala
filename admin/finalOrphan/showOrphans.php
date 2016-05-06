@@ -37,6 +37,9 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
 		$extra .= ' and ';
 		}
         }
+    if(isset($_GET['name'])){
+        $extra = " WHERE `first_name` = '".$_GET['name']."'";
+    }
     $start=0;
     $limit=20;
     $total_results = fp_final_orphan_get_num_rows($extra);

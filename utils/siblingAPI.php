@@ -134,7 +134,7 @@ function fp_sibiling_get_by_id($id){
 		return true ;
 		}
 
-                include 'db.php';
+                /*include 'db.php';
                 $sibilings = fp_sibiling_get(10);
                     $sicount = @count($sibilings);
                     for($i = 0 ; $i < $sicount ; $i++){
@@ -142,5 +142,5 @@ function fp_sibiling_get_by_id($id){
                         echo $sibling->id;
                         fp_sibiling_update($sibling->id ,10 , null , null, null , null);
                         echo $sibling->id;
-                    }
+                    }*/
 ?>

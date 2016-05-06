@@ -25,16 +25,43 @@
 </table>
 </div>
 <!-- menu -->
-<div class="menu">
-	<ul>
-      <li><a href="cars.html">تسجيل خروج</a>
-      <li><a href="customers.html">الدعاة</a>
-      <li><a href="employees.html">الطلاب</a>
-      <li><a href="reports.html">الأسر</a>
-      <li><a href="main.html">الأيتام</a>
-   </ul>
-</div>
-
+<table align="center">
+    <tr>
+        <td>
+            <div class="container" id="main" role="main" align="center" >
+            <ul class="menu" >
+                <li><a href="#">الأيتام</a>    
+                    <ul class="submenu">
+                        <li><a href="showOrphans.php">عرض الكل  </a></li>
+                        <li><a href="../orphan/showOrphans.php"> بيانات غير معتمدة </a></li>
+                        <li>
+                            <form method="get" action="orphanInfo.php" >
+                                <input dir="rtl" type="text" name="id" size="12"/> <input type="submit" size="5" value="بحث" id="o_serch"/>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#">المستخدمين</a>    
+                    <ul class="submenu">
+                        <li><a href="../users/showUsers.php">عرض الكل  </a></li>
+                        <li><a href="../users/addUser.php">اضافة مستخدم جديد</a></li>
+                        
+                    </ul>
+                </li>
+                <li><a href="#">ال</a>    
+                    <ul class="submenu">
+                        <li><a href="../users/showUsers.php">عرض الكل  </a></li>
+                        <li><a href="../users/addUser.php">اضافة مستخدم جديد</a></li>
+                        
+                    </ul>
+                </li>
+            </ul>
+            
+            
+            </div>
+        </td>
+    </tr>
+</table>
 <!-- main -->
 <div class="main">
 
@@ -176,6 +203,7 @@
 </table>
 <div id="footer">
 <p>جميع الحقوق محفوظة 2016 &copy;</div>
+</div>
 </div>
 </body>
 </html>
