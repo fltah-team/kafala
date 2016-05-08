@@ -1,4 +1,6 @@
 <?php
+include("db.php");
+
 	// SELECT BY ID
 function fp_sibiling_get_by_id($id){
 	$oid = (int)$id;
@@ -33,6 +35,8 @@ function fp_sibiling_get_by_id($id){
 		return true ;
 		}	
 	
+                fp_sibiling_update(7 , 1 , "ameenah" , 0 , "1950-01-01" , 1);
+                
         function fp_sibiling_update($id ,$orphan_id = null , $name= null , $sex = null, $birth_date = null , $state = null ){
                 global $fp_handle ;
                 $uid = (int)$id;
@@ -72,7 +76,8 @@ function fp_sibiling_get_by_id($id){
                         if($i != ($fcount - 1 ))
                         $query .= ' , ';
                         }
-                $query .= ' WHERE `id` = '.$uid;echo $query;
+                $query .= ' WHERE `id` = '.$uid;
+                echo $query;
                 $qresult = @mysql_query($query);
                         if(!$qresult) return false ;
                         else return true ;

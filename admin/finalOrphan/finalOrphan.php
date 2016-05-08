@@ -4,6 +4,13 @@
 	include('../../utils/db.php');
 	include('../../utils/finalOrphanAPI.php');
         include('../../utils/error_handler.php');
+       
+        if(!isset ( $_GET['id']) || !isset ( $_GET['status']) || !isset ( $_GET['sponsor']) ||!isset (  $_GET['name1']) ||!isset (  $_GET['name2']) || !isset ( $_GET['name3']) ||!isset (  $_GET['name4'])  ||!isset (  $_GET['y']) || !isset ( $_GET['m']) || !isset ( $_GET['d']) || !isset ( $_GET['gender']) ||!isset (  $_GET['mname1']) || !isset ( $_GET['mname2']) || !isset ( $_GET['mname3'])  || !isset ( $_GET['mname4']) || !isset ( $_GET['my']) || !isset ( $_GET['mm']) ||!isset (  $_GET['md']) ||!isset (  $_GET['mstatus']) || !isset ( $_GET['fy']) ||!isset (  $_GET['fm']) || !isset ( $_GET['fd']) || !isset ( $_GET['dr']) || !isset ( $_GET['lw']) || !isset ( $_GET['state']) ||!isset (  $_GET['city']) || !isset ( $_GET['district']) ||!isset (  $_GET['section'])|| !isset ( $_GET['hno']) ||!isset (  $_GET['tel1']) || !isset ( $_GET['tel2']) || !isset ( $_GET['learning']) 
+                || !isset ( $_GET['quran']) || !isset ( $_GET['illness']) )
+        {
+            fp_err_show_record("اليتيم");
+        }
+        
 	$id = $_GET['id'];
         $n_id = (int)$id;
 	$state = $_GET['status'];	
@@ -32,25 +39,42 @@
 	$phone1 = $_GET['tel1'];	
 	$phone2 = $_GET['tel2'];
 	$studing_state = $_GET['learning'];	
-        if($studing_state == 1){
-            $nonstuding_cause = "لا يوجد";
-            $school_name = $_GET['school'];	
-            $level = $_GET['level'];	
-            $year = $_GET['class'];	
-        }  
+        
+      if($studing_state == 1){
+            if (!isset($_GET['school'])|| !isset($_GET['level'])|| !isset($_GET['class']))
+            {
+                fp_err_show_record("اليتيم");
+            }else{
+                $nonstuding_cause = "لا يوجد";
+                $school_name = $_GET['school'];	
+                $level = $_GET['level'];	
+                $year = $_GET['class'];	
+            }
+                
+            }  
         else{
-            $nonstuding_cause = $_GET['teachingr'];	
-            $school_name = "لا يوجد" ;	
-            $level = "لا يوجد";	
-            $year = "لا يوجد";	
+           if (!isset($_GET['teachingr']))
+            {
+                fp_err_show_record("اليتيم");
+            }else{
+                $nonstuding_cause = $_GET['teachingr'];	
+                $school_name = "لا يوجد" ;	
+                $level = "لا يوجد";	
+                $year = "لا يوجد";
+            }
         }
 	
 	$quran_parts = $_GET['quran'];	
 	$health_state = $_GET['illness'];
-        if($health_state == 1)
+        if($health_state == 1){
             $ill_cause = "لا يوجد";
-            else
-            $ill_cause = $_GET['illt'];	
+        }
+        else{
+             if (!isset($_GET['illt'])){
+                fp_err_show_record("اليتيم"); 
+             }
+            $ill_cause = $_GET['illt'];
+        }
 	$data_entery_name = "user";	
 	$data_entery_date  = date("d-m-y");
         $data_admin_name = "admin";

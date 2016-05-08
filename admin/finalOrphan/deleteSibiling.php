@@ -7,15 +7,19 @@
 	
         $id = (int)$_GET['id'];
 	
-	
+	if(!isset($_GET['id'])){
+            fp_err_delete_fail("فرد العائلة");
+        }
 	$result = fp_sibiling_delete($id) ;
 	
 
 	fp_db_close();
 	
-	if(!$result)
-		die ("fail");
-        else
-	echo " sibiling record is deleted ";
+	if(!$result){
+            fp_err_delete_fail("فرد العائلة");
+        }	
+         else {
+            fp_err_delete_succes("فرد العائلة")  ;
+        }
 	
 	?>
