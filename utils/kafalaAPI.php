@@ -86,8 +86,20 @@ function fp_kafala_insert_sponsorships($n_sponsored_id,$n_saving,$n_date){
                 } 
     }
 }
+    include("db.php");
 
-	
+    fp_sponsorships_delete(1);
+function fp_sponsorships_delete($o_id){
+        global $fp_handle ;
+        $orphan_id = (int)$o_id ;
+        if($orphan_id == 0) return false ;
+        $query = sprintf("DELETE FROM `sponsorships` WHERE `sponsored` = %d",$orphan_id);
+        $qresult = @mysql_query($query);
+	if(!$qresult) return false ;
+	@mysql_free_result($qresult);
+	return true ;        
+
+}
 	// DELETE
 function fp_kafala_delete($id){
 	global $fp_handle ;
