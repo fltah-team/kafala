@@ -1,6 +1,4 @@
 <?php
- 
-include("db.php");
 
 
 	// SELSECT ALL sponsor
@@ -33,9 +31,6 @@ function fp_sponsor_get_by_id($id){
 	return $sponsor ;
 	}
         
-        
-        fp_sponsor_delete(2);
-        
 	function fp_sponsor_add( $name , $numberOFSponsored){
 		global $fp_handle;
 	
@@ -43,8 +38,6 @@ function fp_sponsor_get_by_id($id){
 		$n_name    = @mysql_real_escape_string(strip_tags($name),$fp_handle);
 		$n_numberOFSponsored = (int)$numberOFSponsored ;
 		$query = ("INSERT INTO `sponsor`( `id` , `name` , `numberOFSponsored`) VALUE(NULL,'$n_name' , '$n_numberOFSponsored' )");
-		echo $query ;
-		
 		$qresult = mysql_query($query);
 		if(!$qresult) return false ;
 		
@@ -59,7 +52,7 @@ function fp_sponsor_get_by_id($id){
   	function fp_sponsor_delete($id){
 		$uid = (int)$id;
 		if($uid == 0) return false ;
-		$query = sprintf("DELETE FROM `sponsor` WHERE `id` = %d",$uid);
+		$query = sprintf("DELETE FROM `sponsor` WHERE `id` = %d",$uid);echo $query;
 		$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
 		

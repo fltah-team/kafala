@@ -1,5 +1,4 @@
 <?php
-	
 
 	// SELSECT ALL
 function fp_final_orphan_get($extra = ''){
@@ -37,7 +36,7 @@ function fp_final_orphan_get_last_id(){
 	$orphans = fp_final_orphan_get("ORDER BY `id` DESC LIMIT 1");
 	if($orphans == NULL) return NULL ;
 	$orphan = $orphans[0];
-	return $orphan ;
+	return $orphan->id ;
 }
 	// SELECT BY ID
 function fp_final_orphan_get_by_id($id){
@@ -95,15 +94,18 @@ function fp_final_orphan_add($state , $warranty_organization  , $saving , $first
  				VALUE(NULL , '$n_state' , '$n_warranty_organization' , '$n_saving', '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_mother_first_name' , '$n_mother_middle_name' , '$n_mother_last_name' , '$n_mother_4th_name' , '$n_mother_Birth_date' , '$n_mother_state' ,'$n_father_dead_date' , '$n_father_dead_cause' , '$n_father_work' , '$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2'  , '$n_studing_state' ,'$n_nonstuding_cause', '$n_school_name' , '$n_level' , '$n_year' , '$n_quran_parts' , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date'  , '$n_head_dep_name' , '$n_head_dep_date' )");
 	$qresult = mysql_query($query);
 	if(!$qresult) return false ;
-        include('../../utils/siblingAPI.php');
+        include('siblingAPI.php');
+        include('orphanAPI.php');
         $sibilings = fp_sibiling_get($phone1);
         $sicount = @count($sibilings);
-        $last_id = fp_final_orphan_get_last_id();
-        @mysql_free_result($last_id);
-        for($i = 0 ; $i <- $sicount ; $i++){
-            $sibling = $sibilings[$i];echo $i;
-            fp_sibiling_update($sibling->id, $last_id->id, NULL, NULL, NULL, NULL);
+        if($sicount > 0 ){
+            $last_id = fp_final_orphan_get_last_id();
+            for($i = 0 ; $i < $sicount ; $i++){
+                $sibling = $sibilings[$i];
+                fp_sibiling_update($sibling->id, $last_id);
         }
+        }
+        fp_orphan_delete($phone1);
 	return true ;
 	}
 	
@@ -305,7 +307,8 @@ function fp_final_orphan_delete($id){
 	$query = sprintf("DELETE FROM `finalorphan` WHERE `id` = %d",$uid);
 	$qresult = @mysql_query($query);
 	if(!$qresult) return false ;
-	
+        include('kafalaAPI.php');
+        fp_kafala_delete($id)
 	return true ;
 	}
 	

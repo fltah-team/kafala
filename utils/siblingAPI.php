@@ -99,7 +99,6 @@ function fp_sibiling_get_by_id($id){
 		
 		return $sibiling ; 
 		}
-    
        	// get with extra 
 	function fp_sibiling_get_for_gender($orphan_id,$extra ){
 		global $fp_handle ;

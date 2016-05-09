@@ -38,19 +38,13 @@ function fp_states_get_by_id($id){
         
 	function fp_states_add( $name ){
 		global $fp_handle;
-	
-
 		$n_name    = @mysql_real_escape_string(strip_tags($name),$fp_handle);
-
 		$query = ("INSERT INTO `state`( `id` , `name`) VALUE(NULL,'$n_name'  )");
-		echo $query ;
-		
 		$qresult = mysql_query($query);
 		if(!$qresult) return false ;
 		
 		return true ;
 		}
-                
   	function fp_states_delete($id){
 		$uid = (int)$id;
 		if($uid == 0) return false ;
@@ -60,5 +54,5 @@ function fp_states_get_by_id($id){
 		
 		return true ;
 		}
-
+        
 ?>	

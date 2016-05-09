@@ -1,3 +1,12 @@
+<?php
+    if(isset($_POST['login-name']) && isset($_POST['login-pass'])){
+        include 'auth/login.php';
+        if(fp_login($_POST['login-name'],$_POST['login-pass']))
+                echo "OK";
+        else
+            echo "err0";
+    }
+?>
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -25,23 +34,27 @@
 			</div>
 
 			<div class="login-form">
+                            <form action="index.php" method="post" >
 				<div class="control-group">
-				<input type="text" class="login-field" value="" placeholder="اسم المستخدم" id="login-name" />
+				<input type="text" class="login-field" value="" placeholder="اسم المستخدم" name="login-name" />
 				<label class="login-field-icon fui-user" for="login-name"></label>
 				</div>
 
 				<div class="control-group">
-				<input type="password" class="login-field" value="" placeholder="كلمة المرور" id="login-pass" />
+				<input type="password" class="login-field" value="" placeholder="كلمة المرور" name="login-pass" />
 				<label class="login-field-icon fui-lock" for="login-pass"></label>
 				</div>
 
-                            <a class="btn btn-primary btn-large btn-block" onclick="get_str()">تسجيل دخول</a>
+                            <!--<a class="btn btn-primary btn-large btn-block" onclick="get_str()">تسجيل دخول</a>-->
+                            <input type="submit" value="تسجيل دخول" class="btn btn-primary btn-large btn-block" id="login"/>
 				<a class="login-link" href="#">نسيت كلمة المرور ؟</a>
+                            </form>
 			</div>
 		</div>
 	</div>
-<script >
-    function IsEmpty(){ 
+
+<script type="text/javascript" >
+    /*function IsEmpty(){ 
         var text = document.getElementsByTagName('input');
         var empty_checker = 0 ;
         for(var i = 0 ; i< text.length ; i++){
@@ -113,7 +126,7 @@ function ajax(str)
     }
     return ajax;
 	
-}
+}*/
 </script>
 <div id="footer">
 <p>جميع الحقوق محفوظة 2016 &copy;</p>
