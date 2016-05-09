@@ -20,14 +20,53 @@
 
 <!-- menu -->
 <div class="menu">
-	<ul>
-      
-      <li><a href="../employee/orphan/cars.html">تسجيل خروج</a>
-      <li><a href="../employee/orphan/customers.html">الدعاة</a>
-      <li><a href="../employee/orphan/employees.html">الطلاب</a>
-      <li><a href="../employee/orphan/reports.html">الأسر</a>
-      <li><a href="../employee/orphan/main.html">الأيتام</a>
-   </ul>
+	<table align="center">
+    <tr>
+        <td>
+            <div class="container" id="main" role="main" align="center" >
+            <ul class="menu" >
+                <li><a href="#">الأيتام</a>    
+                    <ul class="submenu">
+                        <li><a href="showOrphans.php">عرض الكل  </a></li>
+                        <li><a href="../orphan/showOrphans.php"> بيانات غير معتمدة </a></li>
+                        <li>
+                            <form method="get" action="orphanInfo.php" >
+                                <input dir="rtl" type="text" name="id" size="12"/> <input type="submit" size="5" value="بحث" id="o_serch"/>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#">المستخدمين</a>    
+                    <ul class="submenu">
+                        <li><a href="../users/showUsers.php">عرض الكل  </a></li>
+                        <li><a href="../users/addUser.php">اضافة مستخدم جديد</a></li>
+                        
+                    </ul>
+                </li>
+                <li><a href="#">الكفالات</a>    
+                    <ul class="submenu">
+                        <li><a href="../kafala/showKafala.php">عرض الكل  </a></li>
+                        <li><a href="../kafala/addKafala.php">اضافة كفالة جديدة</a></li>
+                        
+                    </ul>
+                </li>
+                <li><a href="#">أخرى</a>    
+                    <ul class="submenu">
+                        <li><a href="../sponsor/showSponsor.php">عرض جهات الكفالة  </a></li>
+                        <li><a href="../sponsor/addSponsor.php">اضافة جهة كفالة</a></li>
+                        <li><a href="../states/showState.php">عرض المدن  </a></li>
+                        <li><a href="../kafala/showKafala.php">اضافة مدينة جديدة</a></li>
+                        
+                    </ul>
+                </li>
+                <li><a href="../../utils/logout.php">تسجيل خروج</a></li>
+            </ul>
+            
+            
+            </div>
+        </td>
+    </tr>
+</table>
 </div>
 
 <!-- main -->

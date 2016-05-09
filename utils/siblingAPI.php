@@ -1,6 +1,4 @@
 <?php
-include("db.php");
-
 	// SELECT BY ID
 function fp_sibiling_get_by_id($id){
 	$oid = (int)$id;

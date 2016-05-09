@@ -1,12 +1,4 @@
-<?php
-    if(isset($_POST['login-name']) && isset($_POST['login-pass'])){
-        include 'auth/login.php';
-        if(fp_login($_POST['login-name'],$_POST['login-pass']))
-                echo "OK";
-        else
-            echo "err0";
-    }
-?>
+
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -34,7 +26,7 @@
 			</div>
 
 			<div class="login-form">
-                            <form action="index.php" method="post" >
+                            <form action="login.php" method="post" >
 				<div class="control-group">
 				<input type="text" class="login-field" value="" placeholder="اسم المستخدم" name="login-name" />
 				<label class="login-field-icon fui-user" for="login-name"></label>

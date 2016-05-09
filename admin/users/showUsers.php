@@ -72,7 +72,7 @@
     <td width="9%"></td>    
     <td width="30%"></td>
     <td width="4%"></td>
-    <td width="31%"><button name="add" class="bt"  type="button" onclick="print()"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
+    <td width="31%"><button name="add" class="bt"  type="button" onclick="printt()"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
     <td width="16%"></td>
     
   </tr>
@@ -139,6 +139,9 @@ if($page>1)
 </div>
 </div>
 <script type="text/javascript">
+function printt(){
+    window.location.href = "print_users.php"
+}
 function show_confirm(id){
     var confirm = "<div  id='show_confirm' class='confirm' ><img src='../../images/style images/success.png'alt='yes' class='yes' onclick='ajax(id)'/><img src='../../images/style images/error.png' alt='no' class='yes' onclick'' /></div>";
     return confirm;
@@ -199,13 +202,12 @@ function show_confirm(id){
 	}
 }
 
-function print()
+function printf()
 {
     var ajax;
 	//var d_node = document.getElementById(elementID);
 	elementID = "sucsses_notice";
 	filename = "print_users.php";
-	str = "?id="+ID;
 	post = false ;
 	
     if (window.XMLHttpRequest)
@@ -229,12 +231,12 @@ function print()
     {
         if (ajax.readyState==4&&ajax.status==200)
         {
-            alert(ajax.responseText);
+            printt(ajax.responseText);
         }
     }
     if (post==false)
     {
-        ajax.open("GET",filename+str,true);
+        ajax.open("GET",filename,true);
         ajax.send(null);
 		
     }

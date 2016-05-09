@@ -10,18 +10,32 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <style >
+        *{
+            font-family:Droid Arabic Kufi;
+        }
+        .table{
+        }
+        .header{
+            border: 1px #000 solid;
+            background: #f1eded
+        }
+        .data{
+            border: 1px #000 solid;
+        }
+    </style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>الهيئة الخيرية الاسلامية للرعاية الاجتماعية</title>
 </head>
 
 <body>
-<div style=" margin: 0 auto; width: 100%; border: solid 3px black; border-radius: 30px;">
+<div >
 <!-- Title -->
 <div id="title">
-<table width="90%" border="0" align="center">
+    <table width="100%" border="0" align="center">
   <tr>
     <td align="center"><img src="../../images/logo.png" /></td>
-    <td align="center"><h2>الهيئة الخيرية الاسلامية للرعاية الاجتماعية</h2 ></td>
+    <td align="center"><h3>الهيئة الخيرية الاسلامية للرعاية الاجتماعية</h3></td>
     <td align="center"  ><img src="../../images/logo.png" /></td>
   </tr>
 </table>
@@ -36,25 +50,25 @@
 
 
 
-<table width="90%" align="center" border="2">
+<table class="table" width="100%" align="center" border="0">
 
-    <tr align="center"  style="background: #e7e6e6;" >
-        <td width="25%" > نوع المستخدم</td>
-    <td width="20%">اسم المستخدم</td>
-    <td width="45%">الاسم كامل</td>
-    <td width="10%">الرقم</td>
+    <tr align="center"   >
+        <td class="header"  width="35%" > نوع المستخدم</td>
+    <td class="header"  width="20%">اسم المستخدم</td>
+    <td class="header"  width="40%">الاسم كامل</td>
+    <td class="header"  width="5%">الرقم</td>
   </tr>
   <?php 
   	for($i = 0 ; $i < $ucount ; $i++){
-		$user = $users[$i];
+		$user = $users[0];
   ?>
-    <tr align="center" style="background: #f6f5f5   ;" onclick="window.location.href='user.php?id='+<?php echo $user->id?>" >
-    <td><?php
+    <tr  align="center" onclick="window.location.href='user.php?id='+<?php echo $user->id?>" >
+    <td class="data"><?php
   fp_get_user_type($user->type);
 	  ?></td>
-    <td><?php echo $user->username?></td>
-    <td><?php echo $user->name?></td>
-    <td><?php echo $user->id?></td>
+    <td class="data"><?php echo $user->username?></td>
+    <td class="data"><?php echo $user->name?></td>
+    <td class="data"><?php echo $i+1?></td>
     
   </tr>
   <?php } ?>
@@ -68,3 +82,6 @@
 </div>
 </body>
 </html>
+<script type="text/javascript" >
+    //window.print();
+</script>

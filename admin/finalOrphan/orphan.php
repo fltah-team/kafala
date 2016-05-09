@@ -51,7 +51,7 @@
                 <li><a href="#">الكفالات</a>    
                     <ul class="submenu">
                         <li><a href="../kafala/showKafala.php">عرض الكل  </a></li>
-                        <li><a href="../kafala/showKafala.php">اضافة كفالة جديدة</a></li>
+                        <li><a href="../kafala/addKafala.php">اضافة كفالة جديدة</a></li>
                         
                     </ul>
                 </li>
@@ -64,6 +64,7 @@
                         
                     </ul>
                 </li>
+                <li><a href="../../utils/logout.php">تسجيل خروج</a></li>
             </ul>
             
             
@@ -97,7 +98,7 @@
       </form></td>
      <td align="center"width="187" align="center" >
     <form action="addOrphan.htm" method="post">
-    <input class="bt" type="submit" name="button" id="button" value="اضافة طالبجديد" />
+    <input class="bt" type="submit" name="button" id="button" value="اضافة يتيم جديد" />
     </form>
     </td>
   </tr>
