@@ -656,13 +656,7 @@ function delete_sibling_ajax(id)
     <td align="center"></td>
     <td>&nbsp;</td>
   </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td align="center"><button class="add_bt" name="add" type="button" onclick="get_str()" >تعديل البيانات<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
-    <td>&nbsp;</td>
-  </tr>
+
 
 </table>
   </form>
@@ -670,97 +664,7 @@ function delete_sibling_ajax(id)
 <div  style="margin: 0 auto; text-align: center ; width: 60%;" id="reponse">
 </div>
 <script type="text/javascript" >
-        
-function IsEmpty(){ 
-        var text = document.getElementsByTagName('input');
-        var empty_checker = 0 ;
-        for(var i = 0 ; i< text.length ; i++){
-           if(text[i].value == ''){
-               text.item(i).style.color = "#ff0000" ;
-               text.item(i).setAttribute("placeholder","هذا الحقل فارغ");
-               empty_checker++;
-           }
-        }
-        if(empty_checker > 0 )alert("هناك حقول يجب تعبئتها");
-        else get_str();
-}
 
-function get_str(){
-        
-	var text = document.getElementsByTagName('input');
-        var select = document.getElementsByTagName('select');
-        var str = '';
-        for(var i = 0 ; i< text.length ; i++){
-           str += text[i].getAttribute('id')+'='+text[i].value+'&';
-        }
-        for(var i = 0 ; i< select.length ; i++){
-           str += select[i].getAttribute('id')+'='+select[i].value+'&';
-        }
-        gender_value = 1 ;
-        if(document.getElementById("male_gender").checked == true) gender_value = "1" ;
-        else
-            if(document.getElementById("female_gender").checked == true) gender_value = "0" ;
-        else gender_value = "1" ;
-        str+="gender="+gender_value;
-        //window.location.href = "updateOrphan.php?"+str;
-        ajax(str);
-}
-function ajax(str)
-{		
-    var ajax;
-	var data ;
-	//var d_node = document.getElementById(elementID);
-	elementID = "div";
-	filename = "updateOrphan.php";
-	post = false ;
-    if (window.XMLHttpRequest)
-    {
-        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
-    }
-    else if (ActiveXObject("Microsoft.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
-    }
-    else if (ActiveXObject("Msxml2.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
-    }
-    else
-    {
-        alert("Error: Your browser does not support AJAX.");
-        return false;
-    }
-    ajax.onreadystatechange=function()
-    {
-        if (ajax.readyState==4&&ajax.status==200)
-        {
-            document.getElementById("reponse").innerHTML=ajax.responseText;
-        }
-    }
-    if (post==false)
-    {
-        ajax.open("GET",filename+"?"+str,true);
-        ajax.send(null);
-		
-    }
-    else
-    {
-        ajax.open("POST",filename,true);
-        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        ajax.send(str);
-    }
-    return ajax;
-	
-}
-
-function add_sibling (){
-    var s_final_str = "";
-    if(s_str_array.length != 0)
-    for(var i =0 ; i < s_str_array.length ; i++){
-        s_final_str+=s_str_array[i];
-    }
-     alert(document.getElementById("success_notice").getAttribute("name"));
-}		
 </script>
 <div id="footer">
 <p>جميع الحقوق محفوظة 2016 &copy;</div>
