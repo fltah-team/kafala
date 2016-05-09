@@ -48,10 +48,19 @@
                         
                     </ul>
                 </li>
-                <li><a href="#">ال</a>    
+                <li><a href="#">الكفالات</a>    
                     <ul class="submenu">
-                        <li><a href="../users/showUsers.php">عرض الكل  </a></li>
-                        <li><a href="../users/addUser.php">اضافة مستخدم جديد</a></li>
+                        <li><a href="../kafala/showKafala.php">عرض الكل  </a></li>
+                        <li><a href="../kafala/showKafala.php">اضافة كفالة جديدة</a></li>
+                        
+                    </ul>
+                </li>
+                <li><a href="#">أخرى</a>    
+                    <ul class="submenu">
+                        <li><a href="../sponsor/showSponsor.php">عرض جهات الكفالة  </a></li>
+                        <li><a href="../sponsor/addSponsor.php">اضافة جهة كفالة</a></li>
+                        <li><a href="../states/showState.php">عرض المدن  </a></li>
+                        <li><a href="../kafala/showKafala.php">اضافة مدينة جديدة</a></li>
                         
                     </ul>
                 </li>

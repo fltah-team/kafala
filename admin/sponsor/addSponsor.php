@@ -34,7 +34,7 @@
 <div class="main">
 
 <div class="login">
-    <h2 align="center" class="adress">اضافة مدينة </h2>
+    <h2 align="center" class="adress">اضافة جهة كفالة </h2>
 <br />
 <form >
 	<table width="60%" border="0" align="center">
@@ -44,7 +44,7 @@
   </tr>
   <tr>
     <td align="right" width="58%"><input class="textFiels" name="un" type="text" id="complete_name" size="30" maxlength="30" /></td>
-    <td align="center" width="42%">الاسم المدينة</td>
+    <td align="center" width="42%">اسم جهة الكفالة</td>
     </tr>
       
   <tr>
@@ -84,7 +84,7 @@ function ajax()
     document.getElementById('bt').style.display = 'none';
 	//var d_node = document.getElementById(elementID);
 	elementID = "div";
-	filename = "saveState.php";
+	filename = "saveSponsor.php";
 	str = "name="+complete_name.value;
 	post = false ;
     if (window.XMLHttpRequest)

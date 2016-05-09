@@ -72,7 +72,7 @@
     <td width="9%"></td>    
     <td width="30%"></td>
     <td width="4%"></td>
-    <td width="31%"><button name="add" class="bt"  type="button" onclick="window.open('print_users.php')"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
+    <td width="31%"><button name="add" class="bt"  type="button" onclick="print()"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
     <td width="16%"></td>
     
   </tr>
@@ -198,7 +198,55 @@ function show_confirm(id){
     return ajax;
 	}
 }
+
+function print()
+{
+    var ajax;
+	//var d_node = document.getElementById(elementID);
+	elementID = "sucsses_notice";
+	filename = "print_users.php";
+	str = "?id="+ID;
+	post = false ;
 	
+    if (window.XMLHttpRequest)
+    {
+        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
+    }
+    else if (ActiveXObject("Microsoft.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
+    }
+    else if (ActiveXObject("Msxml2.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
+    }
+    else
+    {
+        alert("Error: Your browser does not support AJAX.");
+        return false;
+    }
+    ajax.onreadystatechange=function()
+    {
+        if (ajax.readyState==4&&ajax.status==200)
+        {
+            alert(ajax.responseText);
+        }
+    }
+    if (post==false)
+    {
+        ajax.open("GET",filename+str,true);
+        ajax.send(null);
+		
+    }
+    else
+    {
+        ajax.open("POST",filename,true);
+        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.send(str);
+    }
+    return ajax;
+	}
+
 </script>
 </body>
 </html>

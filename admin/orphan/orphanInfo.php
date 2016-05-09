@@ -569,9 +569,9 @@ function delete_sibling_ajax(id)
   <tr>
       <td>&nbsp;</td>
       
-      <td align="center"><input class="textFiels" disabled name="level" type="text" id="level" size="10" maxlength="30" value="<?php echo $orphan->data_entery_date?>"/></td>
+      <td align="center"><input class="textFiels" disabled name="level" type="text" id="user_d" size="10" maxlength="30" value="<?php echo $orphan->data_entery_date?>"/></td>
     <td align="center">التاريخ</td>
-    <td align="center"><input class="textFiels" disabled name="level" type="text" id="level" size="10" maxlength="30" value="<?php echo $orphan->data_entery_name?>"/></td>
+    <td align="center"><input class="textFiels" disabled name="level" type="text" id="user" size="10" maxlength="30" value="<?php echo $orphan->data_entery_name?>"/></td>
     <td align="center">مدخل البيانات   </td>
   </tr>
    

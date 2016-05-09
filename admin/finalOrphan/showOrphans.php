@@ -112,7 +112,7 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
             echo '
                 <div style="text-align:center;color:#fff;">
                 <div class="alert-box notice"><span>تنبيه: </span>لا يوجد أيتام لعرضهم
-                <p>يمكنك اضافة أيتام من <a href="addOrphan.php">هنا</a></p>
+                <p>يمكنك اضافة أيتام من <a href="../orphan/addOrphan.php">هنا</a></p>
                 </div>
                 <div id="footer">
                 <p>جميع الحقوق محفوظة 2016 &copy;</p>

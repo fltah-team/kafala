@@ -1,9 +1,9 @@
 <?php
 	include('../../utils/db.php');
-	include('../../utils/stateAPI.php');
+	include('../../utils/sponsorAPI.php');
         include('../../utils/error_handler.php');
     
-        $states = fp_states_get();
+        $states = fp_sponsor_get();
 	fp_db_close();
         
 ?>
@@ -43,12 +43,12 @@
 
 <!-- main -->
 <div class="main">
-<h1 align="center" class="adress">  المدن </h1>
+<h1 align="center" class="adress"> جهات الكفالة </h1>
 <br />
 
 <?php
     if($states == 0 ||$states == -1 ) {
-            fp_err_show_records("المدن");
+            fp_err_show_records("جهات الكفالة");
         }
         
 	$ucount = @count($states);
@@ -91,7 +91,7 @@ function ajax(ID)
     var ajax;
 	//var d_node = document.getElementById(elementID);
 	elementID = "sucsses_notice";
-	filename = "deleteState.php";
+	filename = "deleteSponsor.php";
 	str = "?id="+ID;
 	post = false ;
 	conf = confirm("هل تريد مسح <?php echo $state->name?>");
@@ -118,8 +118,8 @@ function ajax(ID)
         if (ajax.readyState==4&&ajax.status==200)
         {
             alert(ajax.responseText);
-			window.location.href = "showState.php";
-			//document.getElementById(elementID).innerHTML=ajax.responseText;
+		window.location.href = "showSponsor.php";
+		//document.getElementById(elementID).innerHTML=ajax.responseText;
         }
     }
     if (post==false)

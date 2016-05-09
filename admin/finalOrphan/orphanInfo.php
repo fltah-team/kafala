@@ -195,9 +195,9 @@
      
 <table align="center" width="60%" >
     <tr>
-        <td><input class="textFiels" id="saving" disabled size="10px" value="<?php echo $orphan->saving?>" ></input></td>
+        <td><input class="textFiels" id="saving" disabled size="10px" value="<?php echo $orphan->saving ?>" ></input></td>
         <td>اجمالي الادخار</td>
-        <td><input class="textFiels" id="saving" disabled size="10px" value="<?php echo 4?>" ></input></td>
+        <td><input class="textFiels" id="saving" disabled size="10px" value="<?php echo $orphan->last_sponsorship_date ?>" ></input></td>
         <td>تاريخ اخر كفالة</td>
     </tr>
 </table>
