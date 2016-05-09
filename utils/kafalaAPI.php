@@ -86,9 +86,7 @@ function fp_kafala_insert_sponsorships($n_sponsored_id,$n_saving,$n_date){
                 } 
     }
 }
-    include("db.php");
 
-    fp_sponsorships_delete(1);
 function fp_sponsorships_delete($o_id){
         global $fp_handle ;
         $orphan_id = (int)$o_id ;
