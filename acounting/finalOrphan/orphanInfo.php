@@ -360,7 +360,8 @@
 </table>
 
 <!--   Family   -->
-
+<?php $scount = @count($sibilings);
+        if($scount>0){?>
 
 <br />
 <h2 align="center"><b><span dir="RTL" lang="AR-SA">عدد افراد الاسرة </span>
@@ -374,8 +375,6 @@
     <td width="15%" align="right"><h2><?php echo $male_count+$female_count?></h2></td>
     <td width="14%" align="center">  عدد الاخوان  </td>
   </tr>
-  
-  
     <table class="table" width="70%" border="0" align="center">
    <br />
    <tr class="table_header">
@@ -387,7 +386,6 @@
     <td align="center" width="10%">&nbsp;</td>
   </tr>
    <?php 
-        $scount = @count($sibilings);
         for($i = 0 ; $i < $scount ; $i++){
 		$one_sibling = $sibilings[$i];
   ?>
@@ -402,56 +400,8 @@
     <td align="center"><?php echo $i+1 ?></td>
   </tr>
    <?php } ?>
-   <tr class="table_data<?php echo $i%2?>">
-       <td></td>
-    <td align="center" >
-        <select tabindex="0" class="select" name="status" id="s_status">
-      <option value="1">مكفول</option>
-      <option value="2">قيد التسويق</option>
-      <option value="3">متوقف</option>
-    </select>
-    </td>
-    <td align="center">
-        <table width="60%" border="0">
-      <tr>
-        <td><select name="my" class="select" id="sy">
-          <?php
-	  for($i=1950 ; $i <= date("Y") ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-        <td><select class="select" name="mm" id="sm">
-          <?php
-	  for($i=1 ; $i <= 12 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-        <td><select class="select" name="md" id="sd">
-          <?php
-	  for($i=1 ; $i <= 31 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-      </tr>
-    </table>
-    </td>
-       <td align="center" dir="rtl" >
-  	    ذكر<input type="radio" name="s_gender" value="1" id="sibling_male_gender" />
-            &nbsp;&nbsp;
-  	    أنثى<input type="radio" name="s_gender" value="0" id="sibling_female_gender" />
-  	    
-    </td>
-    <td align="center"><input class="textFielsS" name="fbname" type="text" id="sibling_name" size="10" maxlength="30" /></td>
-    <td></td>
-  </tr>
-  <tr >
-  	
-    <td align="center"><input type="button" name="login " id="login " onclick="get_s_str()" value="إضافة فرد" /></td>
-   </tr>
-
 </table>
-
-
+        <?php } ?>
 </table>
 
 <script type="text/javascript">
