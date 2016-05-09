@@ -1,5 +1,6 @@
 <?php
-function fp_login($un,$pass){   
+function fp_login($un,$pass){
+    include 'db.php';
     include 'usersAPI.php';
     $n_un    = @mysql_real_escape_string(strip_tags($un));
     $n_pass    = @mysql_real_escape_string(strip_tags($pass));
@@ -14,5 +15,16 @@ function fp_login($un,$pass){
         else
             return false;
 }
+}
+function fp_is_loged($t){
+     if(isset($_SESSION['un']) && isset($_SESSION['u_type'])){
+         if($t == $_SESSION['u_type']) return true ;
+         else if($t == '*') return true ; 
+     }
+     return false ;
+}
+function fp_logout(){
+    session_destroy();
+    header("location:../");
 }
 ?>

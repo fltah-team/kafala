@@ -51,7 +51,7 @@
                 <li><a href="#">الكفالات</a>    
                     <ul class="submenu">
                         <li><a href="../kafala/showKafala.php">عرض الكل  </a></li>
-                        <li><a href="../kafala/showKafala.php">اضافة كفالة جديدة</a></li>
+                        <li><a href="../kafala/addKafala.php">اضافة كفالة جديدة</a></li>
                         
                     </ul>
                 </li>
@@ -64,6 +64,7 @@
                         
                     </ul>
                 </li>
+                <li><a href="../../utils/logout.php">تسجيل خروج</a></li>
             </ul>
             
             
@@ -73,10 +74,7 @@
 </table>
 <!-- main -->
 <div class="main">
-
 <div class="login">
-<h2 align="center">بيانات يتيم </h2>
-<br />
 <?php 
         include('../../utils/db.php');
         include('../../utils/sponsorAPI.php');	
@@ -87,24 +85,28 @@
         $states = fp_states_get();
         $stcount = @count($states);
 ?>
+<h1 align="center" class="adress" dir="rtl">الأيتام</h1>
 <br />
-<table width="400" border="0" align="center">
-<form action="orphanInfo.htm" method="post">
-  <tr>
-     <td align="center"width="98" align="center"><input class="bt" type="submit" name="button" id="button" value="بحث طالب" /></td>
-     <td align="center"width="101" align="center"><label for="textfield"></label>
-      <input class="textFiels" name="textfield" type="text" id="textfield" size="10" />
-      </form></td>
-     <td align="center"width="187" align="center" >
-    <form action="addOrphan.htm" method="post">
-    <input class="bt" type="submit" name="button" id="button" value="اضافة طالبجديد" />
-    </form>
-    </td>
-  </tr>
-  
+<table dir="rtl" width="50%" border="0" align="center">
+    <tr align="center">
+        <td>
+            <button onclick="window.location.href = '../orphan/addorphan.php'" >
+                <img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" />
+                اضافة يتيم جديد
+            </button>
+        </td>
+        <td>
+            <input id="s_tf" type="text" size="10px" class="textFiels"  />
+        </td>
+        <td>
+            <button class="bt" onclick="window.location.href = '../finalOrphan/orphanInfo.php?id='+document.getElementById('s_tf').value" >
+                <img align="right" src="../../images/style images/search_icon.png" style="padding-left:5px" />
+                بحث
+            </button>
+        </td>
+    </tr>
 </table>
-<br />
-<h2 align="center">عرض بيانات الطلاب </h2>	
+<h2 align="center">عرض بيانات الأيتام </h2>	
 <table width="500" border="0" align="center">
     <form action="showOrphans.php" method="get">
   <tr>

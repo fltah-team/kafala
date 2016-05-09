@@ -44,8 +44,8 @@
 <?php 
         include('../../utils/db.php');
 	include('../../utils/orphanAPI.php');
+        include('../../utils/siblingAPI.php');
         include('../../utils/sponsorAPI.php');
-        include ('../../utils/kafalaAPI.php');
         include ('../../utils/error_handler.php');
 	if(!isset($_GET['id']) || $_GET['id']=="" || (int)$_GET['id']==0){
             fp_err_show_record("اليتيم");
@@ -53,13 +53,13 @@
         global $fp_handle;
 	$id = @mysql_real_escape_string(strip_tags($_GET['id']),$fp_handle);
 	$orphan = fp_orphan_get_by_phone1($id);
+	if(!$orphan) fp_err_show_record("اليتيم");
+        
         $sibilings = fp_sibiling_get($orphan->phone1);
         $siblings_male = fp_sibiling_get_for_gender($id," and sex = 1 ");
         $siblings_female = fp_sibiling_get_for_gender($id," and sex = 0 ");
-        $kafalas = fp_sposored_get_kafala($id);
-	$male_count = @count($siblings_male);
-        $female_count = @count($siblings_female);
-	if(!$orphan) fp_err_show_record("اليتيم");	
+        $male_count = @count($siblings_male);
+        $female_count = @count($siblings_female);	
 	$scount = @count($sibilings);
         include('../../utils/stateAPI.php');
 	$states = fp_states_get();
@@ -194,67 +194,6 @@
 </table>
 
 <br />
-<h2 align="center"> الكفالات </h2>
-
-<br />
-     
-<table align="center" width="60%" >
-    <tr>
-        <td><input class="textFiels" id="saving" disabled size="10px" value="<?php echo $orphan->saving?>" ></input></td>
-        <td>اجمالي الادخار</td>
-        <td><input class="textFiels" id="saving" disabled size="10px" value="<?php echo $orphan->last_sponsorship_date?>" ></input></td>
-        <td>تاريخ اخر كفالة</td>
-    </tr>
-</table>
-
-<br />
-
-<div id="db_err" style="display: none" class="alert-box error"><span>خطأ: </span>هناك مشكلة في الاتصال بقاعدة البيانات    </div>
-
-<div id="no_kafala" style="display: none" class="alert-box warning"><span>تنبيه: </span>لا يوجد كفالات لعرضها</div>
-
-<div id="kafalas" style="display: none">
-    <?php
-        $kcount = @count($kafalas);
-        
-    ?>
-    <table width="60%" border="0" align="center" class="table">
-    <tr align="center" class="table_header">
-    <td width="10%">عدد الشهور</td>
-    <td width="20%">التاريخ</td>
-    <td width="5%">الادخار</td>
-    <td width="5%">المبلغ</td>
-    <td width="5%">الرقم</td>
-  </tr>
-  <?php 
-        
-                
-  	for($i = 0 ; $i < $kcount ; $i++){
-                $kafala = $kafalas[$i];
-		$sponsorship = fp_kafala_get_by_id($kafala->sponsorship);                
-  ?>
-    <tr align="center" class="table_data<?php echo $i%2?>">
-    <td><?php echo $sponsorship->month_no?></td>
-    <td><?php echo $sponsorship->date?></td>
-    <td><?php echo $sponsorship->saving?></td>
-    <td><?php echo $sponsorship->amount?></td>
-    <td><?php echo $sponsorship->id?></td>
-  </tr>
-  <?php } 
-  
-	fp_db_close();
-        ?>
-  </table>
-
-</div>
-
-<?php
-        if($kafalas == -1 )echo "<script type='text/javascript'>document.getElementById('db_err').style.display = 'block';</script>";
-        else if($kafalas == 0) echo "<script type='text/javascript'>document.getElementById('no_kafala').style.display = 'block';</script>";
-        else echo "<script type='text/javascript'>document.getElementById('kafalas').style.display = 'block';</script>";
-        
-    ?>     
-     
 
 <!--   Aderss   -->
 
@@ -624,28 +563,28 @@ function delete_sibling_ajax(id)
   </tr>
   
 </table>
-
+<br />
 <!-- Employee -->
-<table width="70%" border="0" align="center" id=" ">
+<table width="50%" border="0" align="center" id=" ">
   <tr>
       <td>&nbsp;</td>
       
-      <td><input class="textFiels" disabled name="level" type="text" id="level" size="10" maxlength="30" value="<?php echo $orphan->data_entery_date?>"/</td>
-    <td>التاريخ</td>
-              <td align="center"><input class="textFiels" disabled name="level" type="text" id="level" size="10" maxlength="30" value="<?php echo $orphan->data_entery_name?>"/</td>
-    <td>مدخل البيانات   </td>
+      <td align="center"><input class="textFiels" disabled name="level" type="text" id="user_d" size="10" maxlength="30" value="<?php echo $orphan->data_entery_date?>"/></td>
+    <td align="center">التاريخ</td>
+    <td align="center"><input class="textFiels" disabled name="level" type="text" id="user" size="10" maxlength="30" value="<?php echo $orphan->data_entery_name?>"/></td>
+    <td align="center">مدخل البيانات   </td>
   </tr>
    
     <tr>
-       <td>&nbsp;</td>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td align="center"></td>    
-
+    <td align="center"></td> 
     
     
    <tr>
-       <td>&nbsp;</td>
+        <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td align="center"></td>
@@ -653,17 +592,17 @@ function delete_sibling_ajax(id)
   </tr>
   <tr>
     <td>&nbsp;</td>
+    <td align="center"><button class="add_bt" name="add" type="button" onclick="del_ajax(<?php echo $orphan->phone1?>)" >الغاء البيانات<img align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" />  </button>
     <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td align="center"><button class="add_bt" name="add" type="button" onclick="get_str()" >تعديل البيانات<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
+    <td align="center"><button class="add_bt" name="add" type="button" onclick="i3_get_str()" >اعتماد البيانات<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
     <td>&nbsp;</td>
   </tr>
 
 </table>
 
+
 </div>
 <div  style="margin: 0 auto; text-align: center ; width: 60%;" id="reponse">
-    <span id="res_stattus"></span>
 </div>
 <script type="text/javascript" >
         
@@ -678,10 +617,10 @@ function IsEmpty(){
            }
         }
         if(empty_checker > 0 )alert("هناك حقول يجب تعبئتها");
-        else get_str();
+        else i3_get_str();
 }
 
-function get_str(){
+function i3_get_str(){
         
 	var text = document.getElementsByTagName('input');
         var select = document.getElementsByTagName('select');
@@ -708,7 +647,7 @@ function ajax(str)
 	var data ;
 	//var d_node = document.getElementById(elementID);
 	elementID = "div";
-	filename = "updateOrphan.php";
+	filename = "finalOrphan.php";
 	post = false ;
     if (window.XMLHttpRequest)
     {
@@ -731,8 +670,7 @@ function ajax(str)
     {
         if (ajax.readyState==4&&ajax.status==200)
         {
-            document.getElementById("res_stattus").innerHTML=ajax.responseText;
-            add_sibling();
+            document.getElementById("reponse").innerHTML=ajax.responseText;
         }
     }
     if (post==false)
@@ -758,7 +696,60 @@ function add_sibling (){
         s_final_str+=s_str_array[i];
     }
      alert(document.getElementById("success_notice").getAttribute("name"));
-}		
+}	
+
+//*********************  DELETE
+function del_ajax(ID)
+{		
+        var ajax;
+	var data ;
+        var str = "?id="+ID;
+	alert(str);
+        //var d_node = document.getElementById(elementID);
+	elementID = "div";
+	filename = "deleteOrphan.php";
+	post = false ;
+    if (window.XMLHttpRequest)
+    {
+        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
+    }
+    else if (ActiveXObject("Microsoft.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
+    }
+    else if (ActiveXObject("Msxml2.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
+    }
+    else
+    {
+        alert("Error: Your browser does not support AJAX.");
+        return false;
+    }
+    ajax.onreadystatechange=function()
+    {
+        if (ajax.readyState==4&&ajax.status==200)
+        {
+            document.getElementById("reponse").innerHTML=ajax.responseText;
+        }
+    }
+    if (post==false)
+    {
+        ajax.open("GET",filename+str,true);
+        ajax.send(null);
+		
+    }
+    else
+    {
+        ajax.open("POST",filename,true);
+        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.send(str);
+    }
+    return ajax;
+	
+}
+
+	
 </script>
 <div id="footer">
 <p>جميع الحقوق محفوظة 2016 &copy;</div>

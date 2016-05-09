@@ -326,6 +326,7 @@
     <table class="table" width="70%" border="0" align="center">
    <br />
    <tr class="table_header">
+       <td align="center" width="15%">حذف</td>
       <td align="center" width="15%">الحالة</td>
     <td align="center" width="15%">تاريخ الميلاد</td>
     <td align="center" width="25%">الجنس</td>
@@ -338,6 +339,9 @@
 		$one_sibling = $sibilings[$i];
   ?>
    <tr class="table_data<?php echo $i%2?>">
+       <td onclick="delete_sibling_ajax(<?php echo $one_sibling->id?>)" align="center" >
+        <img width="22px"   align="middle" alt="حذف" src="../../images/style images/delete_icon.png"   />
+    </td>
     <td align="center"><?php fp_get_state($one_sibling->state)?></td>
     <td align="center"><?php echo $one_sibling->birth_date ?></td>
     <td align="center"><?php if($one_sibling->sex == 1) echo "ذكر"; else echo "أنثى";?></td>
@@ -345,13 +349,177 @@
     <td align="center"><?php echo $i+1 ?></td>
   </tr>
    <?php } ?>
-   
+   <tr class="table_data<?php echo $i%2?>">
+       <td></td>
+    <td align="center" >
+        <select tabindex="0" class="select" name="status" id="s_status">
+      <option value="1">مكفول</option>
+      <option value="2">قيد التسويق</option>
+      <option value="3">متوقف</option>
+    </select>
+    </td>
+    <td align="center">
+        <table width="60%" border="0">
+      <tr>
+        <td><select name="my" class="select" id="sy">
+          <?php
+	  for($i=1950 ; $i <= date("Y") ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+        <td><select class="select" name="mm" id="sm">
+          <?php
+	  for($i=1 ; $i <= 12 ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+        <td><select class="select" name="md" id="sd">
+          <?php
+	  for($i=1 ; $i <= 31 ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+        </select></td>
+      </tr>
+    </table>
+    </td>
+       <td align="center" dir="rtl" >
+  	    ذكر<input type="radio" name="s_gender" value="1" id="sibling_male_gender" />
+            &nbsp;&nbsp;
+  	    أنثى<input type="radio" name="s_gender" value="0" id="sibling_female_gender" />
+  	    
+    </td>
+    <td align="center"><input class="textFielsS" name="fbname" type="text" id="sibling_name" size="10" maxlength="30" /></td>
+    <td></td>
+  </tr>
+  <tr >
+  	
+    <td align="center"><input type="button" name="login " id="login " onclick="get_s_str()" value="إضافة فرد" /></td>
+   </tr>
+
 </table>
 
 
 </table>
 
+<script type="text/javascript">
+function get_s_str(){
+       var s_str = "" ;
+      var sname = document.getElementById('sibling_name');
+      s_str+='sibling_name='+sname.value+'&';
+      var s_bd = document.getElementById('sy').value+"-"+document.getElementById('sm').value+"-"+document.getElementById('sd').value;
+      s_str+='s_bd='+s_bd+'&';
+      var s_status = document.getElementById("s_status");
+      s_str+='sibling_status='+s_status.value+'&';
+      var s_gender_nodes = document.getElementsByName("s_gender");
 
+      if(document.getElementById("sibling_male_gender").checked == true) s_gender_value = "1" ;
+        else s_gender_value = "0" ;
+      s_str+='s_gender='+s_gender_value+'&';
+      s_str+='o_id='+<?php echo $orphan->id ?>;
+      sibling_ajax(s_str);
+      }
+  function sibling_ajax(s_str)
+{	
+        var ajax;
+	var data ;
+	filename = "saveSibiling.php";
+	post = false ;
+    if (window.XMLHttpRequest)
+    {
+        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
+    } 
+    else if (ActiveXObject("Microsoft.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
+    }
+    else if (ActiveXObject("Msxml2.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
+    }
+    else
+    {
+        alert("Error: Your browser does not support AJAX.");
+        return false;
+    }
+    ajax.onreadystatechange=function()
+    {
+        if (ajax.readyState==4&&ajax.status==200)
+        {
+            alert(ajax.responseText);
+            window.location.reload();
+            //window.location.href = "orphanInfo.php?id="+<?php //echo $id?>
+			//document.getElementById(elementID).innerHTML=ajax.responseText;
+        }
+    }
+    if (post==false)
+    {
+        ajax.open("GET",filename+"?"+s_str,true);
+        s_str = '';
+        ajax.send(null);
+		
+    }
+    else 
+    {
+        ajax.open("POST",filename,true);
+        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.send(s_str);
+        s_str = '';
+    }
+    return ajax;
+	
+}
+function delete_sibling_ajax(id)
+{	
+        var ajax;
+	var data ;
+	filename = "deleteSibiling.php";
+	post = false ;
+    if (window.XMLHttpRequest)
+    {
+        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
+    } 
+    else if (ActiveXObject("Microsoft.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
+    }
+    else if (ActiveXObject("Msxml2.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
+    }
+    else
+    {
+        alert("Error: Your browser does not support AJAX.");
+        return false;
+    }
+    ajax.onreadystatechange=function()
+    {
+        if (ajax.readyState==4&&ajax.status==200)
+        {
+            alert(ajax.responseText);
+            window.location.reload();
+            
+            //window.location.href = "orphanInfo.php?id="+<?php //echo $id?>
+			//document.getElementById(elementID).innerHTML=ajax.responseText;
+        }
+    }
+    if (post==false)
+    {
+        ajax.open("GET",filename+"?id="+id,true);
+        s_str = '';
+        ajax.send(null);
+		
+    }
+    else 
+    {
+        ajax.open("POST",filename,true);
+        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.send(s_str);
+        s_str = '';
+    }
+    return ajax;
+	
+}
+</script>
 <!--   Learning   -->
 
 
@@ -485,14 +653,112 @@
     <td align="center"></td>
     <td>&nbsp;</td>
   </tr>
- 
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td align="center"><button class="add_bt" name="add" type="button" onclick="get_str()" >تعديل البيانات<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
+    <td>&nbsp;</td>
+  </tr>
 
 </table>
   </form>
 </div>
 <div  style="margin: 0 auto; text-align: center ; width: 60%;" id="reponse">
 </div>
+<script type="text/javascript" >
+        
+function IsEmpty(){ 
+        var text = document.getElementsByTagName('input');
+        var empty_checker = 0 ;
+        for(var i = 0 ; i< text.length ; i++){
+           if(text[i].value == ''){
+               text.item(i).style.color = "#ff0000" ;
+               text.item(i).setAttribute("placeholder","هذا الحقل فارغ");
+               empty_checker++;
+           }
+        }
+        if(empty_checker > 0 )alert("هناك حقول يجب تعبئتها");
+        else get_str();
+}
 
+function get_str(){
+        
+	var text = document.getElementsByTagName('input');
+        var select = document.getElementsByTagName('select');
+        var str = '';
+        for(var i = 0 ; i< text.length ; i++){
+           str += text[i].getAttribute('id')+'='+text[i].value+'&';
+        }
+        for(var i = 0 ; i< select.length ; i++){
+           str += select[i].getAttribute('id')+'='+select[i].value+'&';
+        }
+        gender_value = 1 ;
+        if(document.getElementById("male_gender").checked == true) gender_value = "1" ;
+        else
+            if(document.getElementById("female_gender").checked == true) gender_value = "0" ;
+        else gender_value = "1" ;
+        str+="gender="+gender_value;
+        //window.location.href = "updateOrphan.php?"+str;
+        ajax(str);
+}
+function ajax(str)
+{		
+    var ajax;
+	var data ;
+	//var d_node = document.getElementById(elementID);
+	elementID = "div";
+	filename = "updateOrphan.php";
+	post = false ;
+    if (window.XMLHttpRequest)
+    {
+        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
+    }
+    else if (ActiveXObject("Microsoft.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
+    }
+    else if (ActiveXObject("Msxml2.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
+    }
+    else
+    {
+        alert("Error: Your browser does not support AJAX.");
+        return false;
+    }
+    ajax.onreadystatechange=function()
+    {
+        if (ajax.readyState==4&&ajax.status==200)
+        {
+            document.getElementById("reponse").innerHTML=ajax.responseText;
+        }
+    }
+    if (post==false)
+    {
+        ajax.open("GET",filename+"?"+str,true);
+        ajax.send(null);
+		
+    }
+    else
+    {
+        ajax.open("POST",filename,true);
+        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.send(str);
+    }
+    return ajax;
+	
+}
+
+function add_sibling (){
+    var s_final_str = "";
+    if(s_str_array.length != 0)
+    for(var i =0 ; i < s_str_array.length ; i++){
+        s_final_str+=s_str_array[i];
+    }
+     alert(document.getElementById("success_notice").getAttribute("name"));
+}		
+</script>
 <div id="footer">
 <p>جميع الحقوق محفوظة 2016 &copy;</div>
 </div>

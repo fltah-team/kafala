@@ -1,4 +1,20 @@
-
+<?php
+    include './utils/auth.php';
+    $is_loged = fp_is_loged('*');
+    if($is_loged){
+        switch ($_SESSION['u_type']){
+                case 1 : header("location:admin/admin.php");
+                    break;
+                case 2 : header("location:employee/employee.php");
+                    break;
+                case 3 : header("location:admin/admin.php");
+                    break;
+                case 4 : header("location:admin/admin.php");
+                    break;
+                default : header("location:index.php?m=".$m);
+            }
+    }
+?>
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -19,6 +35,17 @@
   </tr>
 </table>
 </div>
+<?php
+    if(isset($_GET['m'])){
+        $m =  $_GET['m'];
+        echo '
+          <div style="text-align:center;color:#fff;">
+                <div class="alert-box error"><span>خطأ: </span>'.$m.'
+                </div>
+                 </div>  
+        ';
+    }
+?>
 <div class="login">
 		<div class="login-screen">
 			<div class="app-title">
@@ -26,7 +53,7 @@
 			</div>
 
 			<div class="login-form">
-                            <form action="login.php" method="post" >
+                            <form action="utils/login.php" method="post" >
 				<div class="control-group">
 				<input type="text" class="login-field" value="" placeholder="اسم المستخدم" name="login-name" />
 				<label class="login-field-icon fui-user" for="login-name"></label>
@@ -43,6 +70,7 @@
                             </form>
 			</div>
 		</div>
+
 	</div>
 
 <script type="text/javascript" >
