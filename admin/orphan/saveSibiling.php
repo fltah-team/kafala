@@ -22,8 +22,8 @@
 	fp_db_close();
 	
 	if(!$result)
-            fp_err_add_fail ("فرد العائلة ");
+            echo(" لم تتم الاضافة ");
         else 
-            fp_err_add_succes ("فرد العائلة ");
+            echo("تمت الاضافة بنجاح");
 	
 	?>

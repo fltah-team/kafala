@@ -264,10 +264,68 @@
   
 	fp_db_close();
         ?>
+        <tr align="center">
+    <td width="31%"><button name="add" class="bt"  type="button" onclick="window.location.href = 'print_kafala.php?id=<?php $orphan?>'"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
+    <td><button onclick="give_sponsorship()">حذف</button></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr> 
   </table>
-
 </div>
-
+<script type="text/javascript" >
+    function delete_sibling_ajax(id)
+{	
+        var ajax;
+	var data ;
+	filename = "deleteSibiling.php";
+	post = false ;
+    if (window.XMLHttpRequest)
+    {
+        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
+    } 
+    else if (ActiveXObject("Microsoft.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
+    }
+    else if (ActiveXObject("Msxml2.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
+    }
+    else
+    {
+        alert("Error: Your browser does not support AJAX.");
+        return false;
+    }
+    ajax.onreadystatechange=function()
+    {
+        if (ajax.readyState==4&&ajax.status==200)
+        {
+            alert(ajax.responseText);
+            window.location.reload();
+            
+            //window.location.href = "orphanInfo.php?id="+<?php //echo $id?>
+			//document.getElementById(elementID).innerHTML=ajax.responseText;
+        }
+    }
+    if (post==false)
+    {
+        ajax.open("GET",filename+"?id="+id,true);
+        s_str = '';
+        ajax.send(null);
+		
+    }
+    else 
+    {
+        ajax.open("POST",filename,true);
+        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.send(s_str);
+        s_str = '';
+    }
+    return ajax;
+	
+}
+</script>
 <?php
         if($kafalas == -1 )echo "<script type='text/javascript'>document.getElementById('db_err').style.display = 'block';</script>";
         else if($kafalas == 0) echo "<script type='text/javascript'>document.getElementById('no_kafala').style.display = 'block';</script>";
@@ -350,7 +408,6 @@
     <table class="table" width="70%" border="0" align="center">
    <br />
    <tr class="table_header">
-       <td align="center" width="15%">حذف</td>
       <td align="center" width="15%">الحالة</td>
     <td align="center" width="15%">تاريخ الميلاد</td>
     <td align="center" width="25%">الجنس</td>
@@ -362,9 +419,6 @@
 		$one_sibling = $sibilings[$i];
   ?>
    <tr class="table_data<?php echo $i%2?>">
-       <td onclick="delete_sibling_ajax(<?php echo $one_sibling->id?>)" align="center" >
-        <img width="22px"   align="middle" alt="حذف" src="../../images/style images/delete_icon.png"   />
-    </td>
     <td align="center"><?php fp_get_state($one_sibling->state)?></td>
     <td align="center"><?php echo $one_sibling->birth_date ?></td>
     <td align="center"><?php if($one_sibling->sex == 1) echo "ذكر"; else echo "أنثى";?></td>

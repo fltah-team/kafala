@@ -115,6 +115,9 @@
 <table width="85%" border="0" align="center">
 
   <tr align="center">
+      <td align="right"></td>
+    
+     <td width="20%" align="center"></td>
     <td width="17%" align="right">
         <?php
         $sponsors = fp_sponsor_get();
@@ -135,11 +138,6 @@
         <?php fp_select_status_get_by_id($orphan->state); ?>
     </td>
     <td width="20%" align="center">الحالة</td>
-     <td align="right">
-         
-         <input class="textFiels" name="name3" type="text" disabled tabindex="4" id="id" size="10" maxlength="30"  value="<?php echo $orphan->id?>" /></td>
-    
-     <td width="20%" align="center">الرقم</td>
   </tr>
   
   <tr>
@@ -207,7 +205,7 @@
     <td align="right">
       </td>
     <td>
-        <?php fp_select_mother_status_get() ?>
+        <?php fp_select_mother_status_get_by_id($orphan->mother_state) ?>
     	</td>
   	<td align="right">حالتها الاجتماعية
 
@@ -345,28 +343,7 @@
     </select>
     </td>
     <td align="center">
-        <table width="60%" border="0">
-      <tr>
-        <td><select name="my" class="select" id="sy">
-          <?php
-	  for($i=1950 ; $i <= date("Y") ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-        <td><select class="select" name="mm" id="sm">
-          <?php
-	  for($i=1 ; $i <= 12 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-        <td><select class="select" name="md" id="sd">
-          <?php
-	  for($i=1 ; $i <= 31 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-      </tr>
-    </table>
+        <?php fp_select_date_get(1990,'s')?>
     </td>
        <td align="center" dir="rtl" >
   	    ذكر<input type="radio" name="s_gender" value="1" id="sibling_male_gender" />
@@ -679,7 +656,6 @@ function i3_get_str(){
             if(document.getElementById("female_gender").checked == true) gender_value = "0" ;
         else gender_value = "1" ;
         str+="gender="+gender_value;
-        alert(str);
         //window.location.href = "updateOrphan.php?"+str;
         ajax(str);
 }
@@ -746,7 +722,6 @@ function del_ajax(ID)
         var ajax;
 	var data ;
         var str = "?id="+ID;
-	alert(str);
         //var d_node = document.getElementById(elementID);
 	elementID = "div";
 	filename = "deleteOrphan.php";

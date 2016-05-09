@@ -82,12 +82,12 @@
 
 <!-- main -->
 <div class="main">
-<h1 align="center" class="adress">  المدن </h1>
+<h1 align="center" class="adress">  الولايات </h1>
 <br />
 
 <?php
     if($states == 0 ||$states == -1 ) {
-            fp_err_show_records("المدن");
+            fp_err_show_records("الولايات");
         }
         
 	$ucount = @count($states);
@@ -97,7 +97,7 @@
     
     <tr align="center" class="table_header">
  <td width="5%">حذف </td>
-    <td width="40%">الاسم </td>
+    <td width="40%">الولاية </td>
     <td width="5%">الرقم</td>
   </tr>
   <?php 

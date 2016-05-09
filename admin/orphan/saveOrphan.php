@@ -9,7 +9,7 @@
 	if(!isset ( $_GET['status']) || !isset ( $_GET['sponsor']) ||!isset (  $_GET['name1']) ||!isset (  $_GET['name2']) || !isset ( $_GET['name3']) ||!isset (  $_GET['name4'])  ||!isset (  $_GET['y']) || !isset ( $_GET['m']) || !isset ( $_GET['d']) || !isset ( $_GET['gender']) ||!isset (  $_GET['mname1']) || !isset ( $_GET['mname2']) || !isset ( $_GET['mname3'])  || !isset ( $_GET['mname4']) || !isset ( $_GET['my']) || !isset ( $_GET['mm']) ||!isset (  $_GET['md']) ||!isset (  $_GET['mstatus']) || !isset ( $_GET['fy']) ||!isset (  $_GET['fm']) || !isset ( $_GET['fd']) || !isset ( $_GET['dr']) || !isset ( $_GET['lw']) || !isset ( $_GET['state']) ||!isset (  $_GET['city']) || !isset ( $_GET['district']) ||!isset (  $_GET['section'])|| !isset ( $_GET['hno']) ||!isset (  $_GET['tel1']) || !isset ( $_GET['tel2']) || !isset ( $_GET['learning']) 
                 || !isset ( $_GET['quran']) || !isset ( $_GET['illness']) || !isset ( $_GET['sponsor']) || !isset ( $_GET['sponsor']) )
         {
-            fp_err_show_record("اليتيم");
+            fp_err_add_fail("اليتيم");
         }
         
         
@@ -37,14 +37,16 @@
 	$District = $_GET['district'];	
 	$section = $_GET['section'];	
 	$house_no = $_GET['hno'];	
-	$phone1 = $_GET['tel1'];	
+	$phone1 = $_GET['tel1'];
+        if(fp_orphan_get_by_phone1($phone1))
+            fp_err_add_fail("اليتيم رقم الجوال1 موجود الرجاء تغييره");
 	$phone2 = $_GET['tel2'];
 	$studing_state = $_GET['learning'];	
         
         if($studing_state == 1){
             if (!isset($_GET['school'])|| !isset($_GET['level'])|| !isset($_GET['class']))
             {
-                fp_err_show_record("اليتيم");
+                fp_err_add_fail("اليتيم");
             }else{
                 $nonstuding_cause = "لا يوجد";
                 $school_name = $_GET['school'];	
@@ -56,7 +58,7 @@
         else{
            if (!isset($_GET['teachingr']))
             {
-                fp_err_show_record("اليتيم");
+                fp_err_add_fail("اليتيم");
             }else{
                 $nonstuding_cause = $_GET['teachingr'];	
                 $school_name = "لا يوجد" ;	
@@ -72,7 +74,7 @@
         }
         else{
              if (!isset($_GET['illt'])){
-                fp_err_show_record("اليتيم"); 
+                fp_err_add_fail("اليتيم"); 
              }
             $ill_cause = $_GET['illt'];
         }

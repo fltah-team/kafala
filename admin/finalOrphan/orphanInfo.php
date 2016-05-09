@@ -213,7 +213,7 @@
     <td align="right">
       </td>
     <td>
-        <?php fp_select_mother_status_get() ?>
+        <?php fp_select_mother_status_get_by_id($orphan->mother_state) ?>
     	</td>
   	<td align="right">حالتها الاجتماعية
 
@@ -286,7 +286,7 @@
     <td><?php echo $sponsorship->date?></td>
     <td><?php echo $sponsorship->saving?></td>
     <td><?php echo $sponsorship->amount?></td>
-    <td><?php echo $sponsorship->id?></td>
+    <td><?php echo $i+1?></td>
   </tr>
   <?php } 
   
@@ -412,28 +412,7 @@
     </select>
     </td>
     <td align="center">
-        <table width="60%" border="0">
-      <tr>
-        <td><select name="my" class="select" id="sy">
-          <?php
-	  for($i=1950 ; $i <= date("Y") ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-        <td><select class="select" name="mm" id="sm">
-          <?php
-	  for($i=1 ; $i <= 12 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-        <td><select class="select" name="md" id="sd">
-          <?php
-	  for($i=1 ; $i <= 31 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-      </tr>
-    </table>
+        <?php fp_select_date_get(1990,'s')?>
     </td>
        <td align="center" dir="rtl" >
   	    ذكر<input type="radio" name="s_gender" value="1" id="sibling_male_gender" />
