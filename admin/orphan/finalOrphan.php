@@ -49,8 +49,7 @@
                 $school_name = $_GET['school'];	
                 $level = $_GET['level'];	
                 $year = $_GET['class'];	
-            }
-                
+            }   
             }  
         else{
            if (!isset($_GET['teachingr']))
@@ -63,28 +62,16 @@
                 $year = "لا يوجد";
             }
         }
-	
-	
 	$quran_parts = $_GET['quran'];	
 	$health_state = $_GET['illness'];
         if($health_state == 1){
             $ill_cause = "لا يوجد";
-<<<<<<< HEAD
-            else
-            $ill_cause = $_GET['illt'];	
-	$data_entery_name = $_GET['user'];		
-	$data_entery_date  = $_GET['user_d'];	
-=======
         }
-        else{
-             if (!isset($_GET['illt'])){
-                fp_err_show_record("اليتيم"); 
-             }
-            $ill_cause = $_GET['illt'];
-        }	
-	$data_entery_name = "user";	
-	$data_entery_date  = date("d-m-y");
->>>>>>> origin/master
+     else{
+         $ill_cause = $_GET['illt'];
+          }
+	$data_entery_name = $_GET['user'];		
+	$data_entery_date  = $_GET['user_d'];
         $data_admin_name = "admin";
         $data_admin_date = date("y-m-d");
                 
