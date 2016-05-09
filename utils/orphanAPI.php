@@ -276,7 +276,6 @@ function fp_orphan_update($id = NULL ,  $state = Null , $warranty_organization =
 		$query .= ' , ';
 		}
 	$query .= ' WHERE `phone1` = '.$n_phone1;
-        echo $query;
 	$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
                 
@@ -291,7 +290,7 @@ function fp_orphan_delete($id){
         global $fp_handle;
 	$uid   = mysql_real_escape_string(strip_tags($id),$fp_handle);
         //echo "---------".$uid;
-	$query = sprintf("DELETE FROM `orphan` WHERE `phone1` = %d",$id);echo $query;
+	$query = sprintf("DELETE FROM `orphan` WHERE `phone1` = %d",$id);
 	$qresult = @mysql_query($query);
 	if(!$qresult) return false ;
 	

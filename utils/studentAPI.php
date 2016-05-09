@@ -280,7 +280,7 @@ function fp_student_update($id , $state = Null , $warranty_organization = Null, 
 		if($i != ($fcount - 1 ))
 		$query .= ' , ';
 		}
-	$query .= ' WHERE `id` = '.$uid; echo $query;
+	$query .= ' WHERE `id` = '.$uid; 
 	$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
                 @mysql_free_result($qresult);

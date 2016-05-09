@@ -52,7 +52,7 @@ function fp_sponsor_add( $name , $numberOFSponsored){
   	function fp_sponsor_delete($id){
 		$uid = (int)$id;
 		if($uid == 0) return false ;
-		$query = sprintf("DELETE FROM `sponsor` WHERE `id` = %d",$uid);echo $query;
+		$query = sprintf("DELETE FROM `sponsor` WHERE `id` = %d",$uid);
 		$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
 		@mysql_free_result($qresult);

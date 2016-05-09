@@ -85,7 +85,7 @@
 		$query = ("INSERT INTO  `family`  ( `family_id` ,`state` , `warranty_organization` , saving , `father_first_name` , `father_middle_name` , `father_last_name` , `father_4th_name` , `birth_date` , `sex` ,`social_state` ,`father_dead_date` , `father_dead_cause` , `father_work` ,  `supporter_first_name` , `supporter_meddle_name` , `supporter_last_name` , `supporter_4th_name` , `supporter_birth_date` , `supporter_sex` , `supporter_state` , `supporter_relation`  , `supporter_work`  , `residence_state` , `city` , `District` , `section`,`house_no` , `phone1` , `phone2`   , `data_entery_name` , `data_entery_date`)
 					VALUE(NULL ,'$n_state' , '$n_warranty_organization' ,'$n_saving', '$n_father_first_name' , '$n_father_middle_name' , '$n_father_last_name' , '$n_father_4th_name' , '$n_birth_date' , '$n_sex' ,'$n_social_state' ,'$n_father_dead_date' , '$n_father_dead_cause' , '$n_father_work' ,  '$n_supporter_first_name' , '$n_supporter_meddle_name' , '$n_supporter_last_name' , '$n_supporter_4th_name' , '$n_supporter_birth_date' , '$n_supporter_sex' , '$n_supporter_state' , '$n_supporter_relation'  , '$n_supporter_work'  , '$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2' , '$n_data_entery_name' , '$n_data_entery_date')");
 		
-		echo $query;
+		
 		$qresult = mysql_query($query);
 		if(!$qresult) return false ;
 		@mysql_free_result($qresult);
@@ -254,7 +254,7 @@
 			$query .= ' , ';
 			}
 		$query .= ' WHERE `family_id` = '.$uid;
-		echo $query;
+		
 		$qresult = @mysql_query($query);
 			if(!$qresult) return false ;
                         @mysql_free_result($qresult);

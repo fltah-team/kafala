@@ -73,7 +73,6 @@ function fp_sibiling_get_by_id($id){
                         $query .= ' , ';
                         }
                 $query .= ' WHERE `id` = '.$uid;
-                echo $query;
                 $qresult = @mysql_query($query);
                         if(!$qresult) return false ;
                         @mysql_free_result($qresult);

@@ -80,7 +80,6 @@
 		$query = ("INSERT INTO `preacher` (id, `state` ,`type` ,  `warranty_organization` , saving , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `male_members_no` , `female_members_no` , `residence_state` , `city` , `District` , `section`,`house_no` , `phone1` , `phone2` , `qualify_name` , `qualify_date` , `qualify_rating` , `quran_parts` , `Issuer` , `current_work` , `Joining_Date` , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date`  )
 					VALUE(NULL  , '$n_state' ,'$n_type' ,  '$n_warranty_organization' ,'$n_saving', '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_male_members_no' , '$n_female_members_no' , '$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$house_no' , '$n_phone1' , '$n_phone2' , '$n_qualify_name', '$n_qualify_date' , '$n_qualify_rating' , '$n_quran_parts' , '$n_Issuer' , '$n_current_work' , '$n_Joining_Date' , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date'  )");
 		
-		echo $query;
 		$qresult = mysql_query($query);
 		if(!$qresult) return false ;
 		@mysql_free_result($qresult);
@@ -251,7 +250,6 @@
 			$query .= ' , ';
 			}
 		$query .= ' WHERE `id` = '.$uid; 
-                echo $query;
 		$qresult = @mysql_query($query);
 			if(!$qresult) return false ;
                         @mysql_free_result($qresult);

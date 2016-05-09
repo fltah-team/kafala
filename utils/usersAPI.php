@@ -117,7 +117,7 @@ function fp_users_update($id , $name = NULL, $username = NULL, $password = NULL,
 		if($i != ($fcount - 1 ))
 		$query .= ' , ';
 		}
-	$query .= ' WHERE `id` = '.$uid; echo $query;
+	$query .= ' WHERE `id` = '.$uid; 
 	$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
                 
