@@ -308,7 +308,7 @@ function fp_final_orphan_delete($id){
 	$qresult = @mysql_query($query);
 	if(!$qresult) return false ;
         include('kafalaAPI.php');
-        fp_kafala_delete($id)
+        fp_kafala_delete($id);
 	return true ;
 	}
 	
