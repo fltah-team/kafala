@@ -4,7 +4,7 @@
 function fp_final_orphan_get($extra = ''){
 	
 	global $fp_handle ;
-	$query = sprintf("SELECT * FROM `finalorphan` %s",$extra);echo $query;
+	$query = sprintf("SELECT * FROM `finalorphan` %s",$extra);
 	$qresult = @mysql_query($query);
 	if(!$qresult) return -1 ; 
 	
@@ -294,7 +294,7 @@ function fp_final_orphan_update($id ,  $state = Null , $warranty_organization = 
 		if($i != ($fcount - 1 ))
 		$query .= ' , ';
 		}
-	$query .= ' WHERE `id` = '.$uid; echo $query;
+	$query .= ' WHERE `id` = '.$uid; 
 	$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
                 
