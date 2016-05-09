@@ -31,7 +31,7 @@
             if(!$qresult) return -1 ; 
 
             return mysql_num_rows($qresult);
-    }
+        }
 	function fp_preacher_get_by_id($id){
 		$oid = (int)$id;
 		if($oid == 0) return NULL ;
@@ -83,9 +83,9 @@
 		echo $query;
 		$qresult = mysql_query($query);
 		if(!$qresult) return false ;
-		
+		@mysql_free_result($qresult);
 		return true ;
-		}
+	}
 		
 
 		// UPDATE
@@ -254,7 +254,8 @@
                 echo $query;
 		$qresult = @mysql_query($query);
 			if(!$qresult) return false ;
-			else return true ;
+                        @mysql_free_result($qresult);
+			return true ;
 		
 		}
 		
@@ -265,7 +266,7 @@
 		$query = sprintf("DELETE FROM `preacher` WHERE `id` = %d",$uid);
 		$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
-		
+		@mysql_free_result($qresult);
 		return true ;
 		}
 		
@@ -287,7 +288,7 @@
 		
 		$qresult = mysql_query($query);
 		if(!$qresult) return false ;
-		
+		@mysql_free_result($qresult);
 		return true ;
 	}	
 
@@ -342,7 +343,7 @@
 		$query = sprintf("DELETE FROM `experience` WHERE `id` = %d",$uid);
 		$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
-		
+		@mysql_free_result($qresult);
 		return true ;
 		}
                

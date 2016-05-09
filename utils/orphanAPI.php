@@ -21,7 +21,7 @@ function fp_orphan_get($extra = ''){
 	@mysql_free_result($qresult);
 	
 	return $orphans ; 
-	}
+}
 function fp_orphan_get_num_rows(){
         global $fp_handle ;
 	$query = sprintf("SELECT * FROM `orphan`");
@@ -96,8 +96,10 @@ function fp_orphan_add($state , $warranty_organization  , $saving , $first_name 
 	$qresult = mysql_query($query);
 	if(!$qresult) return false ;
 	
+        @mysql_free_result($qresult);
+        
 	return true ;
-	}
+}
 	
 	
 	// UPDATE
@@ -277,7 +279,10 @@ function fp_orphan_update($id = NULL ,  $state = Null , $warranty_organization =
         echo $query;
 	$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
-		else return true ;
+                
+                @mysql_free_result($qresult);
+		
+                return true ;
 	
 	}
 	
@@ -290,6 +295,7 @@ function fp_orphan_delete($id){
 	$qresult = @mysql_query($query);
 	if(!$qresult) return false ;
 	
+        @mysql_free_result($qresult);
 	return true ;
 	}
 

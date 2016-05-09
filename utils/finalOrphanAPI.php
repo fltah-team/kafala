@@ -106,8 +106,9 @@ function fp_final_orphan_add($state , $warranty_organization  , $saving , $first
         }
         }
         fp_orphan_delete($phone1);
+        @mysql_free_result($qresult);
 	return true ;
-	}
+}
 	
 	
 	// UPDATE
@@ -296,7 +297,9 @@ function fp_final_orphan_update($id ,  $state = Null , $warranty_organization = 
 	$query .= ' WHERE `id` = '.$uid; echo $query;
 	$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
-		else return true ;
+                
+                @mysql_free_result($qresult);
+		return true ;
 	
 	}
 	
@@ -309,6 +312,8 @@ function fp_final_orphan_delete($id){
 	if(!$qresult) return false ;
         include('kafalaAPI.php');
         fp_kafala_delete($id);
+        
+        @mysql_free_result($qresult);
 	return true ;
 	}
 	

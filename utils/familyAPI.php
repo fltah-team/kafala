@@ -88,7 +88,7 @@
 		echo $query;
 		$qresult = mysql_query($query);
 		if(!$qresult) return false ;
-		
+		@mysql_free_result($qresult);
 		return true ;
 	}
 		
@@ -257,7 +257,8 @@
 		echo $query;
 		$qresult = @mysql_query($query);
 			if(!$qresult) return false ;
-			else return true ;
+                        @mysql_free_result($qresult);
+			return true ;
 		
 		}
 
@@ -268,7 +269,7 @@
 		$query = sprintf("DELETE FROM `family` WHERE `family_id` = %d",$uid);
 		$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
-		
+		@mysql_free_result($qresult);
 		return true ;
 	}	
 
@@ -291,7 +292,7 @@
 		
 		$qresult = mysql_query($query);
 		if(!$qresult) return false ;
-		
+		@mysql_free_result($qresult);
 		return true ;
 		}	
                 
@@ -324,7 +325,7 @@
 		$query = sprintf("DELETE FROM `f_member` WHERE `id` = %d",$uid);
 		$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
-		
+		@mysql_free_result($qresult);
 		return true ;
 		}	
 ?>

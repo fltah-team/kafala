@@ -19,7 +19,7 @@ function fp_sponsor_get($extra = ''){
 		
 	@mysql_free_result($qresult);
 	return $sponsors ; 
-	}
+}
 
 			// SELECT BY ID
 function fp_sponsor_get_by_id($id){
@@ -29,20 +29,20 @@ function fp_sponsor_get_by_id($id){
 	if($sponsors == NULL) return NULL ;
 	$sponsor = $sponsors[0];
 	return $sponsor ;
-	}
+}
         
-	function fp_sponsor_add( $name , $numberOFSponsored){
-		global $fp_handle;
-	
+function fp_sponsor_add( $name , $numberOFSponsored){
+        global $fp_handle;
 
-		$n_name    = @mysql_real_escape_string(strip_tags($name),$fp_handle);
-		$n_numberOFSponsored = (int)$numberOFSponsored ;
-		$query = ("INSERT INTO `sponsor`( `id` , `name` , `numberOFSponsored`) VALUE(NULL,'$n_name' , '$n_numberOFSponsored' )");
-		$qresult = mysql_query($query);
-		if(!$qresult) return false ;
-		
-		return true ;
-		}
+
+        $n_name    = @mysql_real_escape_string(strip_tags($name),$fp_handle);
+        $n_numberOFSponsored = (int)$numberOFSponsored ;
+        $query = ("INSERT INTO `sponsor`( `id` , `name` , `numberOFSponsored`) VALUE(NULL,'$n_name' , '$n_numberOFSponsored' )");
+        $qresult = mysql_query($query);
+        if(!$qresult) return false ;
+        @mysql_free_result($qresult);
+        return true ;
+}
                 
                 
                 ///// ---------------------
@@ -55,7 +55,7 @@ function fp_sponsor_get_by_id($id){
 		$query = sprintf("DELETE FROM `sponsor` WHERE `id` = %d",$uid);echo $query;
 		$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
-		
+		@mysql_free_result($qresult);
 		return true ;
 		}
         

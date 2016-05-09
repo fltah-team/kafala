@@ -48,58 +48,56 @@ function fp_student_get($extra = ''){
 
 	// INSERT	
 	function fp_student_add($state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work ,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,$uni_name , $level , $year , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date  ){
-		global $fp_handle;
-	
+            global $fp_handle;
+
+            $n_state = @mysql_real_escape_string(strip_tags($state),$fp_handle); 
+            $n_warranty_organization = (int)$warranty_organization;
+            $n_saving = (int)$saving ;
+            $n_first_name  = @mysql_real_escape_string(strip_tags($first_name),$fp_handle);
+            $n_meddle_name  = @mysql_real_escape_string(strip_tags($meddle_name),$fp_handle);
+            $n_last_name  = @mysql_real_escape_string(strip_tags($last_name),$fp_handle);
+            $n_last_4th_name  = @mysql_real_escape_string(strip_tags($last_4th_name),$fp_handle);
+            $n_birth_date  = @mysql_real_escape_string(strip_tags($birth_date),$fp_handle);
+            $n_sex = @mysql_real_escape_string(strip_tags($sex),$fp_handle);
+            $n_father_dead_date = @mysql_real_escape_string(strip_tags($father_dead_date),$fp_handle);
+            $n_father_dead_cause = @mysql_real_escape_string(strip_tags($father_dead_cause),$fp_handle);
+            $n_father_work = @mysql_real_escape_string(strip_tags($father_work),$fp_handle);
+            $n_sisters_no  = (int)$sisters_no;
+            $n_brothers_no  = (int)$brothers_no;	
+            $n_residence_state = @mysql_real_escape_string(strip_tags($residence_state),$fp_handle);
+            $n_city = @mysql_real_escape_string(strip_tags($city),$fp_handle);
+            $n_District = @mysql_real_escape_string(strip_tags($District),$fp_handle);
+            $n_section  = (int)$section;
+            $n_house_no  = (int)$house_no;
+            $n_phone1  = @mysql_real_escape_string(strip_tags($phone1),$fp_handle);
+            $n_phone2  = @mysql_real_escape_string(strip_tags($phone2),$fp_handle);
+            $n_school_name =@mysql_real_escape_string(strip_tags($school_name),$fp_handle);
+            $n_uni_name =@mysql_real_escape_string(strip_tags($uni_name),$fp_handle);
+            $n_school_name=@mysql_real_escape_string(strip_tags($school_name),$fp_handle);
+            $n_level  = @mysql_real_escape_string(strip_tags($level),$fp_handle);
+            $n_year  =  @mysql_real_escape_string(strip_tags($year),$fp_handle);;
+            $n_last_result =@mysql_real_escape_string(strip_tags($last_result),$fp_handle);	
+            $n_quran_parts  = (int)$quran_parts;
+            $n_study_year_no = (int)$study_year_no ;
+            $n_study_date_start = @mysql_real_escape_string(strip_tags($study_date_start),$fp_handle);
+            $n_expected_grad = @mysql_real_escape_string(strip_tags($expected_grad),$fp_handle);
+            $n_health_state =@mysql_real_escape_string(strip_tags($health_state),$fp_handle);
+            $n_ill_cause =@mysql_real_escape_string(strip_tags($ill_cause),$fp_handle);
+            $n_data_entery_name =@mysql_real_escape_string( 
+
+            strip_tags($data_entery_name),$fp_handle);
+            $n_data_entery_date=@mysql_real_escape_string(strip_tags($data_entery_date),$fp_handle);
 
 
-	$n_state = @mysql_real_escape_string(strip_tags($state),$fp_handle); 
-	$n_warranty_organization = (int)$warranty_organization;
-        $n_saving = (int)$saving ;
-	$n_first_name  = @mysql_real_escape_string(strip_tags($first_name),$fp_handle);
-	$n_meddle_name  = @mysql_real_escape_string(strip_tags($meddle_name),$fp_handle);
-	$n_last_name  = @mysql_real_escape_string(strip_tags($last_name),$fp_handle);
-	$n_last_4th_name  = @mysql_real_escape_string(strip_tags($last_4th_name),$fp_handle);
-	$n_birth_date  = @mysql_real_escape_string(strip_tags($birth_date),$fp_handle);
-	$n_sex = @mysql_real_escape_string(strip_tags($sex),$fp_handle);
-	$n_father_dead_date = @mysql_real_escape_string(strip_tags($father_dead_date),$fp_handle);
-	$n_father_dead_cause = @mysql_real_escape_string(strip_tags($father_dead_cause),$fp_handle);
-        $n_father_work = @mysql_real_escape_string(strip_tags($father_work),$fp_handle);
-	$n_sisters_no  = (int)$sisters_no;
-	$n_brothers_no  = (int)$brothers_no;	
-	$n_residence_state = @mysql_real_escape_string(strip_tags($residence_state),$fp_handle);
-	$n_city = @mysql_real_escape_string(strip_tags($city),$fp_handle);
-	$n_District = @mysql_real_escape_string(strip_tags($District),$fp_handle);
-	$n_section  = (int)$section;
-	$n_house_no  = (int)$house_no;
-	$n_phone1  = @mysql_real_escape_string(strip_tags($phone1),$fp_handle);
-	$n_phone2  = @mysql_real_escape_string(strip_tags($phone2),$fp_handle);
-	$n_school_name =@mysql_real_escape_string(strip_tags($school_name),$fp_handle);
-	$n_uni_name =@mysql_real_escape_string(strip_tags($uni_name),$fp_handle);
-	$n_school_name=@mysql_real_escape_string(strip_tags($school_name),$fp_handle);
-	$n_level  = @mysql_real_escape_string(strip_tags($level),$fp_handle);
-	$n_year  =  @mysql_real_escape_string(strip_tags($year),$fp_handle);;
-	$n_last_result =@mysql_real_escape_string(strip_tags($last_result),$fp_handle);	
-	$n_quran_parts  = (int)$quran_parts;
-	$n_study_year_no = (int)$study_year_no ;
-	$n_study_date_start = @mysql_real_escape_string(strip_tags($study_date_start),$fp_handle);
-	$n_expected_grad = @mysql_real_escape_string(strip_tags($expected_grad),$fp_handle);
-	$n_health_state =@mysql_real_escape_string(strip_tags($health_state),$fp_handle);
-	$n_ill_cause =@mysql_real_escape_string(strip_tags($ill_cause),$fp_handle);
-	$n_data_entery_name =@mysql_real_escape_string( 
-	
-	strip_tags($data_entery_name),$fp_handle);
-	$n_data_entery_date=@mysql_real_escape_string(strip_tags($data_entery_date),$fp_handle);
+            $query = ("INSERT INTO `student` (id, `state` , warranty_organization , saving , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `father_dead_date` , `father_dead_cause` , 	`father_work` ,sisters_no , brothers_no ,residence_state , `city` , `District` ,section , house_no , phone1 , phone2 ,`school_name` ,`uni_name` , level , year , `last_result`, quran_parts , study_year_no , `study_date_start` , `expected_grad`  , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date` )
+                                    VALUE(NULL ,'$n_state' , '$n_warranty_organization', '$n_saving' , '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_father_dead_date' , '$n_father_dead_cause' , 	'$n_father_work' ,'$n_sisters_no' , '$n_brothers_no' ,'$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2' ,'$n_school_name' ,'$n_uni_name' , '$n_level' , '$n_year' , '$n_last_result','$n_quran_parts' ,'$n_study_year_no' , '$n_study_date_start' , '$n_expected_grad'  , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date' )");
 
+            echo $query ;
 
-	$query = ("INSERT INTO `student` (id, `state` , warranty_organization , saving , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `father_dead_date` , `father_dead_cause` , 	`father_work` ,sisters_no , brothers_no ,residence_state , `city` , `District` ,section , house_no , phone1 , phone2 ,`school_name` ,`uni_name` , level , year , `last_result`, quran_parts , study_year_no , `study_date_start` , `expected_grad`  , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date` )
-				VALUE(NULL ,'$n_state' , '$n_warranty_organization', '$n_saving' , '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_father_dead_date' , '$n_father_dead_cause' , 	'$n_father_work' ,'$n_sisters_no' , '$n_brothers_no' ,'$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2' ,'$n_school_name' ,'$n_uni_name' , '$n_level' , '$n_year' , '$n_last_result','$n_quran_parts' ,'$n_study_year_no' , '$n_study_date_start' , '$n_expected_grad'  , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date' )");
-	
-	echo $query ;
-	
-	$qresult = mysql_query($query);
-	if(!$qresult) return false ;
-	
-	return true ;
+            $qresult = mysql_query($query);
+            if(!$qresult) return false ;
+            @mysql_free_result($qresult);
+            return true ;
 	}
 	
 
@@ -285,7 +283,8 @@ function fp_student_update($id , $state = Null , $warranty_organization = Null, 
 	$query .= ' WHERE `id` = '.$uid; echo $query;
 	$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
-		else return true ;
+                @mysql_free_result($qresult);
+		return true ;
 	
 	}
 	
@@ -296,7 +295,7 @@ function fp_student_delete($id){
 	$query = sprintf("DELETE FROM `student` WHERE `id` = %d",$uid);
 	$qresult = @mysql_query($query);
 	if(!$qresult) return false ;
-	
+	@mysql_free_result($qresult);
 	return true ;
 	}
 

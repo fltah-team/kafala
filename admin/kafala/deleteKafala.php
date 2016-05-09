@@ -6,7 +6,7 @@
         if(!isset($_GET['id'])){
             fp_err_delete_fail ("الكفالة");
         }
-	$id = $_GET['id'];
+	$id = (int)$_GET['id'];
 	$result = fp_kafala_delete($id); 
 	fp_db_close();
 	if(!$result)

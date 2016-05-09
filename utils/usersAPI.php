@@ -23,7 +23,7 @@ function fp_users_get($extra = ''){
 	@mysql_free_result($qresult);
 	
 	return $users ; 
-	}
+}
 
         function fp_user_get_num_rows(){
         global $fp_handle ;
@@ -70,7 +70,7 @@ function fp_users_add($name , $username , $password , $type){
 	$query = ("INSERT INTO `employee` VALUE(NULL,'$n_name','$n_username','$n_password',$n_type)");
 	$qresult = mysql_query($query);
 	if(!$qresult) return false ;
-	
+	@mysql_free_result($qresult);
 	return true ;
 	}
 	
@@ -120,7 +120,9 @@ function fp_users_update($id , $name = NULL, $username = NULL, $password = NULL,
 	$query .= ' WHERE `id` = '.$uid; echo $query;
 	$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
-		else return true ;
+                
+                @mysql_free_result($qresult);
+		return true ;
 	
 	}
 	
@@ -131,7 +133,7 @@ function fp_users_delete($id){
 	$query = sprintf("DELETE FROM `employee` WHERE `id` = %d",$uid);
 	$qresult = @mysql_query($query);
 	if(!$qresult) return false ;
-	
+	@mysql_free_result($qresult);
 	return true ;
 	}
 

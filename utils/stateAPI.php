@@ -42,7 +42,7 @@ function fp_states_get_by_id($id){
 		$query = ("INSERT INTO `state`( `id` , `name`) VALUE(NULL,'$n_name'  )");
 		$qresult = mysql_query($query);
 		if(!$qresult) return false ;
-		
+		@mysql_free_result($qresult);
 		return true ;
 		}
   	function fp_states_delete($id){
@@ -51,7 +51,7 @@ function fp_states_get_by_id($id){
 		$query = sprintf("DELETE FROM `state` WHERE `id` = %d",$uid);
 		$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
-		
+		@mysql_free_result($qresult);
 		return true ;
 		}
         

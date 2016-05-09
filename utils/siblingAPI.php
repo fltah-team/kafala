@@ -28,14 +28,12 @@ function fp_sibiling_get_by_id($id){
 		$qresult = mysql_query($query);
                 
 		if(!$qresult){
-                    @mysql_free_result($qresult);
                     return false ;
                 }
                 @mysql_free_result($qresult);
 		return true ;
-		}	
+	}	
 	
-                fp_sibiling_update(7 , 1 , "ameenah" , 0 , "1950-01-01" , 1);
                 
         function fp_sibiling_update($id ,$orphan_id = null , $name= null , $sex = null, $birth_date = null , $state = null ){
                 global $fp_handle ;
@@ -80,8 +78,9 @@ function fp_sibiling_get_by_id($id){
                 echo $query;
                 $qresult = @mysql_query($query);
                         if(!$qresult) return false ;
-                        else return true ;
-                }     
+                        @mysql_free_result($qresult);
+                        return true ;
+        }     
 		// show all
 	function fp_sibiling_get($orphan_id ){
 		global $fp_handle ;
@@ -103,7 +102,7 @@ function fp_sibiling_get_by_id($id){
 		@mysql_free_result($qresult);
 		
 		return $sibiling ; 
-		}
+	}
        	// get with extra 
 	function fp_sibiling_get_for_gender($orphan_id,$extra ){
 		global $fp_handle ;
@@ -134,7 +133,7 @@ function fp_sibiling_get_by_id($id){
 		$query = sprintf("DELETE FROM `sibiling` WHERE `id` = %d",$uid);
 		$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
-		
+		@mysql_free_result($qresult);
 		return true ;
 		}
 

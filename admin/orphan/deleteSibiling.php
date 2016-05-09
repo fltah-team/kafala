@@ -11,7 +11,7 @@
         }
             
             
-        $id = $_GET['id'];
+        $id = (int)$_GET['id'];
 	$result = fp_sibiling_delete($id) ;
 	fp_db_close();
         

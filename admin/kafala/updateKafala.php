@@ -5,7 +5,7 @@
         if(!isset($_GET['id'])){
             fp_err_upadte_fail ("الكفالة");
         }
-	$id = $_GET['id'];
+	$id = (int)$_GET['id'];
 	$result = fp_users_update($id,$_POST['name'],$_POST['un']);
 	fp_db_close();
 

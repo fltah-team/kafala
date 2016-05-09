@@ -8,7 +8,7 @@
         if(!isset( $_GET['id'])){
             fp_err_delete_fail("اليتيم");
         }
-	$id = $_GET['id'] ;
+	$id = (int)$_GET['id'] ;
 	$result = fp_orphan_delete($id) ;
 	
 

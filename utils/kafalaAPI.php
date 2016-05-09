@@ -57,6 +57,7 @@ function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$month_no,$sponsored
 	if(!$qresult) return false ;
         fp_kafala_insert_sponsorships($n_sponsored,$n_saving,$n_date);
 
+        @mysql_free_result($qresult);
         return true ;
 	}
 
@@ -96,9 +97,9 @@ function fp_kafala_delete($id){
 	$qresult = @mysql_query($query);
         mysql_query("DELETE FROM `sponsorship` WHERE `sponsorship` =".$kid);
 	if(!$qresult) return false ;
-	
+	@mysql_free_result($qresult);
 	return true ;
-	}
+}
 
 	 	
 function fp_sposored_get_kafala($id){

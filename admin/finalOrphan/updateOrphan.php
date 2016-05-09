@@ -10,7 +10,7 @@
             fp_err_upadte_fail_record("اليتيم");
         }
         
-	$id = $_GET['id'];
+	$id = (int)$_GET['id'];
 	$state = $_GET['status'];	
 	$warranty_organization =  $_GET['sponsor'];
 	$first_name = $_GET['name1'];	

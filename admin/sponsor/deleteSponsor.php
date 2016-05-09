@@ -1,7 +1,7 @@
 <?php
 	include('../../utils/db.php');
 	include('../../utils/sponsorAPI.php');
-	$id = $_GET['id'];
+	$id = (int)$_GET['id'];
 	$result = fp_sponsor_delete($id);
 	fp_db_close();
 	if(!$result)
