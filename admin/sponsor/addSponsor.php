@@ -31,7 +31,7 @@
                         <li><a href="../finalOrphan/showOrphans.php">عرض الكل  </a></li>
                         <li><a href="../orphan/showOrphans.php"> بيانات غير معتمدة </a></li>
                         <li>
-                            <form method="get" action="orphanInfo.php" >
+                            <form method="get" action="../finalOrphan/orphanInfo.php" >
                                 <input dir="rtl" type="text" name="id" size="12"/> <input type="submit" size="5" value="بحث" id="o_serch"/>
                             </form>
                         </li>
@@ -55,8 +55,8 @@
                     <ul class="submenu">
                         <li><a href="../sponsor/showSponsor.php">عرض جهات الكفالة  </a></li>
                         <li><a href="../sponsor/addSponsor.php">اضافة جهة كفالة</a></li>
-                        <li><a href="../states/showState.php">عرض المدن  </a></li>
-                        <li><a href="../kafala/showKafala.php">اضافة مدينة جديدة</a></li>
+                        <li><a href="../states/showState.php">عرض الولايات  </a></li>
+                        <li><a href="../states/addState.php">اضافة ولاية جديدة</a></li>
                         
                     </ul>
                 </li>

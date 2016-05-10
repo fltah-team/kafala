@@ -54,8 +54,8 @@
                     <ul class="submenu">
                         <li><a href="../sponsor/showSponsor.php">عرض جهات الكفالة  </a></li>
                         <li><a href="../sponsor/addSponsor.php">اضافة جهة كفالة</a></li>
-                        <li><a href="../states/showState.php">عرض المدن  </a></li>
-                        <li><a href="../kafala/showKafala.php">اضافة مدينة جديدة</a></li>
+                        <li><a href="../states/showState.php">عرض الولايات  </a></li>
+                        <li><a href="../states/addState.php">اضافة ولاية جديدة</a></li>
                         
                     </ul>
                 </li>
@@ -73,7 +73,7 @@
 <div class="main">
 
 <div class="login">
-    <h2 align="center" class="adress">اضافة مدينة </h2>
+    <h2 align="center" class="adress">اضافة ولاية </h2>
 <br />
 <form >
 	<table width="60%" border="0" align="center">
@@ -83,7 +83,7 @@
   </tr>
   <tr>
     <td align="right" width="58%"><input class="textFiels" name="un" type="text" id="complete_name" size="30" maxlength="30" /></td>
-    <td align="center" width="42%">الاسم المدينة</td>
+    <td align="center" width="42%">اسم الولاية </td>
     </tr>
       
   <tr>
@@ -91,7 +91,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-      <td align="right"><button id="bt" name="add"  type="button" onclick="IsEmpty()">اضافة مستخدم <img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /></button></td>
+      <td align="right"><button id="bt" name="add"  type="button" onclick="IsEmpty()">اضافة ولاية <img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /></button></td>
     
     <td>&nbsp;</td>
   </tr>
