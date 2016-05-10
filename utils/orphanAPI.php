@@ -41,8 +41,7 @@ function fp_orphan_get_by_id($id){
 	$orphan = $orphans[0];
 	return $orphan ;
 	}
-function fp_orphan_get_by_phone1($id){
-	$oid = (int)$id;
+function fp_orphan_get_by_phone1($oid){
 	if($oid == 0) return NULL ;
 	$orphans = fp_orphan_get("WHERE `phone1` = ".$oid);
 	if($orphans == NULL) return NULL ;
@@ -287,14 +286,15 @@ function fp_orphan_update($id = NULL ,  $state = Null , $warranty_organization =
 	
 	// DELETE
 function fp_orphan_delete($id){
-        global $fp_handle;
+    //include 'siblingAPI.php';
+    global $fp_handle;
 	$uid   = mysql_real_escape_string(strip_tags($id),$fp_handle);
         //echo "---------".$uid;
-	$query = sprintf("DELETE FROM `orphan` WHERE `phone1` = %d",$id);
+	$query = sprintf("DELETE FROM `orphan` WHERE `phone1` = %d",$id);echo $query;
 	$qresult = @mysql_query($query);
 	if(!$qresult) return false ;
-	
-        @mysql_free_result($qresult);
+    @mysql_free_result($qresult);
+    //fp_sibiling_delete_for_orphan($id);
 	return true ;
 	}
 

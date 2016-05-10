@@ -124,8 +124,7 @@
     <td>&nbsp;</td>
   </tr>
     <tr align="right">
-	<td>
-        </td>
+	<td></td>
     <td align="right">
                 <td align="center" dir="rtl" >
   	    ذكر<input type="radio" name="s_gender" value="1" id="male_gender" />
@@ -135,7 +134,6 @@
     </td>
     </td>
   	<td align="center">الجنس</td>
-    
     <td align="center">
         <?php fp_select_date_get(1990,null)?>
     </td>

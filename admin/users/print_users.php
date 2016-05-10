@@ -3,7 +3,7 @@
 	include('../../utils/usersAPI.php');
 	$users = fp_users_get();
 	fp_db_close();
-	if(!$users) die ("prolem");
+	if(!$users) die ("prolem with connecting to database");
 	$ucount = @count($users);
 	if($ucount == 0 ) die("NO users");
 ?>

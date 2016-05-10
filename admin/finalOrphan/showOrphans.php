@@ -204,6 +204,20 @@ function ageCalculator($dob){
   </tr>
   <?php }
   fp_db_close();?>
+<tr align="center" > 
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <?php
+        session_start();
+        $_SESSION['q'] =  "$extra";
+    ?>
+    <td><button name="add" class="bt"  type="button" onclick="window.location.href = 'print_orphans.php?q=<?php echo $extra?>'"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
+    <td></td>
+  </tr>
   </table>
 
 <br />
