@@ -1,9 +1,7 @@
 <?php
-    /*include '../utils/auth.php';
-    $is_loged = fp_is_loged(1);
-    if(!$is_loged)
-        header("location:../");
-    else echo "loged";*/
+    include '../utils/auth.php';
+    $login_checker = fp_is_loged(1);
+    if(!$login_checker)echo "go OUT"; else echo "welcome";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

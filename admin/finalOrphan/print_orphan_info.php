@@ -243,9 +243,12 @@
   </tr>
   
   
-    <table class="table" width="70%" border="0" align="center">
+    <table id="sibilings" width="70%" border="3" align="center" style="border-collapse: collapse">
+          <script type='text/javascript'>
+          if(<?php echo $male_count+$female_count?> == 0)document.getElementById('sibilings').style.display = 'none';
+          </script>
    <br />
-   <tr class="table_header">
+   <tr >
       <td align="center" width="15%">الحالة</td>
     <td align="center" width="15%">تاريخ الميلاد</td>
     <td align="center" width="25%">الجنس</td>
@@ -257,7 +260,7 @@
         for($i = 0 ; $i < $scount ; $i++){
 		$one_sibling = $sibilings[$i];
   ?>
-   <tr class="table_data<?php echo $i%2?>">
+   <tr >
     <td align="center"><?php fp_get_state($one_sibling->state)?></td>
     <td align="center"><?php echo $one_sibling->birth_date ?></td>
     <td align="center"><?php if($one_sibling->sex == 1) echo "ذكر"; else echo "أنثى";?></td>
@@ -271,125 +274,6 @@
 
 </table>
 
-<script type="text/javascript">
-function get_s_str(){
-       var s_str = "" ;
-      var sname = document.getElementById('sibling_name');
-      s_str+='sibling_name='+sname.value+'&';
-      var s_bd = document.getElementById('sy').value+"-"+document.getElementById('sm').value+"-"+document.getElementById('sd').value;
-      s_str+='s_bd='+s_bd+'&';
-      var s_status = document.getElementById("s_status");
-      s_str+='sibling_status='+s_status.value+'&';
-      var s_gender_nodes = document.getElementsByName("s_gender");
-
-      if(document.getElementById("sibling_male_gender").checked == true) s_gender_value = "1" ;
-        else s_gender_value = "0" ;
-      s_str+='s_gender='+s_gender_value+'&';
-      s_str+='o_id='+<?php echo $orphan->id ?>;
-      sibling_ajax(s_str);
-      }
-  function sibling_ajax(s_str)
-{	
-        var ajax;
-	var data ;
-	filename = "saveSibiling.php";
-	post = false ;
-    if (window.XMLHttpRequest)
-    {
-        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
-    } 
-    else if (ActiveXObject("Microsoft.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
-    }
-    else if (ActiveXObject("Msxml2.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
-    }
-    else
-    {
-        alert("Error: Your browser does not support AJAX.");
-        return false;
-    }
-    ajax.onreadystatechange=function()
-    {
-        if (ajax.readyState==4&&ajax.status==200)
-        {
-            alert(ajax.responseText);
-            window.location.reload();
-            //window.location.href = "orphanInfo.php?id="+<?php //echo $id?>
-			//document.getElementById(elementID).innerHTML=ajax.responseText;
-        }
-    }
-    if (post==false)
-    {
-        ajax.open("GET",filename+"?"+s_str,true);
-        s_str = '';
-        ajax.send(null);
-		
-    }
-    else 
-    {
-        ajax.open("POST",filename,true);
-        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        ajax.send(s_str);
-        s_str = '';
-    }
-    return ajax;
-	
-}
-function delete_sibling_ajax(id)
-{	
-        var ajax;
-	var data ;
-	filename = "deleteSibiling.php";
-	post = false ;
-    if (window.XMLHttpRequest)
-    {
-        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
-    } 
-    else if (ActiveXObject("Microsoft.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
-    }
-    else if (ActiveXObject("Msxml2.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
-    }
-    else
-    {
-        alert("Error: Your browser does not support AJAX.");
-        return false;
-    }
-    ajax.onreadystatechange=function()
-    {
-        if (ajax.readyState==4&&ajax.status==200)
-        {
-            alert(ajax.responseText);
-            window.location.reload();
-            
-            //window.location.href = "orphanInfo.php?id="+<?php //echo $id?>
-			//document.getElementById(elementID).innerHTML=ajax.responseText;
-        }
-    }
-    if (post==false)
-    {
-        ajax.open("GET",filename+"?id="+id,true);
-        s_str = '';
-        ajax.send(null);
-		
-    }
-    else 
-    {
-        ajax.open("POST",filename,true);
-        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        ajax.send(s_str);
-        s_str = '';
-    }
-    return ajax;
-	
-}
-</script>
 <!--   Learning   -->
 
 
@@ -527,7 +411,8 @@ function delete_sibling_ajax(id)
 </table>
   </form>
 </div>
-
-</div>
+    <script type="text/javascript" >
+    window.print();
+    </script>
 </body>
 </html>

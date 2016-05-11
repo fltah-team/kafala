@@ -268,8 +268,8 @@
     ?>
     <table width="60%" border="0" align="center" class="table">
     <tr align="center" class="table_header">
-    <td width="10%">عدد الشهور</td>
-    <td width="20%">التاريخ</td>
+    <td width="10%">الى</td>
+    <td width="20%">من</td>
     <td width="5%">الادخار</td>
     <td width="5%">المبلغ</td>
     <td width="5%">الرقم</td>
@@ -636,8 +636,9 @@ function delete_sibling_ajax(id)
             <option id="badill"   value="0">سيئة</option>';
             }
             else {
-            echo '<option id="goodill"  value="1">جيدة</option>
-            <option id="badill"   value="0">سيئة</option>';
+            echo '
+            <option id="badill"   value="0">سيئة</option>
+            <option id="goodill"  value="1">جيدة</option>';
             
             }
             ?>
@@ -688,7 +689,8 @@ function delete_sibling_ajax(id)
   <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td><button name="add" class="bt"  type="button" onclick="window.open('print_orphan_info.php?id=<?php echo $orphan->id?>')"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
+    
     <td align="center"><button class="add_bt" name="add" type="button" onclick="get_str()" >تعديل البيانات<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
     <td>&nbsp;</td>
   </tr>
@@ -740,7 +742,7 @@ function ajax(str)
 	var data ;
 	//var d_node = document.getElementById(elementID);
 	elementID = "div";
-	filename = "updateOrphan.php";
+	filename = "saveOrphan.php";
 	post = false ;
     if (window.XMLHttpRequest)
     {

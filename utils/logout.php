@@ -1,4 +1,4 @@
 <?php
-    include './auth.php';
+    include 'auth.php';
     fp_logout();
 ?>

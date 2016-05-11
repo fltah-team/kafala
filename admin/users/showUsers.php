@@ -106,15 +106,7 @@
 ?>
 
 <table width="90%" align="center" class="table">
-    <tr align="center" >
- <td width="10%"> </td>
-    <td width="9%"></td>    
-    <td width="30%"></td>
-    <td width="4%"></td>
-    <td width="31%"><button name="add" class="bt"  type="button" onclick="printt()"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
-    <td width="16%"></td>
-    
-  </tr>
+
     <tr align="center" class="table_header">
  <td width="5%">حذف </td>
  

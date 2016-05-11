@@ -1,5 +1,5 @@
 <?php
-    include './auth.php';
+    include 'auth.php';
     $m='اسم المستخدم أو كلمة المرور غير صحيحة';
     if(isset($_POST['login-name']) && isset($_POST['login-pass'])){
         $log = fp_login($_POST['login-name'],$_POST['login-pass']);

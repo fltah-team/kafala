@@ -85,8 +85,9 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
         <td>
             <div class="container" id="main" role="main" align="center" >
             <ul class="menu" >
-                <li><a href="#">الأيتام</a>    
+                <li><a href="orphan.php">الأيتام</a>    
                     <ul class="submenu">
+                        <li><a href="orphan.php">عرض بخيارات  </a></li>
                         <li><a href="showOrphans.php">عرض الكل  </a></li>
                         <li><a href="../orphan/showOrphans.php"> بيانات غير معتمدة </a></li>
                         <li>

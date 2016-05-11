@@ -94,7 +94,7 @@
 <form  method="post">
 	<table width="60%" border="0" align="center">
   <tr>
-    <td align="center" width="58%"><input class="textFiels" name="name" type="text" id="name" size="30" maxlength="30" value="<?php echo $user->name?>" /></td>
+      <td align="center" width="58%"><input disabled class="textFiels" name="impt" type="text" id="name" size="30" maxlength="30" value="<?php echo $user->name?>" /></td>
     <td align="center" width="42%">الاسم بالكامل</td>
     </tr>
       <tr>
@@ -118,16 +118,27 @@
     <td align="center">نوع المستخدم</td>
     </tr>
       <tr>
+          <td align="center"><h2 style="color: #ff0000">تغيير كلمة المرور</h2></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="center"><input class="textFiels" name="impt" type="password" id="pass1" size="30" maxlength="30" /></td>
+    <td align="center">كلمة المرور</td>
+  </tr>
+    <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
-  
+  <tr>
+    <td align="center"><input class="textFiels" name="impt" type="password" id="pass2" size="30" maxlength="30" /></td>
+    <td align="center">تكرار كلمة المرور</td>
+  </tr>
   <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   </tr>
   <tr>
-      <td align="right"><input name="add" type="button" onclick="window.location.href ='showUsers.php'" value="قائمة المستخدمين"/></td>
+      <td align="center"><button class="add_bt" name="add" type="button" onclick="IsEmpty()" >تغيير<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
@@ -137,7 +148,89 @@
     </table>
 </form>
 </div>
+    <div style="margin: 0 auto; text-align: center ; width: 60%;" id="reponse">
+    <span id="res_stattus"></span>
+</div>
+    <script type="text/javascript" >
+        function IsEmpty(){ 
+        var text = document.getElementsByName('impt');
+        var empty_checker = 0 ;
+        for(var i = 0 ; i< text.length ; i++){
+           if(text[i].value == ''){
+               text.item(i).style.color = "#ff0000" ;
+               text.item(i).setAttribute("placeholder","هذا الحقل فارغ");
+               empty_checker++;
+           }
+        }
+        if(empty_checker > 0 )alert("هناك حقول يجب تعبئتها");
+        else check_pass(document.getElementById("pass1").value,document.getElementById("pass2").value);
+}
+        
+function check_pass(p1,p2){
+        if(p1.length < 8|| p2.length < 8)alert("كلمة المرور قصيرة ,, الحد الدنى 8 حروف");
+        else if(p1 != p2 ){
+            alert("كلمات المرور غير متطابقة .. الرجاء التأكد");
+            pass1.value = "";
+            pass2.value = "";
+        }
+        else ajax();
+}
 
+function ajax()
+{
+    var ajax;
+	//var d_node = document.getElementById(elementID);
+	elementID = "div";
+	filename = "updateUser.php";
+	str = 'id=<?php echo $user->id?>&';
+            text = document.getElementsByName('impt');
+            for(var i = 0 ; i< text.length ; i++){
+           str += text[i].getAttribute('id')+'='+text[i].value+'&';
+        }
+	post = true ;
+    if (window.XMLHttpRequest)
+    {
+        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
+    }
+    else if (ActiveXObject("Microsoft.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
+    }
+    else if (ActiveXObject("Msxml2.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
+    }
+    else
+    {
+        alert("Error: Your browser does not support AJAX.");
+        return false;
+    }
+    ajax.onreadystatechange=function()
+    {
+        if (ajax.readyState==4&&ajax.status==200)
+        {
+			document.getElementById("reponse").innerHTML = ajax.responseText;
+			//window.location.href = "showUsers.php";
+			//document.getElementById(elementID).innerHTML=ajax.responseText;
+        }
+    }
+    if (post==false)
+    {
+        ajax.open("GET",filename+str,true);
+        ajax.send(null);
+		
+    }
+    else
+    {
+        ajax.open("POST",filename,true);
+        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.send(str);
+    }
+    return ajax;
+	
+}
+
+    </script>
 <div id="footer">
 <p>جميع الحقوق محفوظة 2016 &copy;</p>
 </div>
