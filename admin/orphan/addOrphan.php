@@ -244,9 +244,9 @@
     <tr align="right">
 	<td>&nbsp;</td>
     <td>&nbsp;</td>
-     <td align="right"><input class="textFiels" name="tel2" type="text" id="tel2" size="10" maxlength="30" /></td>
+     <td align="right"><input class="textFiels" name="impt" type="text" id="tel2" size="10" maxlength="30" /></td>
     <td align="center">جوال 2</td>
-    <td align="right"><input class="textFiels" name="tel1" type="text" id="tel1" size="10" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="impt" type="text" id="tel1" size="10" maxlength="30" /></td>
     <td align="center">جوال 1</td>
   </tr>
   
@@ -398,7 +398,7 @@
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td align="center"><button class="bt" name="add" type="button" onclick="get_str()" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة يتيم  </button></td>
+    <td align="center"><button class="bt" name="add" type="button" onclick="IsEmpty()" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة يتيم  </button></td>
     <td>&nbsp;</td>
   </tr>
   </form>
@@ -410,7 +410,7 @@
 <script type="text/javascript" >
         
 function IsEmpty(){ 
-        var text = document.getElementsByTagName('input');
+        var text = document.getElementsByName('impt');
         var empty_checker = 0 ;
         for(var i = 0 ; i< text.length ; i++){
            if(text[i].value == ''){
@@ -420,7 +420,12 @@ function IsEmpty(){
            }
         }
         if(empty_checker > 0 )alert("هناك حقول يجب تعبئتها");
-        else get_str();
+        else {
+            if(document.getElementById('tel1').value.length > 9 )
+                get_str();
+            else
+                alert("يجب ان يكون رقم التلفون أكبر من 10 خانات");
+        }
 }
 
 function get_str(){
@@ -439,7 +444,6 @@ function get_str(){
         else gender_value = "0" ;
         str+="gender="+gender_value;
         //window.location.href = "saveOrphan.php?"+str;
-        alert(str);
        ajax(str);
 }
 function ajax(str)
@@ -490,14 +494,7 @@ function ajax(str)
 	
 }
 
-function add_sibling (){
-    var s_final_str = "";
-    if(s_str_array.length != 0)
-    for(var i =0 ; i < s_str_array.length ; i++){
-        s_final_str+=s_str_array[i];
-    }
-     alert(document.getElementById("success_notice").getAttribute("name"));
-}	
+	
 </script>
 <div id="footer">
 <p>جميع الحقوق محفوظة 2016 &copy;</p>

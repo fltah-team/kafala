@@ -16,8 +16,7 @@
 	fp_db_close();
         
 	if(!$result)
-            fp_err_delete_fail ("فرد العائلة");
+            echo(" لم تتم عملية الحذف ");
         else 
-            fp_err_delete_succes ("فرد العائلة");
-	
+            echo("تمت عملية الحذف  بنجاح");
 	?>

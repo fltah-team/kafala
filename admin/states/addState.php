@@ -83,7 +83,7 @@
   </tr>
   <tr>
     <td align="right" width="58%"><input class="textFiels" name="un" type="text" id="complete_name" size="30" maxlength="30" /></td>
-    <td align="center" width="42%">اسم الولاية </td>
+    <td align="center" width="42%">الاسم الولاية</td>
     </tr>
       
   <tr>
@@ -91,7 +91,7 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-      <td align="right"><button id="bt" name="add"  type="button" onclick="IsEmpty()">اضافة ولاية <img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /></button></td>
+      <td align="right"><button id="bt" name="add"  type="button" onclick="IsEmpty()">اضافة الولاية <img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /></button></td>
     
     <td>&nbsp;</td>
   </tr>

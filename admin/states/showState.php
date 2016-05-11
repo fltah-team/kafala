@@ -65,7 +65,7 @@
                         <li><a href="../sponsor/showSponsor.php">عرض جهات الكفالة  </a></li>
                         <li><a href="../sponsor/addSponsor.php">اضافة جهة كفالة</a></li>
                         <li><a href="../states/showState.php">عرض الولايات  </a></li>
-                        <li><a href="../kafala/showKafala.php">اضافة ولاية جديدة</a></li>
+                        <li><a href="../states/addState.php">اضافة ولاية جديدة</a></li>
                         
                     </ul>
                 </li>
@@ -87,7 +87,7 @@
 
 <?php
     if($states == 0 ||$states == -1 ) {
-            fp_err_show_records("ولايات");
+            fp_err_show_records("الولايات");
         }
         
 	$ucount = @count($states);
@@ -97,7 +97,7 @@
     
     <tr align="center" class="table_header">
  <td width="5%">حذف </td>
-    <td width="40%">الاسم </td>
+    <td width="40%">الولاية </td>
     <td width="5%">الرقم</td>
   </tr>
   <?php 
