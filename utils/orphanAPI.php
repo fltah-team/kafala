@@ -74,7 +74,7 @@ function fp_orphan_add($id,$state , $warranty_organization  , $saving , $first_n
 	$n_city = @mysql_real_escape_string(strip_tags($city),$fp_handle);
 	$n_District = @mysql_real_escape_string(strip_tags($District),$fp_handle);
 	$n_section  = (int)$section;
-	$n_house_no  = (int)$house_no;
+	$n_house_no  = @mysql_real_escape_string(strip_tags($house_no),$fp_handle);
 	$n_phone1  = @mysql_real_escape_string(strip_tags($phone1),$fp_handle);
 	$n_phone2  = @mysql_real_escape_string(strip_tags($phone2),$fp_handle);
 	$n_studing_state =@mysql_real_escape_string(strip_tags($studing_state),$fp_handle);
@@ -206,7 +206,7 @@ function fp_orphan_update($id = NULL ,  $state = Null , $warranty_organization =
 		$fields[@count($fields)] = " `section` = '$n_section' ";
 		}
 	if(!empty($house_no)){
-		$n_house_no   = (int)$house_no ;
+		$n_house_no  = @mysql_real_escape_string(strip_tags($house_no),$fp_handle);
 		$fields[@count($fields)] = " `house_no` = '$n_house_no' ";
 		}
 	//if(!empty($phone1)){

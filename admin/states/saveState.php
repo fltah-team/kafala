@@ -8,7 +8,7 @@
 	$result = fp_states_add($_GET['name']);
 	fp_db_close();
 	if(!$result)
-		fp_err_add_fail("المدينة");
+		fp_err_add_fail("الولاية");
         else
-                fp_err_add_succes("المدينة");
+                fp_err_add_succes("الولاية");
 ?>

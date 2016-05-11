@@ -24,17 +24,56 @@
 
 <!-- menu -->
 <div class="menu">
-	<ul>
-      
-      <li><a href="cars.html">تسجيل خروج</a>
-      <li><a href="customers.html">الدعاة</a>
-      <li><a href="employees.html">الطلاب</a>
-      <li><a href="reports.html">الأسر</a>
-      <li><a href="main.html">الأيتام</a>
-      <li><a href="main.html">عرض الموظفين</a>
-   </ul>
-
+	<table align="center">
+    <tr>
+        <td>
+            <div class="container" id="main" role="main" align="center" >
+            <ul class="menu" >
+                <li><a href="#">الأيتام</a>    
+                    <ul class="submenu">
+                        <li><a href="finalOrphan/showOrphans.php">عرض الكل  </a></li>
+                        <li><a href="orphan/showOrphans.php"> بيانات غير معتمدة </a></li>
+                        <li>
+                            <form method="get" action="orphanInfo.php" >
+                                <input dir="rtl" type="text" name="id" size="12"/> <input type="submit" size="5" value="بحث" id="o_serch"/>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="#">المستخدمين</a>    
+                    <ul class="submenu">
+                        <li><a href="users/showUsers.php">عرض الكل  </a></li>
+                        <li><a href="users/addUser.php">اضافة مستخدم جديد</a></li>
+                        
+                    </ul>
+                </li>
+                <li><a href="#">الكفالات</a>    
+                    <ul class="submenu">
+                        <li><a href="kafala/showKafala.php">عرض الكل  </a></li>
+                        <li><a href="kafala/addKafala.php">اضافة كفالة جديدة</a></li>
+                        
+                    </ul>
+                </li>
+                <li><a href="#">أخرى</a>    
+                    <ul class="submenu">
+                        <li><a href="sponsor/showSponsor.php">عرض جهات الكفالة  </a></li>
+                        <li><a href="sponsor/addSponsor.php">اضافة جهة كفالة</a></li>
+                        <li><a href="states/showState.php">عرض الولايات  </a></li>
+                        <li><a href="states/addState.php">اضافة ولاية جديدة</a></li>
+                        
+                    </ul>
+                </li>
+                <li><a href="../utils/logout.php">تسجيل خروج</a></li>
+            </ul>
+            
+            
+            </div>
+        </td>
+    </tr>
+</table>
 </div>
+
+
 
 <!-- main -->
 <div class="main">
@@ -52,6 +91,21 @@
             ?>
         </td>
         
+<table width="60%" border="0" align="center">
+  <tr>
+    <td width="268" align="center" class="linkBT"><a href="users/addUser.php">اضافة مستخدم</a></td>
+    <td width="100" align="center" ></td>
+    <td width="219" align="center" class="linkBT"><a href="kafala/addKafala.php">اضافة كفالة</a></td>
+    </tr>
+      <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr>
+    <td width="268" align="center" class="linkBT"><a href="users/showUsers.php">عرض المستخدمين</a></td>
+    <td width="100" align="center" ></td>
+    <td width="219" align="center" class="linkBT"><a href="kafala/showKafala.php">عرض الكفالات</a></td>
     </tr>
     <?php } ?>
 </table>

@@ -42,17 +42,17 @@ function fp_kafala_get_by_id($id){
         
 
 	// INSERT	
-function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$month_no,$sponsored)
+function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$last_date ,$sponsored)
 {
 	global $fp_handle;
 	$n_amount    = (int)$amount ;
 	$n_saving    = (int)$saving;
 	$n_date    = @mysql_real_escape_string(strip_tags($date),$fp_handle);
 	$n_sponsor = (int)$sponsor;
-	$n_month_no = (int)$month_no;
+	$n_last_date = @mysql_real_escape_string(strip_tags($last_date),$fp_handle);
 	$n_sponsored = (int)$sponsored;
         
-	$query = ("INSERT INTO `sponsorship` (`id`,`amount` , `saving` , `date` ,`sponsor`, `month_no` ,`sponsored`) VALUE(NULL, $n_amount, $n_saving, '$n_date' ,$n_sponsor , $month_no , $n_sponsored)");
+	$query = ("INSERT INTO `sponsorship` (`id`,`amount` , `saving` , `date` ,`sponsor`, `last_date` ,`sponsored`) VALUE(NULL, $n_amount, $n_saving, '$n_date' ,$n_sponsor , '$n_last_date' , $n_sponsored)");
         $qresult = mysql_query($query);
 	if(!$qresult) return false ;
         fp_kafala_insert_sponsorships($n_sponsored,$n_saving,$n_date,$n_sponsor);

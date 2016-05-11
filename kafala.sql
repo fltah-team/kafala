@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2016 at 12:54 PM
+-- Generation Time: May 11, 2016 at 08:42 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `type` int(10) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `family` (
   `city` varchar(50) NOT NULL,
   `District` varchar(50) NOT NULL,
   `section` int(11) NOT NULL,
-  `house_no` int(11) NOT NULL,
+  `house_no` varchar(500) NOT NULL,
   `phone1` varchar(50) NOT NULL,
   `phone2` varchar(50) NOT NULL,
   `data_entery_name` varchar(50) NOT NULL,
@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `finalfamily` (
   `city` varchar(50) NOT NULL,
   `District` varchar(50) NOT NULL,
   `section` int(11) NOT NULL,
-  `house_no` int(11) NOT NULL,
+  `house_no` varchar(500) NOT NULL,
   `phone1` varchar(50) NOT NULL,
   `phone2` varchar(50) NOT NULL,
   `data_entery_name` varchar(50) NOT NULL,
@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `finalorphan` (
   `city` varchar(100) NOT NULL,
   `District` varchar(100) NOT NULL,
   `section` int(10) NOT NULL,
-  `house_no` int(50) NOT NULL,
+  `house_no` varchar(100) NOT NULL,
   `phone1` varchar(50) NOT NULL,
   `phone2` varchar(50) NOT NULL,
   `studing_state` varchar(50) NOT NULL,
@@ -201,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `finalorphan` (
   UNIQUE KEY `id` (`id`),
   KEY `warranty_organization` (`warranty_organization`),
   KEY `residence_state` (`residence_state`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -229,7 +229,7 @@ CREATE TABLE IF NOT EXISTS `finalpreacher` (
   `city` varchar(50) NOT NULL,
   `District` varchar(50) NOT NULL,
   `section` int(10) NOT NULL,
-  `house_no` int(10) NOT NULL,
+  `house_no` varchar(500) NOT NULL,
   `phone1` varchar(50) NOT NULL,
   `phone2` varchar(50) NOT NULL,
   `qualify_name` varchar(50) NOT NULL,
@@ -278,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `finalstudent` (
   `city` varchar(100) NOT NULL,
   `District` varchar(100) NOT NULL,
   `section` int(20) NOT NULL,
-  `house_no` int(20) NOT NULL,
+  `house_no` varchar(500) NOT NULL,
   `phone1` varchar(50) NOT NULL,
   `phone2` varchar(50) NOT NULL,
   `school_name` varchar(100) NOT NULL,
@@ -326,6 +326,30 @@ CREATE TABLE IF NOT EXISTS `f_member` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notify`
+--
+
+DROP TABLE IF EXISTS `notify`;
+CREATE TABLE IF NOT EXISTS `notify` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `text` varchar(1000) NOT NULL,
+  `ufrom` varchar(100) NOT NULL,
+  `uto` varchar(100) NOT NULL,
+  `type` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `uto` (`uto`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `notify`
+--
+
+INSERT INTO `notify` (`id`, `text`, `ufrom`, `uto`, `type`) VALUES
+(2, 'nooooooooooo', 'dd', 'ee', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orphan`
 --
 
@@ -355,7 +379,7 @@ CREATE TABLE IF NOT EXISTS `orphan` (
   `city` varchar(100) NOT NULL,
   `District` varchar(100) NOT NULL,
   `section` int(10) NOT NULL,
-  `house_no` int(50) NOT NULL,
+  `house_no` varchar(500) NOT NULL,
   `phone1` varchar(50) NOT NULL,
   `phone2` varchar(50) NOT NULL,
   `studing_state` varchar(50) NOT NULL,
@@ -371,7 +395,7 @@ CREATE TABLE IF NOT EXISTS `orphan` (
   UNIQUE KEY `id` (`id`),
   KEY `warranty_organization` (`warranty_organization`),
   KEY `residence_state` (`residence_state`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -399,7 +423,7 @@ CREATE TABLE IF NOT EXISTS `preacher` (
   `city` varchar(50) NOT NULL,
   `District` varchar(50) NOT NULL,
   `section` int(10) NOT NULL,
-  `house_no` int(10) NOT NULL,
+  `house_no` varchar(500) NOT NULL,
   `phone1` varchar(50) NOT NULL,
   `phone2` varchar(50) NOT NULL,
   `qualify_name` varchar(50) NOT NULL,
@@ -450,7 +474,7 @@ CREATE TABLE IF NOT EXISTS `sponsor` (
   `numberOFSponsored` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -465,11 +489,11 @@ CREATE TABLE IF NOT EXISTS `sponsorship` (
   `date` date NOT NULL,
   `saving` int(11) NOT NULL,
   `sponsor` int(11) NOT NULL,
-  `month_no` int(11) NOT NULL,
+  `last_date` date NOT NULL,
   `sponsored` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `sponsor` (`sponsor`)
-) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf32;
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 -- --------------------------------------------------------
 
@@ -499,7 +523,7 @@ CREATE TABLE IF NOT EXISTS `state` (
   KEY `id` (`id`),
   KEY `id_2` (`id`),
   KEY `id_3` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -529,7 +553,7 @@ CREATE TABLE IF NOT EXISTS `student` (
   `city` varchar(100) NOT NULL,
   `District` varchar(100) NOT NULL,
   `section` int(20) NOT NULL,
-  `house_no` int(20) NOT NULL,
+  `house_no` varchar(500) NOT NULL,
   `phone1` varchar(50) NOT NULL,
   `phone2` varchar(50) NOT NULL,
   `school_name` varchar(100) NOT NULL,

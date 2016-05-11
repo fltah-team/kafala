@@ -31,7 +31,7 @@
                         <li><a href="../finalOrphan/showOrphans.php">عرض الكل  </a></li>
                         <li><a href="../orphan/showOrphans.php"> بيانات غير معتمدة </a></li>
                         <li>
-                            <form method="get" action="orphanInfo.php" >
+                            <form method="get" action="../finalOrphan/orphanInfo.php" >
                                 <input dir="rtl" type="text" name="id" size="12"/> <input type="submit" size="5" value="بحث" id="o_serch"/>
                             </form>
                         </li>
