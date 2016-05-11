@@ -1,48 +1,11 @@
 <?php
-    include('../../utils/db.php');
-    include('../../utils/finalOrphanAPI.php');
-    include('../../utils/error_handler.php');
-    $fields = array();
-    $extra = '';
-    if(isset($_GET['gender']) && $_GET['gender'] != ''){
-        if($_GET['gender'] != '-1')
-        $fields[@count($fields)] = " `sex` = ".(int)$_GET['gender'];
-    }
-    if(isset($_GET['states']) && (int)$_GET['states']!=0 && $_GET['states'] != ''){
-        if($_GET['states'] != '-1')
-        $fields[@count($fields)] = " `residence_state` = ".$_GET['states'];
-    }
-    if(isset($_GET['status']) && (int)$_GET['status']!=0 && $_GET['status'] != ''){
-        if($_GET['status'] != '-1')
-        $fields[@count($fields)] = " `state` = ".$_GET['status'];
-    }
-if(isset($_GET['sponsor']) && (int)$_GET['sponsor']!=0 && $_GET['sponsor'] != ''){
-        if($_GET['sponsor'] != '-1')
-        $fields[@count($fields)] = " `warranty_organization` = ".$_GET['sponsor'];
-    }
-if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['age2'] != ''){
-        if($_GET['age'] != '-1'){
-            $first = date("Y")-(int)$_GET['age']-1;
-            $seonnd = date("Y")-(int)$_GET['age2']-1;
-            $fields[@count($fields)] = " `birth_date` between '$seonnd-01-01' and '$first-01-01' ";
-        }
-    }
-	
-        $fcount = @count($fields);
-	if($fcount > 0 ){
-            $extra .= 'WHERE ';
-        for($i = 0 ; $i < $fcount ; $i++){
-		$extra .= $fields[$i];
-		if($i != ($fcount - 1 ))
-		$extra .= ' and ';
-		}
-        }
-    if(isset($_GET['name'])){
-        $extra = " WHERE `first_name` = '".$_GET['name']."'";
-    }
-    $start=0;
+	include('../../utils/db.php');
+	include('../../utils/orphanAPI.php');
+        include('../../utils/error_handler.php');
+        include('../../utils/siblingAPI.php');
+        $start=0;
     $limit=20;
-    $total_results = fp_final_orphan_get_num_rows($extra);
+    $total_results = fp_orphan_get_num_rows();
         $total=ceil($total_results/$limit);
     if(!isset($_GET['page']) || $_GET['page'] == '' || (int)$_GET['page'] == 0 || $_GET['page']>$total)
     {
@@ -52,13 +15,7 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
     $page=$_GET['page'];
     $start=($page-1)*$limit;
     }
-    if(isset($_GET['order'])){
-        if($_GET['order'] == 1)
-            $extra .= " ORDER BY `id` ";
-        else
-            $extra .= " ORDER BY `first_name` ";
-    }
-    $orphans = fp_final_orphan_get($extra." LIMIT $start, $limit ");
+        $orphans = fp_orphan_get("LIMIT $start, $limit");
 	
         
 ?>
@@ -91,10 +48,9 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
         <td>
             <div class="container" id="main" role="main" align="center" >
             <ul class="menu" >
-                <li><a href="orphan.php">الأيتام</a>    
+                <li><a href="#">الأيتام</a>    
                     <ul class="submenu">
-                        <li><a href="orphan.php">عرض بخيارات  </a></li>
-                        <li><a href="showOrphans.php">عرض الكل  </a></li>
+                        <li><a href="../finalOrphan/showOrphans.php">عرض الكل  </a></li>
                         <li><a href="../orphan/showOrphans.php"> بيانات غير معتمدة </a></li>
                         <li>
                             <form method="get" action="orphanInfo.php" >
@@ -139,7 +95,7 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
 
 <!-- main -->
 <div class="main">
-    <h1 align="center" class="adress" dir="rtl">بيانات الأيتام(<?php echo $total_results ?>)</h1>
+    <h1 align="center" class="adress" dir="rtl"> بيانات الأيتام غير المعتمدة<?php echo "($total_results)"?> </h1>
 <br />
  <?php
     //if($users[0] == NULL ) die($users[1]) ;
@@ -158,7 +114,7 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
             echo '
                 <div style="text-align:center;color:#fff;">
                 <div class="alert-box notice"><span>تنبيه: </span>لا يوجد أيتام لعرضهم
-                <p>يمكنك اضافة أيتام من <a href="../orphan/addOrphan.php">هنا</a></p>
+                <p>يمكنك اضافة أيتام من <a href="addOrphan.php">هنا</a></p>
                 </div>
                 <div id="footer">
                 <p>جميع الحقوق محفوظة 2016 &copy;</p>
@@ -199,7 +155,7 @@ function ageCalculator($dob){
 		$orphan = $orphans[$i];
   ?>
     <tr align="center" class="table_data<?php echo $i%2?>">
-    <td  onclick="window.location.href='orphanInfo.php?id='+<?php echo $orphan->id?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
+    <td  onclick="window.location.href='orphanInfo.php?id='+<?php echo $orphan->phone1?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
     <td width="7%"><?php echo ageCalculator($orphan->birth_date);?></td>
  	<td width="9%"><?php echo fp_states_get_by_id($orphan->residence_state)->name;?></td>
     <td width="8%"><?php if($orphan->sex==1)echo "ذكر"; else echo "أنثى" ; ?> </td>
@@ -211,20 +167,6 @@ function ageCalculator($dob){
   </tr>
   <?php }
   fp_db_close();?>
-<tr align="center" > 
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <?php
-        session_start();
-        $_SESSION['q'] =  "$extra";
-    ?>
-    <td><button name="add" class="bt"  type="button" onclick="window.location.href = 'print_orphans.php?q=<?php echo $extra?>'"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
-    <td></td>
-  </tr>
   </table>
 
 <br />

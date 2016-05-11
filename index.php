@@ -1,7 +1,6 @@
 <?php
-    include './utils/auth.php';
-    $is_loged = fp_is_loged('*');
-    if($is_loged){
+    session_start();
+     if(isset($_SESSION['un']) || isset($_SESSION['u_type']) || isset($_SESSION['name'])){
         switch ($_SESSION['u_type']){
                 case 1 : header("location:admin/admin.php");
                     break;
@@ -14,6 +13,7 @@
                 default : header("location:index.php?m=".$m);
             }
     }
+    
     
 ?>
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -39,12 +39,14 @@
 <?php
     if(isset($_GET['m'])){
         $m =  $_GET['m'];
+        if($m != ""){
         echo '
           <div style="text-align:center;color:#fff;">
                 <div class="alert-box error"><span>خطأ: </span>'.$m.'
                 </div>
                  </div>  
         ';
+    }
     }
 ?>
 <div class="login">

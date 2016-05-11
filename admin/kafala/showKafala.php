@@ -107,17 +107,7 @@
         ?>
 
 <table width="85%" border="0" align="center" class="table">
-        <tr align="center" >
- <td > </td>
-    <td ></td>    
-    <td></td>
-    <td ></td>
-    <td ></td>
-    <td ><button name="add" class="bt"  type="button" onclick="window.print('footer')"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
-    
-    <td ></td>
-        <td ></td>
-  </tr>
+
     <tr align="center" class="table_header">
     <td width="5%">عرض </td>
     <td width="10%">الى</td>
@@ -145,6 +135,16 @@
   </tr>
   <?php } 
         fp_db_close();	?>
+    <tr align="center" > 
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><button name="add" class="bt"  type="button" onclick="window.location.href = 'print_kafalas.php'"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
+    <td></td>
+  </tr>
   </table>
 
 <br />

@@ -2,7 +2,7 @@
 	// SELSECT ALL
 function fp_kafala_get($extra = ''){
 	global $fp_handle ;
-	$query = sprintf("SELECT * FROM `sponsorship` %s",$extra);
+	$query = sprintf("SELECT * FROM `sponsorship`  ORDER BY `date` %s",$extra);
 	$qresult = @mysql_query($query);
 	
 	if(!$qresult) return -1 ; 
