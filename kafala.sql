@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2016 at 08:09 PM
+-- Generation Time: May 11, 2016 at 08:42 PM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -489,7 +489,7 @@ CREATE TABLE IF NOT EXISTS `sponsorship` (
   `date` date NOT NULL,
   `saving` int(11) NOT NULL,
   `sponsor` int(11) NOT NULL,
-  `month_no` int(11) NOT NULL,
+  `last_date` date NOT NULL,
   `sponsored` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `sponsor` (`sponsor`)
