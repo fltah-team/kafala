@@ -2,16 +2,15 @@
 	include('../../utils/db.php');
 	include('../../utils/kafalaAPI.php');
         include('../../utils/error_handler.php');
-	$total = $_GET['total'];
-	$saving = $_GET['saving'];
-	$sponsor = $_GET['sponsor'];
-	$months = $_GET['months'];
-	$ponsored = $_GET['ponsored'];
-        if(!isset($_GET['total']) || !isset($_GET['saving']) || !isset($_GET['sponsor']) || !isset($_GET['months']) || !isset($_GET['ponsored']))
+        if(!isset($_POST['total']) || !isset($_POST['saving']) || !isset($_POST['sponsor']) || !isset($_POST['last_date']) || !isset($_POST['ponsored']))
             fp_err_add_fail("الكفالة");
-	$date = date("y-m-d");
-	$amount = $total-$saving;
-	$result = fp_kafala_add($amount,$saving,$date,$sponsor,$months,$ponsored);
+	$total = $_POST['total'];
+	$saving = $_POST['saving'];
+	$sponsor = $_POST['sponsor'];
+    $last_date = $_POST['last_date'];
+	$ponsored = $_POST['ponsored'];
+	$date = date("Y-m-d");
+	$result = fp_kafala_add($total,$saving,$date,$sponsor,$last_date,$ponsored);
 	fp_db_close();
 	if(!$result)
             fp_err_add_fail("الكفالة");

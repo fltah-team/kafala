@@ -85,8 +85,9 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
         <td>
             <div class="container" id="main" role="main" align="center" >
             <ul class="menu" >
-                <li><a href="#">الأيتام</a>    
+                <li><a href="orphan.php">الأيتام</a>    
                     <ul class="submenu">
+                        <li><a href="orphan.php">عرض بخيارات  </a></li>
                         <li><a href="showOrphans.php">عرض الكل  </a></li>
                         <li><a href="../orphan/showOrphans.php"> بيانات غير معتمدة </a></li>
                         <li>
@@ -204,6 +205,20 @@ function ageCalculator($dob){
   </tr>
   <?php }
   fp_db_close();?>
+<tr align="center" > 
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <?php
+        session_start();
+        $_SESSION['q'] =  "$extra";
+    ?>
+    <td><button name="add" class="bt"  type="button" onclick="window.location.href = 'print_orphans.php?q=<?php echo $extra?>'"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
+    <td></td>
+  </tr>
   </table>
 
 <br />

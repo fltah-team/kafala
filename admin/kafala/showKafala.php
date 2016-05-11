@@ -1,7 +1,7 @@
 <?php
 	include('../../utils/db.php');
 	include('../../utils/kafalaAPI.php');
-        include('../../utils/orphanAPI.php');
+        include('../../utils/sponsorAPI.php');
         include('../../utils/error_handler.php');
         $start=0;
     $limit=20;
@@ -17,7 +17,6 @@
     }
         
         $sponsorships = fp_kafala_get("LIMIT $start, $limit");
-        fp_db_close();	
         
 
 ?>
@@ -121,8 +120,8 @@
   </tr>
     <tr align="center" class="table_header">
     <td width="5%">عرض </td>
-    <td width="10%">عدد الشهور</td>
-    <td width="20%">التاريخ</td>
+    <td width="10%">الى</td>
+    <td width="20%">من</td>
     <td width="5%">الادخار</td>
     <td width="5%">المبلغ</td>
     <td width="20%">المكفولين</td>
@@ -135,16 +134,17 @@
 		$sponsorship = $sponsorships[$i];
   ?>
     <tr align="center" class="table_data<?php echo $i%2?>">
-    <td  onclick="window.location.href='kafala.php?id='+<?php echo $sponsorship   ->id?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
+    <td  onclick="window.location.href='kafala.php?id='+<?php echo $sponsorship->id?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
     <td><?php echo $sponsorship->month_no?></td>
     <td><?php echo $sponsorship->date?></td>
     <td><?php echo $sponsorship->saving?></td>
     <td><?php echo $sponsorship->amount?></td>
     <td><?php fp_get_sponsored($sponsorship->sponsored)?></td>
-    <td><?php echo $sponsorship->sponsor?></td>
+    <td><?php echo fp_sponsor_get_by_id($sponsorship->sponsor)->name?></td>
     <td><?php echo $sponsorship->id?></td>
   </tr>
-  <?php } ?>
+  <?php } 
+        fp_db_close();	?>
   </table>
 
 <br />

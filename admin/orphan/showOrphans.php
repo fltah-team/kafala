@@ -95,7 +95,7 @@
 
 <!-- main -->
 <div class="main">
-<h1 align="center" class="adress"> بيانات الأيتام </h1>
+    <h1 align="center" class="adress" dir="rtl"> بيانات الأيتام غير المعتمدة<?php echo "($total_results)"?> </h1>
 <br />
  <?php
     //if($users[0] == NULL ) die($users[1]) ;

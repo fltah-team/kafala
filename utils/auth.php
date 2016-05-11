@@ -9,6 +9,7 @@ function fp_login($un,$pass){
         if($n_un == $db_user->username && md5($n_pass) == $db_user->password ){
             session_start();
             $_SESSION['un'] = $db_user->username;
+            $_SESSION['name'] = $db_user->name;
             $_SESSION['u_type'] = $db_user->type ;
             return true;
         }
@@ -24,7 +25,9 @@ function fp_is_loged($t){
      return false ;
 }
 function fp_logout(){
-    session_destroy();
-    header("location:../");
+    unset($_SESSION['un']);
+    unset($_SESSION['name']);
+    unset($_SESSION['u_type']);
+    header("location:../index.php");
 }
 ?>

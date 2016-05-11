@@ -83,19 +83,20 @@
 	include('../../utils/db.php');
 	include('../../utils/kafalaAPI.php');
         include('../../utils/error_handler.php');
+        include '../../utils/sponsorAPI.php';
 	if(!isset($_GET['id']) || $_GET['id']=="" || (int)$_GET['id']==0){
             fp_err_show_record("الكفالة");
         }
 	$id = $_GET['id']; 
 	$sponsorship = fp_kafala_get_by_id($id);
-	fp_db_close();
 	if(!$sponsorship)fp_err_show_record("الكفالة");
-        
+    $name = fp_sponsor_get_by_id($sponsorship->sponsor)->name;
+	fp_db_close();
 
 ?>
     <table width="60%" border="0" align="center">
        
-    <td align="right" width="44%"><input class="textFiels" name="total" type="text" id="total" value="<?php echo $sponsorship->sponsor?>" size="10" maxlength="30" /></td>
+    <td align="right" width="44%"><input class="textFiels" name="total" type="text" id="total" value="<?php echo $name?>" size="10" maxlength="30" /></td>
     <td align="center" width="56%">جهة الكفالة</td>
     </tr>
       <tr>
@@ -119,13 +120,10 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="right"><select class="textFiels" id="months">
-  	  <?php
-	  for($i=1 ; $i <= 12 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-	  </select></td>
-    <td align="center">عدد الشهور</td>
+    <td align="right">
+        <input class="textFiels" name="total" type="text" id="total" value="<?php echo "هنا التاريخ"?>" size="10" maxlength="30" />
+    </td>
+    <td align="center">الى</td>
   </tr>
     <tr>
     <td>&nbsp;</td>

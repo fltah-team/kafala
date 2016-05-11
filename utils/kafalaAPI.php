@@ -55,7 +55,7 @@ function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$month_no,$sponsored
 	$query = ("INSERT INTO `sponsorship` (`id`,`amount` , `saving` , `date` ,`sponsor`, `month_no` ,`sponsored`) VALUE(NULL, $n_amount, $n_saving, '$n_date' ,$n_sponsor , $month_no , $n_sponsored)");
         $qresult = mysql_query($query);
 	if(!$qresult) return false ;
-        fp_kafala_insert_sponsorships($n_sponsored,$n_saving,$n_date);
+        fp_kafala_insert_sponsorships($n_sponsored,$n_saving,$n_date,$n_sponsor);
 
         @mysql_free_result($qresult);
         return true ;
@@ -69,13 +69,13 @@ function fp_kafala_get_last_id(){
 	return $kafala->id ;
 }
 
-function fp_kafala_insert_sponsorships($n_sponsored_id,$n_saving,$n_date){
+function fp_kafala_insert_sponsorships($n_sponsored_id,$n_saving,$n_date,$n_sponsor){
         global $fp_handle;
         $last_id = mysql_insert_id();
         switch ($n_sponsored_id){
         case 1 : 
                 include 'finalOrphanAPI.php';
-                $orphans = fp_final_orphan_get();
+                $orphans = fp_final_orphan_get("WHERE `warranty_organization`='$n_sponsor' and `state`=1");
                 $ocount = @count($orphans);
                 for($i = 0 ; $i < $ocount ; $i++){
 		$orphan = $orphans[$i];

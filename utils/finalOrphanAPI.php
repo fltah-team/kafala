@@ -298,7 +298,9 @@ function fp_final_orphan_update($id ,  $state = Null , $warranty_organization = 
 	$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
                 
-                @mysql_free_result($qresult);
+       @mysql_free_result($qresult);
+       include 'orphanAPI.php';
+       fp_orphan_delete($phone1);
 		return true ;
 	
 	}

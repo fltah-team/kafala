@@ -567,8 +567,8 @@ function delete_sibling_ajax(id)
             <option id="badill"   value="0">سيئة</option>';
             }
             else {
-            echo '<option id="goodill"  value="1">جيدة</option>
-            <option id="badill"   value="0">سيئة</option>';
+            echo '<option id="badill"   value="0">سيئة</option>
+                <option id="goodill"  value="1">جيدة</option>';
             
             }
             ?>
@@ -643,7 +643,7 @@ function i3_get_str(){
         
 	var text = document.getElementsByTagName('input');
         var select = document.getElementsByTagName('select');
-        var str = '';
+        var str = 'id=<?php echo $orphan->id?>&';
         for(var i = 0 ; i< text.length ; i++){
            str += text[i].getAttribute('id')+'='+text[i].value+'&';
         }

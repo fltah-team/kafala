@@ -119,13 +119,26 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td align="right"><select class="textFiels" id="months">
-  	  <?php
+      <td align="right"><?php
+ echo
+      "<table width='$80%'border='0'>
+      <tr>
+        <td><select name='y' class='select' id='y'>";
+	  for($i=date("Y") ; $i <= date("Y")+3 ; $i++)
+  	  echo "<option value='$i'>$i</option>";
+        echo "</select></td>
+        <td><select class='select' name='m' id='m'>";
 	  for($i=1 ; $i <= 12 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-	  </select></td>
-    <td align="center">عدد الشهور</td>
+  	  echo "<option value='$i'>$i</option>";
+        echo "</select></td>
+        <td><select class='select' name='m' id='d'>";
+	  for($i=1 ; $i <= 31 ; $i++)
+  	  echo "<option value='$i'>$i</option>";
+       echo '</select></td>
+      </tr>
+      </table>';
+      ?></td>
+    <td align="center">من اليوم الحالي الى</td>
   </tr>
     <tr>
     <td>&nbsp;</td>
@@ -169,9 +182,8 @@
 	var sponsor = document.getElementById("sponsor");
 	var total = document.getElementById("total");
 	var saving = document.getElementById("saving");
-	var months = document.getElementById("months");
+	var last_date = document.getElementById("y").value+"-"+document.getElementById("m").value+"-"+document.getElementById("d").value;
 	var sponsored = document.getElementById("sponsored");
-	
 	function IsEmpty(){ 
 	// empty
 	if(total.value == ""){
@@ -197,8 +209,8 @@ function ajax()
 	//var d_node = document.getElementById(elementID);
 	elementID = "div";
 	filename = "saveKafala.php"; 
-	str = "sponsor="+sponsor.value+"&total="+total.value+"&saving="+saving.value+"&months="+months.value+"&ponsored="+sponsored.value;
-	post = false ;
+	str = "sponsor="+sponsor.value+"&total="+total.value+"&saving="+saving.value+"&last_date="+last_date+"&ponsored="+sponsored.value;
+	post = true ;
     if (window.XMLHttpRequest)
     {
         ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
