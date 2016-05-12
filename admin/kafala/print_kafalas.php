@@ -71,7 +71,7 @@
 		$sponsorship = $sponsorships[$i];
   ?>
     <tr align="center" class="table_data<?php echo $i%2?>">
-    <td><?php echo $sponsorship->month_no?></td>
+    <td><?php echo $sponsorship->last_date?></td>
     <td><?php echo $sponsorship->date?></td>
     <td><?php echo $sponsorship->saving?></td>
     <td><?php echo $sponsorship->amount?></td>

@@ -121,7 +121,17 @@
   </tr>
   <tr>
     <td align="right">
-        <input class="textFiels" name="total" type="text" id="total" value="<?php echo "هنا التاريخ"?>" size="10" maxlength="30" />
+        <input class="textFiels" name="total" type="text" id="total" value="<?php echo $sponsorship->date?>" size="10" maxlength="30" />
+    </td>
+    <td align="center">من</td>
+  </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+    <tr>
+    <td align="right">
+        <input class="textFiels" name="total" type="text" id="total" value="<?php echo $sponsorship->last_date?>" size="10" maxlength="30" />
     </td>
     <td align="center">الى</td>
   </tr>
@@ -141,8 +151,8 @@
   </tr>
   <tr>
       <td align="right"><button name="add" id="bt"  type="button" onclick="ajax(<?php echo $sponsorship->id?>)"> حذف <img  align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" /></button></td>
+      <td align="center"><button name="add" class="bt"  type="button" onclick="window.open('print_kafala.php?id=<?php echo $sponsorship->id?>')"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
     
-    <td>&nbsp;</td>
   </tr>
   <tr>
     <td>&nbsp;</td>

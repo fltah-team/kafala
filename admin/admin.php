@@ -1,6 +1,8 @@
 <?php
-    //include '../utils/auth.php';
+    include '../utils/auth.php';
+    include '../utils/db.php';
     include '../utils/error_handler.php';
+    include '../utils/notifyAPI.php';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -82,30 +84,20 @@
 <br />
 <table align="center" border="0" width="60%" dir="rtl" >
     <?php
-    for($i = 0 ; $i<=4 ; $i++){
+    $notifys = fp_notify_get();
+    fp_db_close();
+    if($notifys == -1 || $notifys == 0)
+        fp_err_show_records ("اشعارات");
+    $ncount = @count($notifys);
+    for($i = 0 ; $i<$ncount ; $i++){
+        $notify = $notifys[$i];
 ?>
     <tr >
         <td  width="95%">
             <?php 
-                fp_notify("<a href='#'>اضغط هنا</a>", 2);
+                fp_notify($notify->text, $notify->type);
             ?>
         </td>
-        
-<table width="60%" border="0" align="center">
-  <tr>
-    <td width="268" align="center" class="linkBT"><a href="users/addUser.php">اضافة مستخدم</a></td>
-    <td width="100" align="center" ></td>
-    <td width="219" align="center" class="linkBT"><a href="kafala/addKafala.php">اضافة كفالة</a></td>
-    </tr>
-      <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    </tr>
-    <tr>
-    <td width="268" align="center" class="linkBT"><a href="users/showUsers.php">عرض المستخدمين</a></td>
-    <td width="100" align="center" ></td>
-    <td width="219" align="center" class="linkBT"><a href="kafala/showKafala.php">عرض الكفالات</a></td>
     </tr>
     <?php } ?>
 </table>

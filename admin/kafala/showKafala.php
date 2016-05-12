@@ -16,7 +16,7 @@
     $start=($page-1)*$limit;
     }
         
-        $sponsorships = fp_kafala_get("LIMIT $start, $limit");
+        $sponsorships = fp_kafala_get(" ORDER BY `date` LIMIT $start, $limit");
         
 
 ?>
@@ -125,7 +125,7 @@
   ?>
     <tr align="center" class="table_data<?php echo $i%2?>">
     <td  onclick="window.location.href='kafala.php?id='+<?php echo $sponsorship->id?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
-    <td><?php echo $sponsorship->month_no?></td>
+    <td><?php echo $sponsorship->last_date?></td>
     <td><?php echo $sponsorship->date?></td>
     <td><?php echo $sponsorship->saving?></td>
     <td><?php echo $sponsorship->amount?></td>

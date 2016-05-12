@@ -2,8 +2,8 @@
 	include('../../utils/db.php');
 	include('../../utils/kafalaAPI.php');
         include('../../utils/error_handler.php');
-        if(!isset($_POST['total']) || !isset($_POST['saving']) || !isset($_POST['sponsor']) || !isset($_POST['last_date']) || !isset($_POST['ponsored']))
-            fp_err_add_fail("الكفالة");
+        //if(!isset($_POST['total']) || !isset($_POST['saving']) || !isset($_POST['sponsor']) || !isset($_POST['last_date']) || !isset($_POST['ponsored']))
+            //fp_err_add_fail("الكفالة");
 	$total = $_POST['total'];
 	$saving = $_POST['saving'];
 	$sponsor = $_POST['sponsor'];
