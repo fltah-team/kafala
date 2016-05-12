@@ -113,10 +113,10 @@
   </tr>
     <tr align="center">
 	<td>&nbsp;</td>
-  	<td align="right"><input class="textFiels" name="impt" type="text" id="name4" tabindex="5" size="10" maxlength="30" index="1"/></td>
-    <td align="right"><input class="textFiels" name="impt" type="text" tabindex="4" id="name3" size="10" maxlength="30" index="2" /></td>
-    <td align="right"><input class="textFiels" name="impt" type="text" tabindex="3" id="name2" size="10" maxlength="30" index="3" /></td>
-    <td align="right"><input class="textFiels" name="impt" tabindex="2" type="text" id="name1" size="10" maxlength="30"  index="4"/></td>
+  	<td align="right"><input class="textFiels" name="impt" type="text" id="name4" tabindex="5" size="10" maxlength="30" ></td>
+    <td align="right"><input class="textFiels" name="impt" type="text" tabindex="4" id="name3" size="10" maxlength="30"  /></td>
+    <td align="right"><input class="textFiels" name="impt" type="text" tabindex="3" id="name2" size="10" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="impt" tabindex="2" type="text" id="name1" size="10" maxlength="30"  /></td>
     <td align="center">اسم اليتيم</td>
   </tr>
   
@@ -127,9 +127,9 @@
 	<td></td>
     <td align="right">
                 <td align="center" dir="rtl" >
-  	    ذكر<input type="radio" name="impt" value="1" id="male_gender" index="5" />
+  	    ذكر<input type="radio" name="impt" value="1" id="male_gender"  />
             &nbsp;&nbsp;
-  	    أنثى<input type="radio" name="impt" value="0" id="female_gender" index="6"/>
+  	    أنثى<input type="radio" name="impt" value="0" id="female_gender" />
   	    
     </td>
     </td>
@@ -146,10 +146,10 @@
   </tr>
     <tr align="center">
 	<td>&nbsp;</td>
-  	<td align="right"><input class="textFiels" name="impt" type="text" id="mname4" size="10" maxlength="30" index="7" /></td>
-    <td align="right"><input class="textFiels" name="impt" type="text" id="mname3" size="10" maxlength="30" index="8" /></td>
-    <td align="right"><input class="textFiels" name="impt" type="text" id="mname2" size="10" maxlength="30" index="9"/></td>
-    <td align="right"><input class="textFiels" name="impt" type="text" id="mname1" size="10" maxlength="30" index="10"/></td>
+  	<td align="right"><input class="textFiels" name="impt" type="text" id="mname4" size="10" maxlength="30" tabindex="9" /></td>
+    <td align="right"><input class="textFiels" name="impt" type="text" id="mname3" size="10" maxlength="30" tabindex="8" /></td>
+    <td align="right"><input class="textFiels" name="impt" type="text" id="mname2" size="10" maxlength="30" tabindex="7"/></td>
+    <td align="right"><input class="textFiels" name="impt" type="text" id="mname1" size="10" maxlength="30" tabindex="6"/></td>
     <td align="center">اسم والدة اليتيم</td>
   </tr>
   
@@ -177,9 +177,9 @@
     <td>&nbsp;</td>
   </tr>
     <tr align="center">
-  	<td align="right"><input class="textFiels" name="impt" type="text" id="lw" size="10" maxlength="30" index="11"/></td>
+  	<td align="right"><input class="textFiels" name="impt" type="text" id="lw" size="10" maxlength="30" tabindex="11"/></td>
     <td>عمله السابق</td>
-    <td align="right"><input class="textFiels" name="impt" type="text" id="dr" size="10" maxlength="30" index="12"/></td>
+    <td align="right"><input class="textFiels" name="impt" type="text" id="dr" size="10" maxlength="30" tabindex="10"/></td>
     <td align="right">سبب الوفاة</td>
     <td align="right">
        <?php fp_select_date_get(1995,'f')?>
@@ -199,9 +199,9 @@
 <br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
-  	<td width="13%" align="right"><input class="textFiels" name="impt" type="text" id="district" size="10" maxlength="30" index="13"/></td>
+  	<td width="13%" align="right"><input class="textFiels" name="impt" type="text" id="district" size="10" maxlength="30" tabindex="13"/></td>
   	<td width="7%" align="right">الحي</td>
-    <td width="25%" align="right"><input class="textFiels" name="impt" type="text" id="city" size="15" maxlength="30" index="14"/></td>
+    <td width="25%" align="right"><input class="textFiels" name="impt" type="text" id="city" size="15" maxlength="30" tabindex="12"/></td>
     <td width="24%" align="center">المدينة/القرية</td>
         <?php
     
@@ -229,9 +229,9 @@
     <tr align="center">
 	<td>&nbsp;</td>
   	<td align="right"></td>
-    <td align="right"><input class="textFiels" name="impt" type="text" id="hno" size="15" maxlength="30" index="15"/></td>
+    <td align="right"><input class="textFiels" name="impt" type="text" id="hno" size="15" maxlength="30" tabindex="15"/></td>
     <td align="right">رقم المنزل/معلم بارز</td>
-    <td align="right"><input class="textFiels" name="impt" type="text" id="section" size="10" maxlength="30" index="16" /></td>
+    <td align="right"><input class="textFiels" name="impt" type="text" id="section" size="10" maxlength="30" tabindex="14" /></td>
     <td align="center">المربع</td>
   </tr>
   
@@ -242,9 +242,9 @@
     <tr align="right">
 	<td>&nbsp;</td>
     <td>&nbsp;</td>
-     <td align="right"><input class="textFiels" name="impt" type="text" id="tel2" size="10" maxlength="30" index="17"/></td>
+     <td align="right"><input class="textFiels" name="impt" type="text" id="tel2" size="10" maxlength="30" tabindex="17"/></td>
     <td align="center">جوال 2</td>
-    <td align="right"><input class="textFiels" name="impt" type="text" id="tel1" size="10" maxlength="30" index="18" /></td>
+    <td align="right"><input class="textFiels" name="impt" type="text" id="tel1" size="10" maxlength="30" tabindex="16" /></td>
     <td align="center">جوال 1</td>
   </tr>
   
@@ -262,7 +262,7 @@
   <tr align="center">
   	<td width="16%"></td>
   	<td width="7%" align="right">&nbsp;</td>
-  	<td width="23%" align="right"><input name="impt" type="text"  class="textFiels" id="teachingr" size="20" maxlength="30" index="19" />
+  	<td width="23%" align="right"><input  type="text"  class="textFiels" id="teachingr" size="20" maxlength="30" tabindex="18" />
   	  </td>
         <td width="12%" align="center"  id="teachingr_lable">السبب</td>
         <td width="19%" align="center">
@@ -305,12 +305,12 @@
   </tr>
   
   <tr align="center">
-  	<td style="height: 29px"><input class="textFiels" name="impt" type="text" id="class" size="10" maxlength="30" index="20" /></td>
+  	<td style="height: 29px"><input class="textFiels"  type="text" id="class" size="10" maxlength="30" tabindex="21" /></td>
         <td style="height: 29px" id="class_lable">الصف</td>
   	
-	<td width="23%" align="right" style="height: 29px"><input class="textFiels" name="impt" type="text" id="school" size="20" maxlength="30" index="21"/></td>
+	<td width="23%" align="right" style="height: 29px"><input class="textFiels"  type="text" id="school" size="20" maxlength="30" tabindex="20"/></td>
         <td width="12%" align="center" style="height: 29px" id="school_lable">اسم المدرسة</td>
-        <td align="center" style="height: 29px"><input class="textFiels" name="mpt" type="text" id="level" size="10" maxlength="30" index="22" /></td>
+        <td align="center" style="height: 29px"><input class="textFiels"  type="text" id="level" size="10" maxlength="30" tabindex="19" /></td>
         <td style="height: 29px" id="level_lable">المرحلة</td>
   </tr>
   <tr>
@@ -350,7 +350,7 @@
   <tr align="center">
   	<td width="2%"></td>
   	<td width="12%" align="right"></td>
-  	<td width="38%" align="left"><input class="textFiels" name="impt" type="text" id="illt" size="30" maxlength="30"  index="23" /></td>
+  	<td width="38%" align="left"><input class="textFiels"  type="text" id="illt" size="30" maxlength="30"  index="22" /></td>
 	<td width="18%" align="center" id="illLable">نوع المرض</td>
         <td width="8%" align="center">
         <select class="select" name="illness" id="illness">
