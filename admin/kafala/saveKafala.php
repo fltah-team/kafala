@@ -2,6 +2,10 @@
 	include('../../utils/db.php');
 	include('../../utils/kafalaAPI.php');
         include('../../utils/error_handler.php');
+        include '../../utils/notifyAPI.php';
+        include '../../utils/finalOrphanAPI.php';
+        include '../../utils/usersAPI.php';
+        include '../../utils/sponsorAPI.php';
         //if(!isset($_POST['total']) || !isset($_POST['saving']) || !isset($_POST['sponsor']) || !isset($_POST['last_date']) || !isset($_POST['ponsored']))
             //fp_err_add_fail("الكفالة");
 	$total = $_POST['total'];

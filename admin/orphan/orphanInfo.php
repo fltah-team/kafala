@@ -721,7 +721,7 @@ function del_ajax(ID)
 {		
         var ajax;
 	var data ;
-        var str = "?id="+ID;
+        var str = "?id=0"+ID;
         //var d_node = document.getElementById(elementID);
 	elementID = "div";
 	filename = "deleteOrphan.php";

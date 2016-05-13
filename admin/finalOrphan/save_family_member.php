@@ -1,8 +1,9 @@
 <?php
+    include '../auth.php';
 	include('../../utils/db.php');
 	include('../../utils/orphanAPI.php');
 	include('../../utils/error_handler.php');
-
+    
         
         if(!isset ( $_GET['orphan']) || !isset ( $_GET['name']) || !isset ( $_GET['sex']) || !isset ( $_GET['bd']) || !isset ( $_GET['state']) ){
              fp_err_add_fail("فرد العائلة ");           

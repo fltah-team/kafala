@@ -3,13 +3,13 @@
 	
 	include('../../utils/db.php');
 	include('../../utils/orphanAPI.php');
-        include('../../utils/error_handler.php');
-        
+    include('../../utils/error_handler.php');
+    include('../../utils/notifyAPI.php'); 
         if(!isset( $_GET['id'])){
             fp_err_delete_fail("اليتيم");
         }
-	$id = (int)$_GET['id'] ;
-	$result = fp_orphan_delete($id) ;
+	$id = $_GET['id'] ;
+	$result = fp_orphan_delete($id,0) ;
 	
 
 	fp_db_close();

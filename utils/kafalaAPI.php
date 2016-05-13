@@ -1,5 +1,6 @@
 <?php
 	// SELSECT ALL
+
 function fp_kafala_get($extra = ''){
 	global $fp_handle ;
 	$query = sprintf("SELECT * FROM `sponsorship`   %s",$extra);
@@ -55,15 +56,11 @@ function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$last_date ,$sponsor
 	$query = ("INSERT INTO `sponsorship` (`id`,`amount` , `saving` , `date` ,`sponsor`, `last_date` ,`sponsored`) VALUE(NULL, $n_amount, $n_saving, '$n_date' ,$n_sponsor , '$n_last_date' , $n_sponsored)");
         $qresult = mysql_query($query);
 	if(!$qresult) return false ;
-        include 'notifyAPI.php';
-        include 'usersAPI.php';
-        //include 'error_handler.php';
-        include 'sponsorAPI.php';
         $name = fp_select_sponsored_type($n_sponsored);
         $sponsor = fp_sponsor_get_by_id($n_sponsor);
-        $text =  'تمت اضافة كفالة الى '.$name.' التابعين ل'.$sponsor->name;
+        $text =  'تم اضافة كفالة الى '.$name.' التابعين ل'.$sponsor->name;
         $users = fp_users_get();
-        $ucount = @count($users);echo $ucount;
+        $ucount = @count($users);
         if($ucount > 0){
             for($i = 0 ; $i < $ucount ; $i ++){
                 $user = $users[$i];
@@ -87,7 +84,7 @@ function fp_kafala_get_last_id(){
 function fp_kafala_check_sponsored($n_sponsored_id,$n_sponsor){
         switch ($n_sponsored_id){
         case 1 : 
-                include 'finalOrphanAPI.php';
+                
                 $orphans = fp_final_orphan_get("WHERE `warranty_organization`='$n_sponsor' and `state`=1");
                 if(!$orphans || @count($orphans) == 0 )
                     return false;
@@ -134,16 +131,15 @@ function fp_kafala_delete($id){
 	$qresult = @mysql_query($query);
         mysql_query("DELETE FROM `sponsorship` WHERE `sponsorship` =".$kid);
 	if(!$qresult) return false ;
-        include 'notifyAPI.php';
-        include 'usersAPI.php';
-        $name = fp_select_sponsored_type($check->sponsor);
-        $text =  'تم حذف كفالة من '.$name;
+        $name = fp_select_sponsored_type($check->sponsored);
+        $sponsor = fp_sponsor_get_by_id($check->sponsor);
+        $text =  'تم حذف كفالة من '.$name."التابعين ل ".$sponsor->name;
         $users = fp_users_get();
-        $ucount = @count($users);echo $ucount;
+        $ucount = @count($users);
         if($ucount > 0){
             for($i = 0 ; $i < $ucount ; $i ++){
                 $user = $users[$i];
-                fp_notify_add($text, "admin", $user->name, 1);
+                fp_notify_add($text, "admin", $user->name, 3);
             }
         }
 	@mysql_free_result($qresult);

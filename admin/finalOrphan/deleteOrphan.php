@@ -1,6 +1,5 @@
 <?php
-
-	
+    include '../utils/auth.php';
 	include('../../utils/db.php');
 	include('../../utils/finalOrphanAPI.php');
         include('../../utils/error_handler.php');

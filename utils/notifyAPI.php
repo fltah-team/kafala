@@ -41,7 +41,7 @@ function fp_notify_get_by_id($id){
 	function fp_notify_add( $text , $ufrom , $uto , $type ){
 		global $fp_handle;
 		$n_name    = 
-                $n_text = @mysql_real_escape_string(strip_tags($text),$fp_handle);
+                $n_text = @mysql_real_escape_string($text,$fp_handle);
                 $n_ufrom = @mysql_real_escape_string(strip_tags($ufrom),$fp_handle);
                 $n_uto= @mysql_real_escape_string(strip_tags($uto),$fp_handle);
                 $n_type = (int)$type ;

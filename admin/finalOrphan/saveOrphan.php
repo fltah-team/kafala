@@ -1,11 +1,10 @@
 <?php
-
-	
-	include('../../utils/db.php');
+    include '../auth.php';
+     include('../../utils/db.php');
 	include('../../utils/orphanAPI.php');
-        include('../../utils/error_handler.php');
-	
-
+    include('../../utils/error_handler.php');
+	include('../../utils/notifyAPI.php');
+    include('../../utils/usersAPI.php');
 	if(!isset ( $_GET['status']) || !isset ( $_GET['sponsor']) ||!isset (  $_GET['name1']) ||!isset (  $_GET['name2']) || !isset ( $_GET['name3']) ||!isset (  $_GET['name4'])  ||!isset (  $_GET['y']) || !isset ( $_GET['m']) || !isset ( $_GET['d']) || !isset ( $_GET['gender']) ||!isset (  $_GET['mname1']) || !isset ( $_GET['mname2']) || !isset ( $_GET['mname3'])  || !isset ( $_GET['mname4']) || !isset ( $_GET['my']) || !isset ( $_GET['mm']) ||!isset (  $_GET['md']) ||!isset (  $_GET['mstatus']) || !isset ( $_GET['fy']) ||!isset (  $_GET['fm']) || !isset ( $_GET['fd']) || !isset ( $_GET['dr']) || !isset ( $_GET['lw']) || !isset ( $_GET['state']) ||!isset (  $_GET['city']) || !isset ( $_GET['district']) ||!isset (  $_GET['section'])|| !isset ( $_GET['hno']) ||!isset (  $_GET['tel1']) || !isset ( $_GET['tel2']) || !isset ( $_GET['learning']) 
                 || !isset ( $_GET['quran']) || !isset ( $_GET['illness']) || !isset ( $_GET['sponsor']) || !isset ( $_GET['sponsor']) )
         {
@@ -77,7 +76,8 @@
         session_start();
 	$data_entery_name = $_SESSION['name'];
 	$data_entery_date  = date("y-m-d");	
-    if(fp_orphan_get_by_id($id))fp_err_add_fail ($first_name." ".$meddle_name." هذه البيانات موجودة مسبقا وفي انتظار الاعتماد");
+    if(fp_orphan_get_by_id($id))
+        fp_err_add_fail ($first_name." ".$meddle_name." هذه البيانات موجودة مسبقا وفي انتظار الاعتماد");
 	$result = fp_orphan_add($id,$state , $warranty_organization ,$saving , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date );
 	//$_GET['fno']);
 

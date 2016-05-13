@@ -1,6 +1,4 @@
 <?php
-	
-
 	// SELSECT ALL
 function fp_orphan_get($extra = ''){
 	
@@ -94,7 +92,15 @@ function fp_orphan_add($id,$state , $warranty_organization  , $saving , $first_n
 	
 	$qresult = mysql_query($query);
 	if(!$qresult) return false ;
-	
+	$name = $n_first_name.' '.$n_meddle_name;
+        $sponsered = fp_select_sponsored_type(1);
+        $text =  'تمت اضافة اليتيم  '.$name." يمكنك اعتماده من "."<a href='orphan/orphanInfo.php?id=$phone1'>هنا</a>";
+        $users = fp_users_get(" WHERE `type` = 1");
+        $ucount = @count($users);
+        if($users && $ucount >0 ){
+            for($i = 0 ; $i < $ucount ; $i++)
+        fp_notify_add($text, "admin", $users[$i]->name , 1);
+        }
     @mysql_free_result($qresult);
 	return true ;
 }
@@ -284,14 +290,22 @@ function fp_orphan_update($id = NULL ,  $state = Null , $warranty_organization =
 	}
 	
 	// DELETE
-function fp_orphan_delete($id){
-    //include 'siblingAPI.php';
+function fp_orphan_delete($id,$n){
+    //include 'siblingAPI.php';e
     global $fp_handle;
 	$uid   = mysql_real_escape_string(strip_tags($id),$fp_handle);
         //echo "---------".$uid;
-	$query = sprintf("DELETE FROM `orphan` WHERE `phone1` = %s",$uid);
+    $check = fp_orphan_get_by_phone1($id);
+    if($check && $n !=1){
+        $name = $check->first_name.' '.$check->meddle_name;
+        $sponsered = fp_select_sponsored_type(1);
+        $text =  'لم يعتمد مدير النظام بيانات   '.$name.' التابع ل'.$sponsered;
+        fp_notify_add($text, "admin", $check->data_entery_name , 3);
+    }
+	$query = sprintf("DELETE FROM `orphan` WHERE `phone1` = '%s'",$id);echo $query;
 	$qresult = @mysql_query($query);
 	if(!$qresult) return false ;
+    
     @mysql_free_result($qresult);
     //fp_sibiling_delete_for_orphan($id);
 	return true ;
