@@ -72,5 +72,6 @@ function fp_notify_get_by_id($id){
 		if(!$qresult) return false ;
 		@mysql_free_result($qresult);
 		return true ;
-		}       
+		} 
+
 ?>	

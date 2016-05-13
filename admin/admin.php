@@ -1,5 +1,5 @@
 <?php
-    include 'auth.php';
+    include '../utils/auth.php';
     include '../utils/db.php';
     include '../utils/error_handler.php';
     include '../utils/notifyAPI.php';
@@ -93,6 +93,7 @@
         $notify = $notifys[$i];
 ?>
     <tr >
+        <td><img src="../images/style images/delete_icon.png" width="20px" align="middle" onclick="delete_notify_ajax(<?php echo $notify->id?>)" /></td>   
         <td  width="95%">
             <?php 
                 fp_notify($notify->text, $notify->type);
@@ -101,6 +102,59 @@
     </tr>
     <?php } ?>
 </table>
+<script type="text/javascript">
+function delete_notify_ajax(id)
+{	
+        var ajax;
+	var data ;
+	filename = "notify/deleteNotify.php?id="+id;
+	post = false ;
+    if (window.XMLHttpRequest)
+    {
+        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
+    } 
+    else if (ActiveXObject("Microsoft.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
+    }
+    else if (ActiveXObject("Msxml2.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
+    }
+    else
+    {
+        alert("Error: Your browser does not support AJAX.");
+        return false;
+    }
+    ajax.onreadystatechange=function()
+    {
+        if (ajax.readyState==4&&ajax.status==200)
+        {
+            alert(ajax.responseText);
+            window.location.reload();
+            
+            //window.location.href = "orphanInfo.php?id="+<?php //echo $id?>
+			//document.getElementById(elementID).innerHTML=ajax.responseText;
+        }
+    }
+    if (post==false)
+    {
+        ajax.open("GET",filename+"?id="+id,true);
+        s_str = '';
+        ajax.send(null);
+		
+    }
+    else 
+    {
+        ajax.open("POST",filename,true);
+        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.send(s_str);
+        s_str = '';
+    }
+    return ajax;
+	
+}
+</script>
 <div id="footer">
   <p>جميع الحقوق محفوظة 2016 &copy;</p>
 </div>

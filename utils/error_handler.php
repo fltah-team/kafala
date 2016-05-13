@@ -193,13 +193,26 @@ function fp_select_date_get_by_id($start,$name,$date) {
 function fp_notify($text,$type){
     switch ($type){
         case 1 : 
-            echo '<div style="width: 80%" id="success_notice"   class="alert-box success">'.$text.'</div>';
+            echo '<div align = "center" style="width: 88%" id="success_notice"   class="alert-box success">'.$text.'</div>';
             break;
         case 2 :
-            echo '<div style="width: 80%" id="success_notice"   class="alert-box warning">'.$text.'</div>';
+            echo '<div align = "center" style="width: 88%" id="success_notice"   class="alert-box warning">'.$text.'</div>';
             break;
         case 3 :
-            echo '<div style="width: 80%" id="success_notice"   class="alert-box error">'.$text.'</div>';
+            echo '<div align = "center" style="width: 88%" id="success_notice"   class="alert-box error">'.$text.'</div>';
+            break;
+    }
+}
+
+function fp_select_sponsored_type($t){
+    switch ($t){
+        case 1 : return " الأيتام ";
+            break;
+        case 2 : return "الطلاب";
+            break;
+        case 3 : return "الدعاة/المقرئين/المعلمين";
+            break;
+        case 4 : return "الأسر";
             break;
     }
 }

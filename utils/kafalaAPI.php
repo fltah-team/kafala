@@ -53,11 +53,16 @@ function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$last_date ,$sponsor
 	$n_sponsored = (int)$sponsored;
         
 	$query = ("INSERT INTO `sponsorship` (`id`,`amount` , `saving` , `date` ,`sponsor`, `last_date` ,`sponsored`) VALUE(NULL, $n_amount, $n_saving, '$n_date' ,$n_sponsor , '$n_last_date' , $n_sponsored)");
-        $qresult = mysql_query($query);echo $query;
+        $qresult = mysql_query($query);
 	if(!$qresult) return false ;
         include 'notifyAPI.php';
-        
-        fp_notify_add("تمت", "admin", "user", 1);
+        //include 'db.php';
+        //include 'error_handler.php';
+        include 'sponsorAPI.php';
+        $name = fp_select_sponsored_type($n_sponsored);
+        $sponsor = fp_sponsor_get_by_id($n_sponsor);
+        $text =  'تمت اضافة كفالة الى '.$name.' التابعين ل'.$sponsor->name;
+        fp_notify_add($text, "admin", "user", 3);
         fp_kafala_insert_sponsorships($n_sponsored,$n_saving,$n_date,$n_sponsor);
 
         @mysql_free_result($qresult);
