@@ -4,7 +4,7 @@
 function fp_users_get($extra = ''){
         $res = array();
 	global $fp_handle ;
-	$query = sprintf("SELECT * FROM `employee` %s",$extra);
+	$query = sprintf("SELECT * FROM `employee` %s",$extra);echo $query;
 	$qresult = @mysql_query($query);
 	
         if(!$qresult)

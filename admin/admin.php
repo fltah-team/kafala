@@ -84,7 +84,7 @@
 <br />
 <table align="center" border="0" width="60%" dir="rtl" >
     <?php
-    $notifys = fp_notify_get();
+    $notifys = fp_notify_get(" WHERE `uto` = '".$_SESSION['name']."'");
     fp_db_close();
     if($notifys == -1 || $notifys == 0)
         fp_err_show_records ("اشعارات");
@@ -130,7 +130,6 @@ function delete_notify_ajax(id)
     {
         if (ajax.readyState==4&&ajax.status==200)
         {
-            alert(ajax.responseText);
             window.location.reload();
             
             //window.location.href = "orphanInfo.php?id="+<?php //echo $id?>

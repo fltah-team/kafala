@@ -12,9 +12,9 @@
 	$date = date("Y-m-d");
 	$result = fp_kafala_add($total,$saving,$date,$sponsor,$last_date,$ponsored);
 	fp_db_close();
-	if(!$result)
-            fp_err_add_fail("الكفالة");
-        else
-	fp_err_add_succes("الكفالة");
+    if(!$result)
+        fp_err_add_fail("الكفالة هناك احتمال عدم وجود مكفولين تابعين لهذه المنظمة");
+	else
+        fp_err_add_succes("الكفالة");
 	
 ?>

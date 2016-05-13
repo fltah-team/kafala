@@ -95,8 +95,7 @@ function fp_orphan_add($id,$state , $warranty_organization  , $saving , $first_n
 	$qresult = mysql_query($query);
 	if(!$qresult) return false ;
 	
-        @mysql_free_result($qresult);
-        
+    @mysql_free_result($qresult);
 	return true ;
 }
 	

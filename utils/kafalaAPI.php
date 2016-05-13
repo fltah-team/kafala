@@ -51,18 +51,25 @@ function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$last_date ,$sponsor
 	$n_sponsor = (int)$sponsor;
 	$n_last_date = @mysql_real_escape_string(strip_tags($last_date),$fp_handle);
 	$n_sponsored = (int)$sponsored;
-        
+    if(!fp_kafala_check_sponsored($n_sponsored, $n_sponsor))return false;    
 	$query = ("INSERT INTO `sponsorship` (`id`,`amount` , `saving` , `date` ,`sponsor`, `last_date` ,`sponsored`) VALUE(NULL, $n_amount, $n_saving, '$n_date' ,$n_sponsor , '$n_last_date' , $n_sponsored)");
         $qresult = mysql_query($query);
 	if(!$qresult) return false ;
         include 'notifyAPI.php';
-        //include 'db.php';
+        include 'usersAPI.php';
         //include 'error_handler.php';
         include 'sponsorAPI.php';
         $name = fp_select_sponsored_type($n_sponsored);
         $sponsor = fp_sponsor_get_by_id($n_sponsor);
         $text =  'تمت اضافة كفالة الى '.$name.' التابعين ل'.$sponsor->name;
-        fp_notify_add($text, "admin", "user", 3);
+        $users = fp_users_get();
+        $ucount = @count($users);echo $ucount;
+        if($ucount > 0){
+            for($i = 0 ; $i < $ucount ; $i ++){
+                $user = $users[$i];
+                fp_notify_add($text, "admin", $user->name, 1);
+            }
+        }
         fp_kafala_insert_sponsorships($n_sponsored,$n_saving,$n_date,$n_sponsor);
 
         @mysql_free_result($qresult);
@@ -77,12 +84,22 @@ function fp_kafala_get_last_id(){
 	return $kafala->id ;
 }
 
+function fp_kafala_check_sponsored($n_sponsored_id,$n_sponsor){
+        switch ($n_sponsored_id){
+        case 1 : 
+                include 'finalOrphanAPI.php';
+                $orphans = fp_final_orphan_get("WHERE `warranty_organization`='$n_sponsor' and `state`=1");
+                if(!$orphans || @count($orphans) == 0 )
+                    return false;
+                else return true;
+                } 
+    }
+
 function fp_kafala_insert_sponsorships($n_sponsored_id,$n_saving,$n_date,$n_sponsor){
         global $fp_handle;
         $last_id = mysql_insert_id();
         switch ($n_sponsored_id){
         case 1 : 
-                include 'finalOrphanAPI.php';
                 $orphans = fp_final_orphan_get("WHERE `warranty_organization`='$n_sponsor' and `state`=1");
                 $ocount = @count($orphans);
                 for($i = 0 ; $i < $ocount ; $i++){
@@ -111,10 +128,24 @@ function fp_kafala_delete($id){
 	global $fp_handle ;
 	$kid = (int)$id;
 	if($kid == 0) return false ;
+    $check = fp_kafala_get_by_id($kid);
+    if(!$check)return false;
 	$query = sprintf("DELETE FROM `sponsorship` WHERE `id` = %d",$kid);
 	$qresult = @mysql_query($query);
         mysql_query("DELETE FROM `sponsorship` WHERE `sponsorship` =".$kid);
 	if(!$qresult) return false ;
+        include 'notifyAPI.php';
+        include 'usersAPI.php';
+        $name = fp_select_sponsored_type($check->sponsor);
+        $text =  'تم حذف كفالة من '.$name;
+        $users = fp_users_get();
+        $ucount = @count($users);echo $ucount;
+        if($ucount > 0){
+            for($i = 0 ; $i < $ucount ; $i ++){
+                $user = $users[$i];
+                fp_notify_add($text, "admin", $user->name, 1);
+            }
+        }
 	@mysql_free_result($qresult);
 	return true ;
 }
