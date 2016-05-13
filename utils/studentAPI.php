@@ -47,7 +47,7 @@ function fp_student_get($extra = ''){
 		}
 
 	// INSERT	
-	function fp_student_add($state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work ,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,$uni_name , $level , $year , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date  ){
+	function fp_student_add($state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work ,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,$path ,$major ,  $level , $year , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date  ){
             global $fp_handle;
 
             $n_state = @mysql_real_escape_string(strip_tags($state),$fp_handle); 
@@ -68,12 +68,12 @@ function fp_student_get($extra = ''){
             $n_city = @mysql_real_escape_string(strip_tags($city),$fp_handle);
             $n_District = @mysql_real_escape_string(strip_tags($District),$fp_handle);
             $n_section  = (int)$section;
-	$n_house_no  = @mysql_real_escape_string(strip_tags($house_no),$fp_handle);
+            $n_house_no  = @mysql_real_escape_string(strip_tags($house_no),$fp_handle);
             $n_phone1  = @mysql_real_escape_string(strip_tags($phone1),$fp_handle);
             $n_phone2  = @mysql_real_escape_string(strip_tags($phone2),$fp_handle);
             $n_school_name =@mysql_real_escape_string(strip_tags($school_name),$fp_handle);
-            $n_uni_name =@mysql_real_escape_string(strip_tags($uni_name),$fp_handle);
-            $n_school_name=@mysql_real_escape_string(strip_tags($school_name),$fp_handle);
+            $n_path =@mysql_real_escape_string(strip_tags($path),$fp_handle);
+            $n_major =@mysql_real_escape_string(strip_tags($major),$fp_handle);
             $n_level  = @mysql_real_escape_string(strip_tags($level),$fp_handle);
             $n_year  =  @mysql_real_escape_string(strip_tags($year),$fp_handle);;
             $n_last_result =@mysql_real_escape_string(strip_tags($last_result),$fp_handle);	
@@ -89,8 +89,8 @@ function fp_student_get($extra = ''){
             $n_data_entery_date=@mysql_real_escape_string(strip_tags($data_entery_date),$fp_handle);
 
 
-            $query = ("INSERT INTO `student` (id, `state` , warranty_organization , saving , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `father_dead_date` , `father_dead_cause` , 	`father_work` ,sisters_no , brothers_no ,residence_state , `city` , `District` ,section , house_no , phone1 , phone2 ,`school_name` ,`uni_name` , level , year , `last_result`, quran_parts , study_year_no , `study_date_start` , `expected_grad`  , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date` )
-                                    VALUE(NULL ,'$n_state' , '$n_warranty_organization', '$n_saving' , '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_father_dead_date' , '$n_father_dead_cause' , 	'$n_father_work' ,'$n_sisters_no' , '$n_brothers_no' ,'$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2' ,'$n_school_name' ,'$n_uni_name' , '$n_level' , '$n_year' , '$n_last_result','$n_quran_parts' ,'$n_study_year_no' , '$n_study_date_start' , '$n_expected_grad'  , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date' )");
+            $query = ("INSERT INTO `student` (id, `state` , warranty_organization , saving , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `father_dead_date` , `father_dead_cause` , 	`father_work` ,sisters_no , brothers_no ,residence_state , `city` , `District` ,section , house_no , phone1 , phone2 ,`school_name` ,`path` ,`major` , level , year , `last_result`, quran_parts , study_year_no , `study_date_start` , `expected_grad`  , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date` )
+                                    VALUE(NULL ,'$n_state' , '$n_warranty_organization', '$n_saving' , '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_father_dead_date' , '$n_father_dead_cause' , 	'$n_father_work' ,'$n_sisters_no' , '$n_brothers_no' ,'$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2' ,'$n_school_name' ,'$n_path' ,'$n_major', '$n_level' , '$n_year' , '$n_last_result','$n_quran_parts' ,'$n_study_year_no' , '$n_study_date_start' , '$n_expected_grad'  , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date' )");
 
             echo $query ;
 
@@ -103,7 +103,7 @@ function fp_student_get($extra = ''){
 
 	
 	// UPDATE
-function fp_student_update($id , $state = Null , $warranty_organization = Null, $saving = Null  , $last_sponsorship_date = Null, $first_name = Null , $meddle_name = Null , $last_name = Null , $last_4th_name = Null , $birth_date = Null , $sex = Null , $father_dead_date = Null , $father_dead_cause = Null , 	$father_work = Null ,$sisters_no = Null , $brothers_no = Null ,$residence_state = Null , $city = Null , $District = Null , $section = Null ,$house_no = Null , $phone1 = Null , $phone2 = Null ,$school_name = Null ,$uni_name = Null , $level = Null , $year = Null , $last_result = Null ,$quran_parts = Null ,$study_year_no = Null , $study_date_start = Null , $expected_grad  = Null , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date = Null  ){
+function fp_student_update($id , $state = Null , $warranty_organization = Null, $saving = Null  , $last_sponsorship_date = Null, $first_name = Null , $meddle_name = Null , $last_name = Null , $last_4th_name = Null , $birth_date = Null , $sex = Null , $father_dead_date = Null , $father_dead_cause = Null , 	$father_work = Null ,$sisters_no = Null , $brothers_no = Null ,$residence_state = Null , $city = Null , $District = Null , $section = Null ,$house_no = Null , $phone1 = Null , $phone2 = Null ,$school_name = Null ,$path = Null , $major = Null , $year = Null , $last_result = Null ,$quran_parts = Null ,$study_year_no = Null , $study_date_start = Null , $expected_grad  = Null , $health_state = Null , $ill_cause = Null , $data_entery_name = Null , $data_entery_date = Null  ){
 
 	global $fp_handle ;
 	$uid = (int)$id;
@@ -214,9 +214,13 @@ function fp_student_update($id , $state = Null , $warranty_organization = Null, 
 		$fields[@count($fields)] = " `school_name` = '$n_school_name' ";
 
 		}
-	if(!empty($uni_name)){
-		$n_uni_name   = mysql_real_escape_string(strip_tags($uni_name),$fp_handle);
-		$fields[@count($fields)] = " `uni_name` = '$n_uni_name' ";
+	if(!empty($path)){
+		$n_path   = mysql_real_escape_string(strip_tags($path),$fp_handle);
+		$fields[@count($fields)] = " `path` = '$n_path' ";
+		}
+	if(!empty($major)){
+		$n_major   = mysql_real_escape_string(strip_tags($major),$fp_handle);
+		$fields[@count($fields)] = " `major` = '$n_major' ";
 		}
 	if(!empty($level)){
 		$n_level   = mysql_real_escape_string(strip_tags($level),$fp_handle);

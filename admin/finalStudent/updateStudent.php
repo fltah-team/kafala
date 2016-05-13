@@ -1,4 +1,4 @@
-<?php
+ً<?php
 
 	
 	include('../../utils/db.php');
@@ -11,7 +11,7 @@
                 || !isset($_GET['last_result']) || !isset($_GET['quran_parts']) || !isset($_GET['study_year_no']) || !isset($_GET['study_date_start']) || !isset($_GET['expected_grad']) 
                 || !isset ( $_GET['illness']) || !isset ( $_GET['sponsor']) || !isset ( $_GET['sponsor']) )
         {
-            fp_err_add_fail("الطالب");
+            fp_err_upadte_fail("الطالب");
         }
         
         
@@ -60,20 +60,20 @@
         }
         else{
              if (!isset($_GET['illt'])){
-            fp_err_add_fail("الطالب"); 
+            fp_err_add_fail("اليتيم"); 
              }
             $ill_cause = $_GET['illt'];
         }
 	$data_entery_name = "user";	
 	$data_entery_date  = date("d-m-y");	
         
-	$result =fp_student_add($state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work ,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,$path ,$major ,  $level , $year , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date  );
+	$result =fp_student_update($state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work ,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,$path ,$major ,  $level , $year , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date  );
 	//$_GET['fno']);
 
 	fp_db_close();
 	
 	if(!$result)
-            fp_err_add_fail($first_name." ".$meddle_name);
+            fp_err_update_fail($first_name." ".$meddle_name);
 	else
-            fp_err_add_succes($first_name." ".$meddle_name,$phone1);
+            fp_err_update_succes($first_name." ".$meddle_name,$phone1);
 ?>
