@@ -67,7 +67,9 @@
           }
 	$data_entery_name = $_GET['user'];		
 	$data_entery_date  = $_GET['user_d'];
-        $data_admin_name = "admin";
+        
+        session_start();
+        $data_admin_name = $_SESSION['name'];
         $data_admin_date = date("y-m-d");
                 
                 

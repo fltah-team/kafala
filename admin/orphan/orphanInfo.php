@@ -115,9 +115,6 @@
 <table width="85%" border="0" align="center">
 
   <tr align="center">
-      <td align="right"></td>
-    
-     <td width="20%" align="center"></td>
     <td width="17%" align="right">
         <?php
         $sponsors = fp_sponsor_get();
@@ -138,6 +135,9 @@
         <?php fp_select_status_get_by_id($orphan->state); ?>
     </td>
     <td width="20%" align="center">الحالة</td>
+      <td>  <input class="textFiels" name="name3" type="text" disabled tabindex="4" id="id" size="10" maxlength="30"  value="<?php echo $orphan->id?>" /></td>
+    
+     <td width="20%" align="center">الرقم</td>
   </tr>
   
   <tr>

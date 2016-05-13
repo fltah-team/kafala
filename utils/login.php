@@ -25,8 +25,8 @@
                     break;
                 default : header("location:../index.php?m=".$m);
             }
-        }//else header("location:../index.php?m=".$m);
-    }
-            }
+        }else header("location:../index.php?m=".$m);
+    }else header("location:../index.php?m=".$m);
+            }else header("location:../index.php?m=".$m);
  
 ?>

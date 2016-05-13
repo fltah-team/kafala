@@ -36,8 +36,6 @@
 	$section = $_GET['section'];	
 	$house_no = $_GET['hno'];	
 	$phone1 = $_GET['tel1'];
-        if(fp_orphan_get_by_phone1($phone1))
-            fp_err_add_fail("اليتيم رقم الجوال1 موجود الرجاء تغييره");
 	$phone2 = $_GET['tel2'];
 	$studing_state = $_GET['learning'];	
         
@@ -76,9 +74,10 @@
              }
             $ill_cause = $_GET['illt'];
         }
-	$data_entery_name = "user";	
-	$data_entery_date  = date("d-m-y");	
-        
+        session_start();
+	$data_entery_name = $_SESSION['name'];
+	$data_entery_date  = date("y-m-d");	
+    if(fp_orphan_get_by_id($id))fp_err_add_fail ($first_name." ".$meddle_name." هذه البيانات موجودة مسبقا وفي انتظار الاعتماد");
 	$result = fp_orphan_add($id,$state , $warranty_organization ,$saving , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date );
 	//$_GET['fno']);
 
