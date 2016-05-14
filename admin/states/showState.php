@@ -91,12 +91,18 @@
         }
         
 	$ucount = @count($states);
+    if($ucount == 1)
+        echo '
+            <script type="text/javascript">
+            
+            </script>  
+        ';
 ?>
 
 <table width="40%" align="center" class="table">
     
     <tr align="center" class="table_header">
- <td width="5%">حذف </td>
+        <td width="5%" id="del_lable">حذف </td>
     <td width="40%">الولاية </td>
     <td width="5%">الرقم</td>
   </tr>
@@ -106,7 +112,7 @@
   ?>
 
     <tr align="center" class="table_data<?php echo $i%2?>"  >
-        <td onclick="ajax(<?php echo json_decode($state->id) ?>)" >
+        <td id="del_bt" onclick="ajax(<?php echo json_decode($state->id) ?>)" >
         <img width="22px"   align="middle" alt="حذف" src="../../images/style images/delete_icon.png" style="padding-left:5px"  />
     </td>
     <td><?php echo $state->name?></td>
@@ -125,6 +131,8 @@
 </div>
 <script type="text/javascript">
 
+    document.getElementById("del_lable").setAttribute("hidden","hidden");
+    document.getElementById("del_bt").setAttribute("hidden","hidden");
 function ajax(ID)
 {
     var ajax;
