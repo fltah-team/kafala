@@ -29,7 +29,7 @@
 	$mother_4th_name = $_GET['mname4'];	
 	$mother_Birth_date = $_GET['my']."-".$_GET['mm']."-".$_GET['md'];		
 	$mother_state = $_GET['mstatus'];	
-	$father_dead_date = $_GET['fy']."-".$_GET['fm']."-".$_GET['fd'];	echo $father_dead_date;
+	$father_dead_date = $_GET['fy']."-".$_GET['fm']."-".$_GET['fd'];
 	$father_dead_cause = $_GET['dr'];	
 	$father_work = $_GET['lw'];	
 	$residence_state = $_GET['state'];	
@@ -73,9 +73,6 @@
             $ill_cause = "لا يوجد";
         }
         else{
-             if (!isset($_GET['illt'])){
-                fp_err_add_fail("اليتيم"); 
-             }
             $ill_cause = $_GET['illt'];
         }
     session_start();

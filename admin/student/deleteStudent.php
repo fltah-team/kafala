@@ -8,7 +8,7 @@
         if(!isset( $_GET['id'])){
             fp_err_delete_fail("الطالب");
         }
-	$id = (int)$_GET['id'] ;
+	$id = $_GET['id'] ;
 	$result = fp_student_delete($id) ;
 	
 

@@ -597,7 +597,15 @@ function delete_sibling_ajax(id)
   
   <table width="85%" border="0" align="center" id=" ">
     <tr align="center">
-  	<td width="26%" align="right">جزء <input class="textFiels" name="class" type="text" id="quran" size="10" maxlength="10" value="<?php echo $orphan->quran_parts?>" /></td></td>
+  	<td width="26%" align="right">جزء 
+    <select class="select" name="quran" id="quran">
+	    <?php
+      echo "<option value='".$orphan->quran_parts."'>$orphan->quran_parts</option>'";
+	  for($i=0 ; $i <= 30 ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+	    </select>
+    </td>
   	<td width="23%" align="right">مستوى حفظ القرآن</td>
   	<td width="13%" align="right"><input class="textFiels" name="class" type="text" id="class" size="10" maxlength="30" value="<?php echo $orphan->year?>" /></td>
 	<td width="14%" align="center">الصف</td>

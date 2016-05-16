@@ -157,12 +157,12 @@
     <td>&nbsp;</td>
   </tr>
     <tr align="center">
-  	<td align="right"><input class="textFiels" name="lw" type="text" id="lw" size="10" maxlength="30" /></td>
+  	<td align="right"><input class="textFiels" name="lw" type="text" id="sisters_no" size="10" maxlength="30" /></td>
     <td>الاناث</td>
-    <td align="right"><input class="textFiels" name="dr" type="text" id="dr" size="10" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="dr" type="text" id="brothers_no" size="10" maxlength="30" /></td>
     <td align="right">الذكور</td>
     <td align="right">
-       <input class="textFiels" name="lw" type="text" id="lw" size="10" maxlength="30" />
+       <input class="textFiels" name="lw" type="text" id="f_mem" size="10" maxlength="30" />
     </td>
     <td align="center">عدد الاخوان</td>
   </tr>
@@ -240,7 +240,7 @@
 <br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
-  	<td style="height: 29px"><input class="textFiels" name="class" type="text" id="class" size="10" maxlength="30" /></td>
+  	<td style="height: 29px"><input class="textFiels" name="class" type="text" id="major" size="10" maxlength="30" /></td>
         <td style="height: 29px" id="class_lable">التخصص</td>
 	<td width="23%" align="right" style="height: 29px"><input class="textFiels" name="school" type="text" id="school" size="20" maxlength="30" /></td>
         <td width="12%" align="center" style="height: 29px" id="school_lable">اسم المدرسة/الجامعة</td>
@@ -255,9 +255,9 @@
   </tr>
   
   <tr align="center">
-  	<td style="height: 29px"><input class="textFiels" name="class" type="text" id="class" size="10" maxlength="30" /></td>
+  	<td style="height: 29px"><input class="textFiels" name="class" type="text" id="last_result" size="10" maxlength="30" /></td>
         <td style="height: 29px" id="class_lable">اخر نتيجة للطالب</td>
-  	<td width="23%" align="right" style="height: 29px"><input class="textFiels" name="school" type="text" id="school" size="20" maxlength="30" /></td>
+  	<td width="23%" align="right" style="height: 29px"><input class="textFiels" name="school" type="text" id="path" size="20" maxlength="30" /></td>
         <td width="12%" align="center" style="height: 29px" id="school_lable">الكلية/المساق</td>
     <td style="height: 29px"><input class="textFiels" name="class" type="text" id="class" size="10" maxlength="30" /></td>
         <td style="height: 29px" id="class_lable">الصف</td>    
@@ -266,11 +266,11 @@
     <td>&nbsp;</td>
   </tr>
    <tr align="center">
-  	<td style="height: 29px"><?php fp_select_date_get(2010, 'ss')?></td>
+  	<td style="height: 29px"><?php fp_select_date_get(2010, 'g')?></td>
         <td style="height: 29px" id="class_lable"> تاريخ التخرج المتوقغ</td>
         <td width="23%" align="right" style="height: 29px"><?php fp_select_date_get(2010, 'ss')?></td>
         <td width="12%" align="center" style="height: 29px" id="school_lable">تاريخ بدية الدراسة</td>
-    <td style="height: 29px"><select class="select" name="yearnum" id="yearnum">
+    <td style="height: 29px"><select class="select" name="yearnum" id="study_year_no">
 	    <?php
 	  for($i=2 ; $i <= 7 ; $i++)
   	  echo "<option value='".$i."'>$i</option>'";
@@ -405,8 +405,8 @@ function get_str(){
         if(document.getElementById("male_gender").checked == true) gender_value = "1" ;
         else gender_value = "0" ;
         str+="gender="+gender_value;
-        //window.location.href = "saveOrphan.php?"+str;
-       ajax(str);
+        window.location.href = "saveStudent.php?"+str;
+       //alert(str);//ajax(str);
 }
 function ajax(str)
 {		

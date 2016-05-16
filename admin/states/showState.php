@@ -91,12 +91,6 @@
         }
         
 	$ucount = @count($states);
-    if($ucount == 1)
-        echo '
-            <script type="text/javascript">
-            
-            </script>  
-        ';
 ?>
 
 <table width="40%" align="center" class="table">
@@ -119,8 +113,16 @@
     <td><?php echo $i+1?></td>
     
   </tr>
-  <?php } ?>
-    
+  <?php } 
+  if($ucount == 1)
+        echo '
+            <script type="text/javascript">
+                document.getElementById("del_lable").setAttribute("hidden","hidden");
+                document.getElementById("del_bt").setAttribute("hidden","hidden");
+            </script>  
+        ';
+  ?>
+  
   </table>
 
 <br />
@@ -131,8 +133,6 @@
 </div>
 <script type="text/javascript">
 
-    document.getElementById("del_lable").setAttribute("hidden","hidden");
-    document.getElementById("del_bt").setAttribute("hidden","hidden");
 function ajax(ID)
 {
     var ajax;
