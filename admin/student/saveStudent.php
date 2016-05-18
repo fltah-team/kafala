@@ -58,8 +58,8 @@
         else{
             $ill_cause = $_GET['illt'];
         }
-        session_start();
-	$data_entery_name = $_SESSION['name'];
+        //session_start();
+	$data_entery_name = "user";//$_SESSION['name'];
 	$data_entery_date  = date("y-m-d");	
                             
 	$result =fp_student_add($state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,  $level , $year,$path ,$major  , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date  );
@@ -68,7 +68,7 @@
 	fp_db_close();
 	
 	if(!$result)
-            fp_err_add_fail($first_name." ".$meddle_name);
+            echo "err";//fp_err_add_fail($first_name." ".$meddle_name);
 	else
-            fp_err_add_succes($first_name." ".$meddle_name,$phone1);
+            echo "OK";//fp_err_add_succes($first_name." ".$meddle_name,$phone1);
 ?>
