@@ -719,6 +719,8 @@ function add_sibling (){
 //*********************  DELETE
 function del_ajax(ID)
 {		
+   conf = confirm("ستقوم بحذف بيانات الطلاب \n هل أنت متأكد");
+    if(conf){
         var ajax;
 	var data ;
         var str = "?id=0"+ID;
@@ -766,7 +768,7 @@ function del_ajax(ID)
 	
 }
 
-	
+}
 </script>
 <div id="footer">
 <p>جميع الحقوق محفوظة 2016 &copy;</div>

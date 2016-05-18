@@ -1,4 +1,4 @@
-ً<?php
+<?php
 
 	
 	include('../../utils/db.php');
@@ -60,7 +60,7 @@
         }
         else{
              if (!isset($_GET['illt'])){
-            fp_err_add_fail("اليتيم"); 
+            fp_err_add_fail("الطالب"); 
              }
             $ill_cause = $_GET['illt'];
         }

@@ -28,7 +28,7 @@
             <ul class="menu" >
                 <li><a href="#">الأيتام</a>    
                     <ul class="submenu">
-                        <li><a href="showOrphans.php">عرض الكل  </a></li>
+                        <li><a href="../finalOrphan/showOrphans.php">عرض الكل  </a></li>
                         <li><a href="../orphan/showOrphans.php"> بيانات غير معتمدة </a></li>
                         <li>
                             <form method="get" action="orphanInfo.php" >
@@ -70,11 +70,12 @@
 </table>
 </div>
 
+
 <!-- main -->
 <div class="main">
 
 <div class="login">
-<h2 align="center">بيانات يتيم </h2>
+    <h2 align="center" class="adress">بيانات طالب </h2>
 <br />
 <p id="noti"></p>
 <br />
@@ -116,15 +117,14 @@
     <td align="right"><input class="textFiels" name="name3" type="text" tabindex="4" id="name3" size="10" maxlength="30" /></td>
     <td align="right"><input class="textFiels" name="name2" type="text" tabindex="3" id="name2" size="10" maxlength="30" /></td>
     <td align="right"><input class="textFiels" name="name1" tabindex="2" type="text" id="name1" size="10" maxlength="30" /></td>
-    <td align="center">اسم اليتيم</td>
+    <td align="center">اسم الطالب</td>
   </tr>
   
     <tr>
     <td>&nbsp;</td>
   </tr>
     <tr align="right">
-	<td>
-        </td>
+	<td></td>
     <td align="right">
                 <td align="center" dir="rtl" >
   	    ذكر<input type="radio" name="s_gender" value="1" id="male_gender" />
@@ -134,46 +134,12 @@
     </td>
     </td>
   	<td align="center">الجنس</td>
-    
     <td align="center">
         <?php fp_select_date_get(1990,null)?>
     </td>
     <td align="center">تاريخ الميلاد</td>
   </tr>
-  
-
-    <tr>
-    <td>&nbsp;</td>
-  </tr>
-    <tr align="center">
-	<td>&nbsp;</td>
-  	<td align="right"><input class="textFiels" name="mname4" type="text" id="mname4" size="10" maxlength="30" /></td>
-    <td align="right"><input class="textFiels" name="mname3" type="text" id="mname3" size="10" maxlength="30" /></td>
-    <td align="right"><input class="textFiels" name="mname2" type="text" id="mname2" size="10" maxlength="30" /></td>
-    <td align="right"><input class="textFiels" name="mname1" type="text" id="mname1" size="10" maxlength="30" /></td>
-    <td align="center">اسم والدة اليتيم</td>
-  </tr>
-  
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
-    <tr align="right">
-    <td align="right"></td>
-    <td align="right">
-      </td>
-	<td>
-        <?php fp_select_mother_status_get()?>
-    	</td>
-  	<td align="right">حالتها الاجتماعية
-
-  	  </td>
-    
-    <td align="right">
-        <?php fp_select_date_get(1960,'m')?>
-    </td>
-    <td align="center">تاريخ ميلادها</td>
-  </tr>
-  
+ 
   <tr>
     <td>&nbsp;</td>
   </tr>
@@ -185,7 +151,20 @@
     <td align="right">
        <?php fp_select_date_get(1995,'f')?>
     </td>
-    <td align="center">تاريخ وفاة والد اليتيم</td>
+    <td align="center">تاريخ وفاة والد الطالب</td>
+  </tr>
+    <tr>
+    <td>&nbsp;</td>
+  </tr>
+    <tr align="center">
+  	<td align="right"><input class="textFiels" name="lw" type="text" id="sisters_no" size="10" maxlength="30" /></td>
+    <td>الاناث</td>
+    <td align="right"><input class="textFiels" name="dr" type="text" id="brothers_no" size="10" maxlength="30" /></td>
+    <td align="right">الذكور</td>
+    <td align="right">
+       <input class="textFiels" name="lw" type="text" id="f_mem" size="10" maxlength="30" />
+    </td>
+    <td align="center">عدد الاخوان</td>
   </tr>
     
 </table>
@@ -243,133 +222,16 @@
     <tr align="right">
 	<td>&nbsp;</td>
     <td>&nbsp;</td>
-     <td align="right"><input class="textFiels" name="tel2" type="text" id="tel2" size="10" maxlength="30" /></td>
+     <td align="right"><input class="textFiels" name="impt" type="text" id="tel2" size="10" maxlength="30" /></td>
     <td align="center">جوال 2</td>
-    <td align="right"><input class="textFiels" name="tel1" type="text" id="tel1" size="10" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="impt" type="text" id="tel1" size="10" maxlength="30" /></td>
     <td align="center">جوال 1</td>
   </tr>
   
   
 </table>
 
-<!--   Family   -->
 
-
-<br />
-<h2 align="center"><b><span dir="RTL" lang="AR-SA">عدد افراد الاسرة </span>
-</b></h2>
-<table width="60%" border="0" align="center" id=" ">
-  <tr align="center">
-      <td width="29%" align="right" id="num_male_sib">0</td>
-  	<td width="11%" align="right">الاناث </td>
-        <td width="16%" align="right" id="num_female_sib">0</td>
-    <td width="15%" align="center"> الذكور</td>
-    <td width="15%" align="right" id="num_sib">0</td>
-    <td width="14%" align="center">  عدد الاخوان  </td>
-  </tr>
-  
-  
-    <table class="table" width="70%" border="0" align="center">
-   <br />
-   <tr class="table_header">
-       <td align="center" width="15%">حذف</td>
-      <td align="center" width="15%">الحالة</td>
-    <td align="center" width="15%">تاريخ الميلاد</td>
-    <td align="center" width="25%">الجنس</td>
-    <td align="center" width="20%">الإسم</td>
-    <td align="center" width="10%">&nbsp;</td>
-  </tr>
-   <?php 
-        $scount = @count($sibilings);
-        for($i = 0 ; $i < $scount ; $i++){
-		$one_sibling = $sibilings[$i];
-  ?>
-   <tr class="table_data<?php echo $i%2?>">
-       <td onclick="delete_sibling_ajax(<?php echo $one_sibling->id?>)" align="center" >
-        <img width="22px"   align="middle" alt="حذف" src="../../images/style images/delete_icon.png"   />
-    </td>
-    <td align="center"><?php fp_get_state($one_sibling->state)?></td>
-    <td align="center"><?php echo $one_sibling->birth_date ?></td>
-    <td align="center"><?php if($one_sibling->sex == 1) echo "ذكر"; else echo "أنثى";?></td>
-    <td align="center"><?php echo $one_sibling->name ?></td>
-    <td align="center"><?php echo $i+1 ?></td>
-  </tr>
-   <?php } ?>
-   <tr class="table_data<?php echo $i%2?>">
-       <td></td>
-    <td align="center" >
-        <select tabindex="0" class="select" name="status" id="s_status">
-      <option value="1">مكفول</option>
-      <option value="2">قيد التسويق</option>
-      <option value="3">متوقف</option>
-    </select>
-    </td>
-    <td align="center">
-        <table width="60%" border="0">
-      <tr>
-        <td><select name="my" class="select" id="sy">
-          <?php
-	  for($i=1950 ; $i <= date("Y") ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-        <td><select class="select" name="mm" id="sm">
-          <?php
-	  for($i=1 ; $i <= 12 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-        <td><select class="select" name="md" id="sd">
-          <?php
-	  for($i=1 ; $i <= 31 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-        </select></td>
-      </tr>
-    </table>
-    </td>
-       <td align="center" dir="rtl" >
-  	    ذكر<input type="radio" name="s_gender" value="1" id="sibling_male_gender" />
-            &nbsp;&nbsp;
-  	    أنثى<input type="radio" name="s_gender" value="0" id="sibling_female_gender" />
-  	    
-    </td>
-    <td align="center"><input class="textFielsS" name="fbname" type="text" id="sibling_name" size="10" maxlength="30" /></td>
-    <td></td>
-  </tr>
-  <tr >
-  	
-    <td align="center"><input type="button" name="login " id="login " onclick="get_s_str()" value="إضافة فرد" /></td>
-   </tr>
-
-</table>
-
-
-</table>
-<script type="text/javascript" >
-    
-    var index = 0;
-    var s_str_array = Array();
-    function get_s_str(){
-      var s_str = "" ;
-      var sname = document.getElementById('sibling_name');
-      s_str+='sibling_name='+sname.value+'&';
-      var s_bd = document.getElementById('sy').value+"-"+document.getElementById('sm').value+"-"+document.getElementById('sd').value;
-      s_str+='s_bd='+s_bd+'&';
-      var s_status = document.getElementById("s_status");
-      s_str+='sibling_status='+s_status.value+'&';
-      var s_gender_nodes = document.getElementsByName("s_gender");
-
-      if(document.getElementById("sibling_male_gender").checked == true) s_gender_value = "1" ;
-      else
-      if(document.getElementById("sibling_female_gender").checked == true) s_gender_value = "0" ;
-      else s_gender_value = "1" ;
-      s_str+='s_gender='+s_gender_value+'&';
-      s_str_array[index] = s_str;
-      alert(index);
-      index++;
-      }
-</script>
 <!--   Learning   -->
 
 
@@ -378,42 +240,12 @@
 <br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
-  	<td width="16%"></td>
-  	<td width="7%" align="right">&nbsp;</td>
-  	<td width="23%" align="right"><input name="teachingr" type="text"  class="textFiels" id="teachingr" size="20" maxlength="30" />
-  	  </td>
-        <td width="12%" align="center"  id="teachingr_lable">السبب</td>
-        <td width="19%" align="center">
-        <select class="select" name="learning" id="learning">
-            <option  value="1" onclick="learning1()">يدرس</option>
-            <option  value="0" onclick="learning0()">لا يدرس</option>
-    </select>
-    <script type="text/javascript" >
-        document.getElementById('teachingr').style.display = 'none';
-         document.getElementById('teachingr_lable').innerText = '';
-     function learning0(){
-         document.getElementById('class').style.display = 'none';
-         document.getElementById('class_lable').innerText = ''; 
-         document.getElementById('level').style.display = 'none';
-         document.getElementById('level_lable').innerText = ''; 
-         document.getElementById('school').style.display = 'none';
-         document.getElementById('school_lable').innerText = '';
-         document.getElementById('teachingr').style.display = 'block';
-         document.getElementById('teachingr_lable').innerText = 'السبب';
-     }   
-          function learning1(){
-         document.getElementById('class').style.display = 'block';
-         document.getElementById('class_lable').innerText = 'الصف';  
-         document.getElementById('level').style.display = 'block';
-         document.getElementById('level_lable').innerText = 'المرحلة'; 
-         document.getElementById('school').style.display = 'block';
-         document.getElementById('school_lable').innerText = 'اسم المدرسة'; 
-         document.getElementById('teachingr').style.display = 'none';
-         document.getElementById('teachingr_lable').innerText = ''; 
-     }
-    </script>
-    </td>
-        <td width="23%">الحالة الدراسية</td>
+  	<td style="height: 29px"><input class="textFiels" name="class" type="text" id="major" size="10" maxlength="30" /></td>
+        <td style="height: 29px" id="class_lable">التخصص</td>
+	<td width="23%" align="right" style="height: 29px"><input class="textFiels" name="school" type="text" id="school" size="20" maxlength="30" /></td>
+        <td width="12%" align="center" style="height: 29px" id="school_lable">اسم المدرسة/الجامعة</td>
+       <td align="center" style="height: 29px"><input class="textFiels" name="level" type="text" id="level" size="10" maxlength="30" /></td>
+        <td style="height: 29px" id="level_lable">المرحلة</td>
         
         
   </tr>
@@ -423,18 +255,32 @@
   </tr>
   
   <tr align="center">
-  	<td style="height: 29px"><input class="textFiels" name="class" type="text" id="class" size="10" maxlength="30" /></td>
-        <td style="height: 29px" id="class_lable">الصف</td>
-  	
-	<td width="23%" align="right" style="height: 29px"><input class="textFiels" name="school" type="text" id="school" size="20" maxlength="30" /></td>
-        <td width="12%" align="center" style="height: 29px" id="school_lable">اسم المدرسة</td>
-        <td align="center" style="height: 29px"><input class="textFiels" name="level" type="text" id="level" size="10" maxlength="30" /></td>
-        <td style="height: 29px" id="level_lable">المرحلة</td>
+  	<td style="height: 29px"><input class="textFiels" name="class" type="text" id="last_result" size="10" maxlength="30" /></td>
+        <td style="height: 29px" id="class_lable">اخر نتيجة للطالب</td>
+  	<td width="23%" align="right" style="height: 29px"><input class="textFiels" name="school" type="text" id="path" size="20" maxlength="30" /></td>
+        <td width="12%" align="center" style="height: 29px" id="school_lable">الكلية/المساق</td>
+    <td style="height: 29px"><input class="textFiels" name="class" type="text" id="class" size="10" maxlength="30" /></td>
+        <td style="height: 29px" id="class_lable">الصف</td>    
   </tr>
   <tr>
     <td>&nbsp;</td>
   </tr>
-  
+   <tr align="center">
+  	<td style="height: 29px"><?php fp_select_date_get(2010, 'g')?></td>
+        <td style="height: 29px" id="class_lable"> تاريخ التخرج المتوقغ</td>
+        <td width="23%" align="right" style="height: 29px"><?php fp_select_date_get(2010, 'ss')?></td>
+        <td width="12%" align="center" style="height: 29px" id="school_lable">تاريخ بدية الدراسة</td>
+    <td style="height: 29px"><select class="select" name="yearnum" id="study_year_no">
+	    <?php
+	  for($i=2 ; $i <= 7 ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+	    </select></td>
+        <td style="height: 29px" id="class_lable">عدد سنوات الدراسة</td>    
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
     <tr align="center">
   	<td width="16%" align="right">&nbsp;</td>
   	<td width="7%" align="right">&nbsp;</td>
@@ -514,7 +360,7 @@
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td align="center"><button class="bt" name="add" type="button" onclick="get_str()" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة يتيم  </button></td>
+    <td align="center"><button class="bt" name="add" type="button" onclick="IsEmpty()" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة طالب  </button></td>
     <td>&nbsp;</td>
   </tr>
   </form>
@@ -526,7 +372,7 @@
 <script type="text/javascript" >
         
 function IsEmpty(){ 
-        var text = document.getElementsByTagName('input');
+        var text = document.getElementsByName('impt');
         var empty_checker = 0 ;
         for(var i = 0 ; i< text.length ; i++){
            if(text[i].value == ''){
@@ -536,7 +382,12 @@ function IsEmpty(){
            }
         }
         if(empty_checker > 0 )alert("هناك حقول يجب تعبئتها");
-        else get_str();
+        else {
+            if(document.getElementById('tel1').value.length > 9 )
+                get_str();
+            else
+                alert("يجب ان يكون رقم التلفون أكبر من 10 خانات");
+        }
 }
 
 function get_str(){
@@ -554,9 +405,8 @@ function get_str(){
         if(document.getElementById("male_gender").checked == true) gender_value = "1" ;
         else gender_value = "0" ;
         str+="gender="+gender_value;
-        //window.location.href = "saveOrphan.php?"+str;
-        alert(str);
-       ajax(str);
+        window.location.href = "saveStudent.php?"+str;
+       //alert(str);//ajax(str);
 }
 function ajax(str)
 {		
@@ -606,14 +456,7 @@ function ajax(str)
 	
 }
 
-function add_sibling (){
-    var s_final_str = "";
-    if(s_str_array.length != 0)
-    for(var i =0 ; i < s_str_array.length ; i++){
-        s_final_str+=s_str_array[i];
-    }
-     alert(document.getElementById("success_notice").getAttribute("name"));
-}	
+	
 </script>
 <div id="footer">
 <p>جميع الحقوق محفوظة 2016 &copy;</p>
