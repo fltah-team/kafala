@@ -83,10 +83,6 @@
      </td>    
      <td width="35%" align="center">الرقم</td>
   </tr>
-  
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
     <tr align="center">
 	<td>&nbsp;</td>
         <td align="right"><input class="textFiels" name="name4" type="text" id="name4" tabindex="5" size="10" maxlength="30" value="<?php echo $orphan->last_4th_name?>" /></td>
@@ -95,11 +91,6 @@
     <td align="right"><input class="textFiels" name="name1" tabindex="2" type="text" id="name1" size="10" maxlength="30" value="<?php echo $orphan->first_name?>"  /></td>
     <td align="center">اسم اليتيم</td>
   </tr>
-  
-    <tr>
-    <td>&nbsp;</td>
-  </tr>
-   
     <tr align="right">
 	<td>
         </td>   
@@ -116,11 +107,6 @@
       </td>
     <td align="center">تاريخ الميلاد</td>
   </tr>
-  
-
-    <tr>
-    <td>&nbsp;</td>
-  </tr>
     <tr align="center">
 	<td>&nbsp;</td>
   	<td align="right"><input class="textFiels" name="mname4" type="text" id="mname4" size="10" maxlength="30"  value="<?php echo $orphan->mother_4th_name?>" /></td>
@@ -130,9 +116,6 @@
     <td align="center">اسم والدة اليتيم</td>
   </tr>
   
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
     <tr align="right">
     <td align="right"></td>
     <td align="right">
@@ -149,10 +132,6 @@
     </td>
     <td align="center">تاريخ ميلادها</td>
   </tr>
-  
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
     <tr align="center">
   	<td align="right"><input class="textFiels" name="lw" type="text" id="lw" size="10" maxlength="30" value="<?php echo $orphan->father_work?>" /></td>
     <td>عمله السابق</td>
@@ -166,7 +145,6 @@
     
 </table>
 
-<br />
 
 <?php
         if($kafalas == -1 )echo "<script type='text/javascript'>document.getElementById('db_err').style.display = 'block';</script>";
@@ -178,10 +156,7 @@
 
 <!--   Aderss   -->
 
-
-<br />
 <h2 align="center">العنوان</h2>
-<br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
   	<td width="13%" align="right"><input class="textFiels" name="district" type="text" id="district" size="8" maxlength="30" value="<?php echo $orphan->District?>"/></td>
@@ -202,10 +177,7 @@
       </td>
     <td width="16%" align="center">الولاية</td>
   </tr>
-  
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
+
     <tr align="center">
 	<td>&nbsp;</td>
   	<td align="right"></td>
@@ -213,11 +185,6 @@
     <td align="right">رقم المنزل/معلم بارز</td>
     <td align="right"><input class="textFiels" name="section" type="text" id="section" size="10" maxlength="30" value="<?php echo $orphan->section?>" /></td>
     <td align="center">المربع</td>
-  </tr>
-  
-  
-    <tr>
-    <td>&nbsp;</td>
   </tr>
     <tr align="right">
 	<td>&nbsp;</td>
@@ -233,8 +200,6 @@
 
 <!--   Family   -->
 
-
-<br />
 <h2 align="center"><b><span dir="RTL" lang="AR-SA">عدد افراد الاسرة </span>
 </b></h2>
 <table width="60%" border="0" align="center" id=" ">
@@ -252,7 +217,6 @@
           <script type='text/javascript'>
           if(<?php echo $male_count+$female_count?> == 0)document.getElementById('sibilings').style.display = 'none';
           </script>
-   <br />
    <tr >
       <td align="center" width="15%">الحالة</td>
     <td align="center" width="15%">تاريخ الميلاد</td>
@@ -281,10 +245,7 @@
 
 <!--   Learning   -->
 
-
-<br />
 <h2 align="center" class="auto-style1">التعليم</h2>
-<br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
   	<td width="11%"></td>
@@ -303,9 +264,6 @@
         
   </tr>
   
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
   
   <tr align="center">
   	<td></td>
@@ -315,9 +273,6 @@
         <td width="14%" align="center">اسم المدرسة</td>
         <td>&nbsp;</td>
   	<td style="height: 29px">&nbsp;</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
   </tr>
   
   </table>
@@ -332,19 +287,12 @@
         <td width="11%">المرحلة</td>
     
   </tr>
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
   
 </table>
 
 
 <!-- health -->
-
-<br />
 <h2 align="center">الحالة الصحية</h2>
-<br />
-
   <table width="80%" border="0" align="center" id=" ">
 
   <tr align="center">
@@ -373,9 +321,6 @@
         <td width="18%">الحالة الصحية  </td>
 
   </tr>
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
   
 </table>
 <br />
@@ -389,13 +334,7 @@
     <td>التاريخ</td>
               <td align="center"><input class="textFiels" disabled name="level" type="text" id="level" size="10" maxlength="30" value="<?php echo $orphan->data_entery_name?>"/</td>
     <td>مدخل البيانات   </td>
-  </tr>
-   
-    <tr>
-       <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td align="center"></td>    
+  </tr>   
       <tr>
       <td>&nbsp;</td>
       

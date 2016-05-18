@@ -13,12 +13,10 @@
         {
             //fp_err_add_fail("الطالب");
         }
-        
-        
-
+	$id = $_GET['id'];
 	$state = $_GET['status'];	
 	$warranty_organization =  $_GET['sponsor'];
-    $saving = 0 ;
+    $saving = $_GET['saving']; ;
 	$first_name = $_GET['name1'];	
 	$meddle_name = $_GET['name2'];	
 	$last_name = $_GET['name3'];	
@@ -27,8 +25,7 @@
 	$sex = $_GET['gender'];	
 	$father_dead_date = $_GET['fy']."-".$_GET['fm']."-".$_GET['fd'];	
 	$father_dead_cause = $_GET['dr'];	
-	$father_work = $_GET['lw'];	
-    $f_mem = $_GET['f_mem'];
+	$father_work = $_GET['lw'];
     $sisters_no = $_GET['sisters_no'];	
     $brothers_no = $_GET['brothers_no'];	
 	$residence_state = $_GET['state'];	
@@ -62,7 +59,7 @@
 	$data_entery_name = "user";//$_SESSION['name'];
 	$data_entery_date  = date("y-m-d");	
                             
-	$result =fp_student_add($state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,  $level , $year,$path ,$major  , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date  );
+	$result =fp_student_add($id,$state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,  $level , $year,$path ,$major  , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date  );
 	//$_GET['fno']);
 
 	fp_db_close();

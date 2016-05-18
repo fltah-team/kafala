@@ -21,8 +21,7 @@ function fp_kafala_get($extra = ''){
 	return $kafala ; 
 	}
 function fp_kafala_get_num_rows(){
-        global $fp_handle ;
-	$query = sprintf("SELECT * FROM `sponsorship`");
+	$query = sprintf("SELECT * FROM `sponsorship` ORDER BY `date`");
 	$qresult = @mysql_query($query);
 	
 	if(!$qresult) return -1 ; 
@@ -55,6 +54,7 @@ function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$last_date ,$sponsor
     if(!fp_kafala_check_sponsored($n_sponsored, $n_sponsor))return false;    
 	$query = ("INSERT INTO `sponsorship` (`id`,`amount` , `saving` , `date` ,`sponsor`, `last_date` ,`sponsored`) VALUE(NULL, $n_amount, $n_saving, '$n_date' ,$n_sponsor , '$n_last_date' , $n_sponsored)");
         $qresult = mysql_query($query);
+        fp_kafala_insert_sponsorships($n_sponsored,$n_saving,$n_date,$n_sponsor);
 	if(!$qresult) return false ;
         $name = fp_select_sponsored_type($n_sponsored);
         $sponsor = fp_sponsor_get_by_id($n_sponsor);
@@ -67,8 +67,6 @@ function fp_kafala_add( $amount , $saving ,$date ,$sponsor ,$last_date ,$sponsor
                 fp_notify_add($text, "admin", $user->name, 1);
             }
         }
-        fp_kafala_insert_sponsorships($n_sponsored,$n_saving,$n_date,$n_sponsor);
-
         @mysql_free_result($qresult);
         return true ;
 	}
@@ -89,6 +87,12 @@ function fp_kafala_check_sponsored($n_sponsored_id,$n_sponsor){
                 if(!$orphans || @count($orphans) == 0 )
                     return false;
                 else return true;
+       case 2 : 
+                
+                $orphans = fp_final_student_get("WHERE `warranty_organization`='$n_sponsor' and `state`=1");
+                if(!$orphans || @count($orphans) == 0 )
+                    return false;
+                else return true;
                 } 
     }
 
@@ -104,7 +108,17 @@ function fp_kafala_insert_sponsorships($n_sponsored_id,$n_saving,$n_date,$n_spon
                 $add_kafala_qurey = "INSERT INTO `sponsorships` VALUE($last_id,$orphan->id,1)";
                 $res = mysql_query($add_kafala_qurey);
                 $com_saving = $orphan->saving + $n_saving;
-                fp_final_orphan_update($orphan->id,Null,Null,$com_saving,$n_date,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null,Null);
+                fp_final_orphan_update($orphan->id,Null,Null,$com_saving,$n_date);
+                }
+       case 2 : 
+                $orphans = fp_final_student_get("WHERE `warranty_organization`='$n_sponsor' and `state`=1");
+                $ocount = @count($orphans);
+                for($i = 0 ; $i < $ocount ; $i++){
+                $orphan = $orphans[$i];
+                $add_kafala_qurey = "INSERT INTO `sponsorships` VALUE($last_id,$orphan->id,2)";
+                $res = mysql_query($add_kafala_qurey);
+                $com_saving = $orphan->saving + $n_saving;
+                fp_final_student_update($orphan->id,Null,Null,$com_saving,$n_date);
                 } 
     }
 }
@@ -145,11 +159,9 @@ function fp_kafala_delete($id){
 	@mysql_free_result($qresult);
 	return true ;
 }
-
 	 	
-function fp_sposored_get_kafala($id){
-        global $fp_handle ;
-	$query = sprintf("SELECT * FROM `sponsorships` WHERE `sponsored`= ".$id);
+function fp_sposored_get_kafala($id,$t){
+	$query = sprintf("SELECT * FROM `sponsorships` WHERE `sponsored`= %d AND `type`=%d",$id,$t);echo $query;
 	$qresult = @mysql_query($query);
 	
 	if(!$qresult) return -1 ; 

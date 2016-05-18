@@ -89,7 +89,7 @@
         include('../../utils/siblingAPI.php');
         include('../../utils/sponsorAPI.php');
         include ('../../utils/error_handler.php');
-	if(!isset($_GET['id']) || $_GET['id']=="" || (int)$_GET['id']==0){
+	if(!isset($_GET['id']) || $_GET['id']==""){
             fp_err_show_record("اليتيم");
         }
         
@@ -396,14 +396,6 @@
     <td align="center">مدخل البيانات   </td>
   </tr>
    
-    <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td align="center"></td>    
-    <td align="center"></td> 
-    
-    
    <tr>
         <td>&nbsp;</td>
     <td>&nbsp;</td>

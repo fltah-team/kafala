@@ -1,94 +1,34 @@
-
+<?php include '../auth.php';?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title> الهيئة الخيرية الاسلامية للرعاية الاجتماعية</title>
+    
 <link href="../../style/pageStyle.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-.auto-style1 {
-	direction: rtl;
-}
-</style>
+    <style >
+        *{
+            font-family:Droid Arabic Kufi;
+        }
+        body{
+            
+            background-color: #999999;
+        }
+        .cont{
+            width: 1000px;
+            background-color: white; 
+            margin: 0 auto;
+            padding: 50px 0 10px 0;
+        }
+    </style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>الهيئة الخيرية الاسلامية للرعاية الاجتماعية</title>
 </head>
 
 <body>
-<!-- Title -->
-<div id="title">
-<table width="90%" border="0" align="center">
-  <tr>
-    <td><img src="../../images/logo.png" /></td>
-    <td><h1>الهيئة الخيرية الاسلامية للرعاية الاجتماعية</h1></td>
-    <td><img src="../../images/logo.png" /></td>
-  </tr>
-  
-</table>
-</div>
-
-<!-- menu -->
-<div class="menu">
-	<table align="center">
-    <tr>
-        <td>
-            <div class="container" id="main" role="main" align="center" >
-            <ul class="menu" >
-                <li><a href="#">الأيتام</a>    
-                    <ul class="submenu">
-                        <li><a href="../finalOrphan/showOrphans.php">عرض الكل  </a></li>
-                        <li><a href="../orphan/showOrphans.php"> بيانات غير معتمدة </a></li>
-                        <li>
-                            <form method="get" action="orphanInfo.php" >
-                                <input dir="rtl" type="text" name="id" size="12"/> <input type="submit" size="5" value="بحث" id="o_serch"/>
-                            </form>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#">المستخدمين</a>    
-                    <ul class="submenu">
-                        <li><a href="../users/showUsers.php">عرض الكل  </a></li>
-                        <li><a href="../users/addUser.php">اضافة مستخدم جديد</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="#">الكفالات</a>    
-                    <ul class="submenu">
-                        <li><a href="../kafala/showKafala.php">عرض الكل  </a></li>
-                        <li><a href="../kafala/addKafala.php">اضافة كفالة جديدة</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="#">أخرى</a>    
-                    <ul class="submenu">
-                        <li><a href="../sponsor/showSponsor.php">عرض جهات الكفالة  </a></li>
-                        <li><a href="../sponsor/addSponsor.php">اضافة جهة كفالة</a></li>
-                        <li><a href="../states/showState.php">عرض المدن  </a></li>
-                        <li><a href="../kafala/showKafala.php">اضافة مدينة جديدة</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="../../utils/logout.php">تسجيل خروج</a></li>
-            </ul>
-            
-            
-            </div>
-        </td>
-    </tr>
-</table>
-</div>
-
-
-<!-- main -->
-<div class="main">
-
-<div class="login">
-<h2 align="center">بيانات طالب </h2>
-<br />
-<?php
+<?php 
         include('../../utils/db.php');
         include('../../utils/finalStudentAPI.php');
         include('../../utils/siblingAPI.php');
         include('../../utils/sponsorAPI.php');
-        include('../../utils/kafalaAPI.php');
         include ('../../utils/error_handler.php');
 	if(!isset($_GET['id']) || $_GET['id']=="" ){
             fp_err_show_record("اليتيم");
@@ -104,7 +44,6 @@
         $sibilings = fp_sibiling_get($orphan->phone1);
         $siblings_male = fp_sibiling_get_for_gender($id," and sex = 1 ");
         $siblings_female = fp_sibiling_get_for_gender($id," and sex = 0 ");
-        $kafalas = fp_sposored_get_kafala($id,2);
         $male_count = @count($siblings_male);
         $female_count = @count($siblings_female);	
 	$scount = @count($sibilings);
@@ -115,8 +54,16 @@
         
         
 ?>
-<br />
-<table width="85%" border="0" align="center">
+    <div class="cont" >
+    <table width="80%" border="0" align="center">
+        <tr>
+            <td align="center"><img src="../../images/logo.png" /></td>
+            <td align="center"><h2>الهيئة الخيرية الاسلامية للرعاية الاجتماعية</h2></td>
+            <td align="center"  ><img src="../../images/logo.png" /></td>
+        </tr>
+    </table>
+<h2 align="center">بيانات طالب </h2>
+    <table width="85%" border="0" align="center">
 
   <tr align="center">
     <td width="17%" align="right">
@@ -144,10 +91,6 @@
     </td>
     <td width="20%" align="center">الرقم</td>
   </tr>
-  
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
     <tr align="center">
 	<td>&nbsp;</td>
         <td align="right"><input class="textFiels" name="name4" type="text" id="name4" tabindex="5" size="10" maxlength="30" value="<?php echo $orphan->last_4th_name?>" /></td>
@@ -157,9 +100,6 @@
     <td align="center">اسم اليتيم</td>
   </tr>
   
-    <tr>
-    <td>&nbsp;</td>
-  </tr>
    
     <tr align="right">
 	<td>
@@ -188,13 +128,7 @@
       </td>
     <td align="center">تاريخ الميلاد</td>
   </tr>
-  
-
-    <tr>
-    
-    <td>&nbsp;</td>
-  </tr>
-    <tr align="center">
+ <tr align="center">
   	<td align="right"><input class="textFiels" name="lw" type="text" id="lw" size="10" maxlength="30" value="<?php echo $orphan->father_work?>" /></td>
     <td>عمله السابق</td>
     <td align="right"><input class="textFiels" name="dr" type="text" id="dr" size="10" maxlength="30" value="<?php echo $orphan->father_dead_cause?>" /></td>
@@ -203,10 +137,6 @@
         <?php fp_select_date_get_by_id(1940, 'f', $orphan->father_dead_date)?>
     </td>
     <td align="center">تاريخ وفاة والد اليتيم</td>
-  </tr>
-    <tr>
-    
-    <td>&nbsp;</td>
   </tr>
       <tr align="center">
   	<td align="right"><input class="textFiels" value="<?php echo $orphan->sisters_no?>" name="lw" type="text" id="sisters_no" size="10" maxlength="30" /></td>
@@ -220,75 +150,11 @@
   </tr>  
 </table>
 
-<br />
-<h2 align="center"> الكفالات </h2>
-
-<br />
-     
-<table align="center" width="60%" >
-    <tr>
-        <td><input class="textFiels" id="saving" disabled size="10px" value="<?php echo $orphan->saving ?>" ></input></td>
-        <td>اجمالي الادخار</td>
-        <td><input class="textFiels" id="saving" disabled size="10px" value="<?php echo $orphan->last_sponsorship_date ?>" ></input></td>
-        <td>تاريخ اخر كفالة</td>
-    </tr>
-</table>
-
-<br />
-
-<div id="db_err" style="display: none" class="alert-box error"><span>خطأ: </span>هناك مشكلة في الاتصال بقاعدة البيانات    </div>
-
-<div id="no_kafala" style="display: none" class="alert-box warning"><span>تنبيه: </span>لا يوجد كفالات لعرضها</div>
-
-<div id="kafalas" style="display: none">
-    <?php
-        $kcount = @count($kafalas);
-        
-    ?>
-    <table width="60%" border="0" align="center" class="table">
-    <tr align="center" class="table_header">
-    <td width="10%">الى</td>
-    <td width="20%">من</td>
-    <td width="5%">الادخار</td>
-    <td width="5%">المبلغ</td>
-    <td width="5%">الرقم</td>
-  </tr>
-  <?php 
-        
-                
-  	for($i = 0 ; $i < $kcount ; $i++){
-                $kafala = $kafalas[$i];
-		$sponsorship = fp_kafala_get_by_id($kafala->sponsorship);                
-  ?>
-    <tr align="center" class="table_data<?php echo $i%2?>">
-    <td><?php echo $sponsorship->last_date?></td>
-    <td><?php echo $sponsorship->date?></td>
-    <td><?php echo $sponsorship->saving?></td>
-    <td><?php echo $sponsorship->amount?></td>
-    <td><?php echo $i+1?></td>
-  </tr>
-  <?php } 
-  
-	fp_db_close();
-        ?>
-  </table>
-
-</div>
-
-<?php
-        if($kafalas == -1 )echo "<script type='text/javascript'>document.getElementById('db_err').style.display = 'block';</script>";
-        else if($kafalas == 0) echo "<script type='text/javascript'>document.getElementById('no_kafala').style.display = 'block';</script>";
-        else echo "<script type='text/javascript'>document.getElementById('kafalas').style.display = 'block';</script>";
-        
-    ?>     
-     
 
 <!--   Aderss   -->
 
 
-<br />
 <h2 align="center">العنوان</h2>
-<br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
   	<td width="13%" align="right"><input class="textFiels" name="district" type="text" id="district" size="10" maxlength="30" value="<?php echo $orphan->District?>"/></td>
@@ -309,10 +175,6 @@
       </td>
     <td width="16%" align="center">الولاية</td>
   </tr>
-  
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
     <tr align="center">
 	<td>&nbsp;</td>
   	<td align="right"></td>
@@ -320,11 +182,6 @@
     <td align="right">رقم المنزل/معلم بارز</td>
     <td align="right"><input class="textFiels" name="section" type="text" id="section" size="10" maxlength="30" value="<?php echo $orphan->section?>" /></td>
     <td align="center">المربع</td>
-  </tr>
-  
-  
-    <tr>
-    <td>&nbsp;</td>
   </tr>
     <tr align="right">
 	<td>&nbsp;</td>
@@ -341,9 +198,7 @@
 <!--   Learning   -->
 
 
-<br />
 <h2 align="center">التعليم</h2>
-<br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
        <td width="10%" style="height: 29px"><input value="<?php echo $orphan->major?>" class="textFiels" name="class" type="text" id="major" size="10" maxlength="30" /></td>
@@ -356,10 +211,6 @@
         
   </tr>
   
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
-  
   <tr align="center">
   	<td style="height: 29px"><input class="textFiels" value="<?php echo $orphan->last_result?>"  name="class" type="text" id="last_result" size="10" maxlength="30" /></td>
         <td style="height: 29px" id="class_lable">اخر نتيجة للطالب</td>
@@ -367,9 +218,6 @@
         <td " align="center" style="height: 29px" id="school_lable">الكلية/المساق</td>
     <td style="height: 29px"><input class="textFiels" value="<?php echo $orphan->year?>"  name="class" type="text" id="class" size="10" maxlength="30" /></td>
         <td style="height: 29px" id="class_lable">الصف</td>    
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
   </tr>
    <tr align="center">
        <td style="height: 29px"><?php fp_select_date_get_by_id(2010, 'g',$orphan->expected_grad)?></td>
@@ -384,9 +232,6 @@
 	  ?>
 	    </select></td>
         <td style="height: 29px" id="class_lable">عدد سنوات الدراسة</td>    
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
   </tr>
     <tr align="center">
 	<td  align="center">&nbsp;</td>
@@ -403,20 +248,14 @@
 	    </select></td>
     <td  align="center">مستوى حفظ القران</td>
         </tr>
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
   
 </table>
 
 
 <!-- health -->
 
-<br />
 <h2 align="center">الحالة الصحية</h2>
-<br />
-
-  <table width="80%" border="0" align="center" id=" ">
+ <table width="80%" border="0" align="center" id=" ">
 
   <tr align="center">
   	<td width="0%"></td>
@@ -444,10 +283,6 @@
         <td width="18%">الحالة الصحية  </td>
 
   </tr>
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
-  
 </table>
 <br />
 <!-- Employee -->
@@ -460,14 +295,6 @@
     <td align="center"><input class="textFiels" disabled name="level" type="text" id="user" size="10" maxlength="30" value="<?php echo $orphan->data_entery_name?>"/></td>
     <td align="center">مدخل البيانات   </td>
   </tr>
-   
-    <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td align="center"></td>    
-    <td align="center"></td> 
-    </tr>
     <tr>
       <td>&nbsp;</td>
       
@@ -485,159 +312,10 @@
     <td>&nbsp;</td>
   </tr>
 </table>
-<table align="center" >
-  <tr>
-    <td align="center"><button name="add" id="bt"  type="button" onclick="del_ajax()"> حذف <img  align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" /></button></td>
-      <td>&nbsp;</td>
-    <td><button name="add" class="bt"  type="button" onclick="window.open('print_student_info.php?id=<?php echo $orphan->id?>')"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
-    <td>&nbsp;</td>
-    <td align="center"><button class="add_bt" name="add" type="button" onclick="get_str()" >تعديل البيانات<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
-    <td>&nbsp;</td>
-  </tr>
-
-</table>
-
-
+  </form>
 </div>
-<div  style="margin: 0 auto; text-align: center ; width: 60%;" id="reponse">
-</div>
-<script type="text/javascript" >
-function IsEmpty(){ 
-        var text = document.getElementsByTagName('input');
-        var empty_checker = 0 ;
-        for(var i = 0 ; i< text.length ; i++){
-           if(text[i].value == ''){
-               text.item(i).style.color = "#ff0000" ;
-               text.item(i).setAttribute("placeholder","هذا الحقل فارغ");
-               empty_checker++;
-           }
-        }
-        if(empty_checker > 0 )alert("هناك حقول يجب تعبئتها");
-        else get_str();
-}
-
-function get_str(){
-        
-	var text = document.getElementsByTagName('input');
-        var select = document.getElementsByTagName('select');
-        var str = '';
-        for(var i = 0 ; i< text.length ; i++){
-           str += text[i].getAttribute('id')+'='+text[i].value+'&';
-        }
-        for(var i = 0 ; i< select.length ; i++){
-           str += select[i].getAttribute('id')+'='+select[i].value+'&';
-        }
-        gender_value = 1 ;
-        if(document.getElementById("male_gender").checked == true) gender_value = "1" ;
-        else
-            if(document.getElementById("female_gender").checked == true) gender_value = "0" ;
-        else gender_value = "1" ;
-        str+="gender="+gender_value;
-        //window.location.href = "updateOrphan.php?"+str;
-        ajax(str);
-}
-function ajax(str)
-{		
-    var ajax;
-	var data ;
-	//var d_node = document.getElementById(elementID);
-	elementID = "div";
-	filename = "saveStudent.php";
-	post = false ;
-    if (window.XMLHttpRequest)
-    {
-        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
-    }
-    else if (ActiveXObject("Microsoft.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
-    }
-    else if (ActiveXObject("Msxml2.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
-    }
-    else
-    {
-        alert("Error: Your browser does not support AJAX.");
-        return false;
-    }
-    ajax.onreadystatechange=function()
-    {
-        if (ajax.readyState==4&&ajax.status==200)
-        {
-            document.getElementById("reponse").innerHTML=ajax.responseText;
-        }
-    }
-    if (post==false)
-    {
-        ajax.open("GET",filename+"?"+str,true);
-        ajax.send(null);
-		
-    }
-    else
-    {
-        ajax.open("POST",filename,true);
-        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        ajax.send(str);
-    }
-    return ajax;
-	
-}
-function del_ajax(ID)
-{
-    var ajax;
-    document.getElementById('bt').style.display = 'none';
-	//var d_node = document.getElementById(elementID);
-	elementID = "div";
-	filename = "deleteStudent.php";
-	str = "?id="+document.getElementById("id").value;alert(str);
-	post = false ;
-	conf = confirm(" هل أنت متأكد");
-	if(conf){
-    if (window.XMLHttpRequest)
-    {
-        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
-    }
-    else if (ActiveXObject("Microsoft.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
-    }
-    else if (ActiveXObject("Msxml2.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
-    }
-    else
-    {
-        alert("Error: Your browser does not support AJAX.");
-        return false;
-    }
-    ajax.onreadystatechange=function()
-    {        
-        if (ajax.readyState==4&&ajax.status==200)
-        {
-            //alert(ajax.responseText);
-            document.getElementById("reponse").innerHTML = ajax.responseText;
-			//document.getElementById(elementID).innerHTML=ajax.responseText;
-        }
-    }
-    if (post==false)
-    {
-        ajax.open("GET",filename+str,true);
-        ajax.send(null);
-		
-    }
-    else
-    {
-        ajax.open("POST",filename,true);
-        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        ajax.send(str);
-    }
-    return ajax;
-	}
-}
-</script>
-<div id="footer">
-<p>جميع الحقوق محفوظة 2016 &copy;</div>
-</div>
+    <script type="text/javascript" >
+    window.print();
+    </script>
 </body>
 </html>

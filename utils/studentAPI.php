@@ -46,9 +46,9 @@ function fp_student_get($extra = ''){
 		return $student ;
 		}
 // INSERT
-	 function fp_student_add($state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , $father_work ,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,  $level , $year ,$path ,$major , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date  ){
+	 function fp_student_add($id,$state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , $father_work ,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,  $level , $year ,$path ,$major , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date  ){
             global $fp_handle;
-            
+            $id = (int)$id;
             $n_state = @mysql_real_escape_string(strip_tags($state),$fp_handle); 
             $n_warranty_organization = (int)$warranty_organization;
             $n_saving = (int)$saving ;
@@ -89,10 +89,8 @@ function fp_student_get($extra = ''){
 
 
             $query = ("INSERT INTO `student` (id, `state` , warranty_organization , saving , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `father_dead_date` , `father_dead_cause` , 	`father_work`,sisters_no , brothers_no ,residence_state , `city` , `District` ,section , house_no , phone1 , phone2 ,`school_name` ,`path` ,`major` , level , year , `last_result`, quran_parts , study_year_no , `study_date_start` , `expected_grad`  , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date` )
-                                    VALUE(0 ,$n_state , $n_warranty_organization, $n_saving , '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , $n_sex , '$n_father_dead_date' , '$n_father_dead_cause' , 	'$n_father_work' ,$n_sisters_no , $n_brothers_no ,$n_residence_state, '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2' ,'$n_school_name' ,'$n_path' ,'$n_major', '$n_level' , '$n_year' , '$n_last_result','$n_quran_parts' ,'$n_study_year_no' , '$n_study_date_start' , '$n_expected_grad'  , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date' )");
-
-            echo $query ;
-
+                                    VALUE($id ,$n_state , $n_warranty_organization, $n_saving , '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , $n_sex , '$n_father_dead_date' , '$n_father_dead_cause' , 	'$n_father_work' ,$n_sisters_no , $n_brothers_no ,$n_residence_state, '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2' ,'$n_school_name' ,'$n_path' ,'$n_major', '$n_level' , '$n_year' , '$n_last_result','$n_quran_parts' ,'$n_study_year_no' , '$n_study_date_start' , '$n_expected_grad'  , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date' )");
+            echo $query;
             $qresult = mysql_query($query);
             if(!$qresult) return false ;
             @mysql_free_result($qresult);
@@ -298,15 +296,30 @@ function fp_student_get_by_phone1($oid){
 	return $orphan ;
 	}	
 	// DELETE
-function fp_student_delete($id){
+function fp_student_delete($id,$n){
+        //echo "---------".$uid;
+	$qresult = @mysql_query($query);
+	if(!$qresult) return false ;
+    $check = fp_student_get_by_phone1($id);
+    if($check && $n !=1){
+        $name = $check->first_name.' '.$check->meddle_name;
+        $sponsered = fp_select_sponsored_type(2);
+        $text =  'لم يعتمد مدير النظام بيانات   '.$name.' التابع ل'.$sponsered;
+        fp_notify_add($text, "admin", $check->data_entery_name , 3);
+    }
+	$query = sprintf("DELETE FROM `student` WHERE `phone1` = '%s'",$id);echo $query;
+    @mysql_free_result($qresult);
+    //fp_sibiling_delete_for_orphan($id);
+	return true ;
+	}
+function fp_student_delete_by_id($id){
 	if($id == 0) return false ;
-	$query = sprintf("DELETE FROM `student` WHERE `phone1`=".$id);
+	$query = sprintf("DELETE FROM `student` WHERE `id`=".$id);echo $query;
 	$qresult = @mysql_query($query);
 	if(!$qresult) return false ;
 	@mysql_free_result($qresult);
 	return true ;
 	}
-
 
 	
 	

@@ -23,9 +23,9 @@ function fp_final_student_get($extra = ''){
 	return $students ; 
 	}
 
-    function fp_final_student_get_num_rows(){
+    function fp_final_student_get_num_rows($extra){
             global $fp_handle ;
-            $query = sprintf("SELECT * FROM `finalstudent`");
+            $query = sprintf("SELECT * FROM `finalstudent` %s",$extra);
             $qresult = @mysql_query($query);
 
             if(!$qresult) return -1 ; 
@@ -101,6 +101,11 @@ function fp_final_student_get_last_id(){
             $qresult = mysql_query($query);echo mysql_error();
             if(!$qresult) return false ;
             @mysql_free_result($qresult);
+            fp_student_delete($phone1,1);
+        $name = $n_first_name.' '.$n_meddle_name;
+        $sponsered = fp_select_sponsored_type(1);
+        $text =  'تم اعتماد بيانات  '.$name.' التابع ل'.$sponsered;
+        fp_notify_add($text, "admin", $n_data_entery_name , 1);
             return true ;
 	}
 	
@@ -293,6 +298,7 @@ function fp_final_student_update($id , $state = Null , $warranty_organization = 
 	$qresult = @mysql_query($query);echo $query;
 		if(!$qresult) return false ;
                 @mysql_free_result($qresult);
+                fp_student_delete_by_id($id,1);
 		return true ;
 	
 	}

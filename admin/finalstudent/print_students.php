@@ -1,14 +1,14 @@
 <?php
     include '../auth.php';
     include('../../utils/db.php');
-    include('../../utils/finalOrphanAPI.php');
+    include('../../utils/finalStudentAPI.php');
     include('../../utils/error_handler.php');
         $extra = '';
         session_start();
-        if(isset($_SESSION['q']))
-        $extra = $_SESSION['q'];
-        unset($_SESSION['q']);
-        $orphans = fp_final_orphan_get($extra);
+        if(isset($_GET['q']))
+        $extra = $_GET['q'];
+        unset($_GET['q']);
+        $orphans = fp_final_student_get($extra);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -41,7 +41,7 @@
             <td align="center"  ><img src="../../images/logo.png" /></td>
         </tr>
     </table>
-    <h1 align="center" class="adress" dir="rtl">بيانات الأيتام</h1>
+    <h1 align="center" class="adress" dir="rtl">بيانات الطلاب</h1>
 <br />
  <?php
     //if($users[0] == NULL ) die($users[1]) ;
@@ -58,7 +58,6 @@
             echo '
                 <div style="text-align:center;color:#fff;">
                 <div class="alert-box notice"><span>تنبيه: </span>لا يوجد أيتام لعرضهم
-                <p>يمكنك اضافة أيتام من <a href="../orphan/addOrphan.php">هنا</a></p>
                 </div>
                </div>';
             die() ;

@@ -1,5 +1,6 @@
 <?php
-    session_start();
+    
+session_start();
      if(!isset($_SESSION['un']) || !isset($_SESSION['u_type']) || !isset($_SESSION['name']))
          header("location:../");
      if(isset($_SESSION['u_type'])){

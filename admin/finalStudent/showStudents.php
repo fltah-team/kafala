@@ -1,11 +1,48 @@
 <?php
-	include('../../utils/db.php');
-	include('../../utils/studentAPI.php');
-        include('../../utils/error_handler.php');
-        include('../../utils/siblingAPI.php');
-        $start=0;
+    include('../../utils/db.php');
+    include('../../utils/finalStudentAPI.php');
+    include('../../utils/error_handler.php');
+    $fields = array();
+    $extra = '';
+    if(isset($_GET['gender']) && $_GET['gender'] != ''){
+        if($_GET['gender'] != '-1')
+        $fields[@count($fields)] = " `sex` = ".(int)$_GET['gender'];
+    }
+    if(isset($_GET['states']) && (int)$_GET['states']!=0 && $_GET['states'] != ''){
+        if($_GET['states'] != '-1')
+        $fields[@count($fields)] = " `residence_state` = ".$_GET['states'];
+    }
+    if(isset($_GET['status']) && (int)$_GET['status']!=0 && $_GET['status'] != ''){
+        if($_GET['status'] != '-1')
+        $fields[@count($fields)] = " `state` = ".$_GET['status'];
+    }
+if(isset($_GET['sponsor']) && (int)$_GET['sponsor']!=0 && $_GET['sponsor'] != ''){
+        if($_GET['sponsor'] != '-1')
+        $fields[@count($fields)] = " `warranty_organization` = ".$_GET['sponsor'];
+    }
+if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['age2'] != ''){
+        if($_GET['age'] != '-1'){
+            $first = date("Y")-(int)$_GET['age']-1;
+            $seonnd = date("Y")-(int)$_GET['age2']-1;
+            $fields[@count($fields)] = " `birth_date` between '$seonnd-01-01' and '$first-01-01' ";
+        }
+    }
+	
+        $fcount = @count($fields);
+	if($fcount > 0 ){
+            $extra .= 'WHERE ';
+        for($i = 0 ; $i < $fcount ; $i++){
+		$extra .= $fields[$i];
+		if($i != ($fcount - 1 ))
+		$extra .= ' and ';
+		}
+        }
+    if(isset($_GET['name'])){
+        $extra = " WHERE `first_name` = '".$_GET['name']."'";
+    }
+    $start=0;
     $limit=20;
-    $total_results = fp_student_get_num_rows();
+    $total_results = fp_final_student_get_num_rows($extra);echo $extra;
         $total=ceil($total_results/$limit);
     if(!isset($_GET['page']) || $_GET['page'] == '' || (int)$_GET['page'] == 0 || $_GET['page']>$total)
     {
@@ -15,7 +52,13 @@
     $page=$_GET['page'];
     $start=($page-1)*$limit;
     }
-        $orphans = fp_student_get("LIMIT $start, $limit");
+    if(isset($_GET['order'])){
+        if($_GET['order'] == 1)
+            $extra .= " ORDER BY `id` ";
+        else
+            $extra .= " ORDER BY `first_name` ";
+    }
+    $orphans = fp_final_student_get($extra." LIMIT $start, $limit ");
 	
         
 ?>
@@ -95,7 +138,7 @@
 
 <!-- main -->
 <div class="main">
-    <h1 align="center" class="adress" dir="rtl"> بيانات الطلاب غير المعتمدة<?php echo "($total_results)"?> </h1>
+    <h1 align="center" class="adress" dir="rtl"> بيانات الطلاب  <?php echo "($total_results)"?> </h1>
 <br />
  <?php
     //if($users[0] == NULL ) die($users[1]) ;
@@ -155,7 +198,7 @@ function ageCalculator($dob){
 		$orphan = $orphans[$i];
   ?>
     <tr align="center" class="table_data<?php echo $i%2?>">
-        <td  onclick="window.location.href='studentInfo.php?id='+<?php echo json_decode($orphan->phone1)?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
+        <td  onclick="window.location.href='studentInfo.php?id='+<?php echo $orphan->id?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
     <td width="7%"><?php echo ageCalculator($orphan->birth_date);?></td>
  	<td width="9%"><?php echo fp_states_get_by_id($orphan->residence_state)->name;?></td>
     <td width="8%"><?php if($orphan->sex==1)echo "ذكر"; else echo "أنثى" ; ?> </td>
@@ -167,6 +210,19 @@ function ageCalculator($dob){
   </tr>
   <?php }
   fp_db_close();?>
+    <tr align="center" > 
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <?php
+        //echo $extra; //$_SESSION['q'] =  "$extra";
+    ?>
+    <td><button name="add" class="bt"  type="button" onclick="window.location.href = 'print_students.php?q=<?php echo $extra?>'"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
+    <td></td>
+  </tr>
   </table>
 
 <br />

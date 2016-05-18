@@ -694,10 +694,13 @@ function delete_sibling_ajax(id)
     <td align="center"></td>
     <td>&nbsp;</td>
   </tr>
+    </table>
+<table align="center">
   <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td><button name="add" class="bt"  type="button" onclick="window.open('print_orphan_info.php?id=<?php echo $orphan->id?>')"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
+      <td>&nbsp;</td>
+    
+      <td align="center"><button name="add" id="bt"  type="button" onclick="del_ajax()"> حذف <img  align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" /></button></td>
+      <td><button name="add" class="bt"  type="button" onclick="window.open('print_orphan_info.php?id=<?php echo $orphan->id?>')"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
     
     <td align="center"><button class="add_bt" name="add" type="button" onclick="get_str()" >تعديل البيانات<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
     <td>&nbsp;</td>
@@ -799,7 +802,61 @@ function add_sibling (){
         s_final_str+=s_str_array[i];
     }
      alert(document.getElementById("success_notice").getAttribute("name"));
-}		
+}	
+
+function del_ajax(ID)
+{
+    var ajax;
+    document.getElementById('bt').style.display = 'none';
+	//var d_node = document.getElementById(elementID);
+	elementID = "div";
+	filename = "deleteOrphan.php";
+	str = "?id="+document.getElementById("id").value;alert(str);
+	post = false ;
+	conf = confirm(" هل أنت متأكد");
+	if(conf){
+    if (window.XMLHttpRequest)
+    {
+        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
+    }
+    else if (ActiveXObject("Microsoft.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
+    }
+    else if (ActiveXObject("Msxml2.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
+    }
+    else
+    {
+        alert("Error: Your browser does not support AJAX.");
+        return false;
+    }
+    ajax.onreadystatechange=function()
+    {        
+        if (ajax.readyState==4&&ajax.status==200)
+        {
+            //alert(ajax.responseText);
+            document.getElementById("reponse").innerHTML = ajax.responseText;
+			//document.getElementById(elementID).innerHTML=ajax.responseText;
+        }
+    }
+    if (post==false)
+    {
+        ajax.open("GET",filename+str,true);
+        ajax.send(null);
+		
+    }
+    else
+    {
+        ajax.open("POST",filename,true);
+        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.send(str);
+    }
+    return ajax;
+	}
+}
+	
 </script>
 <div id="footer">
 <p>جميع الحقوق محفوظة 2016 &copy;</div>
