@@ -115,9 +115,6 @@
 <table width="85%" border="0" align="center">
 
   <tr align="center">
-      <td align="right"></td>
-    
-     <td width="20%" align="center"></td>
     <td width="17%" align="right">
         <?php
         $sponsors = fp_sponsor_get();
@@ -138,6 +135,10 @@
         <?php fp_select_status_get_by_id($orphan->state); ?>
     </td>
     <td width="20%" align="center">الحالة</td>
+    <td width="14%" align="right">
+        <input class="textFiels" name="id" disabled type="text" id="id" size="10" maxlength="30" value="<?php echo $orphan->id?>"  />
+    </td>
+    <td width="20%" align="center">الرقم</td>
   </tr>
   
   <tr>
@@ -209,7 +210,7 @@
     <td align="right"><input class="textFiels" value="<?php echo $orphan->brothers_no?>" name="dr" type="text" id="brothers_no" size="10" maxlength="30" /></td>
     <td align="right">الذكور</td>
     <td align="right">
-       <input class="textFiels" name="lw" value="<?php echo $orphan->f_mem?>" type="text" id="f_mem" size="10" maxlength="30" />
+        <input class="textFiels" disabled name="lw" value="<?php echo $orphan->sisters_no+$orphan->brothers_no?>" type="text" id="f_mem" size="10" maxlength="30" />
     </td>
     <td align="center">عدد الاخوان</td>
   </tr>  
@@ -522,7 +523,7 @@ function del_ajax(ID)
 {		
         var ajax;
 	var data ;
-        var str = "?id=0"+ID;alert(str);
+        var str = "?id=0"+ID;
         //var d_node = document.getElementById(elementID);
 	elementID = "div";
 	filename = "deleteStudent.php";

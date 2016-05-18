@@ -15,7 +15,7 @@
         }
         
         
-
+    $id = $_GET['id'];
 	$state = $_GET['status'];	
 	$warranty_organization =  $_GET['sponsor'];
     $saving = 0 ;
@@ -58,17 +58,17 @@
         else{
             $ill_cause = $_GET['illt'];
         }
-        session_start();
+        //session_start();
     $data_entery_name = $_GET['user'];		
 	$data_entery_date  = $_GET['user_d'];
-        $data_admin_name = "admin";//$_SESSION['name'];
-        $data_admin_date = date("y-m-d");
+    $data_admin_name = "admin";//$_SESSION['name'];
+    $data_admin_date = date("y-m-d");
                 
-                
-//if(fp_final_student_get_by_id($id))
-    //$result = fp_final_student_update($state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work,$f_mem ,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,  $level , $year,$path ,$major  , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date ,$data_admin_name , $data_admin_date );
-	//else 
-	$result = fp_prefinal_student_add($phone1);//fp_final_student_add($state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work,$f_mem ,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,  $level , $year,$path ,$major  , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date ,$data_admin_name , $data_admin_date );
+           
+    if(fp_final_student_get_by_id(1))
+    $result = fp_final_student_update(1,$state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,$path ,$major,  $level , $year  , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date ,$data_admin_name , $data_admin_date );
+	else 
+	$result =fp_final_student_add($state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,$path ,$major,  $level , $year  , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date ,$data_admin_name , $data_admin_date );
 	
 
 	fp_db_close();
