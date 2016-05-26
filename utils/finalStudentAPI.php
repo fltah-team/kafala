@@ -96,16 +96,10 @@ function fp_final_student_get_last_id(){
             $query = ("INSERT INTO `finalstudent` (id, `state` , warranty_organization , saving , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `father_dead_date` , `father_dead_cause` , 	`father_work`,sisters_no , brothers_no ,residence_state , `city` , `District` ,section , house_no , phone1 , phone2 ,`school_name` ,`path` ,`major` , level , year , `last_result`, quran_parts , study_year_no , `study_date_start` , `expected_grad`  , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date` , `head_dep_name` , `head_dep_date` )
                                     VALUE(0 ,$n_state , $n_warranty_organization, $n_saving , '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , $n_sex , '$n_father_dead_date' , '$n_father_dead_cause' , 	'$n_father_work' ,$n_sisters_no , $n_brothers_no ,$n_residence_state, '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2' ,'$n_school_name' ,'$n_path' ,'$n_major', '$n_level' , '$n_year' , '$n_last_result','$n_quran_parts' ,'$n_study_year_no' , '$n_study_date_start' , '$n_expected_grad'  , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date', '$n_head_dep_name' , '$n_head_dep_date' )");
 
-            echo $query ;
 
-            $qresult = mysql_query($query);echo mysql_error();
+            $qresult = mysql_query($query);
             if(!$qresult) return false ;
             @mysql_free_result($qresult);
-            fp_student_delete($phone1,1);
-        $name = $n_first_name.' '.$n_meddle_name;
-        $sponsered = fp_select_sponsored_type(1);
-        $text =  'تم اعتماد بيانات  '.$name.' التابع ل'.$sponsered;
-        fp_notify_add($text, "admin", $n_data_entery_name , 1);
             return true ;
 	}
 	
@@ -298,7 +292,6 @@ function fp_final_student_update($id , $state = Null , $warranty_organization = 
 	$qresult = @mysql_query($query);echo $query;
 		if(!$qresult) return false ;
                 @mysql_free_result($qresult);
-                fp_student_delete_by_id($id,1);
 		return true ;
 	
 	}

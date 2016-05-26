@@ -11,12 +11,10 @@
             $n_qualifier_name = @mysql_real_escape_string(strip_tags($qualifier_name),$fp_handle);
             $n_organizaton    = @mysql_real_escape_string(strip_tags($organizaton),$fp_handle);
             $n_date    = @mysql_real_escape_string(strip_tags($date),$fp_handle);
-            $n_birth_date  = @mysql_real_escape_string(strip_tags($birth_date),$fp_handle);
 
 
             $query = ("INSERT INTO `experience`(`id` , `preacherID`, `qualifier_name` , `organizaton` , `date` ) VALUE(NULL , '$n_preacherID', '$n_qualifier_name' , '$n_organizaton' , '$n_date' )");
-            echo $query ;
-
+            
             $qresult = mysql_query($query);
             if(!$qresult) return false ;
             @mysql_free_result($qresult);
@@ -48,8 +46,7 @@
     function fp_experience_get_by_preacherID($preacherID){
 
             global $fp_handle ;
-            $query = sprintf("SELECT * FROM `experience` WHERE `preacherID` = %d ",$preacherID);
-
+            $query = sprintf("SELECT * FROM `experience` WHERE `preacherID` = %s",$preacherID);
             $qresult = @mysql_query($query);
 
             if(!$qresult) return NULL ; 

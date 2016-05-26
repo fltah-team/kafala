@@ -65,7 +65,7 @@
 	fp_db_close();
 	
 	if(!$result)
-            echo "err";//fp_err_add_fail($first_name." ".$meddle_name);
+            fp_err_add_fail($first_name." ".$meddle_name);
 	else
-            echo "OK";//fp_err_add_succes($first_name." ".$meddle_name,$phone1);
+            fp_err_add_succes($first_name." ".$meddle_name,$phone1);
 ?>

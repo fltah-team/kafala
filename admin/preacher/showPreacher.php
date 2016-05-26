@@ -1,49 +1,11 @@
 <?php
-    include '../auth.php';
-    include('../../utils/db.php');
-    include('../../utils/finalOrphanAPI.php');
-    include('../../utils/error_handler.php');
-    $fields = array();
-    $extra = '';
-    if(isset($_GET['gender']) && $_GET['gender'] != ''){
-        if($_GET['gender'] != '-1')
-        $fields[@count($fields)] = " `sex` = ".(int)$_GET['gender'];
-    }
-    if(isset($_GET['states']) && (int)$_GET['states']!=0 && $_GET['states'] != ''){
-        if($_GET['states'] != '-1')
-        $fields[@count($fields)] = " `residence_state` = ".$_GET['states'];
-    }
-    if(isset($_GET['status']) && (int)$_GET['status']!=0 && $_GET['status'] != ''){
-        if($_GET['status'] != '-1')
-        $fields[@count($fields)] = " `state` = ".$_GET['status'];
-    }
-if(isset($_GET['sponsor']) && (int)$_GET['sponsor']!=0 && $_GET['sponsor'] != ''){
-        if($_GET['sponsor'] != '-1')
-        $fields[@count($fields)] = " `warranty_organization` = ".$_GET['sponsor'];
-    }
-if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['age2'] != ''){
-        if($_GET['age'] != '-1'){
-            $first = date("Y")-(int)$_GET['age']-1;
-            $seonnd = date("Y")-(int)$_GET['age2']-1;
-            $fields[@count($fields)] = " `birth_date` between '$seonnd-01-01' and '$first-01-01' ";
-        }
-    }
-	
-        $fcount = @count($fields);
-	if($fcount > 0 ){
-            $extra .= 'WHERE ';
-        for($i = 0 ; $i < $fcount ; $i++){
-		$extra .= $fields[$i];
-		if($i != ($fcount - 1 ))
-		$extra .= ' and ';
-		}
-        }
-    if(isset($_GET['name'])){
-        $extra = " WHERE `first_name` = '".$_GET['name']."'";
-    }
-    $start=0;
+	include('../../utils/db.php');
+	include('../../utils/preacherAPI.php');
+        include('../../utils/error_handler.php');
+        include('../../utils/siblingAPI.php');
+        $start=0;
     $limit=20;
-    $total_results = fp_final_orphan_get_num_rows($extra);
+    $total_results = fp_preacher_get_num_rows();
         $total=ceil($total_results/$limit);
     if(!isset($_GET['page']) || $_GET['page'] == '' || (int)$_GET['page'] == 0 || $_GET['page']>$total)
     {
@@ -53,13 +15,7 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
     $page=$_GET['page'];
     $start=($page-1)*$limit;
     }
-    if(isset($_GET['order'])){
-        if($_GET['order'] == 1)
-            $extra .= " ORDER BY `id` ";
-        else
-            $extra .= " ORDER BY `first_name` ";
-    }
-    $orphans = fp_final_orphan_get($extra." LIMIT $start, $limit ");
+        $orphans = fp_preacher_get("LIMIT $start, $limit");
 	
         
 ?>
@@ -92,10 +48,9 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
         <td>
             <div class="container" id="main" role="main" align="center" >
             <ul class="menu" >
-                <li><a href="orphan.php">الأيتام</a>    
+                <li><a href="#">الأيتام</a>    
                     <ul class="submenu">
-                        <li><a href="orphan.php">عرض بخيارات  </a></li>
-                        <li><a href="showOrphans.php">عرض الكل  </a></li>
+                        <li><a href="../finalOrphan/showOrphans.php">عرض الكل  </a></li>
                         <li><a href="../orphan/showOrphans.php"> بيانات غير معتمدة </a></li>
                         <li>
                             <form method="get" action="orphanInfo.php" >
@@ -122,8 +77,8 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
                     <ul class="submenu">
                         <li><a href="../sponsor/showSponsor.php">عرض جهات الكفالة  </a></li>
                         <li><a href="../sponsor/addSponsor.php">اضافة جهة كفالة</a></li>
-                        <li><a href="../states/showState.php">عرض الولايات  </a></li>
-                        <li><a href="../states/addState.php">اضافة ولاية جديدة</a></li>
+                        <li><a href="../states/showState.php">عرض المدن  </a></li>
+                        <li><a href="../kafala/showKafala.php">اضافة مدينة جديدة</a></li>
                         
                     </ul>
                 </li>
@@ -140,7 +95,7 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
 
 <!-- main -->
 <div class="main">
-    <h1 align="center" class="adress" dir="rtl">بيانات الأيتام(<?php echo $total_results ?>)</h1>
+    <h1 align="center" class="adress" dir="rtl"> بيانات الدعاة غير المعتمدة<?php echo "($total_results)"?> </h1>
 <br />
  <?php
     //if($users[0] == NULL ) die($users[1]) ;
@@ -158,8 +113,8 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
         if($orphans == 0 ) {
             echo '
                 <div style="text-align:center;color:#fff;">
-                <div class="alert-box notice"><span>تنبيه: </span>لا يوجد أيتام لعرضهم
-                <p>يمكنك اضافة أيتام من <a href="../orphan/addOrphan.php">هنا</a></p>
+                <div class="alert-box notice"><span>تنبيه: </span>لا يوجد طلاب لعرضهم
+                <p>يمكنك اضافة طلاب من <a href="addStudent.php">هنا</a></p>
                 </div>
                 <div id="footer">
                 <p>جميع الحقوق محفوظة 2016 &copy;</p>
@@ -200,7 +155,7 @@ function ageCalculator($dob){
 		$orphan = $orphans[$i];
   ?>
     <tr align="center" class="table_data<?php echo $i%2?>">
-    <td  onclick="window.location.href='orphanInfo.php?id='+<?php echo $orphan->id?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
+        <td  onclick="window.location.href='preacherInfo.php?id='+<?php echo json_decode($orphan->phone1)?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
     <td width="7%"><?php echo ageCalculator($orphan->birth_date);?></td>
  	<td width="9%"><?php echo fp_states_get_by_id($orphan->residence_state)->name;?></td>
     <td width="8%"><?php if($orphan->sex==1)echo "ذكر"; else echo "أنثى" ; ?> </td>
@@ -212,19 +167,6 @@ function ageCalculator($dob){
   </tr>
   <?php }
   fp_db_close();?>
-<tr align="center" > 
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <?php
-        $_SESSION['q'] =  "$extra";
-    ?>
-    <td><button name="add" class="bt"  type="button" onclick="window.location.href = 'print_orphans.php?q=<?php echo $extra?>'"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
-    <td></td>
-  </tr>
   </table>
 
 <br />
@@ -258,64 +200,5 @@ if($page>1)
   <p>جميع الحقوق محفوظة 2016 &copy;</p>
 </div>
 </div>
-<script type="text/javascript">
-
-	//var del = document.getElementById("delete");
-	
-	//ajax("div","deleteuser.php","?id=7",false);
-	
-	function ajax(ID)
-{
-    var ajax;
-	//var d_node = document.getElementById(elementID);
-	elementID = "div";
-	filename = "deleteuser.php";
-	str = "?id="+ID;
-	post = false ;
-	conf = confirm("هل تريد مسح <?php echo $user->name?>");
-	if(conf){
-    if (window.XMLHttpRequest)
-    {
-        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
-    }
-    else if (ActiveXObject("Microsoft.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
-    }
-    else if (ActiveXObject("Msxml2.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
-    }
-    else
-    {
-        alert("Error: Your browser does not support AJAX.");
-        return false;
-    }
-    ajax.onreadystatechange=function()
-    {
-        if (ajax.readyState==4&&ajax.status==200)
-        {
-            alert(ajax.responseText);
-			window.location.href = "showUsers.php";
-			//document.getElementById(elementID).innerHTML=ajax.responseText;
-        }
-    }
-    if (post==false)
-    {
-        ajax.open("GET",filename+str,true);
-        ajax.send(null);
-		
-    }
-    else
-    {
-        ajax.open("POST",filename,true);
-        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        ajax.send(str);
-    }
-    return ajax;
-	}
-}
-	
-</script>
 </body>
 </html>

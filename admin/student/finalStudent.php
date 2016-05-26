@@ -2,6 +2,7 @@
 	
 	
 	include('../../utils/db.php');
+	include('../../utils/sponsorAPI.php');
 	include('../../utils/studentAPI.php');
     include('../../utils/error_handler.php');
 	include('../../utils/finalStudentAPI.php');
@@ -66,18 +67,20 @@
                 
            
     if(fp_final_student_get_by_id($id))
-    $result = fp_final_student_update($id,$state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,$path ,$major,  $level , $year  , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date ,$data_admin_name , $data_admin_date );
-	else 
+    $result = fp_final_student_update($id,$state,$warranty_organization,NULL,Null,$first_name,$last_name,$last_4th_name,$birth_date,$sex, $father_dead_date  , $father_dead_cause  , 	$father_work  ,$sisters_no  , $brothers_no  ,$residence_state  , $city  , $District  , $section  ,$house_no  , $phone1  , $phone2  ,$school_name  ,$path  , $major  , $year  , $last_result  ,$quran_parts  ,$study_year_no  , $study_date_start  , $expected_grad   , $health_state  , $ill_cause  , $data_entery_name  , $data_entery_date  , $data_admin_name , $data_admin_date   );
+    else 
 	$result =fp_final_student_add($state , $warranty_organization ,$saving, $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $father_dead_date , $father_dead_cause , 	$father_work,$sisters_no , $brothers_no ,$residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$school_name ,$path ,$major,  $level , $year  , $last_result,$quran_parts ,$study_year_no , $study_date_start , $expected_grad  , $health_state , $ill_cause , $data_entery_name , $data_entery_date ,$data_admin_name , $data_admin_date );
-	
-
-	fp_db_close();
-	
+    
 	if(!$result)
             fp_err_add_fail($first_name." ".$meddle_name);
 	else{
-            //fp_orphan_delete($phone1);
+            fp_student_delete($phone1);
+            $name = $first_name.' '.$meddle_name;
+            $sponsered = fp_select_sponsored_type(1);
+            $text =  'تم اعتماد بيانات  '.$name.' التابع ل'.$sponsered." ".fp_sponsor_get_by_id($warranty_organization)->name;
+            fp_notify_add($text, "admin", $data_entery_name , 1);
             fp_err_add_succes($first_name." ".$meddle_name,$result);
             
         }
+fp_db_close();
 ?>

@@ -91,7 +91,7 @@ session_start();
 <br />
 <table align="center" border="0" width="60%" dir="rtl" >
     <?php
-    $notifys = fp_notify_get(" WHERE `uto` = '".$_SESSION['name']."'");
+    $notifys = fp_notify_get(" WHERE `uto` = 'user'");//.$_SESSION['name']."'");
     fp_db_close();
     if($notifys == -1 || $notifys == 0)
         fp_err_show_records ("اشعارات");

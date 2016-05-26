@@ -50,7 +50,7 @@
         }              
                 
 	// INSERT	
-	function fp_final_preacher_add($type, $state ,  $warranty_organization ,$saving ,  $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $male_members_no , $female_members_no , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 , $qualify_name , $qualify_date , $qualify_rating , $quran_parts , $Issuer , $current_work , $Joining_Date , $health_state , $ill_cause , $data_entery_name , $data_entery_date ){
+	function fp_final_preacher_add($type, $state ,  $warranty_organization ,$saving ,  $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $male_members_no , $female_members_no , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 , $qualify_name , $qualify_date , $qualify_rating , $quran_parts , $Issuer , $current_work , $Joining_Date , $health_state , $ill_cause , $data_entery_name , $data_entery_date ,$head_dep_name,$head_dep_date ){
 		global $fp_handle;
 		
 		$n_state = @mysql_real_escape_string(strip_tags($state),$fp_handle); 
@@ -83,15 +83,15 @@
 		$n_ill_cause =@mysql_real_escape_string(strip_tags($ill_cause),$fp_handle);
 		$n_data_entery_name =@mysql_real_escape_string(strip_tags($data_entery_name),$fp_handle);
 		$n_data_entery_date=@mysql_real_escape_string(strip_tags($data_entery_date),$fp_handle);
-                $n_head_dep_name = @mysql_real_escape_string(strip_tags($head_dep_name),$fp_handle);
-                $n_head_dep_date = @mysql_real_escape_string(strip_tags($head_dep_date),$fp_handle);
+        $n_head_dep_name = @mysql_real_escape_string(strip_tags($head_dep_name),$fp_handle);
+        $n_head_dep_date = @mysql_real_escape_string(strip_tags($head_dep_date),$fp_handle);
 	 
-		$query = ("INSERT INTO `finalpreacher` (id, `state` ,`type` ,  `warranty_organization` , saving , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `male_members_no` , `female_members_no` , `residence_state` , `city` , `District` , `section`,`house_no` , `phone1` , `phone2` , `qualify_name` , `qualify_date` , `qualify_rating` , `quran_parts` , `Issuer` , `current_work` , `Joining_Date` , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date, `head_dep_name` , `head_dep_date`   )
+		$query = ("INSERT INTO `finalpreacher` (id, `state` ,`type` ,  `warranty_organization` , saving , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `male_members_no` , `female_members_no` , `residence_state` , `city` , `District` , `section`,`house_no` , `phone1` , `phone2` , `qualify_name` , `qualify_date` , `qualify_rating` , `quran_parts` , `Issuer` , `current_work` , `Joining_Date` , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date`, `head_dep_name` , `head_dep_date`   )
 					VALUE(NULL  , '$n_state' ,'$n_type' ,  '$n_warranty_organization' ,'$n_saving', '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_male_members_no' , '$n_female_members_no' , '$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$house_no' , '$n_phone1' , '$n_phone2' , '$n_qualify_name', '$n_qualify_date' , '$n_qualify_rating' , '$n_quran_parts' , '$n_Issuer' , '$n_current_work' , '$n_Joining_Date' , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date', '$n_head_dep_name' , '$n_head_dep_date'  )");
 		
-		$qresult = mysql_query($query);
+		$qresult = mysql_query($query);echo $query;
 		if(!$qresult) return false ;
-                
+                /*
                 $experieces = fp_experience_get($phone1);
                 $sicount = @count($experieces);
                 if($sicount > 0 ){
@@ -101,11 +101,7 @@
                         fp_experience_update($preacher->id, $last_id);
                     }
                 }   
-                fp_preacher_delete($phone1,1);
-                $name = $n_first_name.' '.$n_meddle_name;
-                $sponsered = fp_select_sponsored_type(1);
-                $text =  'تم اعتماد بيانات  '.$name.' التابع ل'.$sponsered;
-                fp_notify_add($text, "admin", $n_data_entery_name , 1);
+                */
                 @mysql_free_result($qresult);               
 		return true ;
 	}

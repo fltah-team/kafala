@@ -104,11 +104,7 @@ function fp_final_orphan_add($state , $warranty_organization  , $saving , $first
                 fp_sibiling_update($sibling->id, $last_id);
         }
         }
-        fp_orphan_delete($phone1,1);
-        $name = $n_first_name.' '.$n_meddle_name;
-        $sponsered = fp_select_sponsored_type(1);
-        $text =  'تم اعتماد بيانات  '.$name.' التابع ل'.$sponsered;
-        fp_notify_add($text, "admin", $n_data_entery_name , 1);
+        
         @mysql_free_result($qresult);
         return true ;
 }
@@ -302,11 +298,6 @@ function fp_final_orphan_update($id ,  $state = Null , $warranty_organization = 
 		if(!$qresult) return false ;
                 
        @mysql_free_result($qresult);
-       fp_orphan_delete($phone1,1);
-        $name = $n_first_name.' '.$n_meddle_name;
-        $sponsered = fp_select_sponsored_type(1);
-        $text =  'تم اعتماد بيانات  '.$name.' التابع ل'.$sponsered;
-        fp_notify_add($text, "admin", $n_data_entery_name , 1);
 		return true ;
 	
 	}

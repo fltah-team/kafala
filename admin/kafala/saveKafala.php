@@ -1,6 +1,6 @@
 <?php
-	include('../../utils/db.php');
-	include('../../utils/kafalaAPI.php');
+        include('../../utils/db.php');
+        include('../../utils/kafalaAPI.php');
         include('../../utils/error_handler.php');
         include '../../utils/notifyAPI.php';
         include '../../utils/finalOrphanAPI.php';
@@ -13,13 +13,35 @@
 	$saving = $_POST['saving'];
 	$sponsor = $_POST['sponsor'];
     $last_date = $_POST['last_date'];
-	$ponsored = $_POST['ponsored'];
+	$sponsored = $_POST['ponsored'];
 	$date = date("Y-m-d");
-	$result = fp_kafala_add($total,$saving,$date,$sponsor,$last_date,$ponsored);
-	fp_db_close();
-    if(!$result)
+    switch ($sponsored){
+        case 1 :
+            $check = fp_final_orphan_get(" WHERE `state`=1 AND `warranty_organization`=".$sponsor);
+            break;
+        case 2 :
+            $check = fp_final_student_get(" WHERE `state`=1 AND `warranty_organization`=".$sponsor);
+            break;
+    }
+    if(!$check)
         fp_err_add_fail("الكفالة هناك احتمال عدم وجود مكفولين تابعين لهذه المنظمة");
-	else
-        fp_err_add_succes("الكفالة");
+	$result = fp_kafala_add($total,$saving,$date,$sponsor,$last_date,$sponsored);
 	
+    if(!$result)
+        fp_err_add_fail("الكفالة");
+    else{
+        /*$name = fp_select_sponsored_type($n_sponsored);
+        $sponsor = fp_sponsor_get_by_id($n_sponsor);
+        $text =  'تم اضافة كفالة الى '.$name.' التابعين ل'.$sponsor->name;
+        $users = fp_users_get();
+        $ucount = @count($users);
+        if($ucount > 0){
+            for($i = 0 ; $i < $ucount ; $i ++){
+                $user = $users[$i];
+                fp_notify_add($text, "admin", $user->name, 1);
+            }
+        }*/
+        fp_err_add_succes("الكفالة");
+    }
+fp_db_close();	
 ?>

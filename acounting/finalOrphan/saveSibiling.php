@@ -1,8 +1,8 @@
 <?php
 
-	
+	include '../auth.php';
 	include('../../utils/db.php');
-	include('../../utils/orphanAPI.php');
+	include('../../utils/finalOrphanAPI.php');
         include('../../utils/siblingAPI.php');
         if(!isset($_GET['o_id']) || (int)$_GET['o_id']== 0 || $_GET['o_id'] == '' ||
                 !isset($_GET['sibling_name'])|| $_GET['sibling_name'] == '' ||

@@ -390,9 +390,9 @@
   <tr>
       <td>&nbsp;</td>
       
-      <td align="center"><input class="textFiels" disabled name="level" type="text" id="user_d" size="10" maxlength="30" value="<?php echo $orphan->data_entery_date?>"/></td>
+      <td align="center"><input class="textFiels" disabled name="impt" type="text" id="user_d" size="10" maxlength="30" value="<?php echo $orphan->data_entery_date?>"/></td>
     <td align="center">التاريخ</td>
-    <td align="center"><input class="textFiels" disabled name="level" type="text" id="user" size="10" maxlength="30" value="<?php echo $orphan->data_entery_name?>"/></td>
+    <td align="center"><input class="textFiels" disabled name="impt" type="text" id="user" size="10" maxlength="30" value="<?php echo $orphan->data_entery_name?>"/></td>
     <td align="center">مدخل البيانات   </td>
   </tr>
    
@@ -451,6 +451,7 @@ function i3_get_str(){
         else gender_value = "1" ;
         str+="gender="+gender_value;
         //window.location.href = "finalStudent.php?"+str;
+        //alert(str);
         ajax(str);
 }
 function ajax(str)
@@ -501,15 +502,6 @@ function ajax(str)
     return ajax;
 	
 }
-
-function add_sibling (){
-    var s_final_str = "";
-    if(s_str_array.length != 0)
-    for(var i =0 ; i < s_str_array.length ; i++){
-        s_final_str+=s_str_array[i];
-    }
-     alert(document.getElementById("success_notice").getAttribute("name"));
-}	
 
 //*********************  DELETE
 function del_ajax(ID)

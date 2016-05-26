@@ -67,6 +67,49 @@
       <option value="3">متوقف</option>
     </select>';
  }
+  function fp_select_get_preacher_type() {
+     echo '<select tabindex="0" class="select"  id="typ">
+      <option value="1">داعية</option>
+      <option value="2">معلم</option>
+      <option value="3">امام</option>
+        <option value="4">مقرء</option>
+    </select>';
+ }
+ function fp_select_preacher_type_get_by_id($id){
+     echo '<select tabindex="0" class="select" name="status" id="typ">';
+           switch($id){
+                case 1 :
+                    echo 
+                    '<option value="1">داعية</option>
+                    <option value="2">معلم</option>
+                    <option value="3">امام</option>
+                    <option value="4">مقرء</option>';
+                    break;
+                case 2 :
+                    echo 
+                    '<option value="2">معلم</option>
+                     <option value="1">داعية</option>
+                    <option value="3">امام</option>
+                    <option value="4">مقرء</option>';
+                    break;
+                case 3 :
+                    echo 
+                    '<option value="3">امام</option>
+                    <option value="1">داعية</option>
+                    <option value="2">معلم</option>
+                    <option value="4">مقرء</option>';
+                    break;
+                case 4 :
+                    echo 
+                    '<option value="4">مقرء</option>
+                    <option value="3">امام</option>
+                    <option value="1">داعية</option>
+                    <option value="2">معلم</option>';
+                    break;
+            } 
+    echo '</select>';
+ }
+ 
  function fp_select_status_get_by_id($id){
      echo '<select tabindex="0" class="select" name="status" id="status">';
            switch($id){
@@ -206,13 +249,13 @@ function fp_notify($text,$type){
 
 function fp_select_sponsored_type($t){
     switch ($t){
-        case 1 : return " الأيتام ";
+        case 1 : return "أيتام";
             break;
-        case 2 : return "الطلاب";
+        case 2 : return "طلاب";
             break;
         case 3 : return "الدعاة/المقرئين/المعلمين";
             break;
-        case 4 : return "الأسر";
+        case 4 : return "أسر";
             break;
     }
 }

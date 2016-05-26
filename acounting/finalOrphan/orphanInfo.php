@@ -1,4 +1,4 @@
-
+<?php //include '../utils/auth.php';?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -26,7 +26,8 @@
 </div>
 
 <!-- menu -->
-<table align="center">
+<div class="menu">
+	<table align="center">
     <tr>
         <td>
             <div class="container" id="main" role="main" align="center" >
@@ -34,11 +35,35 @@
                 <li><a href="#">الأيتام</a>    
                     <ul class="submenu">
                         <li><a href="showOrphans.php">عرض الكل  </a></li>
+                        <li><a href="../orphan/showOrphans.php"> بيانات غير معتمدة </a></li>
                         <li>
                             <form method="get" action="orphanInfo.php" >
                                 <input dir="rtl" type="text" name="id" size="12"/> <input type="submit" size="5" value="بحث" id="o_serch"/>
                             </form>
                         </li>
+                    </ul>
+                </li>
+                <li><a href="#">المستخدمين</a>    
+                    <ul class="submenu">
+                        <li><a href="../users/showUsers.php">عرض الكل  </a></li>
+                        <li><a href="../users/addUser.php">اضافة مستخدم جديد</a></li>
+                        
+                    </ul>
+                </li>
+                <li><a href="#">الكفالات</a>    
+                    <ul class="submenu">
+                        <li><a href="../kafala/showKafala.php">عرض الكل  </a></li>
+                        <li><a href="../kafala/addKafala.php">اضافة كفالة جديدة</a></li>
+                        
+                    </ul>
+                </li>
+                <li><a href="#">أخرى</a>    
+                    <ul class="submenu">
+                        <li><a href="../sponsor/showSponsor.php">عرض جهات الكفالة  </a></li>
+                        <li><a href="../sponsor/addSponsor.php">اضافة جهة كفالة</a></li>
+                        <li><a href="../states/showState.php">عرض الولايات  </a></li>
+                        <li><a href="../states/addState.php">اضافة ولاية جديدة</a></li>
+                        
                     </ul>
                 </li>
                 <li><a href="../../utils/logout.php">تسجيل خروج</a></li>
@@ -49,6 +74,9 @@
         </td>
     </tr>
 </table>
+</div>
+
+<!-- main -->
 <!-- main -->
 <div class="main">
 
@@ -76,7 +104,7 @@
         $sibilings = fp_sibiling_get($id);
         $siblings_male = fp_sibiling_get_for_gender($id," and sex = 1 ");
         $siblings_female = fp_sibiling_get_for_gender($id," and sex = 0 ");
-        $kafalas = fp_sposored_get_kafala($id);
+        $kafalas = fp_sposored_get_kafala($id,1);
 	$male_count = @count($siblings_male);
         $female_count = @count($siblings_female);
 	if(!$orphan) fp_err_show_record("اليتيم");	
@@ -185,7 +213,7 @@
     <td align="right">
       </td>
     <td>
-        <?php fp_select_mother_status_get() ?>
+        <?php fp_select_mother_status_get_by_id($orphan->mother_state) ?>
     	</td>
   	<td align="right">حالتها الاجتماعية
 
@@ -238,12 +266,14 @@
         $kcount = @count($kafalas);
         
     ?>
-    <table width="60%" border="0" align="center" class="table">
+    <table width="80%" border="0" align="center" class="table">
     <tr align="center" class="table_header">
-    <td width="10%">عدد الشهور</td>
-    <td width="20%">التاريخ</td>
-    <td width="5%">الادخار</td>
-    <td width="5%">المبلغ</td>
+    <td width="10%">حذف</td>
+    <td width="5%">طباعة</td>
+    <td width="10%">الى</td>
+    <td width="10%">من</td>
+    <td width="10%">الادخار</td>
+    <td width="10%">المبلغ</td>
     <td width="5%">الرقم</td>
   </tr>
   <?php 
@@ -251,81 +281,26 @@
                 
   	for($i = 0 ; $i < $kcount ; $i++){
                 $kafala = $kafalas[$i];
-		$sponsorship = fp_kafala_get_by_id($kafala->sponsorship);                
+		$sponsorship = fp_kafala_get_by_id($kafala->sponsorship);           
   ?>
     <tr align="center" class="table_data<?php echo $i%2?>">
-    <td><?php echo $sponsorship->month_no?></td>
+        <td align="center"><button name="add" id="bt"  type="button" onclick="del_ajax()"> حذف <img  align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" /></button></td>
+      <td><button name="add" class="bt"  type="button" onclick="window.open('print_receipt.php?id=<?php echo $orphan->id?>&sp=<?php echo $sponsorship->id?>')"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
+    
+    <td><?php echo $sponsorship->last_date?></td>
     <td><?php echo $sponsorship->date?></td>
     <td><?php echo $sponsorship->saving?></td>
     <td><?php echo $sponsorship->amount?></td>
-    <td><?php echo $sponsorship->id?></td>
+    <td><?php echo $i+1?></td>
   </tr>
   <?php } 
   
 	fp_db_close();
         ?>
-        <tr align="center">
-    <td width="31%"><button name="add" class="bt"  type="button" onclick="window.location.href = 'print_kafala.php?id=<?php $orphan?>'"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
-    <td><button onclick="give_sponsorship()">حذف</button></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr> 
   </table>
+
 </div>
-<script type="text/javascript" >
-    function delete_sibling_ajax(id)
-{	
-        var ajax;
-	var data ;
-	filename = "deleteSibiling.php";
-	post = false ;
-    if (window.XMLHttpRequest)
-    {
-        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
-    } 
-    else if (ActiveXObject("Microsoft.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
-    }
-    else if (ActiveXObject("Msxml2.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
-    }
-    else
-    {
-        alert("Error: Your browser does not support AJAX.");
-        return false;
-    }
-    ajax.onreadystatechange=function()
-    {
-        if (ajax.readyState==4&&ajax.status==200)
-        {
-            alert(ajax.responseText);
-            window.location.reload();
-            
-            //window.location.href = "orphanInfo.php?id="+<?php //echo $id?>
-			//document.getElementById(elementID).innerHTML=ajax.responseText;
-        }
-    }
-    if (post==false)
-    {
-        ajax.open("GET",filename+"?id="+id,true);
-        s_str = '';
-        ajax.send(null);
-		
-    }
-    else 
-    {
-        ajax.open("POST",filename,true);
-        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        ajax.send(s_str);
-        s_str = '';
-    }
-    return ajax;
-	
-}
-</script>
+
 <?php
         if($kafalas == -1 )echo "<script type='text/javascript'>document.getElementById('db_err').style.display = 'block';</script>";
         else if($kafalas == 0) echo "<script type='text/javascript'>document.getElementById('no_kafala').style.display = 'block';</script>";
@@ -390,8 +365,7 @@
 </table>
 
 <!--   Family   -->
-<?php $scount = @count($sibilings);
-        if($scount>0){?>
+
 
 <br />
 <h2 align="center"><b><span dir="RTL" lang="AR-SA">عدد افراد الاسرة </span>
@@ -405,9 +379,12 @@
     <td width="15%" align="right"><h2><?php echo $male_count+$female_count?></h2></td>
     <td width="14%" align="center">  عدد الاخوان  </td>
   </tr>
+  
+  
     <table class="table" width="70%" border="0" align="center">
    <br />
    <tr class="table_header">
+       <td align="center" width="15%">حذف</td>
       <td align="center" width="15%">الحالة</td>
     <td align="center" width="15%">تاريخ الميلاد</td>
     <td align="center" width="25%">الجنس</td>
@@ -415,10 +392,14 @@
     <td align="center" width="10%">&nbsp;</td>
   </tr>
    <?php 
+        $scount = @count($sibilings);
         for($i = 0 ; $i < $scount ; $i++){
 		$one_sibling = $sibilings[$i];
   ?>
    <tr class="table_data<?php echo $i%2?>">
+       <td onclick="delete_sibling_ajax(<?php echo $one_sibling->id?>)" align="center" >
+        <img width="22px"   align="middle" alt="حذف" src="../../images/style images/delete_icon.png"   />
+    </td>
     <td align="center"><?php fp_get_state($one_sibling->state)?></td>
     <td align="center"><?php echo $one_sibling->birth_date ?></td>
     <td align="center"><?php if($one_sibling->sex == 1) echo "ذكر"; else echo "أنثى";?></td>
@@ -426,8 +407,35 @@
     <td align="center"><?php echo $i+1 ?></td>
   </tr>
    <?php } ?>
+   <tr class="table_data<?php echo $i%2?>">
+       <td></td>
+    <td align="center" >
+        <select tabindex="0" class="select" name="status" id="s_status">
+      <option value="1">مكفول</option>
+      <option value="2">قيد التسويق</option>
+      <option value="3">متوقف</option>
+    </select>
+    </td>
+    <td align="center">
+        <?php fp_select_date_get(1990,'s')?>
+    </td>
+       <td align="center" dir="rtl" >
+  	    ذكر<input type="radio" name="s_gender" value="1" id="sibling_male_gender" />
+            &nbsp;&nbsp;
+  	    أنثى<input type="radio" name="s_gender" value="0" id="sibling_female_gender" />
+  	    
+    </td>
+    <td align="center"><input class="textFielsS" name="fbname" type="text" id="sibling_name" size="10" maxlength="30" /></td>
+    <td></td>
+  </tr>
+  <tr >
+  	
+    <td align="center"><input type="button" name="login " id="login " onclick="get_s_str()" value="إضافة فرد" /></td>
+   </tr>
+
 </table>
-        <?php } ?>
+
+
 </table>
 
 <script type="text/javascript">
@@ -594,7 +602,15 @@ function delete_sibling_ajax(id)
   
   <table width="85%" border="0" align="center" id=" ">
     <tr align="center">
-  	<td width="26%" align="right">جزء <input class="textFiels" name="class" type="text" id="quran" size="10" maxlength="10" value="<?php echo $orphan->quran_parts?>" /></td></td>
+  	<td width="26%" align="right">جزء 
+    <select class="select" name="quran" id="quran">
+	    <?php
+      echo "<option value='".$orphan->quran_parts."'>$orphan->quran_parts</option>'";
+	  for($i=0 ; $i <= 30 ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+	    </select>
+    </td>
   	<td width="23%" align="right">مستوى حفظ القرآن</td>
   	<td width="13%" align="right"><input class="textFiels" name="class" type="text" id="class" size="10" maxlength="30" value="<?php echo $orphan->year?>" /></td>
 	<td width="14%" align="center">الصف</td>
@@ -633,8 +649,9 @@ function delete_sibling_ajax(id)
             <option id="badill"   value="0">سيئة</option>';
             }
             else {
-            echo '<option id="goodill"  value="1">جيدة</option>
-            <option id="badill"   value="0">سيئة</option>';
+            echo '
+            <option id="badill"   value="0">سيئة</option>
+            <option id="goodill"  value="1">جيدة</option>';
             
             }
             ?>
@@ -682,7 +699,17 @@ function delete_sibling_ajax(id)
     <td align="center"></td>
     <td>&nbsp;</td>
   </tr>
-
+    </table>
+<table align="center">
+  <tr>
+      <td>&nbsp;</td>
+    
+      <td align="center"><button name="add" id="bt"  type="button" onclick="del_ajax()"> حذف <img  align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" /></button></td>
+      <td><button name="add" class="bt"  type="button" onclick="window.open('print_orphan_info.php?id=<?php echo $orphan->id?>')"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
+    
+    <td align="center"><button class="add_bt" name="add" type="button" onclick="get_str()" >تعديل البيانات<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
+    <td>&nbsp;</td>
+  </tr>
 
 </table>
   </form>
@@ -690,7 +717,151 @@ function delete_sibling_ajax(id)
 <div  style="margin: 0 auto; text-align: center ; width: 60%;" id="reponse">
 </div>
 <script type="text/javascript" >
+        
+function IsEmpty(){ 
+        var text = document.getElementsByTagName('input');
+        var empty_checker = 0 ;
+        for(var i = 0 ; i< text.length ; i++){
+           if(text[i].value == ''){
+               text.item(i).style.color = "#ff0000" ;
+               text.item(i).setAttribute("placeholder","هذا الحقل فارغ");
+               empty_checker++;
+           }
+        }
+        if(empty_checker > 0 )alert("هناك حقول يجب تعبئتها");
+        else get_str();
+}
 
+function get_str(){
+        
+	var text = document.getElementsByTagName('input');
+        var select = document.getElementsByTagName('select');
+        var str = '';
+        for(var i = 0 ; i< text.length ; i++){
+           str += text[i].getAttribute('id')+'='+text[i].value+'&';
+        }
+        for(var i = 0 ; i< select.length ; i++){
+           str += select[i].getAttribute('id')+'='+select[i].value+'&';
+        }
+        gender_value = 1 ;
+        if(document.getElementById("male_gender").checked == true) gender_value = "1" ;
+        else
+            if(document.getElementById("female_gender").checked == true) gender_value = "0" ;
+        else gender_value = "1" ;
+        str+="gender="+gender_value;
+        //window.location.href = "updateOrphan.php?"+str;
+        ajax(str);
+}
+function ajax(str)
+{		
+    var ajax;
+	var data ;
+	//var d_node = document.getElementById(elementID);
+	elementID = "div";
+	filename = "saveOrphan.php";
+	post = false ;
+    if (window.XMLHttpRequest)
+    {
+        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
+    }
+    else if (ActiveXObject("Microsoft.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
+    }
+    else if (ActiveXObject("Msxml2.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
+    }
+    else
+    {
+        alert("Error: Your browser does not support AJAX.");
+        return false;
+    }
+    ajax.onreadystatechange=function()
+    {
+        if (ajax.readyState==4&&ajax.status==200)
+        {
+            document.getElementById("reponse").innerHTML=ajax.responseText;
+        }
+    }
+    if (post==false)
+    {
+        ajax.open("GET",filename+"?"+str,true);
+        ajax.send(null);
+		
+    }
+    else
+    {
+        ajax.open("POST",filename,true);
+        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.send(str);
+    }
+    return ajax;
+	
+}
+
+function add_sibling (){
+    var s_final_str = "";
+    if(s_str_array.length != 0)
+    for(var i =0 ; i < s_str_array.length ; i++){
+        s_final_str+=s_str_array[i];
+    }
+     alert(document.getElementById("success_notice").getAttribute("name"));
+}	
+
+function del_ajax(ID)
+{
+    var ajax;
+    document.getElementById('bt').style.display = 'none';
+	//var d_node = document.getElementById(elementID);
+	elementID = "div";
+	filename = "deleteOrphan.php";
+	str = "?id="+document.getElementById("id").value;alert(str);
+	post = false ;
+	conf = confirm(" هل أنت متأكد");
+	if(conf){
+    if (window.XMLHttpRequest)
+    {
+        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
+    }
+    else if (ActiveXObject("Microsoft.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
+    }
+    else if (ActiveXObject("Msxml2.XMLHTTP"))
+    {
+        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
+    }
+    else
+    {
+        alert("Error: Your browser does not support AJAX.");
+        return false;
+    }
+    ajax.onreadystatechange=function()
+    {        
+        if (ajax.readyState==4&&ajax.status==200)
+        {
+            //alert(ajax.responseText);
+            document.getElementById("reponse").innerHTML = ajax.responseText;
+			//document.getElementById(elementID).innerHTML=ajax.responseText;
+        }
+    }
+    if (post==false)
+    {
+        ajax.open("GET",filename+str,true);
+        ajax.send(null);
+		
+    }
+    else
+    {
+        ajax.open("POST",filename,true);
+        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        ajax.send(str);
+    }
+    return ajax;
+	}
+}
+	
 </script>
 <div id="footer">
 <p>جميع الحقوق محفوظة 2016 &copy;</div>

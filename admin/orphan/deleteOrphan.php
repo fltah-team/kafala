@@ -9,7 +9,7 @@
             fp_err_delete_fail("اليتيم");
         }
 	$id = $_GET['id'] ;
-	$result = fp_orphan_delete($id,0) ;
+	$result = fp_orphan_delete($id) ;
 	
 
 	fp_db_close();

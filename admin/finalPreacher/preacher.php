@@ -1,4 +1,4 @@
-<?php include '../auth.php';?>
+<?php //include '../auth.php';?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -85,30 +85,30 @@
         $states = fp_states_get();
         $stcount = @count($states);
 ?>
-<h1 align="center" class="adress" dir="rtl">الأيتام</h1>
+<h1 align="center" class="adress" dir="rtl">الدعاة</h1>
 <br />
 <table dir="rtl" width="50%" border="0" align="center">
     <tr align="center">
         <td>
-            <button onclick="window.location.href = '../orphan/addorphan.php'" >
+            <button onclick="window.location.href = '../preacher/addPreacher.php'" >
                 <img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" />
-                اضافة يتيم جديد
+                اضافة داعية جديد
             </button>
         </td>
         <td>
             <input id="s_tf" type="text" size="10px" class="textFiels"  />
         </td>
         <td>
-            <button class="bt" onclick="window.location.href = '../finalOrphan/orphanInfo.php?id='+document.getElementById('s_tf').value" >
+            <button class="bt" onclick="window.location.href = '../finalPreacher/preacherInfo.php?id='+document.getElementById('s_tf').value" >
                 <img align="right" src="../../images/style images/search_icon.png" style="padding-left:5px" />
                 بحث
             </button>
         </td>
     </tr>
 </table>
-<h2 align="center">عرض بيانات الأيتام </h2>	
+<h2 align="center">عرض بيانات الدعاة </h2>	
 <table width="500" border="0" align="center">
-    <form action="showOrphans.php" method="get">
+    <form action="showStudents.php" method="get">
   <tr>
       <td align="center">
         <select class="select" tabindex="1" name="sponsor" id="sponsor">

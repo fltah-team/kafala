@@ -75,7 +75,7 @@
 <div class="main">
 
 <div class="login">
-    <h2 align="center" class="adress">بيانات طالب </h2>
+    <h2 align="center" class="adress">بيانات داعية/معلم/مقريء </h2>
 <br />
 <p id="noti"></p>
 <br />
@@ -84,8 +84,6 @@
 <table width="85%" border="0" align="center">
 
   <tr align="center">
-  	<td width="13%" align="right">&nbsp;</td>
-  	<td width="13%" align="center">&nbsp;</td>
     <?php
 	include('../../utils/db.php');
 	include('../../utils/sponsorAPI.php');
@@ -94,18 +92,22 @@
 	$scount = count($sponsors);
 	
 	?>
-    <td width="13%" align="right">
+    <td width="20%" align="right">
     <select class="select" tabindex="1" name="sponsor" id="sponsor">
     <?php for($i = 0 ; $i < $scount ; $i++){
 		$sponsor = $sponsors[$i] ; ?>
       <option value="<?php echo $sponsor->id?>"><?php echo $sponsor->name?></option>
 	<?php } ?>
     </select></td>
-    <td width="14%">جهة الكفالة</td>
-    <td width="21%" align="right">
+    <td width="10%">جهة الكفالة</td>
+    <td width="10%" align="right">
         <?php fp_select_status_get()?>
     </td>
-    <td width="26%" align="center">الحالة</td>
+    <td width="10%" align="center">الحالة</td>
+    <td width="10%" align="right">
+        <?php fp_select_get_preacher_type();?>
+    </td>
+    <td width="10%" align="center">النوع</td>
   </tr>
   
   <tr>
@@ -117,7 +119,7 @@
     <td align="right"><input class="textFiels" name="name3" type="text" tabindex="4" id="name3" size="10" maxlength="30" /></td>
     <td align="right"><input class="textFiels" name="name2" type="text" tabindex="3" id="name2" size="10" maxlength="30" /></td>
     <td align="right"><input class="textFiels" name="name1" tabindex="2" type="text" id="name1" size="10" maxlength="30" /></td>
-    <td align="center">اسم الطالب</td>
+    <td align="center">الاسم بالكامل</td>
   </tr>
   
     <tr>
@@ -143,26 +145,14 @@
   <tr>
     <td>&nbsp;</td>
   </tr>
-    <tr align="center">
-  	<td align="right"><input class="textFiels" name="lw" type="text" id="lw" size="10" maxlength="30" /></td>
-    <td>عمله السابق</td>
-    <td align="right"><input class="textFiels" name="dr" type="text" id="dr" size="10" maxlength="30" /></td>
-    <td align="right">سبب الوفاة</td>
-    <td align="right">
-       <?php fp_select_date_get(1995,'f')?>
-    </td>
-    <td align="center">تاريخ وفاة والد الطالب</td>
-  </tr>
-    <tr>
-    <td>&nbsp;</td>
-  </tr>
+  
     <tr align="center">
   	<td align="right"><input class="textFiels" name="lw" type="text" id="sisters_no" size="10" maxlength="30" /></td>
     <td>الاناث</td>
     <td align="right"><input class="textFiels" name="dr" type="text" id="brothers_no" size="10" maxlength="30" /></td>
     <td align="right">الذكور</td>
     
-    <td align="center"><b>:عدد الاخوان  </b></td>
+    <td align="center"><b>:عدد افراد الاسرة  </b></td>
     <td align="right">
         </td>
   </tr>
@@ -240,12 +230,12 @@
 <br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
-  	<td style="height: 29px"><input class="textFiels" name="class" type="text" id="major" size="10" maxlength="30" /></td>
-        <td style="height: 29px" id="class_lable">التخصص</td>
-	<td width="23%" align="right" style="height: 29px"><input class="textFiels" name="school" type="text" id="school" size="20" maxlength="30" /></td>
-        <td width="12%" align="center" style="height: 29px" id="school_lable">اسم المدرسة/الجامعة</td>
-       <td align="center" style="height: 29px"><input class="textFiels" name="level" type="text" id="level" size="10" maxlength="30" /></td>
-        <td style="height: 29px" id="level_lable">المرحلة</td>
+  	<td style="height: 29px"><input class="textFiels" name="class" type="text" id="digree" size="10" maxlength="30" /></td>
+        <td style="height: 29px" id="class_lable">التقدير</td>
+        <td width="23%" align="right" style="height: 29px"><?php fp_select_date_get(1985,"c") ?></td>
+        <td width="12%" align="center" style="height: 29px" id="school_lable">تاريخه</td>
+        <td align="right" ><input class="textFiels" name="level" type="text" id="cert" size="10" maxlength="30" /></td>
+        <td style="height: 29px" id="level_lable">المؤهل</td>
         
         
   </tr>
@@ -255,46 +245,30 @@
   </tr>
   
   <tr align="center">
-  	<td style="height: 29px"><input class="textFiels" name="class" type="text" id="last_result" size="10" maxlength="30" /></td>
-        <td style="height: 29px" id="class_lable">اخر نتيجة للطالب</td>
-  	<td width="23%" align="right" style="height: 29px"><input class="textFiels" name="school" type="text" id="path" size="20" maxlength="30" /></td>
-        <td width="12%" align="center" style="height: 29px" id="school_lable">الكلية/المساق</td>
-    <td style="height: 29px"><input class="textFiels" name="class" type="text" id="class" size="10" maxlength="30" /></td>
-        <td style="height: 29px" id="class_lable">الصف</td>    
+  	<td style="height: 29px" id="class_lable"></td>
+    <td style="height: 29px" id="class_lable"></td>
+  	<td width="23%" align="right" style="height: 29px"><input class="textFiels" name="school" type="text" id="cert_org" size="20" maxlength="30" /></td>
+        <td width="12%" align="center" style="height: 29px" id="school_lable">جهة الاصدار</td>
+       <td>&nbsp;</td>
+       <td>&nbsp;</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
   </tr>
    <tr align="center">
-  	<td style="height: 29px"><?php fp_select_date_get(2010, 'g')?></td>
-        <td style="height: 29px" id="class_lable"> تاريخ التخرج المتوقغ</td>
-        <td width="23%" align="right" style="height: 29px"><?php fp_select_date_get(2010, 'ss')?></td>
-        <td width="12%" align="center" style="height: 29px" id="school_lable">تاريخ بدية الدراسة</td>
-    <td style="height: 29px"><select class="select" name="yearnum" id="study_year_no">
-	    <?php
-	  for($i=2 ; $i <= 7 ; $i++)
-  	  echo "<option value='".$i."'>$i</option>'";
-	  ?>
-	    </select></td>
-        <td style="height: 29px" id="class_lable">عدد سنوات الدراسة</td>    
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
-    <tr align="center">
-  	<td width="16%" align="right">&nbsp;</td>
-  	<td width="7%" align="right">&nbsp;</td>
-  	<td width="23%" align="right">&nbsp;</td>
-	<td width="12%" align="center">&nbsp;</td>
-	<td width="19%" align="center">جزء
+  	<td style="height: 29px"><?php fp_select_date_get(2010, 'w')?></td>
+        <td style="height: 29px" id=""> تاريخ  الالتحاق</td>
+  	<td width="23%" align="right" style="height: 29px"><input class="textFiels" name="school" type="text" id="w_org" size="20" maxlength="30" /></td>
+        <td width="12%" align="center" style="height: 29px" id="school_lable">جهة العمل الحالية</td>
+        <td width="19%" align="right">جزء
 	  <select class="select" name="quran" id="quran">
 	    <?php
 	  for($i=0 ; $i <= 30 ; $i++)
   	  echo "<option value='".$i."'>$i</option>'";
 	  ?>
 	    </select></td>
-	<td width="23%" align="right">مستوى حفظ القران</td>
-        </tr>
+        <td width="23%" align="center">حفظ القران</td>    
+   </tr>
   <tr>
     <td>&nbsp;</td>
   </tr>
@@ -360,7 +334,7 @@
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td align="center"><button class="bt" name="add" type="button" onclick="IsEmpty()" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة طالب  </button></td>
+    <td align="center"><button class="bt" name="add" type="button" onclick="IsEmpty()" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة  </button></td>
     <td>&nbsp;</td>
   </tr>
   </form>
@@ -405,7 +379,7 @@ function get_str(){
         if(document.getElementById("male_gender").checked == true) gender_value = "1" ;
         else gender_value = "0" ;
         str+="gender="+gender_value;
-        //window.location.href = "saveStudent.php?"+str;
+        //window.location.href = "savePreacher.php?"+str;
         ajax(str);
 }
 function ajax(str)
@@ -413,7 +387,7 @@ function ajax(str)
     var ajax;
 	//var d_node = document.getElementById(elementID);
 	elementID = "div";
-	filename = "saveStudent.php";
+	filename = "savePreacher.php";
 	post = false ;
     if (window.XMLHttpRequest)
     {
