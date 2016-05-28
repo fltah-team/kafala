@@ -85,30 +85,30 @@
         $states = fp_states_get();
         $stcount = @count($states);
 ?>
-<h1 align="center" class="adress" dir="rtl">الدعاة</h1>
+<h1 align="center" class="adress" dir="rtl">الطلاب</h1>
 <br />
 <table dir="rtl" width="50%" border="0" align="center">
     <tr align="center">
         <td>
-            <button onclick="window.location.href = '../preacher/addPreacher.php'" >
+            <button onclick="window.location.href = '../student/addStudent.php'" >
                 <img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" />
-                اضافة داعية جديد
+                اضافة طالب جديد
             </button>
         </td>
         <td>
             <input id="s_tf" type="text" size="10px" class="textFiels"  />
         </td>
         <td>
-            <button class="bt" onclick="window.location.href = '../finalPreacher/preacherInfo.php?id='+document.getElementById('s_tf').value" >
+            <button class="bt" onclick="window.location.href = '../finalStudent/studentInfo.php?id='+document.getElementById('s_tf').value" >
                 <img align="right" src="../../images/style images/search_icon.png" style="padding-left:5px" />
                 بحث
             </button>
         </td>
     </tr>
 </table>
-<h2 align="center">عرض بيانات الدعاة </h2>	
+<h2 align="center">عرض بيانات الأيتام </h2>	
 <table width="500" border="0" align="center">
-    <form action="showPreachers.php" method="get">
+    <form action="showStudents.php" method="get">
   <tr>
       <td align="center">
         <select class="select" tabindex="1" name="sponsor" id="sponsor">

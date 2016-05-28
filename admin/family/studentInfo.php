@@ -81,24 +81,28 @@
 <div class="main">
 
 <div class="login">
-    <h2 align="center" class="adress">بيانات داعية/معلم/مقريء </h2>
+<h2 align="center">بيانات طالب </h2>
 <br />
 <?php 
         include('../../utils/db.php');
-        include('../../utils/preacherAPI.php');
-        include('../../utils/experienceAPI.php');
+        include('../../utils/studentAPI.php');
         include('../../utils/siblingAPI.php');
         include('../../utils/sponsorAPI.php');
         include ('../../utils/error_handler.php');
 	if(!isset($_GET['id']) || $_GET['id']==""){
-            fp_err_show_record("الداعية");
+            fp_err_show_record("اليتيم");
         }
         
 	$id = $_GET['id'];
-	$orphan = fp_preacher_get_by_phone1($id);
-	if(!$orphan) fp_err_show_record("الداعية");
+	$orphan = fp_student_get_by_phone1($id);
+	if(!$orphan) fp_err_show_record("الطالب");
         
-    $exp = fp_experience_get_by_preacherID($orphan->phone1);
+        $sibilings = fp_sibiling_get($orphan->phone1);
+        $siblings_male = fp_sibiling_get_for_gender($id," and sex = 1 ");
+        $siblings_female = fp_sibiling_get_for_gender($id," and sex = 0 ");
+        $male_count = @count($siblings_male);
+        $female_count = @count($siblings_female);	
+	$scount = @count($sibilings);
         include('../../utils/stateAPI.php');
 	$states = fp_states_get();
 	$scount = count($states);
@@ -153,7 +157,10 @@
     <td>&nbsp;</td>
   </tr>
    
-    <tr align="right">      
+    <tr align="right">
+	<td>
+        </td>   
+    <td align="right">
                 <td align="center" dir="rtl" >
   	    ذكر<input type="radio" name="s_gender" value="1" id="male_gender" />
             &nbsp;&nbsp;
@@ -167,7 +174,8 @@
             if(gender == 1)male.setAttribute("checked","checked");
             else
                 if(gender == 0)female.setAttribute("checked","checked");
-        </script> 
+        </script>    
+    </td>
   	<td align="center">الجنس</td>
     
         <td align="right">
@@ -175,24 +183,34 @@
         
       </td>
     <td align="center">تاريخ الميلاد</td>
-    <td width="10%" align="right">
-        <?php fp_select_preacher_type_get_by_id($orphan->type);?>
-    </td>
-    <td width="10%" align="center">النوع</td>
   </tr>
-    
+  
+
     <tr>
     
     <td>&nbsp;</td>
   </tr>
- 
+    <tr align="center">
+  	<td align="right"><input class="textFiels" name="lw" type="text" id="lw" size="10" maxlength="30" value="<?php echo $orphan->father_work?>" /></td>
+    <td>عمله السابق</td>
+    <td align="right"><input class="textFiels" name="dr" type="text" id="dr" size="10" maxlength="30" value="<?php echo $orphan->father_dead_cause?>" /></td>
+    <td align="right">سبب الوفاة</td>
+    <td align="right">
+        <?php fp_select_date_get_by_id(1940, 'f', $orphan->father_dead_date)?>
+    </td>
+    <td align="center">تاريخ وفاة والد اليتيم</td>
+  </tr>
+    <tr>
+    
+    <td>&nbsp;</td>
+  </tr>
       <tr align="center">
-  	<td align="right"><input class="textFiels" value="<?php echo $orphan->female_members_no?>" name="lw" type="text" id="sisters_no" size="10" maxlength="30" /></td>
+  	<td align="right"><input class="textFiels" value="<?php echo $orphan->sisters_no?>" name="lw" type="text" id="sisters_no" size="10" maxlength="30" /></td>
     <td>الاناث</td>
-    <td align="right"><input class="textFiels" value="<?php echo $orphan->male_members_no?>" name="dr" type="text" id="brothers_no" size="10" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" value="<?php echo $orphan->brothers_no?>" name="dr" type="text" id="brothers_no" size="10" maxlength="30" /></td>
     <td align="right">الذكور</td>
     <td align="right">
-        <input class="textFiels" disabled name="lw" value="<?php echo $orphan->female_members_no+$orphan->male_members_no?>" type="text" id="f_mem" size="10" maxlength="30" />
+        <input class="textFiels" disabled name="lw" value="<?php echo $orphan->sisters_no+$orphan->brothers_no?>" type="text" id="f_mem" size="10" maxlength="30" />
     </td>
     <td align="center">عدد الاخوان</td>
   </tr>  
@@ -256,18 +274,19 @@
 </table>
 
 <!--   Learning   -->
+
+
 <br />
 <h2 align="center">التعليم</h2>
 <br />
 <table width="85%" border="0" align="center" id=" ">
   <tr align="center">
-  	<td style="height: 29px"><input value="<?php echo $orphan->qualify_rating?>" class="textFiels" name="class" type="text" id="digree" size="10" maxlength="30" /></td>
-        <td style="height: 29px" id="class_lable">التقدير</td>
-        <td width="23%" align="right" style="height: 29px">
-        <?php fp_select_date_get_by_id(1995, "c", $orphan->qualify_date)?></td>
-        <td width="12%" align="center" style="height: 29px" id="school_lable">تاريخه</td>
-        <td align="right" ><input value="<?php echo $orphan->qualify_name?>" class="textFiels" name="level" type="text" id="cert" size="10" maxlength="30" /></td>
-        <td style="height: 29px" id="level_lable">المؤهل</td>
+  	<td style="height: 29px"><input value="<?php echo $orphan->major?>" class="textFiels" name="class" type="text" id="major" size="10" maxlength="30" /></td>
+        <td style="height: 29px" id="class_lable">التخصص</td>
+	<td width="23%" align="right" style="height: 29px"><input value="<?php echo $orphan->school_name?>" class="textFiels" name="school" type="text" id="school" size="20" maxlength="30" /></td>
+        <td width="12%" align="center" style="height: 29px" id="school_lable">اسم المدرسة/الجامعة</td>
+       <td align="center" style="height: 29px"><input class="textFiels" value="<?php echo $orphan->level?>" name="level" type="text" id="level" size="10" maxlength="30" /></td>
+        <td style="height: 29px" id="level_lable">المرحلة</td>
         
         
   </tr>
@@ -277,22 +296,39 @@
   </tr>
   
   <tr align="center">
-  	<td style="height: 29px" id="class_lable"></td>
-    <td style="height: 29px" id="class_lable"></td>
-  	<td width="23%" align="right" style="height: 29px"><input class="textFiels" value="<?php echo $orphan->Issuer?>" name="school" type="text" id="cert_org" size="20" maxlength="30" /></td>
-        <td width="12%" align="center" style="height: 29px" id="school_lable">جهة الاصدار</td>
-       <td>&nbsp;</td>
-       <td>&nbsp;</td>
+  	<td style="height: 29px"><input class="textFiels" value="<?php echo $orphan->last_result?>"  name="class" type="text" id="last_result" size="10" maxlength="30" /></td>
+        <td style="height: 29px" id="class_lable">اخر نتيجة للطالب</td>
+  	<td width="23%" align="right" style="height: 29px"><input value="<?php echo $orphan->path?>"  class="textFiels" name="school" type="text" id="path" size="20" maxlength="30" /></td>
+        <td width="12%" align="center" style="height: 29px" id="school_lable">الكلية/المساق</td>
+    <td style="height: 29px"><input class="textFiels" value="<?php echo $orphan->year?>"  name="class" type="text" id="class" size="10" maxlength="30" /></td>
+        <td style="height: 29px" id="class_lable">الصف</td>    
   </tr>
   <tr>
     <td>&nbsp;</td>
   </tr>
    <tr align="center">
-  	<td style="height: 29px"><?php fp_select_date_get_by_id(1995, "c", $orphan->Joining_Date)?></td>
-        <td style="height: 29px" id=""> تاريخ  الالتحاق</td>
-  	<td width="23%" align="right" style="height: 29px"><input value="<?php echo $orphan->current_work?>" class="textFiels" name="school" type="text" id="w_org" size="20" maxlength="30" /></td>
-        <td width="12%" align="center" style="height: 29px" id="school_lable">جهة العمل الحالية</td>
-        <td width="19%" align="center">جزء
+       <td style="height: 29px"><?php fp_select_date_get_by_id(2010, 'g',$orphan->expected_grad)?></td>
+        <td style="height: 29px" id="class_lable"> تاريخ التخرج المتوقغ</td>
+        <td width="23%" align="right" style="height: 29px"><?php fp_select_date_get_by_id(2010, 'ss',$orphan->study_date_start)?></td>
+        <td width="12%" align="center" style="height: 29px" id="school_lable">تاريخ بدية الدراسة</td>
+    <td style="height: 29px"><select class="select" name="yearnum" id="study_year_no">
+	    <?php
+        echo "<option value='".$orphan->study_year_no."'>$orphan->study_year_no</option>'";
+	  for($i=2 ; $i <= 7 ; $i++)
+  	  echo "<option value='".$i."'>$i</option>'";
+	  ?>
+	    </select></td>
+        <td style="height: 29px" id="class_lable">عدد سنوات الدراسة</td>    
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+    <tr align="center">
+  	<td width="16%" align="right">&nbsp;</td>
+  	<td width="7%" align="right">&nbsp;</td>
+  	<td width="23%" align="right">&nbsp;</td>
+	<td width="12%" align="center">&nbsp;</td>
+	<td width="19%" align="center">جزء
 	  <select class="select" name="quran" id="quran">
 	    <?php
       echo "<option value='".$orphan->quran_parts."'>$orphan->quran_parts</option>'";
@@ -300,173 +336,14 @@
   	  echo "<option value='".$i."'>$i</option>'";
 	  ?>
 	    </select></td>
-        <td width="23%" align="center">حفظ القران</td>    
-   </tr>
+	<td width="23%" align="right">مستوى حفظ القران</td>
+        </tr>
   <tr>
     <td>&nbsp;</td>
   </tr>
-
-</table>
-<h2 align="center"><b><span dir="RTL" lang="AR-SA"> الخبرات والمؤهلات الاخرى(يشترط ابراز الشهادات)</span>
-</b></h2>
-
-    <table class="table" width="70%" border="0" align="center">
-   <br />
-   <tr class="table_header">
-       <td align="center" width="15%">حذف</td>
-    <td align="center" width="15%">التاريخ</td>
-    <td align="center" width="25%">الجهة</td>
-    <td align="center" width="20%">المؤهل / الخبرة </td>
-    <td align="center" width="10%">&nbsp;</td>
-  </tr>
-   <?php 
-        $expcount = @count($exp);
-        for($i = 0 ; $i < $expcount ; $i++){
-		$ex = $exp[$i];
-  ?>
-   <tr class="table_data<?php echo $i%2?>">
-       <td onclick="delete_exp_ajax(<?php echo $ex->id?>)" align="center" >
-        <img width="22px"   align="middle" alt="حذف" src="../../images/style images/delete_icon.png"   />
-    </td>
-    <td align="center"><?php echo $ex->date ?></td>
-    <td align="center"><?php echo $ex->organizaton ?></td>
-    <td align="center"><?php echo $ex->qualifier_name ?></td>
-    <td align="center"><?php echo $i+1 ?></td>
-  </tr>
-   <?php } ?>
-   <tr class="table_data<?php echo $i%2?>">
-       <td></td>
-    
-    <td align="center">
-        <?php fp_select_date_get(1990,'ex')?>
-    </td>
-       <td align="center" dir="rtl" >
-  	  <input class="textFielsS" name="fbname" type="text" id="org" size="20" maxlength="30" />
-    </td>
-    <td align="center"><input class="textFielsS" name="fbname" type="text" id="qualifier_name" size="20" maxlength="30" /></td>
-    <td></td>
-  </tr>
-  <tr >
-      
-    <td align="center"><input type="button" name="login " id="login " onclick="get_exp_str()" value="إضافة " /></td>
-    <td align="center" style="color: white" id="notifyx"></td>
-   </tr>
-
+  
 </table>
 
-
-</table>
-
-<script type="text/javascript">
-function get_exp_str(){
-      var d = document.getElementById('exy').value+"-"+document.getElementById('exm').value+"-"+document.getElementById('exd').value;
-      var s_str = "id=<?php echo $orphan->phone1 ?>&qualifier_name="+document.getElementById("qualifier_name").value+"&date="+d+"&org="+document.getElementById("org").value ;
-      
-      exp_ajax(s_str);
-      //window.location.href = "saveExp.php?"+s_str;
-      }
-function exp_ajax(s_str)
-{	
-    var ajax;
-	var data ;
-	filename = "saveExp.php";
-	post = false ;
-    if (window.XMLHttpRequest)
-    {
-        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
-    } 
-    else if (ActiveXObject("Microsoft.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
-    }
-    else if (ActiveXObject("Msxml2.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
-    }
-    else
-    {
-        alert("Error: Your browser does not support AJAX.");
-        return false;
-    }
-    ajax.onreadystatechange=function()
-    {
-        if (ajax.readyState==4&&ajax.status==200)
-        {
-            alert(ajax.responseText);
-            window.location.reload();
-            //window.location.href = "orphanInfo.php?id="+<?php //echo $id?>
-			//document.getElementById(elementID).innerHTML=ajax.responseText;
-        }
-    }
-    if (post==false)
-    {
-        ajax.open("GET",filename+"?"+s_str,true);
-        s_str = '';
-        ajax.send(null);
-		
-    }
-    else 
-    {
-        ajax.open("POST",filename,true);
-        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        ajax.send(s_str);
-        s_str = '';
-    }
-    return ajax;
-	
-}
-function delete_exp_ajax(id)
-{	
-        var ajax;
-	var data ;
-	filename = "deleteExp.php";
-	post = false ;
-    if (window.XMLHttpRequest)
-    {
-        ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
-    } 
-    else if (ActiveXObject("Microsoft.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Microsoft.XMLHTTP");//IE6/5
-    }
-    else if (ActiveXObject("Msxml2.XMLHTTP"))
-    {
-        ajax=new ActiveXObject("Msxml2.XMLHTTP");//other
-    }
-    else
-    {
-        alert("Error: Your browser does not support AJAX.");
-        return false;
-    }
-    ajax.onreadystatechange=function()
-    {
-        if (ajax.readyState==4&&ajax.status==200)
-        {
-            alert(ajax.responseText);
-            window.location.reload();
-            
-            //window.location.href = "orphanInfo.php?id="+<?php //echo $id?>
-			//document.getElementById(elementID).innerHTML=ajax.responseText;
-        }
-    }
-    if (post==false)
-    {
-        ajax.open("GET",filename+"?id="+id,true);
-        s_str = '';
-        ajax.send(null);
-		
-    }
-    else 
-    {
-        ajax.open("POST",filename,true);
-        ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        ajax.send(s_str);
-        s_str = '';
-    }
-    return ajax;
-	
-}
-</script>
 
 <!-- health -->
 
@@ -573,7 +450,7 @@ function i3_get_str(){
             if(document.getElementById("female_gender").checked == true) gender_value = "0" ;
         else gender_value = "1" ;
         str+="gender="+gender_value;
-        //window.location.href = "finalPreacher.php?"+str;
+        //window.location.href = "finalStudent.php?"+str;
         //alert(str);
         ajax(str);
 }
@@ -584,7 +461,7 @@ function ajax(str)
 	var data ;
 	//var d_node = document.getElementById(elementID);
 	elementID = "div";
-	filename = "finalPreacher.php";
+	filename = "finalStudent.php";
 	post = false ;
     if (window.XMLHttpRequest)
     {
@@ -629,14 +506,14 @@ function ajax(str)
 //*********************  DELETE
 function del_ajax(ID)
 {	
-    conf = confirm("ستقوم بحذف بيانات الداعية \n هل أنت متأكد");
+    conf = confirm("ستقوم بحذف بيانات الطلاب \n هل أنت متأكد");
     if(conf){
     var ajax;
 	var data ;
         var str = "?id=0"+ID;
         //var d_node = document.getElementById(elementID);
 	elementID = "div";
-	filename = "deletePreacher.php";
+	filename = "deleteStudent.php";
 	post = false ;
     if (window.XMLHttpRequest)
     {

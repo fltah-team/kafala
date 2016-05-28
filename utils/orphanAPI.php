@@ -89,7 +89,7 @@ function fp_orphan_add($id,$state , $warranty_organization  , $saving , $first_n
  
  	$query = ("INSERT INTO `orphan` (`id` ,`state`, `warranty_organization` ,`saving`, `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `mother_first_name` , `mother_middle_name` , `mother_last_name` , `mother_4th_name` , `mother_Birth_date` , `mother_state` ,`father_dead_date` , `father_dead_cause` , `father_work` , `residence_state` , `city`, `District` , section,  house_no , phone1 , phone2   , `studing_state` ,`nonstuding_cause`, `school_name` , level , year , quran_parts , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date`  )
  				VALUE('$n_id' , '$n_state' , '$n_warranty_organization' , '$n_saving', '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_mother_first_name' , '$n_mother_middle_name' , '$n_mother_last_name' , '$n_mother_4th_name' , '$n_mother_Birth_date' , '$n_mother_state' ,'$n_father_dead_date' , '$n_father_dead_cause' , '$n_father_work' , '$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2'  , '$n_studing_state' ,'$n_nonstuding_cause', '$n_school_name' , '$n_level' , '$n_year' , '$n_quran_parts' , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date' )");
-	
+	echo $query;
 	$qresult = mysql_query($query);
 	if(!$qresult) return false ;
 	

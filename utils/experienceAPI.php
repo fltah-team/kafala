@@ -14,7 +14,6 @@
 
 
             $query = ("INSERT INTO `experience`(`id` , `preacherID`, `qualifier_name` , `organizaton` , `date` ) VALUE(NULL , '$n_preacherID', '$n_qualifier_name' , '$n_organizaton' , '$n_date' )");
-            
             $qresult = mysql_query($query);
             if(!$qresult) return false ;
             @mysql_free_result($qresult);
@@ -25,7 +24,7 @@
     function fp_experience_get($extra = ''){
             global $fp_handle ;
             $query = sprintf("SELECT * FROM `experience` %s",$extra);
-
+            
             $qresult = @mysql_query($query);
 
             if(!$qresult) return NULL ; 
@@ -113,11 +112,11 @@
                     if($i != ($fcount - 1 ))
                     $query .= ' , ';
                     }
-            $query .= ' WHERE `id` = '.$uid;
+            $query .= ' WHERE `id` = '.$uid;echo $query;
             $qresult = @mysql_query($query);
                     if(!$qresult) return false ;
                     @mysql_free_result($qresult);
                     return true ;
     }     
-?>
+    ?>
 

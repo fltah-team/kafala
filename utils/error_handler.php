@@ -109,6 +109,22 @@
             } 
     echo '</select>';
  }
+  function fp_one_type_get_by_id($id){
+           switch($id){
+                case 1 :
+                    echo 'داعية';
+                    break;
+                case 2 :
+                    echo 'معلم';
+                    break;
+                case 3 :
+                    echo 'امام';
+                    break;
+                case 3 :
+                    echo 'مقرء';
+                    break;
+            } 
+ }
  
  function fp_select_status_get_by_id($id){
      echo '<select tabindex="0" class="select" name="status" id="status">';

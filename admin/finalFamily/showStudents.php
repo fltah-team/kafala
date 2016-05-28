@@ -1,6 +1,6 @@
 <?php
     include('../../utils/db.php');
-    include('../../utils/finalPreacherAPI.php');
+    include('../../utils/finalStudentAPI.php');
     include('../../utils/error_handler.php');
     $fields = array();
     $extra = '';
@@ -42,7 +42,7 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
     }
     $start=0;
     $limit=20;
-    $total_results = fp_final_preacher_get_num_rows($extra);
+    $total_results = fp_final_student_get_num_rows($extra);echo $extra;
         $total=ceil($total_results/$limit);
     if(!isset($_GET['page']) || $_GET['page'] == '' || (int)$_GET['page'] == 0 || $_GET['page']>$total)
     {
@@ -58,7 +58,7 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
         else
             $extra .= " ORDER BY `first_name` ";
     }
-    $orphans = fp_final_preacher_get($extra." LIMIT $start, $limit ");
+    $orphans = fp_final_student_get($extra." LIMIT $start, $limit ");
 	
         
 ?>
@@ -138,7 +138,7 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
 
 <!-- main -->
 <div class="main">
-    <h1 align="center" class="adress" dir="rtl"> الدعاة <?php echo "($total_results)"?> </h1>
+    <h1 align="center" class="adress" dir="rtl"> بيانات الطلاب  <?php echo "($total_results)"?> </h1>
 <br />
  <?php
     //if($users[0] == NULL ) die($users[1]) ;
@@ -157,7 +157,7 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
             echo '
                 <div style="text-align:center;color:#fff;">
                 <div class="alert-box notice"><span>تنبيه: </span>لا يوجد طلاب لعرضهم
-                <p>يمكنك اضافة دعاة من <a href="addStudent.php">هنا</a></p>
+                <p>يمكنك اضافة طلاب من <a href="addStudent.php">هنا</a></p>
                 </div>
                 <div id="footer">
                 <p>جميع الحقوق محفوظة 2016 &copy;</p>
@@ -198,7 +198,7 @@ function ageCalculator($dob){
 		$orphan = $orphans[$i];
   ?>
     <tr align="center" class="table_data<?php echo $i%2?>">
-        <td  onclick="window.location.href='preacherInfo.php?id='+<?php echo $orphan->id?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
+        <td  onclick="window.location.href='studentInfo.php?id='+<?php echo $orphan->id?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
     <td width="7%"><?php echo ageCalculator($orphan->birth_date);?></td>
  	<td width="9%"><?php echo fp_states_get_by_id($orphan->residence_state)->name;?></td>
     <td width="8%"><?php if($orphan->sex==1)echo "ذكر"; else echo "أنثى" ; ?> </td>
@@ -220,7 +220,7 @@ function ageCalculator($dob){
     <?php
         //echo $extra; //$_SESSION['q'] =  "$extra";
     ?>
-    <td><button name="add" class="bt"  type="button" onclick="window.location.href = 'print_preachers.php?q=<?php echo $extra?>'"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
+    <td><button name="add" class="bt"  type="button" onclick="window.location.href = 'print_students.php?q=<?php echo $extra?>'"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
     <td></td>
   </tr>
   </table>

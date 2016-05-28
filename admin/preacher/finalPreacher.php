@@ -1,6 +1,7 @@
 <?php
 	
 	include('../../utils/db.php');
+    include('../../utils/experienceAPI.php');
     include('../../utils/sponsorAPI.php');
     include('../../utils/notifyAPI.php');
 	include('../../utils/finalPreacherAPI.php');
@@ -62,10 +63,19 @@
     $result = fp_final_preacher_update($type, $state ,  $warranty_organization ,$saving ,  $first_name , $meddle_name , $last_name , $last_4th_name ,$birth_date , $sex , $male_members_no , $female_members_no , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 , $qualify_name , $qualify_date , $qualify_rating , $quran_parts , $Issuer , $current_work , $Joining_Date , $health_state , $ill_cause , $data_entery_name , $data_entery_date ,$data_admin_name , $data_admin_date );
 	else */
 	$result =  fp_final_preacher_add($type, $state ,  $warranty_organization ,$saving ,  $first_name , $meddle_name , $last_name , $last_4th_name ,$birth_date , $sex , $male_members_no , $female_members_no , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 , $qualify_name , $qualify_date , $qualify_rating , $quran_parts , $Issuer , $current_work , $Joining_Date , $health_state , $ill_cause , $data_entery_name , $data_entery_date ,$data_admin_name , $data_admin_date );
-	 
+	
 	if(!$result)
             fp_err_add_fail($first_name." ".$meddle_name);
 	else{
+            $experieces = fp_experience_get_by_preacherID($phone1);echo serialize($experieces);
+            $sicount = @count($experieces);
+            if($sicount > 0 ){
+                $last_id = fp_final_preacher_get_last_id();
+                for($i = 0 ; $i < $sicount ; $i++){
+                    $experiece = $experieces[$i];
+                    fp_experience_update($experiece->id, $last_id);
+                    }
+                }   
             fp_preacher_delete($phone1);
             $name = $first_name.' '.$meddle_name;
             $sponsered = fp_select_sponsored_type(1);

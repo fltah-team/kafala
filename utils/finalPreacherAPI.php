@@ -36,12 +36,12 @@
 		$oid = (int)$id;
 		if($oid == 0) return NULL ;
 		
-		$preachers = fp_preacher_get("WHERE `id` = ".$oid);
+		$preachers = fp_final_preacher_get("WHERE `id` = ".$oid);
 		if($preachers == NULL) return NULL ;
 		$preacher = $preachers[0];
 		return $preacher ;
 		}
-         function fp_final_preacher_get_last_id(){
+function fp_final_preacher_get_last_id(){
                 global $fp_handle ;
                 $preachers = fp_final_preacher_get("ORDER BY `id` DESC LIMIT 1");
                 if($preachers == NULL) return NULL ;
@@ -89,20 +89,9 @@
 		$query = ("INSERT INTO `finalpreacher` (id, `state` ,`type` ,  `warranty_organization` , saving , `first_name` , `meddle_name` , `last_name` , `last_4th_name` , `birth_date` , `sex` , `male_members_no` , `female_members_no` , `residence_state` , `city` , `District` , `section`,`house_no` , `phone1` , `phone2` , `qualify_name` , `qualify_date` , `qualify_rating` , `quran_parts` , `Issuer` , `current_work` , `Joining_Date` , `health_state` , `ill_cause` , `data_entery_name` , `data_entery_date`, `head_dep_name` , `head_dep_date`   )
 					VALUE(NULL  , '$n_state' ,'$n_type' ,  '$n_warranty_organization' ,'$n_saving', '$n_first_name' , '$n_meddle_name' , '$n_last_name' , '$n_last_4th_name' , '$n_birth_date' , '$n_sex' , '$n_male_members_no' , '$n_female_members_no' , '$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$house_no' , '$n_phone1' , '$n_phone2' , '$n_qualify_name', '$n_qualify_date' , '$n_qualify_rating' , '$n_quran_parts' , '$n_Issuer' , '$n_current_work' , '$n_Joining_Date' , '$n_health_state' , '$n_ill_cause' , '$n_data_entery_name' , '$n_data_entery_date', '$n_head_dep_name' , '$n_head_dep_date'  )");
 		
-		$qresult = mysql_query($query);echo $query;
-		if(!$qresult) return false ;
-                /*
-                $experieces = fp_experience_get($phone1);
-                $sicount = @count($experieces);
-                if($sicount > 0 ){
-                    $last_id = fp_final_preacher_get_last_id();
-                    for($i = 0 ; $i < $sicount ; $i++){
-                        $preacher = $preachers[$i];
-                        fp_experience_update($preacher->id, $last_id);
-                    }
-                }   
-                */
-                @mysql_free_result($qresult);               
+		$qresult = mysql_query($query);
+		if(!$qresult) return false ;                
+        @mysql_free_result($qresult);               
 		return true ;
 	}
 		
@@ -293,7 +282,7 @@
 	function fp_final_preacher_delete($id){
 		$uid = (int)$id;
 		if($uid == 0) return false ;
-		$query = sprintf("DELETE FROM `finalًpreacher` WHERE `id` = %d",$uid);
+		$query = sprintf("DELETE FROM `finalpreacher` WHERE `id` = %d",$uid);echo $query;
 		$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
 		@mysql_free_result($qresult);

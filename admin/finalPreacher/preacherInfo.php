@@ -85,7 +85,7 @@
 <br />
 <?php 
         include('../../utils/db.php');
-        include('../../utils/preacherAPI.php');
+        include('../../utils/finalPreacherAPI.php');
         include('../../utils/experienceAPI.php');
         include('../../utils/siblingAPI.php');
         include('../../utils/sponsorAPI.php');
@@ -95,10 +95,10 @@
         }
         
 	$id = $_GET['id'];
-	$orphan = fp_preacher_get_by_phone1($id);
+	$orphan = fp_final_preacher_get_by_id($id);
 	if(!$orphan) fp_err_show_record("الداعية");
         
-    $exp = fp_experience_get_by_preacherID($orphan->phone1);
+    $exp = fp_experience_get_by_preacherID($orphan->id);
         include('../../utils/stateAPI.php');
 	$states = fp_states_get();
 	$scount = count($states);
@@ -360,15 +360,15 @@
 <script type="text/javascript">
 function get_exp_str(){
       var d = document.getElementById('exy').value+"-"+document.getElementById('exm').value+"-"+document.getElementById('exd').value;
-      var s_str = "id=<?php echo $orphan->phone1 ?>&qualifier_name="+document.getElementById("qualifier_name").value+"&date="+d+"&org="+document.getElementById("org").value ;
-      
-      exp_ajax(s_str);
-      //window.location.href = "saveExp.php?"+s_str;
+      var s_str = "?id=<?php echo $orphan->id ?>&qualifier_name="+document.getElementById("qualifier_name").value+"&date="+d+"&org="+document.getElementById("org").value ;
+
+      //exp_ajax(s_str);
+      window.location.href = "saveExp.php"+s_str;
       }
-function exp_ajax(s_str)
+  function exp_ajax(s_str)
 {	
     var ajax;
-	var data ;
+	alert(s_str);
 	filename = "saveExp.php";
 	post = false ;
     if (window.XMLHttpRequest)
@@ -519,6 +519,22 @@ function delete_exp_ajax(id)
     <td align="center">مدخل البيانات   </td>
   </tr>
    
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td align="center"></td>    
+    <td align="center"></td> 
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      
+      <td align="center"><input class="textFiels" disabled name="level" type="text" id="sdsg" size="10" maxlength="30" value="<?php echo $orphan->head_dep_date?>"/>   </td>
+    <td>التاريخ</td>
+              <td align="center"><input class="textFiels" disabled name="level" type="text" id="sgsdg" size="10" maxlength="30" value="<?php echo $orphan->head_dep_name?>"/</td>
+    <td>اعتماد رئيس القسم</td>
+  </tr>
+    
    <tr>
         <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -526,11 +542,14 @@ function delete_exp_ajax(id)
     <td align="center"></td>
     <td>&nbsp;</td>
   </tr>
+</table>
+<table align="center" >
   <tr>
+    <td align="center"><button name="add" id="bt"  type="button" onclick="del_ajax()"> حذف <img  align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" /></button></td>
+      <td>&nbsp;</td>
+    <td><button name="add" class="bt"  type="button" onclick="window.open('print_preacher_info.php?id=<?php echo $orphan->id?>')"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
     <td>&nbsp;</td>
-    <td align="center"><button class="add_bt" name="add" type="button" onclick="del_ajax(<?php echo $orphan->phone1?>)" >الغاء البيانات<img align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" />  </button>
-    <td>&nbsp;</td>
-    <td align="center"><button class="add_bt" name="add" type="button" onclick="i3_get_str()" >اعتماد البيانات<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
+    <td align="center"><button class="add_bt" name="add" type="button" onclick="get_str()" >تعديل البيانات<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
     <td>&nbsp;</td>
   </tr>
 
@@ -541,7 +560,6 @@ function delete_exp_ajax(id)
 <div  style="margin: 0 auto; text-align: center ; width: 60%;" id="reponse">
 </div>
 <script type="text/javascript" >
-        
 function IsEmpty(){ 
         var text = document.getElementsByTagName('input');
         var empty_checker = 0 ;
@@ -553,14 +571,14 @@ function IsEmpty(){
            }
         }
         if(empty_checker > 0 )alert("هناك حقول يجب تعبئتها");
-        else i3_get_str();
+        else get_str();
 }
 
-function i3_get_str(){
+function get_str(){
         
 	var text = document.getElementsByTagName('input');
         var select = document.getElementsByTagName('select');
-        var str = 'id=<?php echo $orphan->id?>&';
+        var str = '';
         for(var i = 0 ; i< text.length ; i++){
            str += text[i].getAttribute('id')+'='+text[i].value+'&';
         }
@@ -573,18 +591,17 @@ function i3_get_str(){
             if(document.getElementById("female_gender").checked == true) gender_value = "0" ;
         else gender_value = "1" ;
         str+="gender="+gender_value;
-        //window.location.href = "finalPreacher.php?"+str;
+        //window.location.href = "saveStudent.php?"+str;
         //alert(str);
         ajax(str);
 }
 function ajax(str)
 {		
-    
     var ajax;
 	var data ;
 	//var d_node = document.getElementById(elementID);
 	elementID = "div";
-	filename = "finalPreacher.php";
+	filename = "saveStudent.php";
 	post = false ;
     if (window.XMLHttpRequest)
     {
@@ -625,19 +642,17 @@ function ajax(str)
     return ajax;
 	
 }
-
-//*********************  DELETE
 function del_ajax(ID)
-{	
-    conf = confirm("ستقوم بحذف بيانات الداعية \n هل أنت متأكد");
-    if(conf){
+{
     var ajax;
-	var data ;
-        var str = "?id=0"+ID;
-        //var d_node = document.getElementById(elementID);
+    document.getElementById('bt').style.display = 'none';
+	//var d_node = document.getElementById(elementID);
 	elementID = "div";
 	filename = "deletePreacher.php";
+	str = "?id="+document.getElementById("id").value;
 	post = false ;
+	conf = confirm(" هل أنت متأكد");
+	if(conf){
     if (window.XMLHttpRequest)
     {
         ajax=new XMLHttpRequest();//IE7+, Firefox, Chrome, Opera, Safari
@@ -656,10 +671,12 @@ function del_ajax(ID)
         return false;
     }
     ajax.onreadystatechange=function()
-    {
+    {        
         if (ajax.readyState==4&&ajax.status==200)
         {
-            document.getElementById("reponse").innerHTML=ajax.responseText;
+            //alert(ajax.responseText);
+            document.getElementById("reponse").innerHTML = ajax.responseText;
+			//document.getElementById(elementID).innerHTML=ajax.responseText;
         }
     }
     if (post==false)
@@ -675,10 +692,8 @@ function del_ajax(ID)
         ajax.send(str);
     }
     return ajax;
-	
+	}
 }
-
-}	
 </script>
 <div id="footer">
 <p>جميع الحقوق محفوظة 2016 &copy;</div>
