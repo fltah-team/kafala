@@ -1,10 +1,9 @@
 <?php
-
-	
-	include('../../utils/db.php');
+	include('../auth.php');
+    include('../../utils/db.php');
 	include('../../utils/orphanAPI.php');
 	include('../../utils/siblingAPI.php');
-         include('../../utils/error_handler.php');
+    include('../../utils/error_handler.php');
        
         if(!isset($_GET['id']) || $_GET['id']== 0 || $_GET['id'] == ''){
             fp_err_delete_fail ("فرد العائلة");

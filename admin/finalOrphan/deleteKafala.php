@@ -1,11 +1,12 @@
 <?php
+    include '../auth.php';
 	include('../../utils/db.php');
 	include('../../utils/kafalaAPI.php');
-        include('../../utils/error_handler.php');
-        include '../../utils/notifyAPI.php';
-        include '../../utils/usersAPI.php';
-        include '../../utils/sponsorAPI.php';
-        if(!isset($_GET['id'])){
+    include('../../utils/error_handler.php');
+    include '../../utils/notifyAPI.php';
+    include '../../utils/usersAPI.php';
+    include '../../utils/sponsorAPI.php';
+    if(!isset($_GET['id'])){
             fp_err_delete_fail ("الكفالة");
         }
 	$id = (int)$_GET['id'];

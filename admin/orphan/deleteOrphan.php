@@ -1,4 +1,5 @@
 <?php
+	include('../auth.php');
 	include('../../utils/db.php');
 	include('../../utils/siblingAPI.php');
 	include('../../utils/orphanAPI.php');
