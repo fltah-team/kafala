@@ -287,7 +287,7 @@ function fp_orphan_delete($id){
     global $fp_handle;
 	$uid   = mysql_real_escape_string(strip_tags($id),$fp_handle);
         //echo "---------".$uid;
-	$query = sprintf("DELETE FROM `orphan` WHERE `phone1` = '%s'",$id);echo $query;
+	$query = sprintf("DELETE FROM `orphan` WHERE `phone1` = '%s'",$id);
 	$qresult = @mysql_query($query);
 	if(!$qresult) return false ;
     

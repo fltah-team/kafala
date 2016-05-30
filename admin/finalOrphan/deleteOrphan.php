@@ -1,8 +1,9 @@
 <?php
     include '../auth.php';
+	include('../../utils/siblingAPI.php');
 	include('../../utils/db.php');
 	include('../../utils/finalOrphanAPI.php');
-        include('../../utils/error_handler.php');
+    include('../../utils/error_handler.php');
 
         
 	$id = (int)$_GET['id'] ;
@@ -18,7 +19,8 @@
             fp_err_delete_fail("اليتيم");
         }	
          else {
-            fp_err_delete_succes("اليتيم")  ;
+            // FOR DELEE SIBLINGS  fp_sibiling_delete_for_orphan($id)
+            fp_err_delete_succes("اليتيم");
         }
 
 	

@@ -104,7 +104,7 @@ function fp_final_orphan_add($state , $warranty_organization  , $saving , $first
                 fp_sibiling_update($sibling->id, $last_id);
         }
         }
-        
+        fp_orphan_delete($phone1);
         @mysql_free_result($qresult);
         return true ;
 }

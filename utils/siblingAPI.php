@@ -138,7 +138,7 @@ function fp_sibiling_get_by_id($id){
 	function fp_sibiling_delete_for_orphan($id){
 		$uid = (int)$id;
 		if($uid == 0) return false ;
-		$query = sprintf("DELETE FROM `sibiling` WHERE `orphan_id` = %d",$uid);
+		$query = sprintf("DELETE FROM `sibiling` WHERE `orphan_id` = %d",$uid);echo $query;
 		$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
 		@mysql_free_result($qresult);

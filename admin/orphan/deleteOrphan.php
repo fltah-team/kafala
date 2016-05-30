@@ -1,7 +1,6 @@
 <?php
-
-	
 	include('../../utils/db.php');
+	include('../../utils/siblingAPI.php');
 	include('../../utils/orphanAPI.php');
     include('../../utils/error_handler.php');
     include('../../utils/notifyAPI.php'); 
@@ -9,14 +8,14 @@
             fp_err_delete_fail("اليتيم");
         }
 	$id = $_GET['id'] ;
-	$result = fp_orphan_delete($id) ;
-	
-
-	fp_db_close();
-	
-	if(!$result)
+	$result = fp_orphan_delete($id) ;	
+	if(!$result){
+            fp_db_close();
             fp_err_delete_fail ('اليتيم');
-        else 
+            }
+        else{
+            fp_sibiling_delete_for_orphan($id);
+            fp_db_close();
             fp_err_delete_succes ('اليتيم');
-	
+        }
 	?>

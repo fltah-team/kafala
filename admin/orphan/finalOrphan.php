@@ -1,11 +1,11 @@
 <?php
 	include('../../utils/db.php');
 	include('../../utils/finalOrphanAPI.php');
-        include('../../utils/error_handler.php');
-        include('../../utils/notifyAPI.php');
-        include('../../utils/orphanAPI.php');
-        include('../../utils/siblingAPI.php');
-        if(!isset ( $_GET['status']) || !isset ( $_GET['sponsor']) ||!isset (  $_GET['name1']) ||!isset (  $_GET['name2']) || !isset ( $_GET['name3']) ||!isset (  $_GET['name4'])  ||!isset (  $_GET['y']) || !isset ( $_GET['m']) || !isset ( $_GET['d']) || !isset ( $_GET['gender']) ||!isset (  $_GET['mname1']) || !isset ( $_GET['mname2']) || !isset ( $_GET['mname3'])  || !isset ( $_GET['mname4']) || !isset ( $_GET['my']) || !isset ( $_GET['mm']) ||!isset (  $_GET['md']) ||!isset (  $_GET['mstatus']) || !isset ( $_GET['fy']) ||!isset (  $_GET['fm']) || !isset ( $_GET['fd']) || !isset ( $_GET['dr']) || !isset ( $_GET['lw']) || !isset ( $_GET['state']) ||!isset (  $_GET['city']) || !isset ( $_GET['district']) ||!isset (  $_GET['section'])|| !isset ( $_GET['hno']) ||!isset (  $_GET['tel1']) || !isset ( $_GET['tel2']) || !isset ( $_GET['learning']) 
+    include('../../utils/error_handler.php');
+    include('../../utils/notifyAPI.php');
+    include('../../utils/orphanAPI.php');
+    include('../../utils/siblingAPI.php');
+    if(!isset ( $_GET['status']) || !isset ( $_GET['sponsor']) ||!isset (  $_GET['name1']) ||!isset (  $_GET['name2']) || !isset ( $_GET['name3']) ||!isset (  $_GET['name4'])  ||!isset (  $_GET['y']) || !isset ( $_GET['m']) || !isset ( $_GET['d']) || !isset ( $_GET['gender']) ||!isset (  $_GET['mname1']) || !isset ( $_GET['mname2']) || !isset ( $_GET['mname3'])  || !isset ( $_GET['mname4']) || !isset ( $_GET['my']) || !isset ( $_GET['mm']) ||!isset (  $_GET['md']) ||!isset (  $_GET['mstatus']) || !isset ( $_GET['fy']) ||!isset (  $_GET['fm']) || !isset ( $_GET['fd']) || !isset ( $_GET['dr']) || !isset ( $_GET['lw']) || !isset ( $_GET['state']) ||!isset (  $_GET['city']) || !isset ( $_GET['district']) ||!isset (  $_GET['section'])|| !isset ( $_GET['hno']) ||!isset (  $_GET['tel1']) || !isset ( $_GET['tel2']) || !isset ( $_GET['learning']) 
                 || !isset ( $_GET['quran']) || !isset ( $_GET['illness']) )
         {
             fp_err_show_record("اليتيم");
@@ -74,8 +74,7 @@
         session_start();
         $data_admin_name = $_SESSION['name'];
         $data_admin_date = date("y-m-d");
-                
-                
+ 
 if(fp_final_orphan_get_by_id($id))
     $result = fp_final_orphan_update($id ,$state , $warranty_organization ,NULL,NULL , $first_name , $meddle_name , $last_name , $last_4th_name , $birth_date , $sex , $mother_first_name , $mother_middle_name , $mother_last_name , $mother_4th_name , $mother_Birth_date , $mother_state ,$father_dead_date , $father_dead_cause , $father_work , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 ,$studing_state ,$nonstuding_cause, $school_name , $level , $year , $quran_parts , $health_state , $ill_cause , $data_entery_name , $data_entery_date ,$data_admin_name , $data_admin_date );   
 else 
