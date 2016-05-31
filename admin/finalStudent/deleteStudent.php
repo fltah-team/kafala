@@ -1,5 +1,5 @@
 <?php
-
+    include '../auth.php';
 	include('../../utils/notifyAPI.php');
 	include('../../utils/db.php');
 	include('../../utils/finalStudentAPI.php');

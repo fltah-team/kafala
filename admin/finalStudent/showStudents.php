@@ -1,4 +1,5 @@
 <?php
+    include '../auth.php';
     include('../../utils/db.php');
     include('../../utils/finalStudentAPI.php');
     include('../../utils/error_handler.php');
@@ -82,60 +83,10 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
    
 </table>
 </div>
-
-
 <!-- menu -->
 <div class="menu">
-	<table align="center">
-    <tr>
-        <td>
-            <div class="container" id="main" role="main" align="center" >
-            <ul class="menu" >
-                <li><a href="#">الأيتام</a>    
-                    <ul class="submenu">
-                        <li><a href="../finalOrphan/showOrphans.php">عرض الكل  </a></li>
-                        <li><a href="../orphan/showOrphans.php"> بيانات غير معتمدة </a></li>
-                        <li>
-                            <form method="get" action="orphanInfo.php" >
-                                <input dir="rtl" type="text" name="id" size="12"/> <input type="submit" size="5" value="بحث" id="o_serch"/>
-                            </form>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#">المستخدمين</a>    
-                    <ul class="submenu">
-                        <li><a href="../users/showUsers.php">عرض الكل  </a></li>
-                        <li><a href="../users/addUser.php">اضافة مستخدم جديد</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="#">الكفالات</a>    
-                    <ul class="submenu">
-                        <li><a href="../kafala/showKafala.php">عرض الكل  </a></li>
-                        <li><a href="../kafala/addKafala.php">اضافة كفالة جديدة</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="#">أخرى</a>    
-                    <ul class="submenu">
-                        <li><a href="../sponsor/showSponsor.php">عرض جهات الكفالة  </a></li>
-                        <li><a href="../sponsor/addSponsor.php">اضافة جهة كفالة</a></li>
-                        <li><a href="../states/showState.php">عرض المدن  </a></li>
-                        <li><a href="../kafala/showKafala.php">اضافة مدينة جديدة</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="../../utils/logout.php">تسجيل خروج</a></li>
-            </ul>
-            
-            
-            </div>
-        </td>
-    </tr>
-</table>
+	<?php include '../menu.php';?>
 </div>
-
-
 <!-- main -->
 <div class="main">
     <h1 align="center" class="adress" dir="rtl"> بيانات الطلاب  <?php echo "($total_results)"?> </h1>

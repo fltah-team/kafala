@@ -1,6 +1,9 @@
-
+@font-face {
+    font-family: DroidKufi;
+    src: url(DroidKufi.ttf);
+}
 *{
-	font-family:Droid Arabic Kufi;
+	font-family:DroidKufi;
         
 }
 * td{

@@ -1,6 +1,5 @@
 <?php
-
-	
+    include '../auth.php';
 	include('../../utils/db.php');
 	include('../../utils/studentAPI.php');
         include('../../utils/error_handler.php');

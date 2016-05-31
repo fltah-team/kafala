@@ -104,22 +104,7 @@
     <tr align="right">
 	<td>
         </td>   
-    <td align="right">
-                <td align="center" dir="rtl" >
-  	    ذكر<input type="radio" name="s_gender" value="1" id="male_gender" />
-            &nbsp;&nbsp;
-  	    أنثى<input type="radio" name="s_gender" value="0" id="female_gender" />
-  	    
-    </td>
-        <script type="text/javascript" >
-            var gender = <?php echo $orphan->sex?>;
-            var male =document.getElementById("male_gender");
-            var female =document.getElementById("female_gender");
-            if(gender == 1)male.setAttribute("checked","checked");
-            else
-                if(gender == 0)female.setAttribute("checked","checked");
-        </script>    
-    </td>
+    <td align="right"><input class="textFiels" name="lw" type="text" id="lw" size="10" maxlength="30" value="<?php if($orphan->sex==1)echo "ذكر"; else echo "أنثى" ; ?>" /></td>
   	<td align="center">الجنس</td>
     
         <td align="right">
