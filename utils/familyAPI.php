@@ -1,14 +1,9 @@
 <?php
-
-//include("db.php");
-            
-
-
 		// SELSECT ALL
 	function fp_family_get($extra = ''){
 		
 		global $fp_handle ;
-		$query = sprintf("SELECT * FROM `family` %s",$extra);
+		$query = sprintf("SELECT * FROM `family` %s",$extra);echo $query;
 		$qresult = @mysql_query($query);
 		
 		if(!$qresult) return -1 ; 
@@ -44,7 +39,14 @@
 		$family = $families[0];
 		return $family ;
 		}
-
+ function fp_family_get_by_phone1($oid){
+		if($oid == 0) return NULL ;
+		
+		$families = fp_family_get("WHERE `phone1` = ".$oid);
+		if($families == NULL) return NULL ;
+		$family = $families[0];
+		return $family ;
+		}
 		// INSERT	
 	function fp_family_add($state , $warranty_organization , $saving , $father_first_name , $father_middle_name , $father_last_name , $father_4th_name , $birth_date , $sex ,$social_state ,$father_dead_date , $father_dead_cause , $father_work ,  $supporter_first_name , $supporter_meddle_name , $supporter_last_name , $supporter_4th_name , $supporter_birth_date , $supporter_sex , $supporter_state , $supporter_relation  , $supporter_work  , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 , $data_entery_name , $data_entery_date ){
 		global $fp_handle;
@@ -83,9 +85,8 @@
 
 	 
 		$query = ("INSERT INTO  `family`  ( `family_id` ,`state` , `warranty_organization` , saving , `father_first_name` , `father_middle_name` , `father_last_name` , `father_4th_name` , `birth_date` , `sex` ,`social_state` ,`father_dead_date` , `father_dead_cause` , `father_work` ,  `supporter_first_name` , `supporter_meddle_name` , `supporter_last_name` , `supporter_4th_name` , `supporter_birth_date` , `supporter_sex` , `supporter_state` , `supporter_relation`  , `supporter_work`  , `residence_state` , `city` , `District` , `section`,`house_no` , `phone1` , `phone2`   , `data_entery_name` , `data_entery_date`)
-					VALUE(NULL ,'$n_state' , '$n_warranty_organization' ,'$n_saving', '$n_father_first_name' , '$n_father_middle_name' , '$n_father_last_name' , '$n_father_4th_name' , '$n_birth_date' , '$n_sex' ,'$n_social_state' ,'$n_father_dead_date' , '$n_father_dead_cause' , '$n_father_work' ,  '$n_supporter_first_name' , '$n_supporter_meddle_name' , '$n_supporter_last_name' , '$n_supporter_4th_name' , '$n_supporter_birth_date' , '$n_supporter_sex' , '$n_supporter_state' , '$n_supporter_relation'  , '$n_supporter_work'  , '$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2' , '$n_data_entery_name' , '$n_data_entery_date')");
-		
-		
+					VALUE(0 ,'$n_state' , '$n_warranty_organization' ,'$n_saving', '$n_father_first_name' , '$n_father_middle_name' , '$n_father_last_name' , '$n_father_4th_name' , '$n_birth_date' , '$n_sex' ,'$n_social_state' ,'$n_father_dead_date' , '$n_father_dead_cause' , '$n_father_work' ,  '$n_supporter_first_name' , '$n_supporter_meddle_name' , '$n_supporter_last_name' , '$n_supporter_4th_name' , '$n_supporter_birth_date' , '$n_supporter_sex' , '$n_supporter_state' , '$n_supporter_relation'  , '$n_supporter_work'  , '$n_residence_state' , '$n_city' , '$n_District' , '$n_section','$n_house_no' , '$n_phone1' , '$n_phone2' , '$n_data_entery_name' , '$n_data_entery_date')");
+		echo $query;		
 		$qresult = mysql_query($query);
 		if(!$qresult) return false ;
 		@mysql_free_result($qresult);
@@ -264,9 +265,9 @@
 
 	// DELETE
 	function fp_family_delete($id){
-		$uid = (int)$id;
+		$uid = $id;
 		if($uid == 0) return false ;
-		$query = sprintf("DELETE FROM `family` WHERE `family_id` = %d",$uid);
+		$query = sprintf("DELETE FROM `family` WHERE `phone1` = %s",$uid);echo $query;
 		$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
 		@mysql_free_result($qresult);
@@ -276,19 +277,18 @@
 
 	//------------------------family members -------------------------------
 	
-	function fp_member_add( $member_id , $name , $sex , $birth_date , $relation ,$study_level , $health_state  , $familyID){
+	function fp_member_add($name , $sex , $birth_date , $relation ,$study_level , $health_state  , $familyID){
 		global $fp_handle;
 	
-		$n_member_id = (int)$member_id ;
 		$n_name    = @mysql_real_escape_string(strip_tags($name),$fp_handle);
 		$n_sex    = @mysql_real_escape_string(strip_tags($sex),$fp_handle);
 		$n_birth_date  = @mysql_real_escape_string(strip_tags($birth_date),$fp_handle);
 		$n_relation = @mysql_real_escape_string(strip_tags($relation),$fp_handle);
-		$study_level = @mysql_real_escape_string(strip_tags($study_level),$fp_handle);
-		$health_state  = @mysql_real_escape_string(strip_tags($health_state),$fp_handle);
-		$familyID = (int)$familyID ;
-		$query = ("INSERT INTO `f_member`( `member_id` , `name` , `sex` , `birth_date` , `relation` ,`study_level` , `health_state`  , `familyID`) VALUE(NULL,'$n_member_id' , '$n_name' , '$n_sex' , '$n_birth_date' , '$n_relation' ,'$n_study_level' , '$n_health_state'  , '$n_familyID')");
-		echo $query ;
+		$n_study_level = @mysql_real_escape_string(strip_tags($study_level),$fp_handle);
+		$n_health_state  = @mysql_real_escape_string(strip_tags($health_state),$fp_handle);
+		$n_familyID = $familyID ;
+		$query = ("INSERT INTO `f_member`( `member_id` , `name` , `sex` , `birth_date` , `relation` ,`study_level` , `health_state`  , `familyID`) VALUE(NULL , '$n_name' , '$n_sex' , '$n_birth_date' , '$n_relation' ,'$n_study_level' , '$n_health_state'  , '$n_familyID')");
+		echo $n_familyID;
 		
 		$qresult = mysql_query($query);
 		if(!$qresult) return false ;
@@ -296,10 +296,10 @@
 		return true ;
 		}	
                 
-		function fp_member_get($extra = ''){
+function fp_member_get($extra = ''){
 			global $fp_handle ;
 			$query = sprintf("SELECT * FROM `f_member` %s ",$extra);
-		
+            echo $query;
 			$qresult = @mysql_query($query);
 			
 			if(!$qresult) return NULL ; 
@@ -322,7 +322,7 @@
 	function fp_member_delete($id){
 		$uid = (int)$id;
 		if($uid == 0) return false ;
-		$query = sprintf("DELETE FROM `f_member` WHERE `id` = %d",$uid);
+		$query = sprintf("DELETE FROM `f_member` WHERE `member_id` = %s",$uid);echo $query;
 		$qresult = @mysql_query($query);
 		if(!$qresult) return false ;
 		@mysql_free_result($qresult);

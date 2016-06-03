@@ -14,16 +14,13 @@
 
 <body>
 <!-- Title -->
-<div id="title">
-<table width="90%" border="0" align="center">
-  <tr>
-    <td><img src="../../images/logo.png" /></td>
-    <td><h1>الهيئة الخيرية الاسلامية للرعاية الاجتماعية</h1></td>
-    <td><img src="../../images/logo.png" /></td>
-  </tr>
-  
+<table align="center" width="80%" >
+    <tr >
+        <td>
+            <img width="100%"  src="../../images/banner.JPG" style="margin: 5px;border: 2px #990033 solid; border-radius: 10px ;" />            
+        </td>
+    </tr>
 </table>
-</div>
 <!-- menu -->
 <div class="menu">
 	<?php include '../menu.php';?>
@@ -356,7 +353,7 @@
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td align="center"><button class="add_bt" name="add" type="button" onclick="del_ajax(<?php echo $orphan->phone1?>)" >الغاء البيانات<img align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" />  </button>
+    <td align="center"><button class="del_bt" name="add" type="button" onclick="del_ajax(<?php echo $orphan->phone1?>)" >الغاء البيانات<img align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" />  </button></td>
     <td>&nbsp;</td>
     <td align="center"><button class="add_bt" name="add" type="button" onclick="i3_get_str()" >اعتماد البيانات<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
     <td>&nbsp;</td>
@@ -375,7 +372,8 @@ function IsEmpty(){
         var empty_checker = 0 ;
         for(var i = 0 ; i< text.length ; i++){
            if(text[i].value == ''){
-               text.item(i).style.color = "#ff0000" ;
+               text.item(i).style.color = "#fff" ;
+               text.item(i).style.backgroundColor = "#fa4854" ;
                text.item(i).setAttribute("placeholder","هذا الحقل فارغ");
                empty_checker++;
            }

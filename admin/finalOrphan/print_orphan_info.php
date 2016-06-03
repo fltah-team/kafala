@@ -45,7 +45,7 @@
         $sibilings = fp_sibiling_get($id);
         $siblings_male = fp_sibiling_get_for_gender($id," and sex = 1 ");
         $siblings_female = fp_sibiling_get_for_gender($id," and sex = 0 ");
-        $kafalas = fp_sposored_get_kafala($id);
+        $kafalas = fp_sposored_get_kafala($id,1);
 	$male_count = @count($siblings_male);
         $female_count = @count($siblings_female);
 	if(!$orphan) fp_err_show_record("اليتيم");	
@@ -96,7 +96,7 @@
         </td>   
     <td align="right">
     <td align="center" dir="rtl" >
-        <input size="10" type="text" name="s_gender" value="<?php echo "khg".$orphan->sex?>"/>    
+        <input size="10" type="text" name="s_gender" value="<?php if($orphan->sex==1)echo "ذكر"; else echo "أنثى" ; ?>"/>    
     </td>
     </td>
   	<td align="center">الجنس</td>

@@ -1,5 +1,6 @@
 <?php
-    include '../auth.php';
+
+	
 	include('../../utils/db.php');
 	include('../../utils/sponsorAPI.php');
 	include('../../utils/studentAPI.php');

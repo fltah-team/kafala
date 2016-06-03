@@ -9,17 +9,13 @@
 
 <body>
 <!-- Title -->
-<div id="title">
-<table width="90%" border="0" align="center">
-  <tr>
-    <td><img src="../../images/logo.png" /></td>
-    <td><h1>الهيئة الخيرية الاسلامية للرعاية الاجتماعية</h1></td>
-    <td><img src="../../images/logo.png" /></td>
-  </tr>
-  
+<table align="center" width="80%" >
+    <tr >
+        <td>
+            <img width="100%"  src="../../images/banner.JPG" style="margin: 5px;border: 2px #990033 solid; border-radius: 10px ;" />            
+        </td>
+    </tr>
 </table>
-</div>
-
 <!-- menu -->
 <div class="menu">
 	<?php include '../menu.php';?>
@@ -315,7 +311,7 @@
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td align="center"><button class="bt" name="add" type="button" onclick="IsEmpty()" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة طالب  </button></td>
+    <td align="center"><button class="add_bt" name="add" type="button" onclick="IsEmpty()" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة طالب  </button></td>
     <td>&nbsp;</td>
   </tr>
   </form>
@@ -331,7 +327,8 @@ function IsEmpty(){
         var empty_checker = 0 ;
         for(var i = 0 ; i< text.length ; i++){
            if(text[i].value == ''){
-               text.item(i).style.color = "#ff0000" ;
+               text.item(i).style.color = "#fff" ;
+               text.item(i).style.backgroundColor = "#fa4854" ;
                text.item(i).setAttribute("placeholder","هذا الحقل فارغ");
                empty_checker++;
            }

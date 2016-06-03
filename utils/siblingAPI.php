@@ -47,10 +47,10 @@ function fp_sibiling_get_by_id($id){
                     $n_name    = @mysql_real_escape_string(strip_tags($name),$fp_handle);
                     $fields[@count($fields)] = " `name` = '$n_name' ";
                     }
-                
+                if($sex != NULL){
                 $n_sex   = (int)@mysql_real_escape_string(strip_tags($sex),$fp_handle) ;
                 $fields[@count($fields)] = " `sex` = '$n_sex' ";
-                        
+                }
                 if(!empty($birth_date)){
                     $n_birth_date   = @mysql_real_escape_string(strip_tags($birth_date),$fp_handle);
                     $fields[@count($fields)] = " `birth_date` = '$n_birth_date' ";

@@ -27,15 +27,13 @@
 
 <body>
 <!-- Title pihasdlfb -->
-<div id="title">
-<table width="90%" border="0" align="center">
-  <tr>
-    <td><img src="images/logo.png" /></td>
-    <td><h1>الهيئة الخيرية الاسلامية للرعاية الاجتماعية</h1></td>
-    <td><img src="images/logo.png" /></td>
-  </tr>
-</table>
-</div>
+<table align="center" width="80%" >
+    <tr >
+        <td>
+            <img width="100%"  src="images/banner.JPG" style="border: 2px #990033 solid; border-radius: 10px ;" />            
+        </td>
+    </tr>
+    </table>
 <?php
     if(isset($_GET['m'])){
         $m =  $_GET['m'];

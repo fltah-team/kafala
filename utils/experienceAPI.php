@@ -73,6 +73,15 @@
             @mysql_free_result($qresult);
             return true ;
             }
+  function fp_experience_delete_by_preacher_id($id){
+            $uid = $id;
+            if($uid == 0) return false ;
+            $query = sprintf("DELETE FROM `experience` WHERE `preacherID` = %s",$uid);echo $query;
+            $qresult = @mysql_query($query);
+            if(!$qresult) return false ;
+            @mysql_free_result($qresult);
+            return true ;
+            }
 
 
     function fp_experience_update($id, $preacherID = NULL , $qualifier_name = NULL , $organizaton = NULL , $date = NULL){

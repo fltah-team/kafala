@@ -74,7 +74,7 @@
         else{
             $ill_cause = $_GET['illt'];
         }
-    session_start();
+    //session_start();
 	$data_entery_name = $_SESSION['name'];
 	$data_entery_date  = date("y-m-d");	
         

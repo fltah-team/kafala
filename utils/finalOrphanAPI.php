@@ -161,10 +161,10 @@ function fp_final_orphan_update($id ,  $state = Null , $warranty_organization = 
 		$n_birth_date  = mysql_real_escape_string(strip_tags($birth_date),$fp_handle);
 		$fields[@count($fields)] = " `birth_date` = '$n_birth_date' ";
 		}
-	//if(!empty($sex)){
+	if($sex != NULL){
 		$n_sex   = mysql_real_escape_string(strip_tags($sex),$fp_handle);
 		$fields[@count($fields)] = " `sex` = '$n_sex' ";
-		//}
+    }
 	if(!empty($mother_first_name)){
 		$n_mother_first_name   = mysql_real_escape_string(strip_tags($mother_first_name),$fp_handle);
 		$fields[@count($fields)] = " `mother_first_name` = '$n_mother_first_name' ";

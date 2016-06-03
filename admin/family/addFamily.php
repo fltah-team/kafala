@@ -1,3 +1,4 @@
+<?php include '../auth.php';?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -21,53 +22,7 @@
 
 <!-- menu -->
 <div class="menu">
-	<table align="center">
-    <tr>
-        <td>
-            <div class="container" id="main" role="main" align="center" >
-            <ul class="menu" >
-                <li><a href="#">الأيتام</a>    
-                    <ul class="submenu">
-                        <li><a href="../finalOrphan/showOrphans.php">عرض الكل  </a></li>
-                        <li><a href="../orphan/showOrphans.php"> بيانات غير معتمدة </a></li>
-                        <li>
-                            <form method="get" action="orphanInfo.php" >
-                                <input dir="rtl" type="text" name="id" size="12"/> <input type="submit" size="5" value="بحث" id="o_serch"/>
-                            </form>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#">المستخدمين</a>    
-                    <ul class="submenu">
-                        <li><a href="../users/showUsers.php">عرض الكل  </a></li>
-                        <li><a href="../users/addUser.php">اضافة مستخدم جديد</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="#">الكفالات</a>    
-                    <ul class="submenu">
-                        <li><a href="../kafala/showKafala.php">عرض الكل  </a></li>
-                        <li><a href="../kafala/addKafala.php">اضافة كفالة جديدة</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="#">أخرى</a>    
-                    <ul class="submenu">
-                        <li><a href="../sponsor/showSponsor.php">عرض جهات الكفالة  </a></li>
-                        <li><a href="../sponsor/addSponsor.php">اضافة جهة كفالة</a></li>
-                        <li><a href="../states/showState.php">عرض المدن  </a></li>
-                        <li><a href="../kafala/showKafala.php">اضافة مدينة جديدة</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="../../utils/logout.php">تسجيل خروج</a></li>
-            </ul>
-            
-            
-            </div>
-        </td>
-    </tr>
-</table>
+<?php include '../menu.php';?>
 </div>
 
 
@@ -124,7 +79,7 @@
     <td>&nbsp;</td>
   </tr>
     <tr align="right">
-        <td align="right"><input class="textFiels" name="name1" tabindex="2" type="text" id="name1" size="10" maxlength="30" /></td>
+        <td align="right"><input class="textFiels" name="name1" tabindex="2" type="text" id="state" size="10" maxlength="30" /></td>
     <td align="center">الحالة الاجتماعية</td>
                 <td align="center" dir="rtl" >
   	    ذكر<input type="radio" name="s_gender" value="1" id="male_gender" />
@@ -134,7 +89,7 @@
     </td>
   	<td align="center">الجنس</td>
     <td align="center">
-        <?php fp_select_date_get(1990,null)?>
+        <?php fp_select_date_get(1950,null)?>
     </td>
     <td align="center">تاريخ الميلاد</td>
   </tr>
@@ -157,10 +112,10 @@
   </tr>
     <tr align="center">
 	<td>&nbsp;</td>
-  	<td align="right"><input class="textFiels" name="name4" type="text" id="name4" tabindex="5" size="10" maxlength="30" /></td>
-    <td align="right"><input class="textFiels" name="name3" type="text" tabindex="4" id="name3" size="10" maxlength="30" /></td>
-    <td align="right"><input class="textFiels" name="name2" type="text" tabindex="3" id="name2" size="10" maxlength="30" /></td>
-    <td align="right"><input class="textFiels" name="name1" tabindex="2" type="text" id="name1" size="10" maxlength="30" /></td>
+  	<td align="right"><input class="textFiels" name="name4" type="text" id="sn4" tabindex="5" size="10" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="name3" type="text" tabindex="4" id="sn3" size="10" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="name2" type="text" tabindex="3" id="sn2" size="10" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="name1" tabindex="2" type="text" id="sn1" size="10" maxlength="30" /></td>
     <td align="center">المعيل الحالي  الأسرة</td>
   </tr>
   
@@ -168,17 +123,17 @@
     <td>&nbsp;</td>
   </tr>
     <tr align="right">
-        <td align="right"><input class="textFiels" name="name1" tabindex="2" type="text" id="name1" size="10" maxlength="30" /></td>
+        <td align="right"><input class="textFiels" name="name1" tabindex="2" type="text" id="sstate" size="10" maxlength="30" /></td>
     <td align="center">الحالة الاجتماعية</td>
                 <td align="center" dir="rtl" >
-  	    ذكر<input type="radio" name="s_gender" value="1" id="male_gender" />
+  	    ذكر<input type="radio" name="ss_gender" value="1" id="smale_gender" />
             &nbsp;&nbsp;
-  	    أنثى<input type="radio" name="s_gender" value="0" id="female_gender" />
+  	    أنثى<input type="radio" name="ss_gender" value="0" id="sfemale_gender" />
   	    
     </td>
   	<td align="center">الجنس</td>
     <td align="center">
-        <?php fp_select_date_get(1990,null)?>
+        <?php fp_select_date_get(1950,'s')?>
     </td>
     <td align="center">تاريخ الميلاد</td>
   </tr>
@@ -188,9 +143,9 @@
     <tr align="center">
     <td align="center"></td>
     <td align="center"></td>
-  	<td align="right"><input class="textFiels" name="lw" type="text" id="lw" size="10" maxlength="30" /></td>
+  	<td align="right"><input class="textFiels" name="lw" type="text" id="sw" size="10" maxlength="30" /></td>
     <td>عمله الحالي</td>
-    <td align="right"><input class="textFiels" name="dr" type="text" id="dr" size="10" maxlength="30" /></td>
+    <td align="right"><input class="textFiels" name="dr" type="text" id="sr" size="10" maxlength="30" /></td>
     <td align="center">صلة القرابة بالاسرة</td>
   </tr>
     
@@ -272,7 +227,7 @@
   	<td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-    <td align="center"><button class="bt" name="add" type="button" onclick="IsEmpty()" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة طالب  </button></td>
+    <td align="center"><button class="add_bt" name="add" type="button" onclick="get_str()" ><img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" /> اضافة أسرة  </button></td>
     <td>&nbsp;</td>
   </tr>
   </form>
@@ -317,7 +272,11 @@ function get_str(){
         if(document.getElementById("male_gender").checked == true) gender_value = "1" ;
         else gender_value = "0" ;
         str+="gender="+gender_value;
-        //window.location.href = "saveStudent.php?"+str;
+        sgender_value = 1 ;
+        if(document.getElementById("smale_gender").checked == true) sgender_value = "1" ;
+        else sgender_value = "0" ;
+        str+="&sgender="+sgender_value;
+        //window.location.href = "saveFamily.php?"+str;
         ajax(str);
 }
 function ajax(str)
@@ -325,7 +284,7 @@ function ajax(str)
     var ajax;
 	//var d_node = document.getElementById(elementID);
 	elementID = "div";
-	filename = "saveStudent.php";
+	filename = "saveFamily.php";
 	post = false ;
     if (window.XMLHttpRequest)
     {

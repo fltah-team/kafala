@@ -1,11 +1,11 @@
 <?php
 	include('../../utils/db.php');
-	include('../../utils/studentAPI.php');
+	include('../../utils/familyAPI.php');
         include('../../utils/error_handler.php');
         include('../../utils/siblingAPI.php');
         $start=0;
     $limit=20;
-    $total_results = fp_student_get_num_rows();
+    $total_results = fp_family_get_num_rows();
         $total=ceil($total_results/$limit);
     if(!isset($_GET['page']) || $_GET['page'] == '' || (int)$_GET['page'] == 0 || $_GET['page']>$total)
     {
@@ -15,7 +15,7 @@
     $page=$_GET['page'];
     $start=($page-1)*$limit;
     }
-        $orphans = fp_student_get("LIMIT $start, $limit");
+        $orphans = fp_family_get("LIMIT $start, $limit");
 	
         
 ?>
@@ -43,59 +43,13 @@
 
 <!-- menu -->
 <div class="menu">
-	<table align="center">
-    <tr>
-        <td>
-            <div class="container" id="main" role="main" align="center" >
-            <ul class="menu" >
-                <li><a href="#">الأيتام</a>    
-                    <ul class="submenu">
-                        <li><a href="../finalOrphan/showOrphans.php">عرض الكل  </a></li>
-                        <li><a href="../orphan/showOrphans.php"> بيانات غير معتمدة </a></li>
-                        <li>
-                            <form method="get" action="orphanInfo.php" >
-                                <input dir="rtl" type="text" name="id" size="12"/> <input type="submit" size="5" value="بحث" id="o_serch"/>
-                            </form>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#">المستخدمين</a>    
-                    <ul class="submenu">
-                        <li><a href="../users/showUsers.php">عرض الكل  </a></li>
-                        <li><a href="../users/addUser.php">اضافة مستخدم جديد</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="#">الكفالات</a>    
-                    <ul class="submenu">
-                        <li><a href="../kafala/showKafala.php">عرض الكل  </a></li>
-                        <li><a href="../kafala/addKafala.php">اضافة كفالة جديدة</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="#">أخرى</a>    
-                    <ul class="submenu">
-                        <li><a href="../sponsor/showSponsor.php">عرض جهات الكفالة  </a></li>
-                        <li><a href="../sponsor/addSponsor.php">اضافة جهة كفالة</a></li>
-                        <li><a href="../states/showState.php">عرض المدن  </a></li>
-                        <li><a href="../kafala/showKafala.php">اضافة مدينة جديدة</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="../../utils/logout.php">تسجيل خروج</a></li>
-            </ul>
-            
-            
-            </div>
-        </td>
-    </tr>
-</table>
+<?php include '../menu.php';?>
 </div>
 
 
 <!-- main -->
 <div class="main">
-    <h1 align="center" class="adress" dir="rtl"> بيانات الطلاب غير المعتمدة<?php echo "($total_results)"?> </h1>
+    <h1 align="center" class="adress" dir="rtl"> بيانات الأسر غير المعتمدة<?php echo "($total_results)"?> </h1>
 <br />
  <?php
     //if($users[0] == NULL ) die($users[1]) ;
@@ -113,7 +67,7 @@
         if($orphans == 0 ) {
             echo '
                 <div style="text-align:center;color:#fff;">
-                <div class="alert-box notice"><span>تنبيه: </span>لا يوجد طلاب لعرضهم
+                <div class="alert-box notice"><span>تنبيه: </span>لا يوجد أسر لعرضهم
                 <p>يمكنك اضافة طلاب من <a href="addStudent.php">هنا</a></p>
                 </div>
                 <div id="footer">
@@ -128,12 +82,10 @@
 <table width="90%" border="0" align="center" class="table">
     <tr class="table_header" align="center">
     <td width="7%">عرض</td>
-    <td width="7%">العمر</td>
     <td width="9%">الولاية </td>
-    <td width="8%">الجنس </td>
     <td width="29%">جهة الكفالة</td>
     <td width="15%">الحالة</td>
-    <td width="28%">الاسم </td>
+    <td width="28%">اسم رب الأسرة </td>
     <td  width="4%">الرقم</td>
     
   </tr>
@@ -141,28 +93,16 @@
   	include('../../utils/stateAPI.php');
 	include('../../utils/sponsorAPI.php');
 
-function ageCalculator($dob){
-        if(!empty($dob)){
-        $birthdate = new DateTime($dob);
-        $today   = new DateTime('today');
-        $age = $birthdate->diff($today)->y;
-        return $age;
-    }
-	else
-        return 0;   
-}
   	for($i = 0 ; $i < $ocount ; $i++){
 		$orphan = $orphans[$i];
   ?>
     <tr align="center" class="table_data<?php echo $i%2?>">
-        <td  onclick="window.location.href='studentInfo.php?id='+<?php echo json_decode($orphan->phone1)?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
-    <td width="7%"><?php echo ageCalculator($orphan->birth_date);?></td>
- 	<td width="9%"><?php echo fp_states_get_by_id($orphan->residence_state)->name;?></td>
-    <td width="8%"><?php if($orphan->sex==1)echo "ذكر"; else echo "أنثى" ; ?> </td>
+        <td  onclick="window.location.href='familyInfo.php?id='+<?php echo json_decode($orphan->phone1)?>"><img alt="عرض" align="middle" width="22px"  src="../../images/style images/show_icon.png" style="padding-left:5px" /></td>
+    <td width="9%"><?php echo fp_states_get_by_id($orphan->residence_state)->name;?></td>
     <td width="29%"><?php echo fp_sponsor_get_by_id($orphan->warranty_organization)->name;?></td>
     <td width="15%"><?php fp_one_status_get_by_id($orphan->state)?></td>
-    <td width="28%"> <?php echo $orphan->first_name." ".$orphan->meddle_name." ".$orphan->last_name." ".$orphan->last_4th_name?></td>
-    <td width="4%"><?php echo $orphan->id?></td>
+    <td width="28%"> <?php echo $orphan->father_first_name." ".$orphan->father_middle_name." ".$orphan->father_last_name." ".$orphan->father_4th_name?></td>
+    <td width="4%"><?php echo $i+1?></td>
     
   </tr>
   <?php }

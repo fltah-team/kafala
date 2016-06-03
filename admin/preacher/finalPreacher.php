@@ -52,10 +52,10 @@
         else{
             $ill_cause = $_GET['illt'];
         }
-        //session_start();
+    session_start();
     $data_entery_name = $_GET['user'];		
 	$data_entery_date  = $_GET['user_d'];
-    $data_admin_name = "admin";//$_SESSION['name'];
+    $data_admin_name = $_SESSION['name'];
     $data_admin_date = date("Y-m-d");
                 
            

@@ -14,16 +14,13 @@
 
 <body>
 <!-- Title -->
-<div id="title">
-<table width="90%" border="0" align="center">
-  <tr>
-    <td><img src="../../images/logo.png" /></td>
-    <td><h1>الهيئة الخيرية الاسلامية للرعاية الاجتماعية</h1></td>
-    <td><img src="../../images/logo.png" /></td>
-  </tr>
-  
+<table align="center" width="80%" >
+    <tr >
+        <td>
+            <img width="100%"  src="../../images/banner.JPG" style="margin: 5px;border: 2px #990033 solid; border-radius: 10px ;" />            
+        </td>
+    </tr>
 </table>
-</div>
 <!-- menu -->
 <div class="menu">
 	<?php include '../menu.php';?>
@@ -43,19 +40,19 @@
 ?>
 <h1 align="center" class="adress" dir="rtl">الأيتام</h1>
 <br />
-<table dir="rtl" width="50%" border="0" align="center">
+<table dir="rtl" width="60%" border="0" align="center">
     <tr align="center">
-        <td>
-            <button onclick="window.location.href = '../orphan/addorphan.php'" >
+        <td align="right">
+            <button class="add_bt" onclick="window.location.href = '../orphan/addorphan.php'" >
                 <img align="right" src="../../images/style images/add_icon.png" style="padding-left:5px" />
                 اضافة يتيم جديد
             </button>
         </td>
-        <td>
-            <input id="s_tf" type="text" size="10px" class="textFiels"  />
+        <td align="left">
+            <input id="s_tf" type="text" size="20" class="textFiels"  />
         </td>
-        <td>
-            <button class="bt" onclick="window.location.href = '../finalOrphan/orphanInfo.php?id='+document.getElementById('s_tf').value" >
+        <td align="left">
+            <button class="info_bt" onclick="window.location.href = '../finalOrphan/orphanInfo.php?id='+document.getElementById('s_tf').value" >
                 <img align="right" src="../../images/style images/search_icon.png" style="padding-left:5px" />
                 بحث
             </button>
@@ -163,8 +160,13 @@
     
 	    <tr>
      <td align="center" >&nbsp;</td>
-     <td align="center" ><input class="bt" type="submit" name="button2" id="" value="عرض" /></td>
-     <td align="center" >&nbsp;</td>
+     <td align="center" >
+         <button class="info_bt" style="width: 100px" type="submit"  >
+                <img align="right" src="../../images/style images/show_icon.png" style="padding-left:5px" />
+                عرض
+            </button
+     </td>
+     <td align="center" ></td>
      <td align="center" >&nbsp;</td>
     </tr>
     

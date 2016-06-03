@@ -14,16 +14,13 @@
 
 <body>
 <!-- Title -->
-<div id="title">
-<table width="90%" border="0" align="center">
-  <tr>
-    <td><img src="../../images/logo.png" /></td>
-    <td><h1>الهيئة الخيرية الاسلامية للرعاية الاجتماعية</h1></td>
-    <td><img src="../../images/logo.png" /></td>
-  </tr>
-  
+<table align="center" width="80%" >
+    <tr >
+        <td>
+            <img width="100%"  src="../../images/banner.JPG" style="margin: 5px;border: 2px #990033 solid; border-radius: 10px ;" />            
+        </td>
+    </tr>
 </table>
-</div>
 <!-- menu -->
 <div class="menu">
 	<?php include '../menu.php';?>
@@ -59,7 +56,7 @@
         $male_count = @count($siblings_male);
         $female_count = @count($siblings_female);	
 	$scount = @count($sibilings);
-        include('../../utils/stateAPI.php');
+    include('../../utils/stateAPI.php');
 	$states = fp_states_get();
 	$scount = count($states);
         $curr_state  = fp_states_get_by_id($orphan->residence_state);
@@ -436,11 +433,11 @@
     <td>&nbsp;</td>
   </tr>
 </table>
-<table align="center" >
+<table align="center" width="40%" >
   <tr>
-    <td align="center"><button name="add" id="bt"  type="button" onclick="del_ajax()"> حذف <img  align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" /></button></td>
+      <td align="center"><button name="add" class="del_bt"  type="button" onclick="del_ajax()"> حذف <img  align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" /></button></td>
       <td>&nbsp;</td>
-    <td><button name="add" class="bt"  type="button" onclick="window.open('print_student_info.php?id=<?php echo $orphan->id?>')"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
+    <td><button name="add" class="info_bt"  type="button" onclick="window.open('print_student_info.php?id=<?php echo $orphan->id?>')"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
     <td>&nbsp;</td>
     <td align="center"><button class="add_bt" name="add" type="button" onclick="get_str()" >تعديل البيانات<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
     <td>&nbsp;</td>

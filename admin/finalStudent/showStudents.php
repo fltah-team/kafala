@@ -73,16 +73,13 @@ if(isset($_GET['age']) && $_GET['age'] != '' && isset($_GET['age2']) && $_GET['a
 
 <body>
 <!-- Title -->
-<div id="title">
-<table width="90%" border="0" align="center">
-  <tr>
-    <td><img src="../../images/logo.png" /></td>
-    <td><h1>الهيئة الخيرية الاسلامية للرعاية الاجتماعية</h1></td>
-    <td><img src="../../images/logo.png" /></td>
-  </tr>
-   
+<table align="center" width="80%" >
+    <tr >
+        <td>
+            <img width="100%"  src="../../images/banner.JPG" style="margin: 5px;border: 2px #990033 solid; border-radius: 10px ;" />            
+        </td>
+    </tr>
 </table>
-</div>
 <!-- menu -->
 <div class="menu">
 	<?php include '../menu.php';?>
@@ -171,7 +168,7 @@ function ageCalculator($dob){
     <?php
         //echo $extra; //$_SESSION['q'] =  "$extra";
     ?>
-    <td><button name="add" class="bt"  type="button" onclick="window.location.href = 'print_students.php?q=<?php echo $extra?>'"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
+    <td><button name="add" class="info_bt" style="padding: 0 10px;"  type="button" onclick="window.location.href = 'print_students.php?q=<?php echo $extra?>'"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>;
     <td></td>
   </tr>
   </table>

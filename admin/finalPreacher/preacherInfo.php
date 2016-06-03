@@ -14,69 +14,17 @@
 
 <body>
 <!-- Title -->
-<div id="title">
-<table width="90%" border="0" align="center">
-  <tr>
-    <td><img src="../../images/logo.png" /></td>
-    <td><h1>الهيئة الخيرية الاسلامية للرعاية الاجتماعية</h1></td>
-    <td><img src="../../images/logo.png" /></td>
-  </tr>
-  
-</table>
-</div>
-
-<!-- menu -->
-<div class="menu">
-	<table align="center">
-    <tr>
+<table align="center" width="80%" >
+    <tr >
         <td>
-            <div class="container" id="main" role="main" align="center" >
-            <ul class="menu" >
-                <li><a href="#">الأيتام</a>    
-                    <ul class="submenu">
-                        <li><a href="../finalOrphan/showOrphans.php">عرض الكل  </a></li>
-                        <li><a href="../orphan/showOrphans.php"> بيانات غير معتمدة </a></li>
-                        <li>
-                            <form method="get" action="orphanInfo.php" >
-                                <input dir="rtl" type="text" name="id" size="12"/> <input type="submit" size="5" value="بحث" id="o_serch"/>
-                            </form>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#">المستخدمين</a>    
-                    <ul class="submenu">
-                        <li><a href="../users/showUsers.php">عرض الكل  </a></li>
-                        <li><a href="../users/addUser.php">اضافة مستخدم جديد</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="#">الكفالات</a>    
-                    <ul class="submenu">
-                        <li><a href="../kafala/showKafala.php">عرض الكل  </a></li>
-                        <li><a href="../kafala/addKafala.php">اضافة كفالة جديدة</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="#">أخرى</a>    
-                    <ul class="submenu">
-                        <li><a href="../sponsor/showSponsor.php">عرض جهات الكفالة  </a></li>
-                        <li><a href="../sponsor/addSponsor.php">اضافة جهة كفالة</a></li>
-                        <li><a href="../states/showState.php">عرض المدن  </a></li>
-                        <li><a href="../kafala/showKafala.php">اضافة مدينة جديدة</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="../../utils/logout.php">تسجيل خروج</a></li>
-            </ul>
-            
-            
-            </div>
+            <img width="100%"  src="../../images/banner.JPG" style="margin: 5px;border: 2px #990033 solid; border-radius: 10px ;" />            
         </td>
     </tr>
 </table>
+<!-- menu -->
+<div class="menu">
+<?php include '../menu.php';?>
 </div>
-
-
 <!-- main -->
 <div class="main">
 
@@ -86,6 +34,7 @@
 <?php 
         include('../../utils/db.php');
         include('../../utils/finalPreacherAPI.php');
+        include('../../utils/kafalaAPI.php');
         include('../../utils/experienceAPI.php');
         include('../../utils/siblingAPI.php');
         include('../../utils/sponsorAPI.php');
@@ -199,7 +148,69 @@
 </table>
 
 <br />
+<br />
+<h2 align="center"> الكفالات </h2>
 
+<br />
+     
+<table align="center" width="60%" >
+    <tr>
+        <td><input class="textFiels" id="saving" disabled size="10px" value="<?php echo $orphan->saving ?>" ></input></td>
+        <td>اجمالي الادخار</td>
+        <td><input class="textFiels" id="saving" disabled size="10px" value="<?php echo $orphan->last_sponsorship_date ?>" ></input></td>
+        <td>تاريخ اخر كفالة</td>
+    </tr>
+</table>
+
+<br />
+
+<div id="db_err" style="display: none" class="alert-box error"><span>خطأ: </span>هناك مشكلة في الاتصال بقاعدة البيانات    </div>
+
+<div id="no_kafala" style="display: none" class="alert-box warning"><span>تنبيه: </span>لا يوجد كفالات لعرضها</div>
+
+<div id="kafalas" style="display: none">
+    <?php
+        $kafalas = fp_sposored_get_kafala($id,3);
+        $kcount = @count($kafalas);
+        
+    ?>
+    <table width="60%" border="0" align="center" class="table">
+    <tr align="center" class="table_header">
+    <td width="10%">الى</td>
+    <td width="20%">من</td>
+    <td width="5%">الادخار</td>
+    <td width="5%">المبلغ</td>
+    <td width="5%">الرقم</td>
+  </tr>
+  <?php 
+        
+                
+  	for($i = 0 ; $i < $kcount ; $i++){
+                $kafala = $kafalas[$i];
+		$sponsorship = fp_kafala_get_by_id($kafala->sponsorship);                
+  ?>
+    <tr align="center" class="table_data<?php echo $i%2?>">
+    <td><?php echo $sponsorship->last_date?></td>
+    <td><?php echo $sponsorship->date?></td>
+    <td><?php echo $sponsorship->saving?></td>
+    <td><?php echo $sponsorship->amount?></td>
+    <td><?php echo $i+1?></td>
+  </tr>
+  <?php } 
+  
+	fp_db_close();
+        ?>
+  </table>
+
+</div>
+
+<?php
+        if($kafalas == -1 )echo "<script type='text/javascript'>document.getElementById('db_err').style.display = 'block';</script>";
+        else if($kafalas == 0) echo "<script type='text/javascript'>document.getElementById('no_kafala').style.display = 'block';</script>";
+        else echo "<script type='text/javascript'>document.getElementById('kafalas').style.display = 'block';</script>";
+        
+    ?>     
+     
 <!--   Aderss   -->
 
 
@@ -341,14 +352,14 @@
         <?php fp_select_date_get(1990,'ex')?>
     </td>
        <td align="center" dir="rtl" >
-  	  <input class="textFielsS" name="fbname" type="text" id="org" size="20" maxlength="30" />
+  	  <input class="textFiels" name="fbname" type="text" id="org" size="20" maxlength="30" />
     </td>
-    <td align="center"><input class="textFielsS" name="fbname" type="text" id="qualifier_name" size="20" maxlength="30" /></td>
+    <td align="center"><input class="textFiels" name="fbname" type="text" id="qualifier_name" size="20" maxlength="30" /></td>
     <td></td>
   </tr>
   <tr >
       
-    <td align="center"><input type="button" name="login " id="login " onclick="get_exp_str()" value="إضافة " /></td>
+      <td align="center"><input class="add_bt" type="button" name="login " id="login " onclick="get_exp_str()" value="إضافة " /></td>
     <td align="center" style="color: white" id="notifyx"></td>
    </tr>
 
@@ -360,15 +371,15 @@
 <script type="text/javascript">
 function get_exp_str(){
       var d = document.getElementById('exy').value+"-"+document.getElementById('exm').value+"-"+document.getElementById('exd').value;
-      var s_str = "?id=<?php echo $orphan->id ?>&qualifier_name="+document.getElementById("qualifier_name").value+"&date="+d+"&org="+document.getElementById("org").value ;
-
-      //exp_ajax(s_str);
-      window.location.href = "saveExp.php"+s_str;
+      var s_str = "id=<?php echo $orphan->id ?>&qualifier_name="+document.getElementById("qualifier_name").value+"&date="+d+"&org="+document.getElementById("org").value ;
+      
+      exp_ajax(s_str);
+      //window.location.href = "saveExp.php?"+s_str;
       }
-  function exp_ajax(s_str)
+function exp_ajax(s_str)
 {	
     var ajax;
-	alert(s_str);
+	var data ;
 	filename = "saveExp.php";
 	post = false ;
     if (window.XMLHttpRequest)
@@ -468,6 +479,7 @@ function delete_exp_ajax(id)
 }
 </script>
 
+
 <!-- health -->
 
 <br />
@@ -543,11 +555,11 @@ function delete_exp_ajax(id)
     <td>&nbsp;</td>
   </tr>
 </table>
-<table align="center" >
+<table align="center" width="40%" >
   <tr>
-    <td align="center"><button name="add" id="bt"  type="button" onclick="del_ajax()"> حذف <img  align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" /></button></td>
+      <td align="center"><button name="add" class="del_bt"  type="button" onclick="del_ajax()"> حذف <img  align="right" src="../../images/style images/delete_icon.png" style="padding-left:5px" /></button></td>
       <td>&nbsp;</td>
-    <td><button name="add" class="bt"  type="button" onclick="window.open('print_preacher_info.php?id=<?php echo $orphan->id?>')"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
+    <td><button name="add" class="info_bt"  type="button" onclick="window.open('print_preacher_info.php?id=<?php echo $orphan->id?>')"    > طباعة   <img align="right" src="../../images/style images/print_icon.png" style="padding-left:5px" /></button></td>
     <td>&nbsp;</td>
     <td align="center"><button class="add_bt" name="add" type="button" onclick="get_str()" >تعديل البيانات<img align="right" src="../../images/style images/update_icon.png" style="padding-left:5px" />  </button></td>
     <td>&nbsp;</td>

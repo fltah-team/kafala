@@ -9,7 +9,7 @@
                 !isset($_GET['sibling_status']) || (int)$_GET['sibling_status']== 0 || $_GET['sibling_status'] == '' ||
                 !isset($_GET['s_bd']) || $_GET['s_bd'] == '')
             die ("تعذر اضافة الفرد");
-	$orphan_id = $_GET['o_id'] ;
+	$orphan_id = $_GET['o_id'];
 	$name  = $_GET['sibling_name'] ; 
 	$sex = (int)$_GET['s_gender'] ;;
 	$birth_date  =  $_GET['s_bd'] ;

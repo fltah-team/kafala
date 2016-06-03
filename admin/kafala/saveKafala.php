@@ -5,6 +5,7 @@
         include '../../utils/notifyAPI.php';
         include '../../utils/finalOrphanAPI.php';
         include '../../utils/finalStudentAPI.php';
+        include '../../utils/finalPreacherAPI.php';
         include '../../utils/usersAPI.php';
         include '../../utils/sponsorAPI.php';
         //if(!isset($_POST['total']) || !isset($_POST['saving']) || !isset($_POST['sponsor']) || !isset($_POST['last_date']) || !isset($_POST['ponsored']))
@@ -21,6 +22,9 @@
             break;
         case 2 :
             $check = fp_final_student_get(" WHERE `state`=1 AND `warranty_organization`=".$sponsor);
+            break;
+        case 3 :
+            $check = fp_final_preacher_get(" WHERE `state`=1 AND `warranty_organization`=".$sponsor);
             break;
     }
     if(!$check)

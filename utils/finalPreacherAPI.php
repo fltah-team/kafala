@@ -151,10 +151,10 @@ function fp_final_preacher_get_last_id(){
 			$n_birth_date  = mysql_real_escape_string(strip_tags($birth_date),$fp_handle);
 			$fields[@count($fields)] = " `birth_date` = '$n_birth_date' ";
 			}
-		//if(!empty($sex)){
+		if($sex!=NULL){
 			$n_sex   = mysql_real_escape_string(strip_tags($sex),$fp_handle);
 			$fields[@count($fields)] = " `sex` = '$n_sex' ";
-			//}
+			}
 			
 		if(!empty($male_members_no)){
 			$n_male_members_no   = mysql_real_escape_string(strip_tags($male_members_no),$fp_handle);
@@ -265,15 +265,15 @@ function fp_final_preacher_get_last_id(){
 			if($i != ($fcount - 1 ))
 			$query .= ' , ';
 			}
-		$query .= ' WHERE `id` = '.$uid; 
+		$query .= ' WHERE `id` = '.$uid; echo $query;
 		$qresult = @mysql_query($query);
 			if(!$qresult) return false ;
                 @mysql_free_result($qresult);
-                fp_preacher_delete($phone1,1);
+                /*fp_preacher_delete($phone1,1);
                 $name = $n_first_name.' '.$n_meddle_name;
                 $sponsered = fp_select_sponsored_type(1);
                 $text =  'تم اعتماد بيانات  '.$name.' التابع ل'.$sponsered;
-                fp_notify_add($text, "admin", $n_data_entery_name , 1);
+                fp_notify_add($text, "admin", $n_data_entery_name , 1);*/
                         return true ;
 		
 		}
