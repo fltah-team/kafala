@@ -47,6 +47,13 @@
 		$family = $families[0];
 		return $family ;
 		}
+		function fp_preacher_get_by_phone1($oid){
+	if($oid == 0) return NULL ;
+	$orphans = fp_family_get("WHERE `phone1` = ".$oid);
+	if($orphans == NULL) return NULL ;
+	$orphan = $orphans[0];
+	return $orphan ;
+	}
 		// INSERT	
 	function fp_family_add($state , $warranty_organization , $saving , $father_first_name , $father_middle_name , $father_last_name , $father_4th_name , $birth_date , $sex ,$social_state ,$father_dead_date , $father_dead_cause , $father_work ,  $supporter_first_name , $supporter_meddle_name , $supporter_last_name , $supporter_4th_name , $supporter_birth_date , $supporter_sex , $supporter_state , $supporter_relation  , $supporter_work  , $residence_state , $city , $District , $section,$house_no , $phone1 , $phone2 , $data_entery_name , $data_entery_date ){
 		global $fp_handle;
